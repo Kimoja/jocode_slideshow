@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Infinite horizontal scroll slideshow</title>
+
+        <script src="../../lib/jquery-1.9.1.min.js"></script>
+        
+        <link rel="stylesheet" href="../base_example.css">
+        
+        <!--slideshow-->
+        <link rel="stylesheet" href="./horizontal_scroll.css">
+        
+        <script src="../../src/jocode_class.js"></script>
+        <script src="../../src/jocode_slideshow.js"></script>
+        <script src="../../src/fx/slideshow/scroll.js"></script>
+        <script src="../../src/jocode_navigation_slideshow.js"></script>
+        <script src="../../src/fx/navigation/scroll.js"></script>
+        <script src="./horizontal_scroll.js"></script>
+        
+        <!-- syntax highlighter -->
+        <script type="text/javascript" src="../../lib/rainbow-custom.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <!-- see template horizontal -->
+            <div class="slideshow">
+                
+                <a href="#" class="button first"></a>
+                <a href="#" class="button previous"></a>
+                <a href="#" class="button play"></a>
+                <a href="#" class="button pause"></a>
+                <a href="#" class="button resume"></a>
+                <a href="#" class="button stop"></a>
+                <a href="#" class="button next"></a>
+                <a href="#" class="button last"></a>
+                
+                <div class='loader'></div>
+                
+                <div class='scroller'>
+                    <div>
+                        <div>
+                            <img src='../../image/jocode.png' alt="">
+                        </div>
+                        <div>
+                            <img src='../../image/jocode.png' alt="">
+                        </div>
+                        <div>
+                            <img src='../../image/jocode.png' alt="">
+                        </div>
+                        <div>
+                            <img src='../../image/jocode.png' alt="">
+                        </div>
+                        <div>
+                            <img src='../../image/jocode.png' alt="">
+                        </div>
+                        <div>
+                            <img src='../../image/jocode.png' alt="">
+                        </div>
+                        <div>
+                            <img src='../../image/jocode.png' alt="">
+                        </div>
+                        <div>
+                            <img src='../../image/jocode.png' alt="">
+                        </div>
+                        <div>
+                            <img src='../../image/jocode.png' alt="">
+                        </div>
+                        <div>
+                            <img src='../../image/jocode.png' alt="">
+                        </div>
+                        <div>
+                            <img src='../../image/jocode.png' alt="">
+                        </div>
+                        <div>
+                            <img src='../../image/jocode.png' alt="">
+                        </div>
+                        <div>
+                            <img src='../../image/jocode.png' alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class='navigation'>
+                    <div>
+                        <a href="#" class="button scroll_first"></a>
+                        <a href="#" class="button scroll_previous"></a>
+                        <div class='scroller'>
+                            <div>
+                                <a href="#">Nav1</a>
+                                <a href="#">Nav2</a>
+                                <a href="#">Nav3</a>
+                                <a href="#">Nav4</a>
+                                <a href="#">Nav5</a>
+                                <a href="#">Nav6</a>
+                                <a href="#">Nav7</a>
+                                <a href="#">Nav8</a>
+                                <a href="#">Nav9</a>
+                                <a href="#">Nav10</a>
+                                <a href="#">Nav11</a>
+                                <a href="#">Nav12</a>
+                                <a href="#">Nav13</a>
+                            </div>
+                        </div>
+                        <a href="#" class="button scroll_next"></a>
+                        <a href="#" class="button scroll_last"></a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        
+        <div class="desc">
+            <h1>Infinite horizontal scroll</h1>
+            <p>Simulate an infinite slideshow</p>
+            <p>Simulate an asynchrone loading </p>
+            <pre data-language="javascript">
+$(function(){
+    $('.slideshow').jocodeSlideshow({
+        
+        selector : '> .scroller > div > div',
+        
+        //define manually the container to support, on hover event, the loader element
+        hover_container : '.loader,.scroller',
+            
+        bt_first : '.first',
+        bt_previous : '.previous',
+        bt_play : '.play',
+        bt_pause : '.pause',
+        bt_resume : '.resume',
+        bt_stop : '.stop',
+        bt_next: '.next',
+        bt_last : '.last',
+        
+        disabled_bt_class : 'disabled',
+        
+        auto_play : true,
+        delay : 1000,
+                   
+        start_index : 0,
+       
+        fx : new $.JocodeFxSlideshow.HorizontalScroll({
+            duration : 1000
+        }),
+        
+        navigation : new $.JocodeNavigationSlideshow({
+            
+            selector : '> .navigation > div > .scroller > div >  a',
+            
+            selected_class : 'selected',
+            scrolled_class : 'scrolled',
+            
+            bt_next: '.scroll_next',
+            bt_previous : '.scroll_previous',
+            bt_first: '.scroll_first',
+            bt_last : '.scroll_last',
+            
+            fx : new $.JocodeFxNavigationSlideshow.HorizontalScroll({
+                scroll_over : true
+            })
+        }),
+        
+        //simulate an loader...
+        load : function(){
+            
+            var self = this,
+                index = this.loading_index;
+            
+            $('.loader', this.context).show();
+            
+            setTimeout(function(){
+                
+                if(!self.isCanceled(index))
+                    self.draw();
+                
+            }, 1000);
+        },
+        
+        beforeDraw : function(){
+            //console.log('beforeDraw');
+            $('.loader', this.context).hide();
+        },
+        onCancel : function(canceled_index){
+            console.log('onCancel');
+        },
+        onPlay : function(){
+            console.log('onPlay');
+        },
+        onPause : function(){
+            console.log('onPause');
+        },
+        onResume : function(){
+            console.log('onResume');
+        },
+        onStop : function(){
+            console.log('onStop');
+        },
+        
+        //simulate an infinite slideshow
+        onChange : function(new_index){
+            
+            console.log('onChange');
+            
+            var self, i, div, a;
+            
+            if(!this.hasNext()){
+                
+                this.pause();
+                
+                self = this;
+                
+                setTimeout(function(){
+                    
+                    for(i = 0; i < 10; i++){
+                    
+                        div = document.createElement('div');
+                        div.innerHTML = "<img src='../../image/jocode.png' alt=''>";
+
+                        self.container[0].appendChild(div);
+
+                        a = document.createElement('a');
+                        a.href = '#';
+                        a.innerHTML = "Nav1";
+
+                        self.navigation.container[0].appendChild(a);
+                    }
+                    
+                    self.initPile();
+                    self.resume();
+                    
+                }, 1500);
+            }
+        },
+        
+        beforeWait : function(delay, elapsed, start_time){
+            console.log('beforeWait');
+        }
+    });
+});
+            </pre>
+        </div>
+
+
+    </body>
+</html>

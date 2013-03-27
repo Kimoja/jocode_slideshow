@@ -1,0 +1,155 @@
+
+/* slideshow (see template horizontal)
+******************************************/
+.slideshow{
+    display: inline-block;
+    overflow:  hidden;
+    position: relative;
+    text-align: center;
+    width : 500px;/*what you want*/
+}
+.slideshow img{
+    vertical-align: middle;
+}
+.slideshow a:active, .slideshow a:focus { 
+    border:none;
+    outline:none;
+}
+     /* image 
+    ******************************************/
+     .slideshow > .scroller{
+         overflow: hidden;
+         width : 500px;/*what you want*/
+     }
+     .slideshow > .scroller > div{
+        display: table;
+        table-layout: fixed;
+        position: relative;
+        width : 0;/*important disable auto width*/
+     }
+    .slideshow > .scroller > div > div{
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        width : 500px;/*what you want*/
+    }
+        /* image button 
+        ******************************************/
+        .slideshow > .button{
+            position: relative;
+            display : inline-block;
+            width : 25px;/*what you want*/
+            height : 25px;/*what you want*/
+            margin : 5px;/*what you want*/
+            background-image: url(../player_horizontal.png);
+            background-repeat: no-repeat;
+        }
+        .slideshow > .button.disabled{
+            display : none;
+        }
+        .slideshow > .button.first{
+            background-position: 0 0;
+        }
+        .slideshow > .button.previous{
+            background-position: -25px 0px;
+        }
+        .slideshow > .button.play{
+            background-position: -50px 0px;
+        }
+        .slideshow > .button.pause{
+            background-position: -75px 0px;
+        }
+        .slideshow > .button.resume{
+            background-position: -50px 0px;
+        }
+        .slideshow > .button.stop{
+            background-position: -100px 0px;
+        }
+        .slideshow > .button.next{
+            background-position: -125px 0px;
+        }
+        .slideshow > .button.last{
+            background-position: -150px 0px;
+        }
+        /* end image button
+        ******************************************/
+        
+    /* end image
+    ******************************************/
+
+    
+    /* navigation 
+    ******************************************/
+    .slideshow > .navigation{
+        display: inline-table;
+    }
+    .slideshow >.navigation > div {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .slideshow > .navigation > div > *{
+        float:left;
+    }
+    .slideshow > .navigation > div > .scroller{
+        display: inline-block;
+        overflow: hidden;
+        max-width : 350px;/*what you want*/
+    }
+    
+        /* navigation button
+        ******************************************/
+        /*customisation*/
+        .slideshow > .navigation > div > .button{
+            width : 25px;/*what you want*/
+            height : 25px;/*what you want*/
+            margin : 5px;/*what you want*/
+            background-image: url(../player.png);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .slideshow > .navigation > div > .button.scroll_first{
+            background-position: 0 -25px;
+        }
+        .slideshow > .navigation > div > .button.scroll_previous{
+            background-position: 0 0px;
+        }
+        .slideshow > .navigation > div > .button.scroll_next{
+            background-position: -50px 0px;
+        }
+        .slideshow > .navigation > div > .button.scroll_last{
+            background-position: -50px -25px;
+        }
+        /* end navigation button
+        ******************************************/
+        
+        
+        /* navigation scroller & items
+        ******************************************/
+        .slideshow > .navigation > div > .scroller > div {
+            display: table;
+            table-layout: fixed;
+            width : 0;/*disable auto width*/
+        }
+        .slideshow > .navigation > div > .scroller > div >  a{
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+            width : 50px;/*what you want*/
+            height : 38px;/*what you want*/
+        }
+        .slideshow > .navigation > div > .scroller > div >  a.selected{
+            background-color: red;
+        }
+        .slideshow > .navigation > div > .scroller > div >  a.scrolled{
+            background-color: gray;
+        }
+        /* end navigation scroller & items
+        ******************************************/
+        
+    /* end navigation
+    ******************************************/
+    
+/* end slideshow 
+******************************************/
+

@@ -1,0 +1,168 @@
+
+
+/* slideshow 
+******************************************/
+.slideshow{
+    display: inline-table;
+    overflow:  hidden;
+    text-align: center;
+    width : 600px;/*what you want*/
+}
+.slideshow img{
+    vertical-align: middle;
+}
+.slideshow a:active, .slideshow a:focus { 
+    border:none;
+    outline:none;
+}
+
+    /* slides
+    ******************************************/
+    
+    .slideshow > .slides{
+        display: table-cell;
+        width : 560px;/*what you want*/
+    }
+    
+    .slideshow > .slides > .scroller{
+        overflow: hidden;
+        height : 455px;/*what you want*/
+    }
+    .slideshow > .slides > .scroller > div{
+        display: table;
+        table-layout: fixed;
+        width : 100%;
+    }
+    .slideshow > .slides > .scroller > div > div{
+        display: table-row;
+    }
+    .slideshow > .slides > .scroller > div > div > div{
+        display: table-cell;
+        vertical-align: middle;
+        height : 455px;/*what you want*/
+        background-color: greenyellow;
+    }
+    .slideshow > .slides > .scroller > div > div:nth-child(even) > div {
+        background-color: green;
+    }
+    
+        /* slides button 
+        ******************************************/
+        .slideshow > .slides > .button{
+            display: table;
+            table-layout: fixed;
+            border-spacing: 10px;
+        }
+        .slideshow > .slides > .button > a{
+            display: table-cell;
+            width : 25px;
+            height : 25px;
+            text-decoration: none;
+            background-image: url(../player_horizontal.png);
+            background-repeat: no-repeat;
+        }
+        .slideshow > .slides > .button > .disabled{
+            display : none;/*what you want*/
+        }
+        .slideshow > .slides > .button > .first{
+            background-position: 0 0;
+        }
+        .slideshow > .slides > .button > .previous{
+            background-position: -25px 0px;
+        }
+        .slideshow > .slides > .button > .play{
+            background-position: -50px 0px;
+        }
+        .slideshow > .slides > .button > .pause{
+            background-position: -75px 0px;
+        }
+        .slideshow > .slides > .button > .resume{
+            background-position: -50px 0px;
+        }
+        .slideshow > .slides > .button > .stop{
+            background-position: -100px 0px;
+        }
+        .slideshow > .slides > .button > .next{
+            background-position: -125px 0px;
+        }
+        .slideshow > .slides > .button > .last{
+            background-position: -150px 0px;
+        }
+        /* end slides button 
+        ******************************************/
+        
+    /* end slides 
+    ******************************************/
+    
+    
+    /* navigation
+    ******************************************/
+    
+    .slideshow > .navigation{
+        display: table-cell;
+        vertical-align: bottom;
+        width : 50px;/*what you want*/
+    }
+    
+    .slideshow > .navigation > .scroller{
+        overflow: hidden;
+        height : 350px;/*what you want*/
+    }
+    .slideshow > .navigation > .scroller > div{
+        display: table;
+        table-layout: fixed;
+        width : 100%;
+    }
+    .slideshow > .navigation > .scroller > div > div{
+        display: table-row;
+    }
+    .slideshow > .navigation > .scroller > div > div > a{
+        display: table-cell;
+        vertical-align: middle;
+        height : 70px;/*what you want*/
+        background-color: greenyellow;
+    }
+    .slideshow > .navigation > .scroller > div > div:nth-child(even) > a {
+        background-color: green;
+    }
+    .slideshow > .navigation > .scroller > div > div > a.selected{
+        background-color: red;
+    }
+    .slideshow > .navigation > .scroller > div > div > a.scrolled{
+        background-color: gray;
+    }
+        /* slides navigation 
+        ******************************************/
+        .slideshow > .navigation > .button{
+            /*what you want*/
+        }
+        .slideshow > .navigation > .button > a{
+            display: block;
+            height : 25px;
+            text-decoration: none;
+            background-image: url(../player_vertical.png);
+            background-repeat: no-repeat;
+        }
+        .slideshow > .navigation > .button > a.disabled{
+            display : none;
+        }
+        .slideshow > .navigation > .button > a.first{
+            background-position: 12px 0;
+        }
+        .slideshow > .navigation > .button > a.previous{
+            background-position: 12px -25px;
+        }
+        .slideshow > .navigation > .button > a.next{
+            background-position: 12px -125px;
+        }
+        .slideshow > .navigation > .button > a.last{
+            background-position: 12px -150px;
+        }
+        /* end navigation button 
+        ******************************************/
+    /* end navigation 
+    ******************************************/
+    
+    
+/* end slideshow 
+******************************************/
