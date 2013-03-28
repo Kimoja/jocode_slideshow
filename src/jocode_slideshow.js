@@ -22,6 +22,21 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/*
+ * TODO
+ * evenement touch et clavier pour l'accéssibilité !important
+ * attendre fin de transition pour changer d'item de navigation.... 
+ * permettre une initailisation de l'index de départ via un random, par exemple en mettant -1 ?? bof
+ * différence entre un pause via le bouton et via l'evenement hover !important
+ * création des items de navigation à la volé  via des fonctions , ou des templates, encore mieux!! !important
+ * options infinie, élément précédent en fin de pile  !important, mais ca va être galère .... à faire en premier !!!
+ * fx, changer la taille du conteneur par rapport au contenue, en option , autowidth, autoheight, par défaut dans la classe de base fx ???  !important
+ * activer l'historique de navigation au changement de slide .... pour des sites avec juste un slide comme contenue, ca peut être pas mal
+ * afficher les boutons , navigation ou du player, que lors d'un mouse hover ... pk pas
+ * écouteur live on click sur un slide, !important 
+ * option plein écran .... faut que  l'intégration HTML et CSS le permet, en tout cas via un plugin, à réfléchir ...
+ * tout plein de transition qui envoie
+ **/
 
 (function($){
 
@@ -309,8 +324,7 @@ $.JocodeSlideshow = $.jocodeClass(
          */
         _toogleBt : function(buttons, enable){
             
-            var self = this, 
-                button;
+            var self = this;
                 
             $.each(buttons.split(' '), function(index, bt){
                 
@@ -579,7 +593,7 @@ $.JocodeSlideshow = $.jocodeClass(
         
         
         /**
-         * If the player is on pause
+         * 
          * @function
          * @returns {Boolean}
          */
@@ -871,3 +885,4 @@ $.fn.jocodeSlideshow = function(config) {
 };
 
 })(jQuery);
+

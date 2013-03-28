@@ -39,6 +39,5 @@ $(function(){
             
             fx : new $.JocodeFxNavigationSlideshow.Scroll()
         })
-        
     });
 });
