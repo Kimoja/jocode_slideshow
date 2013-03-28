@@ -24,18 +24,19 @@
 
 /*
  * TODO
- * evenement touch et clavier pour l'accéssibilité !important
+ * evenement touch et clavier pour l'accï¿½ssibilitï¿½ !important
  * attendre fin de transition pour changer d'item de navigation.... 
- * permettre une initailisation de l'index de départ via un random, par exemple en mettant -1 ?? bof
- * différence entre un pause via le bouton et via l'evenement hover !important
- * création des items de navigation à la volé  via des fonctions , ou des templates, encore mieux!! !important
- * options infinie, élément précédent en fin de pile  !important, mais ca va être galère .... à faire en premier !!!
- * fx, changer la taille du conteneur par rapport au contenue, en option , autowidth, autoheight, par défaut dans la classe de base fx ???  !important
- * activer l'historique de navigation au changement de slide .... pour des sites avec juste un slide comme contenue, ca peut être pas mal
+ * permettre une initailisation de l'index de dï¿½part via un random, par exemple en mettant -1 ?? bof
+ * diffï¿½rence entre un pause via le bouton et via l'evenement hover !important
+ * crï¿½ation des items de navigation ï¿½ la volï¿½  via des fonctions , ou des templates, encore mieux!! !important
+ * options infinie, ï¿½lï¿½ment prï¿½cï¿½dent en fin de pile  !important, mais ca va ï¿½tre galï¿½re .... ï¿½ faire en premier !!!
+ * fx, changer la taille du conteneur par rapport au contenue, en option , autowidth, autoheight, par dï¿½faut dans la classe de base fx ???  !important
+ * activer l'historique de navigation au changement de slide .... pour des sites avec juste un slide comme contenue, ca peut ï¿½tre pas mal
  * afficher les boutons , navigation ou du player, que lors d'un mouse hover ... pk pas
- * écouteur live on click sur un slide, !important 
- * option plein écran .... faut que  l'intégration HTML et CSS le permet, en tout cas via un plugin, à réfléchir ...
+ * ï¿½couteur live on click sur un slide, !important 
+ * option plein ï¿½cran .... faut que  l'intï¿½gration HTML et CSS le permet, en tout cas via un plugin, ï¿½ rï¿½flï¿½chir ...
  * tout plein de transition qui envoie
+ * revoir play et l'index start
  **/
 
 (function($){
@@ -50,9 +51,8 @@ $.JocodeSlideshow = $.jocodeClass(
      * @param {jQuery} context The initialization context
      * @param {Object} config  The configuration object
      *      @param {String}   config.selector                               The slides selector, relative to the initialization context
-     *      @param {$.JocodeNavigationSlideshow.Base}[config.navigation]    The navigation object
-     *      @param {$.JocodeProgressBar.Base}[config.progress_bar]          The progress bar object
-     *      @param {String}   [config.hover_container]                      The selector of the container of event hover(by default,  the jQuery parent()  function to find him).
+     *      @param {$.JocodeSlideshowNavigation.Base}[config.navigation]    The navigation object
+     *      @param {$.JocodeProgressBar.Base}[config.progress_bar]          The progress bar object (TODO)
      *      @param {String}   [config.bt_first]                             The Selector of buttons "first"  relative to the initialization context
      *      @param {String}   [config.bt_previous]                          The Selector of buttons "previous"", relative to the initialization context
      *      @param {String}   [config.bt_play]                              The Selector of buttons "play", relative to the initialization context
@@ -64,32 +64,34 @@ $.JocodeSlideshow = $.jocodeClass(
      *      @param {String}   [config.disabled_bt_class]                    Class of disabled buttons
      *      @param {Boolean}  [config.auto_play=false]                      Enable Autoplay
      *      @param {Number}   [config.delay=3000]                           Time in milliseconds between each transition
+     *      @param {String}   [config.hover_container]                      The selector of the container of event hover(by default,  the jQuery parent()  function to find him).
      *      @param {Boolean}  [config.pause_over=true]                      Stop on mouseover
      *      @param {Boolean}  [config.stop_event=true]                      Stop event propagation and default actions
-     *      @param {Number}   [config.start_index=0]                            ...
-     *      @param {$.JocodeFxSlideshow.Base}[config.fx]                    Transition slide object
+     *      @param {Number}   [config.start_index=0]                        The start index
+     *      @param {$.JocodeSlideshowFx.Base}[config.fx]                    Transition slide object
      *      @param {Function} [config.load]                                 Loading slide function 
-     *      @param {Function} [config.beforeWait]                           Function called when waiting for the next transition
-     *      @param {Function} [config.onCancel]                             ...
-     *      @param {Function} [config.onPlay]                               ...
-     *      @param {Function} [config.onPause]                              ...
-     *      @param {Function} [config.onResume]                             ...
-     *      @param {Function} [config.onStop]                               ...
-     *      @param {Function} [config.onChange]                             ...
-     *      @param {Function} [config.beforeDraw]                           ...
+     *      @param {Function} [config.beforeWait]                           Custom method called  while awaiting a transition
+     *      @param {Function} [config.onCancel]                             Custom method called when a slide is cancelled
+     *      @param {Function} [config.onPlay]                               Custom method called when the playback start
+     *      @param {Function} [config.onPause]                              Custom method called when on pause
+     *      @param {Function} [config.onResume]                             Custom method called when the playback is resumed
+     *      @param {Function} [config.onStop]                               Custom method called when the player stops
+     *      @param {Function} [config.onChange]                             Custom method called when a slide is changed
+     *      @param {Function} [config.beforeDraw]                           Custom method called before a transition
      *      
      *      
      **/
     function (context, config){
         
+        //check error
         if(!config)
             throw new Error('jocodeSlideshow Error: Missing parameter "config"');
 
         if(!config.selector)
             throw new Error('jocodeSlideshow Error: Missing parameter "config.selector"');
 
-        if(!config.fx || !(config.fx instanceof $.JocodeFxSlideshow.Base))
-            throw new Error('jocodeSlideshow Error: Parameter "config.fx" is missing or is not of the type "$.JocodeFxSlideshow.Base"');
+        if(!config.fx || !(config.fx instanceof $.JocodeSlideshowFx.Base))
+            throw new Error('jocodeSlideshow Error: Parameter "config.fx" is missing or is not of the type "$.JocodeSlideshowFx.Base"');
 
         var self = this,
             buttons = 'first previous play pause resume stop next last'.split(' ');
@@ -113,6 +115,9 @@ $.JocodeSlideshow = $.jocodeClass(
         'stop_event' in config && (
             this.stop_event = !!config.stop_event
         );
+        'start_index' in config && (
+            this.start_index = Math.abs(config.start_index) || 0
+        ); 
             
         //init event
         $.each('load beforeWait onCancel onPlay onPause onResume onStop onChange beforeDraw'.split(' '), function(index, method){
@@ -123,10 +128,10 @@ $.JocodeSlideshow = $.jocodeClass(
         });
         
         if(!('pause_over' in config) ||  config.pause_over)
-            this.addPauseEvent(this.hover_container);
+            this.addPauseEventOnHover(this.hover_container);
         
         //init navigation
-        if(config.navigation && config.navigation instanceof $.JocodeNavigationSlideshow){
+        if(config.navigation && config.navigation instanceof $.JocodeSlideshowNavigation){
 
             this.navigation = config.navigation;
             this._have_navigation = true; 
@@ -145,22 +150,21 @@ $.JocodeSlideshow = $.jocodeClass(
                 });
             }
         });
-        
         //init transition object
         this.fx.init(this);
         
         //enable/disable buttons
         if(config.auto_play){
             
-            this._toogleBt('play resume', false);
-            this._toogleBt('pause stop', true);
-
-            this._stopped = false;
+            this.play();
         }
-        else this._toogleBt('pause resume stop', false);
+        else{ 
+            
+            this._toogleBt('pause resume stop', false);
+            //got to start index
+            self.goTo(this.start_index);
+        }
         
-        //got to start index
-        self.goTo(config.start_index || 0);
     },
     
     {
@@ -192,7 +196,7 @@ $.JocodeSlideshow = $.jocodeClass(
         hover_container : null,
         
         /**
-         * @property {jQuery} The navigation items
+         * @property {$.JocodeSlideshowNavigation.Base} The navigation object
          */
         navigation : null,
         
@@ -248,7 +252,7 @@ $.JocodeSlideshow = $.jocodeClass(
         
         
         /**
-         * @property {$.JocodeFxSlideshow.Base} Transition slide object
+         * @property {$.JocodeSlideshowFx.Base} Transition slide object
          */
         fx : null,
         
@@ -257,6 +261,11 @@ $.JocodeSlideshow = $.jocodeClass(
          */
         current : null,
 
+        /**
+         * @property {Number} The start index
+         */
+        start_index : 0,
+        
         /**
          * @property {Number} The current index
          */
@@ -350,11 +359,11 @@ $.JocodeSlideshow = $.jocodeClass(
         },
 
         /**
-         * Set event on pause
+         * Set pause on hover event
          * @function
          * @param {jQuery} el The element to listen
          */
-        addPauseEvent : function(el){
+        addPauseEventOnHover : function(el){
 
             var self = this;
 
@@ -387,16 +396,18 @@ $.JocodeSlideshow = $.jocodeClass(
          * @function
          */
         play : function(){
-
+            
             if(!this.isPlayed()){
-
+                
+                this.index = this.loading_index = -1;
+                
                 this._toogleBt('play resume', false);
                 this._toogleBt('pause stop', true);
 
                 this._stopped = false;
-                
                 this.onPlay();
-                this.keepOn(this.index);
+                
+                this.goTo(this.start_index);
             }
         },
 
@@ -436,6 +447,7 @@ $.JocodeSlideshow = $.jocodeClass(
                 
                 !this._on_draw && this.keepOn(this.index);
             }
+            else this.play();
         },
 
         /**
@@ -593,7 +605,7 @@ $.JocodeSlideshow = $.jocodeClass(
         
         
         /**
-         * 
+         * Calculate an index
          * @function
          * @returns {Boolean}
          */
@@ -658,13 +670,13 @@ $.JocodeSlideshow = $.jocodeClass(
          * @param {Number} index The index
          */
         draw : function(index){
-            
+        
             if(index != this.loading_index)
                 return; 
             
             var old_sible = this.current,
                 old_index = this.index;
-
+                
             this._on_load = false; 
             this._on_draw = true;
             
@@ -789,22 +801,22 @@ $.JocodeSlideshow = $.jocodeClass(
 
 /**
  * @namespace 
- * @name $.JocodeFxSlideshow
+ * @name $.JocodeSlideshowFx
  */
-$.JocodeFxSlideshow = {
+$.JocodeSlideshowFx = {
     
     /**
      * The base class of a transition between slide
      * 
      * @constructor 
-     * @name $.JocodeFxSlideshow.Base
+     * @name $.JocodeSlideshowFx.Base
      **/
     Base : $.jocodeClass(
         function(){
             
         }, 
         {
-            /** @lends $.JocodeFxSlideshow.Base.prototype */
+            /** @lends $.JocodeSlideshowFx.Base.prototype */
 
             /**
              * @property {$.JocodeSlideshow} The slideshow
@@ -838,37 +850,6 @@ $.JocodeFxSlideshow = {
             initPile : function(){
                 
             }
-        }
-    )
-};
-
-
-/**
- * @namespace 
- * @name $.JocodeProgressBar
- */
-$.JocodeProgressBar = {
-    
-    /**
-     * The base class of a transition between slide
-     * 
-     * @constructor 
-     * @name $.JocodeProgressBar.Base
-     **/
-    Base : $.jocodeClass(
-        function(){
-            
-        }, 
-        {
-            /** @lends $.JocodeProgressBar.Base.prototype */
-
-            /**
-             * 
-             * @function
-             * @param {Number} value
-             * @param {Number} delay
-             */
-            progress : function(value){}
         }
     )
 };

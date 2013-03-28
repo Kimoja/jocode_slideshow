@@ -3,7 +3,7 @@
 (function($){
     
  /**
-  * Create simple class with inheritance
+  * Create class with inheritance
   * @function
   * @param {Function} construct The constructor
   * @param {Object} proto The prototype

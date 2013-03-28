@@ -2,7 +2,7 @@
 (function($){
     
     
-$.JocodeFxSlideshow.Fade = $.jocodeClass(
+$.JocodeSlideshowFx.Fade = $.jocodeClass(
 
     function(config){
         
@@ -19,7 +19,7 @@ $.JocodeFxSlideshow.Fade = $.jocodeClass(
 
         init : function(slideshow){
 
-            $.JocodeFxSlideshow.Base.prototype.init.call(this, slideshow);
+            $.JocodeSlideshowFx.Base.prototype.init.call(this, slideshow);
 
             this._scroller = $(this.selector, slideshow.context);
             
@@ -46,7 +46,7 @@ $.JocodeFxSlideshow.Fade = $.jocodeClass(
         }
 
     }, 
-    $.JocodeFxSlideshow.Base
+    $.JocodeSlideshowFx.Base
 ); 
 
 })(jQuery);

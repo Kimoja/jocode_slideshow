@@ -1,117 +1,106 @@
 
 /* slideshow (see template horizontal)
 ******************************************/
-.slideshow.horizontal_fade{
+.slideshow.basic{
     display: inline-block;
     overflow:  hidden;
-    width : 520px;/*what you want*/
     position: relative;
+    text-align: center;
+    width : 500px;/*what you want*/
 }
-.slideshow.horizontal_fade img{
+.slideshow.basic img{
     vertical-align: middle;
 }
-.slideshow.horizontal_fade a:active, .slideshow.horizontal_fade a:focus { 
+.slideshow.basic a:active, .slideshow.basic a:focus { 
     border:none;
     outline:none;
 }
-     /* slides 
+     /* image 
     ******************************************/
-     .slideshow.horizontal_fade > .fade{
-        overflow:  hidden;
-        position : relative;
-        display : inline-block;
-        width : 518px;
-        height : 400px;
-         background: #f8f8f8;
-        -moz-border-radius: 3px;
-        -webkit-border-radius: 3px;
-        border-radius: 3px;
-        border: 1px solid #ddd;
+     .slideshow.basic > .scroller{
+         overflow: hidden;
+         width : 500px;/*what you want*/
      }
-     .slideshow.horizontal_fade > .fade > div{
-        display: inline-table;
-        position : absolute;
+     .slideshow.basic > .scroller > div{
+        display: table;
         table-layout: fixed;
-        width : 500px;
-        height : 400px;
-        left : 9px;
-        top : 0px;;
+        position: relative;
+        width : 0;/*important disable auto width*/
      }
-    .slideshow.horizontal_fade > .fade > div > div{
+    .slideshow.basic > .scroller > div > div{
         display: table-cell;
-        height : 300px;
-        width : 500px;
-        text-align: center;
         vertical-align: middle;
+        text-align: center;
+        width : 500px;/*what you want*/
     }
         /* image button 
         ******************************************/
-        .slideshow.horizontal_fade > .button{
+        .slideshow.basic > .button{
             position: relative;
-            width : 25px;
-            height : 25px;
-            margin : 5px;
             display : inline-block;
+            width : 25px;/*what you want*/
+            height : 25px;/*what you want*/
+            margin : 5px;/*what you want*/
             background-image: url(../image/player_horizontal.png);
             background-repeat: no-repeat;
         }
-        .slideshow.horizontal_fade > .button.disabled{
+        .slideshow.basic > .button.disabled{
             display : none;
         }
-        .slideshow.horizontal_fade > .button.first{
+        .slideshow.basic > .button.first{
             background-position: 0 0;
         }
-        .slideshow.horizontal_fade > .button.previous{
+        .slideshow.basic > .button.previous{
             background-position: -25px 0px;
         }
-        .slideshow.horizontal_fade > .button.play{
+        .slideshow.basic > .button.play{
             background-position: -50px 0px;
         }
-        .slideshow.horizontal_fade > .button.pause{
+        .slideshow.basic > .button.pause{
             background-position: -75px 0px;
         }
-        .slideshow.horizontal_fade > .button.resume{
+        .slideshow.basic > .button.resume{
             background-position: -50px 0px;
         }
-        .slideshow.horizontal_fade > .button.stop{
+        .slideshow.basic > .button.stop{
             background-position: -100px 0px;
         }
-        .slideshow.horizontal_fade > .button.next{
+        .slideshow.basic > .button.next{
             background-position: -125px 0px;
         }
-        .slideshow.horizontal_fade > .button.last{
+        .slideshow.basic > .button.last{
             background-position: -150px 0px;
         }
         /* end image button
         ******************************************/
         
-    /* end slides
+    /* end image
     ******************************************/
 
     
     /* navigation 
     ******************************************/
-    .slideshow.horizontal_fade > .navigation{
+    .slideshow.basic > .navigation{
         display: inline-table;
-        margin : 0;
     }
-    .slideshow.horizontal_fade >.navigation > div {
+    .slideshow.basic >.navigation > div {
         display: table-cell;
         text-align: center;
         vertical-align: middle;
     }
-    .slideshow.horizontal_fade > .navigation > div > *{
+    .slideshow.basic > .navigation > div > *{
         float:left;
     }
-    .slideshow.horizontal_fade > .navigation > div > .scroller{
-        max-width : 350px;/*what you want*/
+    .slideshow.basic > .navigation > div > .scroller{
         display: inline-block;
         overflow: hidden;
+        max-width : 350px;/*what you want*/
     }
     
         /* navigation button
         ******************************************/
-        .slideshow.horizontal_fade > .navigation > div > .button{
+        /*customisation*/
+        .slideshow.basic > .navigation > div > .button{
             width : 25px;/*what you want*/
             height : 25px;/*what you want*/
             margin : 5px;/*what you want*/
@@ -119,16 +108,16 @@
             background-repeat: no-repeat;
             background-position: center;
         }
-        .slideshow.horizontal_fade > .navigation > div > .button.first{
+        .slideshow.basic > .navigation > div > .button.first{
             background-position: 0 0;
         }
-        .slideshow.horizontal_fade > .navigation > div > .button.previous{
+        .slideshow.basic > .navigation > div > .button.previous{
             background-position: -25px 0px;
         }
-        .slideshow.horizontal_fade > .navigation > div > .button.next{
+        .slideshow.basic > .navigation > div > .button.next{
             background-position: -125px 0px;
         }
-        .slideshow.horizontal_fade > .navigation > div > .button.last{
+        .slideshow.basic > .navigation > div > .button.last{
             background-position: -150px 0px;
         }
         /* end navigation button
@@ -137,23 +126,22 @@
         
         /* navigation scroller & items
         ******************************************/
-        .slideshow.horizontal_fade > .navigation > div > .scroller > div {
+        .slideshow.basic > .navigation > div > .scroller > div {
             display: table;
             table-layout: fixed;
             width : 0;/*disable auto width*/
         }
-        .slideshow.horizontal_fade > .navigation > div > .scroller > div >  a{
+        .slideshow.basic > .navigation > div > .scroller > div >  a{
             display: table-cell;
             text-align: center;
             vertical-align: middle;
             width : 50px;/*what you want*/
             height : 38px;/*what you want*/
-            /*customisation*/
         }
-        .slideshow.horizontal_fade > .navigation > div > .scroller > div >  a.selected{
+        .slideshow.basic > .navigation > div > .scroller > div >  a.selected{
             background-color: red;
         }
-        .slideshow.horizontal_fade > .navigation > div > .scroller > div >  a.scrolled{
+        .slideshow.basic > .navigation > div > .scroller > div >  a.scrolled{
             background-color: gray;
         }
         /* end navigation scroller & items

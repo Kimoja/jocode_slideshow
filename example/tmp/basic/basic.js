@@ -1,9 +1,9 @@
 
-JocodeSlideshowExemple['basic'] = function(){
+
+$(function(){
     
-    return $.data(
+    JocodeSlideshowExemple['basic'] = $.data(
     
-        //slideshow config
         $('.slideshow.basic').jocodeSlideshow({
         
             selector : '> .scroller > div > div',
@@ -46,4 +46,4 @@ JocodeSlideshowExemple['basic'] = function(){
         })[0]
         , 'jocodeSlideshow'
     );
-};
+});

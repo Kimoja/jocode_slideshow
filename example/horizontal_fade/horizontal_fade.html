@@ -1,183 +1,107 @@
-<!DOCTYPE html>
-<html>
-    <head>
+<!-- see template horizontal -->
+<div class="slideshow horizontal_fade">
 
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Horizontal fade</title>
+    <a href="#" class="button first"></a>
+    <a href="#" class="button previous"></a>
+    <a href="#" class="button play"></a>
+    <a href="#" class="button pause"></a>
+    <a href="#" class="button resume"></a>
+    <a href="#" class="button stop"></a>
+    <a href="#" class="button next"></a>
+    <a href="#" class="button last"></a>
 
-        <script src="../../lib/jquery-1.9.1.min.js"></script>
-        
-        <link rel="stylesheet" href="../base_example.css">
-        
-        <!--slideshow-->
-        <link rel="stylesheet" href="./horizontal_fade.css">
-        
-        <script src="../../src/jocode_class.js"></script>
-        <script src="../../src/jocode_slideshow.js"></script>
-        <script src="../../src/fx/slideshow/fade.js"></script>
-        <script src="../../src/jocode_navigation_slideshow.js"></script>
-        <script src="../../src/fx/navigation/scroll.js"></script>
-        <script src="./horizontal_fade.js"></script>
-        
-        <!-- syntax highlighter -->
-        <script type="text/javascript" src="../../lib/rainbow-custom.min.js"></script>
-    </head>
-    <body>
+    <div class='fade'>
         <div>
-            <!-- see template horizontal -->
-            <div class="slideshow">
-                
-                <a href="#" class="button first"></a>
-                <a href="#" class="button previous"></a>
-                <a href="#" class="button play"></a>
-                <a href="#" class="button pause"></a>
-                <a href="#" class="button resume"></a>
-                <a href="#" class="button stop"></a>
-                <a href="#" class="button next"></a>
-                <a href="#" class="button last"></a>
-                
-                <div class='fade'>
-                    <div>
-                        <div>
-                            <img src='../../image/jocode.png' alt="">
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <p>vertical center html content !!!! </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <img src='../../image/jocode.png' alt="">
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <p>vertical center html content !!!! </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <img src='../../image/jocode.png' alt="">
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <p>vertical center html content !!!! </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <img src='../../image/jocode.png' alt="">
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <p>vertical center html content !!!! </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <img src='../../image/jocode.png' alt="">
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <p>vertical center html content !!!! </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <img src='../../image/jocode.png' alt="">
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <p>vertical center html content !!!! </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class='navigation'>
-                    <div>
-                        <a href="#" class="button scroll_first"></a>
-                        <a href="#" class="button scroll_previous"></a>
-                        <div class='scroller'>
-                            <div>
-                                <a href="#">Nav1</a>
-                                <a href="#">Nav2</a>
-                                <a href="#">Nav3</a>
-                                <a href="#">Nav4</a>
-                                <a href="#">Nav5</a>
-                                <a href="#">Nav6</a>
-                                <a href="#">Nav7</a>
-                                <a href="#">Nav8</a>
-                                <a href="#">Nav9</a>
-                                <a href="#">Nav10</a>
-                                <a href="#">Nav11</a>
-                                <a href="#">Nav12</a>
-                                <a href="#">Nav13</a>
-                            </div>
-                        </div>
-                        <a href="#" class="button scroll_next"></a>
-                        <a href="#" class="button scroll_last"></a>
-                    </div>
-                </div>
-
+            <div>
+                <img src='./slide/1.jpg' alt="">
             </div>
-
         </div>
-        
-        <div class="desc">
-            <h1>Horizontal fade</h1>
-            <pre data-language="javascript">
-$(function(){
-    $('.slideshow').jocodeSlideshow({
-        
-        selector : '> .fade > div',
-        
-        bt_first : '.first',
-        bt_previous : '.previous',
-        bt_play : '.play',
-        bt_pause : '.pause',
-        bt_resume : '.resume',
-        bt_stop : '.stop',
-        bt_next: '.next',
-        bt_last : '.last',
-        
-        disabled_bt_class : 'disabled',
-        
-        auto_play : true,
-        delay : 1000,
-                   
-        start_index : 0,
-       
-        fx : new $.JocodeFxSlideshow.Fade({
-            duration : 1000
-        }),
-        
-        navigation : new $.JocodeNavigationSlideshow({
-            
-            selector : '> .navigation > div > .scroller > div >  a',
-            
-            selected_class : 'selected',
-            scrolled_class : 'scrolled',
-            
-            bt_next: '.scroll_next',
-            bt_previous : '.scroll_previous',
-            bt_first: '.scroll_first',
-            bt_last : '.scroll_last',
-            
-            fx : new $.JocodeFxNavigationSlideshow.Scroll({
-                scroll_over : true
-            })
-        })
-    });
-});
-            </pre>
+        <div>
+            <div>
+                <img src='./slide/2.jpg' alt="">
+            </div>
         </div>
+        <div>
+            <div>
+                <img src='./slide/3.jpg' alt="">
+            </div>
+        </div>
+        <div>
+            <div>
+                <img src='./slide/4.jpg' alt="">
+            </div>
+        </div>
+        <div>
+            <div>
+                <img src='./slide/5.jpg' alt="">
+            </div>
+        </div>
+        <div>
+            <div>
+                <img src='./slide/6.jpg' alt="">
+            </div>
+        </div>
+        <div>
+            <div>
+                <img src='./slide/7.jpg' alt="">
+            </div>
+        </div>
+        <div>
+            <div>
+                <img src='./slide/8.jpg' alt="">
+            </div>
+        </div>
+        <div>
+            <div>
+                <img src='./slide/9.jpg' alt="">
+            </div>
+        </div>
+        <div>
+            <div>
+                <img src='./slide/10.jpg' alt="">
+            </div>
+        </div>
+        <div>
+            <div>
+                <img src='./slide/11.jpg' alt="">
+            </div>
+        </div>
+        <div>
+            <div>
+                <img src='./slide/12.jpg' alt="">
+            </div>
+        </div>
+        <div>
+            <div>
+                <img src='./slide/13.jpg' alt="">
+            </div>
+        </div>
+    </div>
 
+    <div class='navigation'>
+        <div>
+            <a href="#" class="button first"></a>
+            <a href="#" class="button previous"></a>
+            <div class='scroller'>
+                <div>
+                    <a href="#">Nav1</a>
+                    <a href="#">Nav2</a>
+                    <a href="#">Nav3</a>
+                    <a href="#">Nav4</a>
+                    <a href="#">Nav5</a>
+                    <a href="#">Nav6</a>
+                    <a href="#">Nav7</a>
+                    <a href="#">Nav8</a>
+                    <a href="#">Nav9</a>
+                    <a href="#">Nav10</a>
+                    <a href="#">Nav11</a>
+                    <a href="#">Nav12</a>
+                    <a href="#">Nav13</a>
+                </div>
+            </div>
+            <a href="#" class="button next"></a>
+            <a href="#" class="button last"></a>
+        </div>
+    </div>
 
-    </body>
-</html>
+</div>

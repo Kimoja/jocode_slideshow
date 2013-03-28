@@ -3,7 +3,7 @@
 
 (function($){
     
-$.JocodeFxNavigationSlideshow.Scroll = $.jocodeClass(
+$.JocodeSlideshowNavigationFx.Scroll = $.jocodeClass(
     
     function(config){
         
@@ -59,8 +59,8 @@ $.JocodeFxNavigationSlideshow.Scroll = $.jocodeClass(
 
         init : function(navigation){
 
-            $.JocodeFxNavigationSlideshow.Base.prototype.init.call(this, navigation);
-
+            $.JocodeSlideshowNavigationFx.Base.prototype.init.call(this, navigation);
+            
             this._scroller = $(this.selector, navigation.context);
             this.initPile();
         },
@@ -169,7 +169,7 @@ $.JocodeFxNavigationSlideshow.Scroll = $.jocodeClass(
         }
         
     }, 
-    $.JocodeFxNavigationSlideshow.Base
+    $.JocodeSlideshowNavigationFx.Base
 ); 
 
 })(jQuery);

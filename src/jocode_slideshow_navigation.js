@@ -26,16 +26,16 @@
 (function($){
 
 
-$.JocodeNavigationSlideshow = $.jocodeClass(
+$.JocodeSlideshowNavigation = $.jocodeClass(
         
     /**
      *  The navigation class for a slideshow
      *  
      * @constructor 
-     * @name $.JocodeNavigationSlideshow
+     * @name $.JocodeSlideshowNavigation
      * @param {Object} config  The configuration object
      *      @param {String}   config.selector                                   The navigation items selector, relative to the slideshow context if from_context set to true
-     *      @param {$.JocodeFxNavigationSlideshow.Base}[config.fx_navigation]   Transition navigation items object
+     *      @param {$.JocodeSlideshowNavigationFx.Base}[config.fx_navigation]   Transition navigation items object
      *      @param {String}   [config.hover_container]                          The selector of the container of event hover(by default,  the jQuery parent()  function to find him).
      *                                                                          It used to assign the event hover 
      *      @param {String}   [config.context]                                  The context of selectors
@@ -52,13 +52,13 @@ $.JocodeNavigationSlideshow = $.jocodeClass(
     function(config){
 
         if(!config)
-            throw new Error('JocodeNavigationSlideshow Error: Missing parameter "config"');
+            throw new Error('JocodeSlideshowNavigation Error: Missing parameter "config"');
 
         if(!config.selector)
-            throw new Error('JocodeNavigationSlideshow Error: Missing parameter "config.selector"');
+            throw new Error('JocodeSlideshowNavigation Error: Missing parameter "config.selector"');
 
-        if(!config.fx || !(config.fx instanceof $.JocodeFxNavigationSlideshow.Base))
-            throw new Error('JocodeNavigationSlideshow Error: Parameter "config.fx" is missing or is not of the type "$.JocodeFxNavigationSlideshow.Base"');
+        if(!config.fx || !(config.fx instanceof $.JocodeSlideshowNavigationFx.Base))
+            throw new Error('JocodeSlideshowNavigation Error: Parameter "config.fx" is missing or is not of the type "$.JocodeSlideshowNavigationFx.Base"');
 
         this.config = config;
     },
@@ -139,7 +139,7 @@ $.JocodeNavigationSlideshow = $.jocodeClass(
         scrolled_index : -1,
 
         /**
-         * @property {$.JocodeFxNavigationSlideshow.Base} Transition navigation items object
+         * @property {$.JocodeSlideshowNavigationFx.Base} Transition navigation items object
          */
         fx : null,
 
@@ -179,20 +179,21 @@ $.JocodeNavigationSlideshow = $.jocodeClass(
             });
 
             if(!('pause_over' in config) ||  config.pause_over)
-                this.slideshow.addPauseEvent(this.hover_container);
+                this.slideshow.addPauseEventOnHover(this.hover_container);
             
             //initialize buttons
             $.each('first previous next last'.split(' '), function(index, button){
 
                 if(config['bt_' + button]){
-
-                    (self['bt_' + button] = $(config['bt_' + button], this.context)).click(function(e){
+                    
+                    (self['bt_' + button] = $(config['bt_' + button], self.context)).click(function(e){
                        
                         self.slideshow._stopEvent(e); 
                         self[button]();
                     });
                 }
             });
+            
 
             this.fx.init(this);
         },
@@ -310,8 +311,8 @@ $.JocodeNavigationSlideshow = $.jocodeClass(
 
             if(this.selected_class){
                 
-                sible.addClass(this.selected_class);
                 this.current && this.current.removeClass(this.selected_class);
+                sible.addClass(this.selected_class);
                 
                 this.scrolled_class && this.current_scrolled 
                     && this.current_scrolled[0] == sible[0] 
@@ -368,25 +369,25 @@ $.JocodeNavigationSlideshow = $.jocodeClass(
 
 /**
  * @namespace 
- * @name $.JocodeFxNavigationSlideshow
+ * @name $.JocodeSlideshowNavigationFx
  */
-$.JocodeFxNavigationSlideshow = {
+$.JocodeSlideshowNavigationFx = {
     
     /**
      * The base class of a transition item navigation
      * 
      * @constructor 
-     * @name $.JocodeFxNavigationSlideshow.Base
+     * @name $.JocodeSlideshowNavigationFx.Base
      **/
     Base : $.jocodeClass(
         function(){
             
         }, 
         {
-            /** @lends $.JocodeFxNavigationSlideshow.Base.prototype */
+            /** @lends $.JocodeSlideshowNavigationFx.Base.prototype */
 
             /**
-             * @property {$.JocodeNavigationSlideshow} The navigation object
+             * @property {$.JocodeSlideshowNavigation} The navigation object
              */
             navigation : null,
 
