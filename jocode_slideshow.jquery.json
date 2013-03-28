@@ -1,4 +1,4 @@
-{
+{ 
   "name": "jocode_slideshow",
   "version": "0.9.1",
   "title": "jQuery slideshow",
@@ -8,7 +8,7 @@
     "slideshow",
     "carousel",
     "json",
-    "slider",
+    "slider", 
     "ui"
   ],
   "homepage": "https://github.com/Kimoja/jocode_slideshow",
