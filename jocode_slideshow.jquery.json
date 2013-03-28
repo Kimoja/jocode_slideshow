@@ -22,7 +22,7 @@
       "url"  : "https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt"
     }
   ],
-  "bugs": "https://github.com/coldmind/jquery-popup-selecting/issues",
+  "bugs": "https://github.com/Kimoja/jocode_slideshow/issues",
   "dependencies": {
     "jquery": ">=1.7"
   },
