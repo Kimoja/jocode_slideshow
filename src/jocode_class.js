@@ -3,11 +3,14 @@
 (function($){
     
  /**
-  * Create class with inheritance
-  * @function
+  * Create classes, that support  inheritance
+  * @method jocodeClass
   * @param {Function} construct The constructor
   * @param {Object} proto The prototype
   * @param {Function} parent The super class
+  * @for $ 
+  * @static
+  * @return {Function}
   */
 $.jocodeClass = function(construct, proto, parent) {
     

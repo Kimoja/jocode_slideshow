@@ -39,47 +39,48 @@
  * revoir play et l'index start
  **/
 
+ /**
+  * @class $
+  */
+
 (function($){
 
 $.JocodeSlideshow = $.jocodeClass(
 
     /**
-     * Slideshow builder, based on transition objects, and custom html structure and css
+     * The JodecodeSlideshow constructor 
      * 
-     * @constructor 
-     * @name $.JocodeSlideshow
-     * @param {jQuery} context The initialization context
-     * @param {Object} config  The configuration object
-     *      @param {String}   config.selector                               The slides selector, relative to the initialization context
-     *      @param {$.JocodeSlideshowNavigation.Base}[config.navigation]    The navigation object
-     *      @param {$.JocodeProgressBar.Base}[config.progress_bar]          The progress bar object (TODO)
-     *      @param {String}   [config.bt_first]                             The Selector of buttons "first"  relative to the initialization context
-     *      @param {String}   [config.bt_previous]                          The Selector of buttons "previous"", relative to the initialization context
-     *      @param {String}   [config.bt_play]                              The Selector of buttons "play", relative to the initialization context
-     *      @param {String}   [config.bt_pause]                             The Selector of buttons "pause", relative to the initialization context
-     *      @param {String}   [config.bt_resume]                            The Selector of buttons "resume", relative to the initialization context
-     *      @param {String}   [config.bt_stop]                              The Selector of buttons "stop", relative to the initialization context 
-     *      @param {String}   [config.bt_next]                              The Selector of buttons "next", relative to the initialization context
-     *      @param {String}   [config.bt_last]                              The Selector of buttons "last", relative to the initialization context
-     *      @param {String}   [config.disabled_bt_class]                    Class of disabled buttons
-     *      @param {Boolean}  [config.auto_play=false]                      Enable Autoplay
-     *      @param {Number}   [config.delay=3000]                           Time in milliseconds between each transition
-     *      @param {String}   [config.hover_container]                      The selector of the container of event hover(by default,  the jQuery parent()  function to find him).
-     *      @param {Boolean}  [config.pause_over=true]                      Stop on mouseover
-     *      @param {Boolean}  [config.stop_event=true]                      Stop event propagation and default actions
-     *      @param {Number}   [config.start_index=0]                        The start index
-     *      @param {$.JocodeSlideshowFx.Base}[config.fx]                    Transition slide object
-     *      @param {Function} [config.load]                                 Loading slide function 
-     *      @param {Function} [config.beforeWait]                           Custom method called  while awaiting a transition
-     *      @param {Function} [config.onCancel]                             Custom method called when a slide is cancelled
-     *      @param {Function} [config.onPlay]                               Custom method called when the playback start
-     *      @param {Function} [config.onPause]                              Custom method called when on pause
-     *      @param {Function} [config.onResume]                             Custom method called when the playback is resumed
-     *      @param {Function} [config.onStop]                               Custom method called when the player stops
-     *      @param {Function} [config.onChange]                             Custom method called when a slide is changed
-     *      @param {Function} [config.beforeDraw]                           Custom method called before a transition
-     *      
-     *      
+     * @class $.JocodeSlideshow
+     * @constructor
+     * @param {jQuery} context  The initialization context
+     * @param {Object} config   The configuration object
+     *      @param {String}     config.$slides                          The slides selector, relative to the initialization context
+     *      @param {String}     [config.$buttons]                       The button selector
+     *      @param {$.JocodeSlideshowNavigation.Base}[config.navigation]The navigation object
+     *      @param {$.JocodeProgressBar.Base}[config.progress_bar]      The progress bar object (TODO)
+     *      @param {String}     [config.disabled_bt_class]              Class of disabled buttons
+     *      @param {Boolean}    [config.auto_play=false]                Enable Autoplay
+     *      @param {Number}     [config.delay=3000]                     Time in milliseconds between each transition
+     *      @param {String}     [config.hover_container]                The selector of the container of event hover(by default,  the jQuery parent()  function to find him).
+     *      @param {Boolean}    [config.pause_over=true]                Stop on mouseover
+     *      @param {Boolean}    [config.stop_event=true]                Stop event propagation and default actions
+     *      @param {Number}     [config.start_index=0]                  The start index
+     *      @param {$.JocodeSlideshowFx.Base}[config.fx]                Transition slide object
+     *      @param {Function}   [config.load]                           Loading slide function 
+     *          @param {Number} config.load.index
+     *      @param {Function}   [config.beforeWait]                     Custom method called  while awaiting a transition
+     *          @param {Number}     config.beforeWait.delay 
+     *          @param {Number}     config.beforeWait.elapsed 
+     *          @param {Number}     config.beforeWait.start_time 
+     *      @param {Function}   [config.onCancel]                       Custom method called when a slide is cancelled
+     *          @param {Number}     config.onCancel.canceled_index 
+     *      @param {Function}   [config.onPlay]                         Custom method called when the playback start
+     *      @param {Function}   [config.onPause]                        Custom method called when on pause
+     *      @param {Function}   [config.onResume]                       Custom method called when the playback is resumed
+     *      @param {Function}   [config.onStop]                         Custom method called when the player stops
+     *      @param {Function}   [config.onChange]                       Custom method called when a slide is changed
+     *          @param {Number}      config.onChange.new_index 
+     *      @param {Function}   [config.beforeDraw]                     Custom method called before a transition
      **/
     function (context, config){
         
@@ -87,23 +88,23 @@ $.JocodeSlideshow = $.jocodeClass(
         if(!config)
             throw new Error('jocodeSlideshow Error: Missing parameter "config"');
 
-        if(!config.selector)
-            throw new Error('jocodeSlideshow Error: Missing parameter "config.selector"');
+        if(!config.$slides)
+            throw new Error('jocodeSlideshow Error: Missing parameter "config.$slides"');
 
         if(!config.fx || !(config.fx instanceof $.JocodeSlideshowFx.Base))
             throw new Error('jocodeSlideshow Error: Parameter "config.fx" is missing or is not of the type "$.JocodeSlideshowFx.Base"');
 
         var self = this,
-            buttons = 'first previous play pause resume stop next last'.split(' ');
+            ctx_button,
+            bt;
         
         //set requiered 
         this.context = context;
         this.config = config;
         this.fx = config.fx;
-        this.selector = config.selector;
-        this.slides = $(config.selector, context);
-        
-        //set options 
+        this.$slides = config.$slides;
+        this.slides = $(config.$slides, context);
+        //alert(this.slides.length)
         this.hover_container = config.hover_container ? $(config.hover_container, context) : this.slides.parent();
         
         config.disabled_bt_class && (
@@ -139,17 +140,24 @@ $.JocodeSlideshow = $.jocodeClass(
         }
         
         //initialize buttons
-        $.each('first previous play pause resume stop next last'.split(' '), function(index, button){
+        if(config.$buttons){
             
-            if(config['bt_' + button]){
+            ctx_button = $(config.$buttons, context);
+            
+            $.each('first previous play pause resume stop next last'.split(' '), function(index, button){
+                
+                bt = $(' .' + button, ctx_button);
+                if(bt[0]){
+                    
+                    self['bt_' + button] = bt.click(function(e){
 
-                (self['bt_' + button] = $(config['bt_' + button], context)).click(function(e){
-
-                    self._stopEvent(e); 
-                    self[button]();
-                });
-            }
-        });
+                        self._stopEvent(e); 
+                        self[button]();
+                    });
+                }
+            });
+        }
+        
         //init transition object
         this.fx.init(this);
         
@@ -168,168 +176,268 @@ $.JocodeSlideshow = $.jocodeClass(
     },
     
     {
-        /** @lends $.JocodeSlideshow.prototype */
-        
         /**
-         * @property {Object} The configuration object
+         * The configuration object
+         * 
+         * @property config
+         * @type {Object}
          */
         config : null,
         
         /**
-         * @property {jQuery} The initialization context
+         * The initialization context
+         * 
+         * @property context
+         * @type {jQuery}
          */
         context : null,
         
         /**
-         * @property {String} The slides selector
+         * The slides selector
+         * 
+         * @property $slides
+         * @type {String}
          */
-        selector : null,
+        $slides : null,
         
         /**
-         * @property {jQuery} The slides
+         * The slides
+         * 
+         * @property slides
+         * @type {jQuery}
          */
-        slide : null,
+        slides : null,
         
         /**
-         * @property {jQuery} The container of the event hover
+         * The container of the event hover
+         * 
+         * @property hover_container
+         * @type {jQuery}
          */
         hover_container : null,
         
         /**
-         * @property {$.JocodeSlideshowNavigation.Base} The navigation object
+         * The navigation object
+         * 
+         * @property navigation
+         * @type {$.JocodeSlideshowNavigation.Base}
          */
         navigation : null,
         
         /**
-         * @property {jQuery} The button first
+         * The button first
+         * 
+         * @property bt_first
+         * @type {jQuery}
          */
         bt_first : null,
 
         /**
-         * @property {jQuery} The button previous
+         * The button previous
+         * 
+         * @property bt_previous
+         * @type {jQuery}
          */
         bt_previous : null,
 
         /**
-         * @property {jQuery} The button play
+         * The button play
+         * 
+         * @property bt_play
+         * @type {jQuery}
          */
         bt_play : null,
 
         /**
-         * @property {jQuery} The button pause
+         * The button pause
+         * 
+         * @property bt_pause
+         * @type {jQuery}
          */
         bt_pause : null,
 
         /**
-         * @property {jQuery} The button resume
+         * The button resume
+         * 
+         * @property bt_resume
+         * @type {jQuery}
          */
         bt_resume : null,
 
         /**
-         * @property {jQuery} The button stop
+         * The button stop
+         * 
+         * @property bt_stop
+         * @type {jQuery}
          */
         bt_stop : null,
 
+        /**
+         * The button next 
+         * 
+         * @property bt_next
+         * @type {jQuery}
+         */
         /**
          * @property {jQuery} The button next 
          */
         bt_next : null,
 
         /**
-         * @property {jQuery} The button last 
+         * The button last 
+         * 
+         * @property bt_last
+         * @type {jQuery}
          */
         bt_last : null,
 
         /**
-         * @property {String} The css class of disabled buttons
+         * The css class of disabled buttons
+         * 
+         * @property disabled_bt_class
+         * @type {String}
          */
         disabled_bt_class : null,
 
         /**
-         * @property {Number} Time in milliseconds between each transition
+         * Time in milliseconds between each transition
+         * 
+         * @property delay
+         * @type {Number}
+         * @default 3000
          */
         delay : 3000,
         
-        
         /**
-         * @property {$.JocodeSlideshowFx.Base} Transition slide object
+         * Transition slide object
+         * 
+         * @property fx
+         * @type {$.JocodeSlideshowFx.Base}
          */
         fx : null,
         
         /**
-         * @property {jQuery} The current slide
+         * The current slide
+         * 
+         * @property current
+         * @type {jQuery}
          */
         current : null,
 
         /**
-         * @property {Number} The start index
+         * The start index
+         * 
+         * @property start_index
+         * @type {Number}
+         * @default 0
          */
         start_index : 0,
         
         /**
-         * @property {Number} The current index
+         * The current index
+         * 
+         * @property index
+         * @type {Number}
+         * @default -1
          */
         index : -1,
         
+        
         /**
-         * @property {Number} The loading index
+         * The loading index
+         * 
+         * @property loading_index
+         * @type {Number}
+         * @default -1
          */
         loading_index : -1,
         
         /**
+         * If the player is stopped
+         * 
+         * @property _stopped
+         * @type {Boolean}
+         * @default true
          * @private
-         * @property {Boolean} If the player is stopped
          */
         _stopped : true,
 
         /**
+         * If the player is on pause
+         * 
+         * @property _paused
+         * @type {Boolean}
+         * @default false
          * @private
-         * @property {Boolean} If the player is on pause
          */
         _paused : false,
         
         /**
+         * If the slide is on load
+         * 
+         * @property _on_load
+         * @type {Boolean}
+         * @default false
          * @private
-         * @property {Boolean} If the slide is on load
          */
         _on_load : false,
         
         /**
+         * If the slide is on transition
+         * 
+         * @property _on_draw
+         * @type {Boolean}
+         * @default false
          * @private
-         * @property {Boolean} If the slide is on transition
          */
         _on_draw : false,
 
         /**
+         * If have navigation
+         * 
+         * @property _have_navigation
+         * @type {Boolean}
+         * @default false
          * @private
-         * @property {Boolean} If have navigation
          */
         _have_navigation : false,
         
         /**
+         * The timestamp of the beginning of the time interval between transitions
+         * 
+         * @property _time
+         * @type {Number}
+         * @default 0
          * @private
-         * @property {Number} The timestamp of the beginning of the time interval between transitions
          */
         _time : 0,
 
         /**
+         * The time delay during a break
+         * 
+         * @property _defer
+         * @type {Number}
+         * @default 0
          * @private
-         * @property {Number} The time delay during a break
          */
         _defer : 0,
 
         /**
+         * The waiting timer between slides
+         * 
+         * @property _timeout
+         * @type {Number}
          * @private
-         * @property {Number} The waiting timer between slides
          */
         _timeout : null,
         
         /**
          * Change the css classe of a set of buttons
-         * @private
-         * @function
+         * 
+         * @method _toogleBt
          * @param {String} buttons The set of buttons
          * @param {Boolean} enable Add or remove a css class
+         * @private
          */
         _toogleBt : function(buttons, enable){
             
@@ -342,12 +450,14 @@ $.JocodeSlideshow = $.jocodeClass(
                         : button.addClass(self.disabled_bt_class));
             });
         },
-
+        
         /**
-         * Stop an event
+         * Stop an click event
+         * 
+         * @method _stopEvent
+         * @param {Event} e The event object
+         * @param {Boolean} enable Add or remove a css class
          * @private
-         * @function
-         * @param {Event} el The event object
          */
         _stopEvent : function(e){
 
@@ -357,10 +467,11 @@ $.JocodeSlideshow = $.jocodeClass(
                 e.stopPropagation();
             }
         },
-
+        
         /**
          * Set pause on hover event
-         * @function
+         * 
+         * @method addPauseEventOnHover
          * @param {jQuery} el The element to listen
          */
         addPauseEventOnHover : function(el){
@@ -372,28 +483,30 @@ $.JocodeSlideshow = $.jocodeClass(
                 function() {self.resume();}
             );
         },
-
+        
         /**
          * Go to the first slide
-         * @function
+         * 
+         * @method first
          */
         first : function(){
 
             this.goTo(0);
         },
-
+        
         /**
          * Go to the previous slide
-         * @function
+         * 
+         * @method previous
          */
         previous : function(){
 
             this.goTo(this.loading_index - 1);
         },
-
         /**
          * Start the player
-         * @function
+         * 
+         * @method play
          */
         play : function(){
             
@@ -410,10 +523,11 @@ $.JocodeSlideshow = $.jocodeClass(
                 this.goTo(this.start_index);
             }
         },
-
+        
         /**
          * Pause the player
-         * @function
+         * 
+         * @method pause
          */
         pause : function(){
 
@@ -430,10 +544,11 @@ $.JocodeSlideshow = $.jocodeClass(
                 this._on_wait && clearTimeout(this._timeout);
             }
         },
-
+        
         /**
          * Resume the player
-         * @function
+         * 
+         * @method resume
          */
         resume : function(){
 
@@ -449,10 +564,11 @@ $.JocodeSlideshow = $.jocodeClass(
             }
             else this.play();
         },
-
+        
         /**
          * Stop the player
-         * @function
+         * 
+         * @method stop
          */
         stop : function(){
 
@@ -468,41 +584,45 @@ $.JocodeSlideshow = $.jocodeClass(
                 this._on_wait && clearTimeout(this._timeout);
             }
         },
-
+        
         /**
          * Go to the next slide
-         * @function
+         * 
+         * @method next
          */
         next : function(){
 
             this.goTo(this.loading_index + 1);
         },
-
+        
         /**
          * Go to the last slide
-         * @function
+         * 
+         * @method last
          */
         last : function(){
 
             this.goTo(this.slides.length - 1);
         },
         
-        /**
+         /**
          * Are there any slides after to current or loading slide (ignores loop)
-         * @function
+         * 
+         * @method hasNext
          * @param {Boolean} from_index True to test on the index, otherwise on the loading index
-         * @returns {Boolean}
+         * @return {Boolean}
          */
         hasNext : function(from_index){
 
             return (from_index ? this.index : this.loading_index) < this.slides.length - 1;
         },
-
+        
         /**
          * Are there any slides previous to current or loading slide (ignores loop)
-         * @function
+         * 
+         * @method hasPrevious
          * @param {Boolean} from_index True to test on the index, otherwise on the loading index
-         * @returns {Boolean}
+         * @return {Boolean}
          */
         hasPrevious : function(from_index){
 
@@ -511,32 +631,35 @@ $.JocodeSlideshow = $.jocodeClass(
         
         /**
          * If the current or loading slide is the first
-         * @function
+         * 
+         * @method isFirst
          * @param {Boolean} from_index True to test on the index, otherwise on the loading index
-         * @returns {Boolean}
+         * @return {Boolean}
          */
         isFirst : function(from_index){
 
             return (from_index ? this.index : this.loading_index) === 0;
         },
-
+        
         /**
          * If the current or loading slide is the last
-         * @function
+         * 
+         * @method isLast
          * @param {Boolean} from_index True to test on the index, otherwise on the loading index
-         * @returns {Boolean}
+         * @return {Boolean}
          */
         isLast : function(from_index){
 
             return (from_index ? this.index : this.loading_index) === this.slides.length - 1;
         },
-
+        
         /**
          * If the current or loading slide index is that passed as argument
-         * @function
+         * 
+         * @method is
          * @param {Number} index The index
          * @param {Boolean} from_index True to test on the index, otherwise on the loading index
-         * @returns {Boolean}
+         * @return {Boolean}
          */
         is : function(index, from_index){
 
@@ -545,69 +668,76 @@ $.JocodeSlideshow = $.jocodeClass(
         
         /**
          * If a slide is an load
-         * @function
-         * @returns {Boolean}
+         * 
+         * @method isOnLoad
+         * @return {Boolean}
          */
         isOnLoad : function(){
 
             return this._on_load;
         },
-
+        
         /**
          * If a slide is an transition
-         * @function
-         * @returns {Boolean}
+         * 
+         * @method isOnDraw
+         * @return {Boolean}
          */
         isOnDraw : function(){
 
             return this._on_draw;
         },
-
+        
         /**
          * If playback is waiting for a transition
-         * @function
-         * @returns {Boolean}
+         * 
+         * @method isOnWait
+         * @return {Boolean}
          */
         isOnWait : function(){
 
             return this._on_wait && this.isPlayed();
         },
-
+        
         /**
          * If the player is playing
-         * @function
-         * @returns {Boolean}
+         * 
+         * @method isPlayed
+         * @return {Boolean}
          */
         isPlayed : function(){
 
             return !this._stopped && !this._paused;
         },
-
+        
         /**
          * If the player is stopped
-         * @function
-         * @returns {Boolean}
+         * 
+         * @method isStopped
+         * @return {Boolean}
          */
         isStopped : function(){
 
             return this._stopped;
         },
-
+        
         /**
          * If the player is on pause
-         * @function
-         * @returns {Boolean}
+         * 
+         * @method isPaused
+         * @return {Boolean}
          */
         isPaused : function(){
 
             return this._paused;
         },
         
-        
         /**
          * Calculate an index
-         * @function
-         * @returns {Boolean}
+         * 
+         * @method computeIndex
+         * @param {Number} index The index
+         * @return {Number}
          */
         computeIndex : function(index){
             
@@ -616,19 +746,22 @@ $.JocodeSlideshow = $.jocodeClass(
         
         /**
          * Method invoked when the pile of slides change
-         * @function
+         * 
+         * @method initPile
          */
         initPile : function(){
             
-            this.slides = $(this.selector, this.context);
+            this.slides = $(this.$slides, this.context);
             this.fx.initPile();
+            
             this._have_navigation && this.navigation.initPile();
         },
         
         /**
          * Continue playback after a transition
          * Start the timer delay between each transition, whether it is playing
-         * @function
+         * 
+         * @method keepOn
          * @param {Number} index The index
          */
         keepOn : function(index){
@@ -663,10 +796,10 @@ $.JocodeSlideshow = $.jocodeClass(
             }
         },
 
-
         /**
          * Launch the transition, after loading a slide
-         * @function
+         * 
+         * @method draw
          * @param {Number} index The index
          */
         draw : function(index){
@@ -689,10 +822,11 @@ $.JocodeSlideshow = $.jocodeClass(
 
             this._have_navigation && this.navigation.draw(old_index, this.index);
         },
-
+        
         /**
-         * Go to the index of a slide
-         * @function
+         * Go to slide
+         * 
+         * @method goTo
          * @param {Number} index The index
          */
         goTo : function(index){
@@ -739,7 +873,8 @@ $.JocodeSlideshow = $.jocodeClass(
         
         /**
          * Load a slide
-         * @function
+         * 
+         * @method load
          * @param {Number} index The index
          */
         load : function(index){
@@ -749,93 +884,105 @@ $.JocodeSlideshow = $.jocodeClass(
         
         /**
          * Custom method called  while awaiting a transition
-         * @function
+         * 
+         * @method beforeWait
+         * @param {Number} delay
+         * @param {Number} elapsed
+         * @param {Number} start_time
          */
         beforeWait : function(delay, elapsed, start_time){},
         
         /**
          * Custom method called when a slide is cancelled
-         * @function
+         * 
+         * @method onCancel
          * @param {Number} canceled_index The canceled index
          */
         onCancel : function(canceled_index){},
         
         /**
          * Custom method called when the playback start
-         * @function
+         * 
+         * @method onPlay
          */
         onPlay : function(){},
         
-        /**
+       /**
          * Custom method called when on pause
-         * @function
+         * 
+         * @method onPause
          */
         onPause : function(){},
         
         /**
          * Custom method called when the playback is resumed
-         * @function
+         * 
+         * @method onResume
          */
         onResume : function(){},
         
         /**
          * Custom method called when the player stops
-         * @function
+         * 
+         * @method onStop
          */
         onStop : function(){},
         
         /**
          * Custom method called when a slide is changed
-         * @function
+         * 
+         * @method onChange
          * @param {Number} new_index The index of a new slide
          */
         onChange : function(new_index){},
         
         /**
          * Custom method called before a transition
-         * @function
+         * 
+         * @method beforeDraw
          */
         beforeDraw : function(){}
     }
 );
 
-/**
- * @namespace 
- * @name $.JocodeSlideshowFx
- */
+
 $.JocodeSlideshowFx = {
     
-    /**
-     * The base class of a transition between slide
-     * 
-     * @constructor 
-     * @name $.JocodeSlideshowFx.Base
-     **/
     Base : $.jocodeClass(
+    
+        /**
+         * The base class of transitions between slide
+         * 
+         * @class $.JocodeSlideshowFx.Base
+         * @constructor 
+         **/
         function(){
             
         }, 
         {
-            /** @lends $.JocodeSlideshowFx.Base.prototype */
-
             /**
-             * @property {$.JocodeSlideshow} The slideshow
+             * The slideshow
+             * 
+             * @property slideshow
+             * @type {$.JocodeSlideshow}
              */
             slideshow : null,
-
+            
             /**
              * Launch the transition
-             * @function
+             * 
+             * @method draw
              * @param {jQuery} from Slide source
              * @param {jQuery} to   Slide destination
              * @param {Number} from_index The from index
              * @param {Number} to_index The to index
              */
             draw : function(from, to, from_index, to_index){},
-
+            
             /**
              * Initialize the transition object
-             * @function
+             * 
+             * @method init
              * @param {$.JocodeSlideshow} jocode_slideshow The slideshow
              */
             init : function(slideshow){
@@ -845,7 +992,8 @@ $.JocodeSlideshowFx = {
             
             /**
              * Method invoked when the pile of slides change
-             * @function
+             * 
+             * @method initPile
              */
             initPile : function(){
                 
@@ -854,14 +1002,20 @@ $.JocodeSlideshowFx = {
     )
 };
 
-
-
-//add JocodeSlideshow as a jQuery plug-in
+/**
+  * Add JocodeSlideshow as a jQuery plug-in
+  * @method jocodeSlideshow
+  * @param {Object} config The configuration object
+  * @for $ 
+  * @static
+  * @return {jQuery}
+  */
+//
 $.fn.jocodeSlideshow = function(config) {
     
     return this.each(function() {
-
-        $.data(this, 'jocodeSlideshow', new $.JocodeSlideshow(this, config));
+       
+        $.data(this, 'jocodeSlideshow', new $.JocodeSlideshow($(this), config));
     });
 };
 

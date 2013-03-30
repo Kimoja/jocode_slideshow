@@ -7,11 +7,16 @@ $.JocodeSlideshowNavigationFx.Scroll = $.jocodeClass(
     
     function(config){
         
-        this.config = config = config || {};
+        if(!config)
+            throw new Error('$.JocodeSlideshowNavigationFx.Scroll Error: Missing parameter "config"');
+
+        if(!config.$scroller)
+            throw new Error('$.JocodeSlideshowNavigationFx.Scroll Error: Missing parameter "config.$scroller"');
         
-        config.selector  && (
-            this.selector = config.selector
-        );
+        this.config = config;
+        
+        this.$scroller = config.$scroller;
+        
         config.scroll_over  && (
             this.scroll_over = config.scroll_over
         );
@@ -27,7 +32,7 @@ $.JocodeSlideshowNavigationFx.Scroll = $.jocodeClass(
     
         config : null,
         
-        selector : '> .navigation > div > .scroller',
+        $scroller : null,
         
         scroll_over : false,
         
@@ -61,7 +66,7 @@ $.JocodeSlideshowNavigationFx.Scroll = $.jocodeClass(
 
             $.JocodeSlideshowNavigationFx.Base.prototype.init.call(this, navigation);
             
-            this._scroller = $(this.selector, navigation.context);
+            this._scroller = $(this.$scroller, navigation.context);
             this.initPile();
         },
           
@@ -131,18 +136,18 @@ $.JocodeSlideshowNavigationFx.Scroll = $.jocodeClass(
         _goTo : function(to, to_index){
             
             var to_ = this.vertical ? to.height() : to.width(),
-                x;
+                off;
+               
+            off = this._offsets[to_index];
+            off -= this._size / 2 - to_ / 2;
 
-            x = this._offsets[to_index];
-            x -= this._size / 2 - to_ / 2;
-
-            this._to = x < 0 ? 0 : x > this._max_scroll ? this._max_scroll : x;
+            this._to = off < 0 ? 0 : off > this._max_scroll ? this._max_scroll : off;
 
             this._animate();
         },
         
         _animate : function(){
-
+            
             if(this._on_scroll)
                 return;
          
@@ -151,14 +156,14 @@ $.JocodeSlideshowNavigationFx.Scroll = $.jocodeClass(
             this._on_scroll = true;
 
             this._interval = setInterval(function(){
-
+               
                 if(self._to == self._from){
 
                     clearInterval(self._interval);
 
                     self._on_scroll = false;
                     return;
-                }
+                } 
 
                 var shift = ((self._to - self._from) / self._size) * self.velocity;
                 self._from += self._to < self._from ? Math.floor(shift) : Math.ceil(shift);

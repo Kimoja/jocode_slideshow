@@ -6,11 +6,14 @@ $.JocodeSlideshowFx.Scroll = $.jocodeClass(
 
     function(config){
         
-        this.config = config = config || {};
+        if(!config)
+            throw new Error('$.JocodeSlideshowFx.Scroll Error: Missing parameter "config"');
+
+        if(!config.$scroller)
+            throw new Error('$.JocodeSlideshowFx.Scroll Error: Missing parameter "config.$scroller"');
         
-        config.selector  && (
-            this.selector = config.selector
-        );
+        this.$scroller = config.$scroller;
+        
         config.duration  && (
             this.duration = config.duration
         );
@@ -24,7 +27,7 @@ $.JocodeSlideshowFx.Scroll = $.jocodeClass(
 
         config : null,
         
-        selector : '> .scroller',
+        $scroller : null,
         
         duration : 3000,
         
@@ -40,7 +43,7 @@ $.JocodeSlideshowFx.Scroll = $.jocodeClass(
 
             $.JocodeSlideshowFx.Base.prototype.init.call(this, slideshow);
 
-            this._scroller = $(this.selector, slideshow.context);
+            this._scroller = $(this.$scroller, slideshow.context);
             this.initPile();
         },
         
@@ -75,7 +78,7 @@ $.JocodeSlideshowFx.Scroll = $.jocodeClass(
             css = [];
             
             css[this.vertical ? 'scrollTop' : 'scrollLeft'] = this._offsets[to_index];
-            
+            //alert(this._offsets[to_index])
             this._scroller.stop().animate(css, 
                 {
                     duration: this.duration, 

@@ -1,0 +1,91 @@
+
+
+/* slideshow 
+******************************************/
+.slideshow.vertical_scroll { 
+    position : relative;
+}
+.slideshow.vertical_scroll a:active, .slideshow.vertical_scroll a:focus { 
+    border:none;
+    outline:none;
+}
+
+    /* slides 
+    ******************************************/
+    .slideshow.vertical_scroll > .pad{
+        width : 500px;
+        padding : 9px;
+        background: #f8f8f8;
+        border-radius: 3px;
+        border: 1px solid #ddd;
+    }
+    .slideshow.vertical_scroll > .pad > .scroller{
+        overflow: hidden;
+        height : 313px;
+    }
+    .slideshow.vertical_scroll > .pad > .scroller > .slides img{
+        vertical-align: middle;
+    }
+    /* end slides 
+    ******************************************/
+    
+    /* navigation
+    ******************************************/
+    .slideshow.vertical_scroll > .navigation{
+        height : 313px;
+        width : 50px;
+        background: #f8f8f8;
+        border-radius: 3px;
+        border: 1px solid #ddd;
+        padding : 9px 0;
+        position : absolute;
+        top : 0;
+        left : 519px;
+    }
+        /* navigation scroller & items
+        ******************************************/
+        .slideshow.vertical_scroll > .navigation > .scroller{
+            height : 200px;
+            overflow: hidden;
+        }
+        .slideshow.vertical_scroll > .navigation > .scroller > a{
+            display : block;
+            line-height : 40px;
+        }
+        .slideshow.vertical_scroll > .navigation > .scroller > .selected{
+            background-color: greenyellow;
+        }
+        .slideshow.vertical_scroll > .navigation > .scroller > .scrolled{
+            background-color: graytext;
+        }
+        /* end navigation scroller & items
+        ******************************************/
+        
+        /*  navigation buttons
+        ******************************************/
+        .slideshow.vertical_scroll > .navigation > a{
+            display : block;
+            width : 25px;
+            margin : 5px auto;
+            background-image: url(../image/player_vertical.png);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .slideshow.vertical_scroll > .navigation > .first{
+            background-position: 0 0;
+        }
+        .slideshow.vertical_scroll > .navigation > .previous{
+            background-position:  0px -25px;
+        }
+        .slideshow.vertical_scroll > .navigation > .next{
+            background-position: 0px -125px ;
+        }
+        .slideshow.vertical_scroll > .navigation > .last{
+            background-position: 0px -150px ;
+        }
+        /* end navigation button 
+        ******************************************/
+    /* end navigation 
+    ******************************************/
+/* end slideshow 
+******************************************/

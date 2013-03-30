@@ -1,0 +1,590 @@
+<h4>Class $.JocodeSlideshowNavigation</h4>
+
+<div class="intro"><p>The navigation class for a slideshow</p></div>
+
+
+<div id="doc">
+    <ul class="tab">
+        
+        
+        <li><a href="#constructor" class="active">Constructor</a></li>
+        
+
+        
+        <li><a href="#methods">Methods</a></li>
+        
+
+        
+        <li><a href="#props">Properties</a></li>
+        
+    </ul>
+        
+            <div class="tab_content constructor">
+            
+                <a name="methods_$.JocodeSlideshowNavigation"></a>
+<div class="method item">
+     <strong class="name"><code>$.JocodeSlideshowNavigation</code></strong>( <code>config </code> ) 
+    <div class='desc'>
+    
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>config</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a>&gt;
+        
+        
+        <p>The configuration object</p>
+            
+            <ul>
+            
+                <li><code>$items</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;</strong> <p>The navigation items selector, relative to the slideshow context or to the config context, if defined.</p>
+                
+                </li>
+            
+                <li><code>$context</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;</strong> <p>The selector context, defaut,  use the slideshow context</p>
+                
+                </li>
+            
+                <li><code>fx_navigation</code> <strong>&lt;<a href="..\classes\$.JocodeSlideshowNavigationFx.Base.html" class="crosslink">$.JocodeSlideshowNavigationFx.Base</a>&gt;</strong> <p>Transition navigation items object</p>
+                
+                </li>
+            
+                <li><code>hover_container</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;</strong> <p>The selector of the container of event hover(by default,</p>
+                
+                </li>
+            
+                <li><code>selected_class</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;</strong> <p>Class of the selected item</p>
+                
+                </li>
+            
+                <li><code>scrolled_class</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;</strong> <p>Class of the scrolled item</p>
+                
+                </li>
+            
+                <li><code>pause_over</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;</strong> <p>Stop on mouseover</p>
+                
+                </li>
+            
+                <li><code>stop_event</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;</strong> <p>Stop event propagation and default actions</p>
+                
+                </li>
+            
+                <li><code>indexOf</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Function that returns the index of a slide</p>
+                
+                    <ul>
+                        
+                            <li><code>item</code> <strong>&lt;JQuery&gt;</strong>  </li>
+                        
+                    </ul>
+                
+                </li>
+            
+                <li><code>onChange</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Custom method called when a slide is changed</p>
+                
+                    <ul>
+                        
+                            <li><code>new_index</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;</strong>  </li>
+                        
+                    </ul>
+                
+                </li>
+            
+                <li><code>onCancel</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Custom method called when a slide is cancelled</p>
+                
+                    <ul>
+                        
+                            <li><code>canceled_index</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;</strong>  </li>
+                        
+                    </ul>
+                
+                </li>
+            
+                <li><code>beforeDraw</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Custom method called before a transition</p>
+                
+                </li>
+            
+                <li><code>beforeScroll</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Custom method called before the scroll</p>
+                
+                </li>
+            
+            </ul>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+            </div>
+        
+
+        
+            <div class="tab_content methods">
+            
+                <a name="methods__initItems"></a>
+<div class="method item private">
+     <strong class="name"><code>_initItems</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Set items and its listener</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_beforeDraw"></a>
+<div class="method item">
+     <strong class="name"><code>beforeDraw</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Custom method called before a transition</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_beforeScroll"></a>
+<div class="method item">
+     <strong class="name"><code>beforeScroll</code></strong>( <code>scrolled_index </code> ) 
+    <div class='desc'>
+    <p>Custom method called before the scroll</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>scrolled_index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The index of the scrolled index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_draw"></a>
+<div class="method item">
+     <strong class="name"><code>draw</code></strong>( <code>from_index, to_index </code> ) 
+    <div class='desc'>
+    <p>Launch the transition</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>from_index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The from index</p>
+            
+        </li>
+    
+        <li>
+        
+            <code>to_index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The to index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_first"></a>
+<div class="method item">
+     <strong class="name"><code>first</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Scroll to the first item</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_indexOf"></a>
+<div class="method item">
+     <strong class="name"><code>indexOf</code></strong>( <code>item </code> ) 
+    <div class='desc'>
+    <p>Return the index of an item</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>item</code> &lt;JQuery&gt;
+        
+        
+        <p>The item</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_init"></a>
+<div class="method item">
+     <strong class="name"><code>init</code></strong>( <code>The </code> ) 
+    <div class='desc'>
+    <p>Initialize the navigation</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>The</code> &lt;$.JocodeSlideshow.Base&gt;
+        
+        
+        <p>slideshow</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_initPile"></a>
+<div class="method item">
+     <strong class="name"><code>initPile</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Method invoked when the pile of slides change</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_last"></a>
+<div class="method item">
+     <strong class="name"><code>last</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Scroll to the last item</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_next"></a>
+<div class="method item">
+     <strong class="name"><code>next</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Scroll to the next item</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_onCancel"></a>
+<div class="method item">
+     <strong class="name"><code>onCancel</code></strong>( <code>canceled_index </code> ) 
+    <div class='desc'>
+    <p>Custom method called when a slide is cancelled</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>canceled_index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The canceled index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_onChange"></a>
+<div class="method item">
+     <strong class="name"><code>onChange</code></strong>( <code>new_index </code> ) 
+    <div class='desc'>
+    <p>Custom method called when a slide is changed</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>new_index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The index of a new slide</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_previous"></a>
+<div class="method item">
+     <strong class="name"><code>previous</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Scroll to the previous item</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_scrollTo"></a>
+<div class="method item">
+     <strong class="name"><code>scrollTo</code></strong>( <code>index </code> ) 
+    <div class='desc'>
+    <p>Scroll at the passed index</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_setScrolled"></a>
+<div class="method item">
+     <strong class="name"><code>setScrolled</code></strong>( <code>index </code> ) 
+    <div class='desc'>
+    <p>Set the scrolled index and element
+Change its css class if scrolled_class is defined</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+            </div>
+        
+        
+            <div class="tab_content props">
+            
+                <a name="props_$items"></a>
+<div class="props item">
+    <code>$items</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong>&gt;
+    <div class='desc'>
+        <p>The navigation items selector</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_bt_first"></a>
+<div class="props item">
+    <code>bt_first</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The button first</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_bt_last"></a>
+<div class="props item">
+    <code>bt_last</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The button last</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_bt_next"></a>
+<div class="props item">
+    <code>bt_next</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The button next</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_bt_previous"></a>
+<div class="props item">
+    <code>bt_previous</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The button previous</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_config"></a>
+<div class="props item">
+    <code>config</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong>&gt;
+    <div class='desc'>
+        <p>The configuration object</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_context"></a>
+<div class="props item">
+    <code>context</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The initialization context</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_current"></a>
+<div class="props item">
+    <code>current</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The current item</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_current_scrolled"></a>
+<div class="props item">
+    <code>current_scrolled</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>he current scrolled item</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_fx"></a>
+<div class="props item">
+    <code>fx</code> &lt;<strong>$.JocodeSlideshowNavigationFx</strong>&gt;
+    <div class='desc'>
+        <p>Transition navigation items object</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_hover_container"></a>
+<div class="props item">
+    <code>hover_container</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The container of the event hover</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_items"></a>
+<div class="props item">
+    <code>items</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The navigation items</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_scrolled_class"></a>
+<div class="props item">
+    <code>scrolled_class</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong>&gt;
+    <div class='desc'>
+        <p>The css class of scrolled item</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_scrolled_index"></a>
+<div class="props item">
+    <code>scrolled_index</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></strong>&gt;
+    <div class='desc'>
+        <p>The scrolled index</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_selected_class"></a>
+<div class="props item">
+    <code>selected_class</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong>&gt;
+    <div class='desc'>
+        <p>The css class of selected item</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_slideshow"></a>
+<div class="props item">
+    <code>slideshow</code> &lt;<strong><a href="..\classes\$.JocodeSlideshow.html" class="crosslink">$.JocodeSlideshow</a></strong>&gt;
+    <div class='desc'>
+        <p>The slideshow</p>
+        
+    </div>
+</div>
+
+            
+            </div>
+        
+</div>

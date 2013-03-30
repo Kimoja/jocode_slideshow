@@ -31,31 +31,33 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
     /**
      *  The navigation class for a slideshow
      *  
+     * @class $.JocodeSlideshowNavigation
      * @constructor 
-     * @name $.JocodeSlideshowNavigation
      * @param {Object} config  The configuration object
-     *      @param {String}   config.selector                                   The navigation items selector, relative to the slideshow context if from_context set to true
+     *      @param {String}   config.$items                                     The navigation items selector, relative to the slideshow context or to the config context, if defined.
+     *      @param {String}   [config.$context]                                 The selector context, defaut,  use the slideshow context
      *      @param {$.JocodeSlideshowNavigationFx.Base}[config.fx_navigation]   Transition navigation items object
-     *      @param {String}   [config.hover_container]                          The selector of the container of event hover(by default,  the jQuery parent()  function to find him).
-     *                                                                          It used to assign the event hover 
-     *      @param {String}   [config.context]                                  The context of selectors
+     *      @param {String}   [config.hover_container]                          The selector of the container of event hover(by default,
      *      @param {String}   [config.selected_class]                           Class of the selected item
      *      @param {String}   [config.scrolled_class]                           Class of the scrolled item
      *      @param {Boolean}  [config.pause_over=true]                          Stop on mouseover
      *      @param {Boolean}  [config.stop_event=true]                          Stop event propagation and default actions
      *      @param {Function} [config.indexOf]                                  Function that returns the index of a slide
-     *      @param {Function} [config.onChange]                                 ...
-     *      @param {Function} [config.onCancel]                                 ...
-     *      @param {Function} [config.beforeDraw]                               ...
-     *      @param {Function} [config.beforeScroll]                             ...
+     *          @param {jQuery}     config.indexOf.item                       
+     *      @param {Function} [config.onChange]                                 Custom method called when a slide is changed
+     *          @param {Number}     config.onChange.new_index 
+     *      @param {Function} [config.onCancel]                                 Custom method called when a slide is cancelled
+     *          @param {Number}     config.onCancel.canceled_index 
+     *      @param {Function} [config.beforeDraw]                               Custom method called before a transition
+     *      @param {Function} [config.beforeScroll]                             Custom method called before the scroll
      **/
     function(config){
 
         if(!config)
             throw new Error('JocodeSlideshowNavigation Error: Missing parameter "config"');
 
-        if(!config.selector)
-            throw new Error('JocodeSlideshowNavigation Error: Missing parameter "config.selector"');
+        if(!config.$items)
+            throw new Error('JocodeSlideshowNavigation Error: Missing parameter "config.$items"');
 
         if(!config.fx || !(config.fx instanceof $.JocodeSlideshowNavigationFx.Base))
             throw new Error('JocodeSlideshowNavigation Error: Parameter "config.fx" is missing or is not of the type "$.JocodeSlideshowNavigationFx.Base"');
@@ -63,100 +65,151 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
         this.config = config;
     },
     {
+        
         /**
-         * @property {$.JocodeSlideshow} The slideshow
+         * The slideshow
+         * 
+         * @property slideshow
+         * @type {$.JocodeSlideshow}
          */
         slideshow : null,
 
         /**
-         * @property {Object} The configuration object
+         * The configuration object
+         * 
+         * @property config
+         * @type {Object}
          */
         config : null,
         
         /**
-         * @property {jQuery} The initialization context
+         * The initialization context
+         * 
+         * @property context
+         * @type {jQuery}
          */
         context : null,
         
         /**
-         * @property {String} The slides selector
+         * The navigation items selector
+         * 
+         * @property $items
+         * @type {String}
          */
-        selector : null,
+        $items : null,
         
         /**
-         * @property {jQuery} The navigation items
+         * The navigation items
+         * 
+         * @property items
+         * @type {jQuery}
          */
         items : null,
 
         /**
-         * @property {jQuery} The container of the event hover
+         * The container of the event hover
+         * 
+         * @property hover_container
+         * @type {jQuery}
          */
         hover_container : null,
 
         /**
-         * @property {String} The css class of selected item
+         * The css class of selected item
+         * 
+         * @property selected_class
+         * @type {String}
          */
         selected_class : null,
         
         /**
-         * @property {String} The css class of scrolled item
+         * The css class of scrolled item
+         * 
+         * @property scrolled_class
+         * @type {String}
          */
         scrolled_class : null,
         
         /**
-         * @property {jQuery} The current item of navigation
+         * The current item
+         * 
+         * @property current
+         * @type {jQuery}
          */
         current : null,
         
         /**
-         * @property {jQuery} The current scrolled item of navigation
+         * he current scrolled item
+         * 
+         * @property current_scrolled
+         * @type {jQuery}
          */
         current_scrolled : null,
         
         /**
-         * @property {jQuery} The button first
+         * The button first
+         * 
+         * @property bt_first
+         * @type {jQuery}
          */
         bt_first : null,
 
         /**
-         * @property {jQuery} The button previous
+         * The button previous
+         * 
+         * @property bt_previous
+         * @type {jQuery}
          */
         bt_previous : null,
         
         /**
-         * @property {jQuery} The button next 
+         * The button next
+         * 
+         * @property bt_next
+         * @type {jQuery}
          */
         bt_next : null,
 
         /**
-         * @property {jQuery} The button last 
+         * The button last
+         * 
+         * @property bt_last
+         * @type {jQuery}
          */
         bt_last : null,
 
         /**
-         * @property {jQuery} The scrolled index 
+         * The scrolled index
+         * 
+         * @property scrolled_index
+         * @type {Number}
          */
         scrolled_index : -1,
 
         /**
-         * @property {$.JocodeSlideshowNavigationFx.Base} Transition navigation items object
+         * Transition navigation items object
+         * 
+         * @property fx
+         * @type {$.JocodeSlideshowNavigationFx}
          */
         fx : null,
 
         /**
          * Initialize the navigation
-         * @function
-         * @property {$.JocodeSlideshow.Base} The slideshow
+         * @method init
+         * @param {$.JocodeSlideshow.Base} The slideshow
          */
         init : function(slideshow){
 
             var self = this,
-                config = this.config;
+                config = this.config,
+                ctx_button,
+                bt;
                 
             //set requiered 
-            this.context = config.context ? $(config.context) : slideshow.context;
             this.slideshow = slideshow;
-            this.selector = config.selector;
+            this.context = config.$context ? $(config.$context) : slideshow.context;
+            this.$items = config.$items;
             this._initItems();
             this.fx = config.fx;
             
@@ -182,25 +235,30 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
                 this.slideshow.addPauseEventOnHover(this.hover_container);
             
             //initialize buttons
-            $.each('first previous next last'.split(' '), function(index, button){
+            if(config.$buttons){
 
-                if(config['bt_' + button]){
-                    
-                    (self['bt_' + button] = $(config['bt_' + button], self.context)).click(function(e){
-                       
-                        self.slideshow._stopEvent(e); 
-                        self[button]();
-                    });
-                }
-            });
-            
+                ctx_button = $(config.$buttons, this.context);
+                
+                $.each('first previous next last'.split(' '), function(index, button){
+
+                    bt = $(' .' + button, ctx_button);
+                    if(bt[0]){
+
+                        self['bt_' + button] = bt.click(function(e){
+
+                            self.slideshow._stopEvent(e); 
+                            self[button]();
+                        });
+                    }
+                });
+            }
 
             this.fx.init(this);
         },
         
         /**
          * Scroll to the first item
-         * @function
+         * @method first
          */
         first : function(){
             
@@ -209,7 +267,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
 
         /**
          * Scroll to the previous item
-         * @function
+         * @method previous
          */
         previous : function(){
             
@@ -219,7 +277,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
         
         /**
          * Scroll to the next item
-         * @function
+         * @method next
          */
         next : function(){
 
@@ -229,7 +287,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
 
         /**
          * Scroll to the last item
-         * @function
+         * @method last
          */
         last : function(){
 
@@ -238,13 +296,12 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
         
         /**
          * Scroll at the passed index
-         * @function
+         * @method scrollTo
+         * @param {Number} index The index 
          */
         scrollTo : function(index){
             
-            index = this.slideshow.computeIndex(index);
-            
-            if(index === this.scrolled_index)
+            if((index = this.slideshow.computeIndex(index)) === this.scrolled_index)
                 return;
             
             this.setScrolled(index);
@@ -254,7 +311,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
         /**
          * Set the scrolled index and element
          * Change its css class if scrolled_class is defined
-         * @function
+         * @method setScrolled
          * @param {Number} index The index 
          */
         setScrolled : function(index){
@@ -275,15 +332,17 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
         
         /**
          * Set items and its listener
-         * @function
+         * @method _initItems
+         * @private
          */
         _initItems : function(){
             
             var self = this;
             
-            this.items = $(this.selector, this.context);
+            this.items = $(this.$items, this.context);
             
             this.items.click(function(e){
+                
                 self.slideshow._stopEvent(e);
                 self.slideshow.goTo(self.indexOf($(this)));
             });
@@ -291,7 +350,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
         
         /**
          * Method invoked when the pile of slides change
-         * @function
+         * @method initPile
          */
         initPile : function(){
             
@@ -301,7 +360,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
         
         /**
          * Launch the transition
-         * @function
+         * @method draw
          * @param {Number} from_index The from index
          * @param {Number} to_index The to index
          */
@@ -330,8 +389,8 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
         
         /**
          * Return the index of an item
-         * @function
-         * @param {jQuery} sible The item
+         * @method indexOf
+         * @param {jQuery} item The item
          */
         indexOf : function (item){
 
@@ -340,59 +399,60 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
         
         /**
          * Custom method called when a slide is cancelled
-         * @function
+         * @method onCancel
          * @param {Number} canceled_index The canceled index
          */
         onCancel : function(canceled_index){},
         
         /**
          * Custom method called when a slide is changed
-         * @function
+         * @method onChange
          * @param {Number} new_index The index of a new slide
          */
         onChange : function(new_index){},
         
         /**
          * Custom method called before the scroll
-         * @function
+         * @method beforeScroll
          * @param {Number} scrolled_index The index of the scrolled index
          */
         beforeScroll : function(scrolled_index){},
         
         /**
          * Custom method called before a transition
-         * @function
+         * @method beforeDraw
          */
         beforeDraw : function(){}
     }
 );
 
-/**
- * @namespace 
- * @name $.JocodeSlideshowNavigationFx
- */
+
 $.JocodeSlideshowNavigationFx = {
     
-    /**
-     * The base class of a transition item navigation
-     * 
-     * @constructor 
-     * @name $.JocodeSlideshowNavigationFx.Base
-     **/
+        
     Base : $.jocodeClass(
+    
+         /**
+          * The base class of a transition between items of navigation
+          * 
+          * @class $.JocodeSlideshowNavigationFx.Base
+          * @constructor 
+          **/ 
         function(){
             
         }, 
         {
-            /** @lends $.JocodeSlideshowNavigationFx.Base.prototype */
-
             /**
-             * @property {$.JocodeSlideshowNavigation} The navigation object
+             * The navigation object
+             * 
+             * @property navigation
+             * @type {$.JocodeSlideshowNavigation}
              */
             navigation : null,
 
             /**
              * Launch the transition
+             * @method draw
              * @param {jQuery} from Navigation item source
              * @param {jQuery} to   Navigation item destination
              * @param {Number} from_index The from index
@@ -402,6 +462,7 @@ $.JocodeSlideshowNavigationFx = {
             
             /**
              * Scroll the navigation
+             * @method scrollTo
              * @param {jQuery} from Navigation item  source
              * @param {jQuery} to   Navigation item  destination
              * @param {Number} from_index The from index
@@ -411,7 +472,8 @@ $.JocodeSlideshowNavigationFx = {
             
             /**
              * Initialize the transition object
-             * @param {$.JocodeSlideshow} jocode_slideshow The slideshow
+             * @method init
+             * @param {$.JocodeSlideshow} navigation The slideshow
              */
             init : function(navigation){
 
@@ -420,7 +482,7 @@ $.JocodeSlideshowNavigationFx = {
             
             /**
              * Method invoked when the pile of slides change
-             * @function
+             * @method initPile
              */
             initPile : function(){
                 
