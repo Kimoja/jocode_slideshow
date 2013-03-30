@@ -1,6 +1,6 @@
 { 
   "name": "jocode_slideshow",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "title": "jQuery slideshow",
   "description": "Slideshow based on transition objects, and custom html structure.",
   "keywords": [
