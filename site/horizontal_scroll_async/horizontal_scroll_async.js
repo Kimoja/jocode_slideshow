@@ -66,7 +66,7 @@ JocodeSlideshowExemple.horizontal_scroll_async = function(){
                             img =  document.createElement('img');
                             
                             div.appendChild(img);
-                            img.src = "./slide/"+ (i + 1) +".jpg";
+                            img.src = "./site/slide/"+ (i + 1) +".jpg";
                             img.setAttribute('alt', '')
                             
                             ct_slides.appendChild(div);
