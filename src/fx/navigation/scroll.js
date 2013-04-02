@@ -3,44 +3,34 @@
 
 (function($){
     
+var nil = nil,
+    wrong = false,
+    right = true,
+    self;
+
 $.JocodeSlideshowNavigationFx.Scroll = $.jocodeClass(
     
     function(config){
         
-        if(!config)
-            throw new Error('$.JocodeSlideshowNavigationFx.Scroll Error: Missing parameter "config"');
-
-        if(!config.$scroller)
-            throw new Error('$.JocodeSlideshowNavigationFx.Scroll Error: Missing parameter "config.$scroller"');
+        self = this;
         
-        this.config = config;
-        
-        this.$scroller = config.$scroller;
-        
-        config.scroll_over  && (
-            this.scroll_over = config.scroll_over
-        );
-        config.velocity  && (
-            this.velocity = config.velocity
-        );
-        'vertical' in config && (
-            this.vertical = !!config.vertical
-        );
+        self.config = config = config || {};
+        $.extend(self, config);
     }, 
     
     {
     
-        config : null,
+        config : nil,
         
-        $scroller : null,
+        $scroller : nil,
         
-        scroll_over : false,
+        scroll_over : wrong,
         
         velocity : 30,
         
-        vertical : false,
+        vertical : wrong,
         
-        _scroller : null,
+        _scroller : nil,
 
         _size : 0,
 
@@ -54,48 +44,51 @@ $.JocodeSlideshowNavigationFx.Scroll = $.jocodeClass(
 
         _from : 0,
 
-        _on_scroll : false,
+        _on_scroll : wrong,
 
-        _by_click : false,
+        _by_click : wrong,
         
-        _to_animate : false,
+        _to_animate : wrong,
 
-        _offsets : null,
+        _offsets : nil,
 
         init : function(navigation){
 
-            $.JocodeSlideshowNavigationFx.Base.prototype.init.call(this, navigation);
+            self = this;
+        
+            $.JocodeSlideshowNavigationFx.Base.prototype.init.call(self, navigation);
             
-            this._scroller = $(this.$scroller, navigation.context);
-            this.initPile();
+            self._scroller = $(self.$scroller, navigation.context);
+            self.initPile();
         },
           
         initPile : function(){
             
-            this._size = this.vertical 
-                    ? this._scroller.height() 
-                    : this._scroller.width();
+            var self = this;
+            
+            self._size = self.vertical 
+                    ? self._scroller.height() 
+                    : self._scroller.width();
                     
-            this._scroll_size =  this.vertical 
-                    ? this._scroller[0].scrollHeight
-                    : this._scroller[0].scrollWidth;
+            self._scroll_size =  self.vertical 
+                    ? self._scroller[0].scrollHeight
+                    : self._scroller[0].scrollWidth;
 
-            if(this._scroll_size > this._size){
+            if(self._scroll_size > self._size){
 
-                var step = 0,
-                    self = this;
+                var step = 0;
 
-                this._to_animate = true;
-                this._max_scroll = this._scroll_size - this._size;
-                this._offsets = [];
+                self._to_animate = right;
+                self._max_scroll = self._scroll_size - self._size;
+                self._offsets = [];
 
-                this.navigation.items.each(function(index, el){
+                self.navigation.items.each(function(index, el){
 
                     self._offsets[index] = step;
                     step +=  self.vertical ? $(el).height() : $(el).width();
                 }); 
                 
-                this.scroll_over && this._scroller.mousemove(function(e){
+                self.scroll_over && self._scroller.mousemove(function(e){
                     
                    var page =  self.vertical ? e.pageY : e.pageX,
                        off =  self.vertical ? self._scroller.offset().top : self._scroller.offset().left;
@@ -104,64 +97,70 @@ $.JocodeSlideshowNavigationFx.Scroll = $.jocodeClass(
                    self._animate();
                 });
             }
-            else this._to_animate = false; 
+            else self._to_animate = wrong; 
         },
         
         draw : function(from, to, from_index, to_index){
             
-            if(!this._to_animate)
+            self = this;
+            
+            if(!self._to_animate)
                 return;
             
-            if(this._by_click){
+            if(self._by_click){
                 
-                this._by_click = false;
+                self._by_click = wrong;
                 return;
             }
             
-            this.navigation.setScrolled(to_index);
+            self.navigation.setScrolled(to_index);
             
-            this._goTo(to, to_index);
+            self._goTo(to, to_index);
         },
         
         scrollTo : function(from, to, from_index, to_index){
             
-            if(!this._to_animate)
+            self = this;
+            
+            if(!self._to_animate)
                 return;
             
-            this._by_click = true;
+            self._by_click = right;
             
-            this._goTo(to, to_index);
+            self._goTo(to, to_index);
         },
     
         _goTo : function(to, to_index){
             
-            var to_ = this.vertical ? to.height() : to.width(),
+            self = this;
+            
+            var to_ = self.vertical ? to.height() : to.width(),
                 off;
                
-            off = this._offsets[to_index];
-            off -= this._size / 2 - to_ / 2;
+            off = self._offsets[to_index];
+            off -= self._size / 2 - to_ / 2;
 
-            this._to = off < 0 ? 0 : off > this._max_scroll ? this._max_scroll : off;
+            self._to = off < 0 ? 0 : off > self._max_scroll ? self._max_scroll : off;
 
-            this._animate();
+            self._animate();
         },
         
         _animate : function(){
             
-            if(this._on_scroll)
+            var self = this;
+            
+            if(self._on_scroll)
                 return;
          
-            var self = this;
+            self._on_scroll = right;
 
-            this._on_scroll = true;
-
-            this._interval = setInterval(function(){
+            self._interval = setInterval(function(){
                
                 if(self._to == self._from){
 
                     clearInterval(self._interval);
 
-                    self._on_scroll = false;
+                    self._on_scroll = wrong;
                     return;
                 } 
 

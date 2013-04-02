@@ -22,28 +22,18 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/*
- * TODO
- * evenement touch et clavier pour l'acc�ssibilit� !important
- * attendre fin de transition pour changer d'item de navigation.... 
- * permettre une initailisation de l'index de d�part via un random, par exemple en mettant -1 ?? bof
- * diff�rence entre un pause via le bouton et via l'evenement hover !important
- * cr�ation des items de navigation � la vol�  via des fonctions , ou des templates, encore mieux!! !important
- * options infinie, �l�ment pr�c�dent en fin de pile  !important, mais ca va �tre gal�re .... � faire en premier !!!
- * fx, changer la taille du conteneur par rapport au contenue, en option , autowidth, autoheight, par d�faut dans la classe de base fx ???  !important
- * activer l'historique de navigation au changement de slide .... pour des sites avec juste un slide comme contenue, ca peut �tre pas mal
- * afficher les boutons , navigation ou du player, que lors d'un mouse hover ... pk pas
- * �couteur live on click sur un slide, !important 
- * option plein �cran .... faut que  l'int�gration HTML et CSS le permet, en tout cas via un plugin, � r�fl�chir ...
- * tout plein de transition qui envoie
- * revoir play et l'index start
- **/
 
  /**
   * @class $
   */
 
 (function($){
+    
+var empty_func = function(){},
+    nil = nil,
+    wrong = false,
+    right = true,
+    self;
 
 $.JocodeSlideshow = $.jocodeClass(
 
@@ -54,14 +44,24 @@ $.JocodeSlideshow = $.jocodeClass(
      * @constructor
      * @param {jQuery} context  The initialization context
      * @param {Object} config   The configuration object
-     *      @param {String}     config.$slides                          The slides selector, relative to the initialization context
+     *      @param {String}     [config.$slides]                        The slides selector, relative to the initialization context
      *      @param {String}     [config.$buttons]                       The button selector
+     *      @param {String}     [config.$loader]                        ...
      *      @param {$.JocodeSlideshowNavigation.Base}[config.navigation]The navigation object
      *      @param {$.JocodeProgressBar.Base}[config.progress_bar]      The progress bar object (TODO)
-     *      @param {String}     [config.disabled_bt_class]              Class of disabled buttons
+     *      @param {Boolean}    [config.await_nav_fx=false]             Waiting for the end of a transition to change navigation item
+     *      @param {Boolean}    [config.await_load=false]               Waiting for the end of a loading to change a slide
+     *      @param {Boolean}    [config.await_fx=false]                 Waiting for the end of a transition to change a slide
+     *      @param {Boolean}    [config.touch=false]                    Allow touch swipe events to control previous/next
+     *      @param {Boolean}    [config.touch_strength=30]              ...
+     *      @param {Boolean}    [config.keyboard=false]                 Allow keyboard events to control previous/next
+     *      @param {Boolean}    [config.display_bt_on_mouseout=true]    ...
+     *      @param {Boolean}    [config.display_nav_on_mouseout=true]   The navigation $container must be defined
+     *      @param {String}     [config.css_disable_bt]                 Class of disabled buttons
+     *      @param {String}     [config.css_await_bt]                   Class of buttons that wait the end of a transition or a loading
      *      @param {Boolean}    [config.auto_play=false]                Enable Autoplay
      *      @param {Number}     [config.delay=3000]                     Time in milliseconds between each transition
-     *      @param {String}     [config.hover_container]                The selector of the container of event hover(by default,  the jQuery parent()  function to find him).
+     *      @param {String}     [config.$event_container]               The selector of the container of events (by default,  the initialization context).
      *      @param {Boolean}    [config.pause_over=true]                Stop on mouseover
      *      @param {Boolean}    [config.stop_event=true]                Stop event propagation and default actions
      *      @param {Number}     [config.start_index=0]                  The start index
@@ -80,99 +80,121 @@ $.JocodeSlideshow = $.jocodeClass(
      *      @param {Function}   [config.onStop]                         Custom method called when the player stops
      *      @param {Function}   [config.onChange]                       Custom method called when a slide is changed
      *          @param {Number}      config.onChange.new_index 
-     *      @param {Function}   [config.beforeDraw]                     Custom method called before a transition
+     *      @param {Function}   [config.beforeDraw]                     Custom method called before a transition 
+     *      @param {Function}   [config.afterDraw]                      Custom method called adter a transition 
+     *      @param {Function}   [config.beforeSetup]                    ....
+     *      @param {Function}   [config.afterSetup]                     ....
+     *      @param {Function}   [config.beforeInitPile]                 ....
+     *      @param {Function}   [config.isLoaded]                       Check that a slide is loaded
+     *          @param {Number}      config.isLoaded.index 
+     *      @param {Function}   [config.onClick]                        ...
      **/
     function (context, config){
         
-        //check error
-        if(!config)
-            throw new Error('jocodeSlideshow Error: Missing parameter "config"');
-
-        if(!config.$slides)
-            throw new Error('jocodeSlideshow Error: Missing parameter "config.$slides"');
-
-        if(!config.fx || !(config.fx instanceof $.JocodeSlideshowFx.Base))
-            throw new Error('jocodeSlideshow Error: Parameter "config.fx" is missing or is not of the type "$.JocodeSlideshowFx.Base"');
-
         var self = this,
+            bts = '',
             ctx_button,
             bt;
         
-        //set requiered 
-        this.context = context;
-        this.config = config;
-        this.fx = config.fx;
-        this.$slides = config.$slides;
-        this.slides = $(config.$slides, context);
-        //alert(this.slides.length)
-        this.hover_container = config.hover_container ? $(config.hover_container, context) : this.slides.parent();
+        self.context = context;
+        self.config = config;
         
-        config.disabled_bt_class && (
-            this.disabled_bt_class = config.disabled_bt_class.toString()
+        $.each(
+            (
+                'fx $slides css_disable_bt css_await_bt delay stop_event start_index await_nav_fx await_load await_fx ' + 
+                'display_bt_on_mouseout touch_strength '+    
+                'load beforeWait onCancel onPlay onPause onResume onStop onChange beforeDraw afterDraw beforeInitPile isLoaded onClick'    
+            ).split(' '), function(index, property){
+                property in config && (self[property] = config[property]);
+            }
         );
-        config.delay && (
-            this.delay = Math.abs(config.delay) || this.delay
-        );
-        'stop_event' in config && (
-            this.stop_event = !!config.stop_event
-        );
-        'start_index' in config && (
-            this.start_index = Math.abs(config.start_index) || 0
-        ); 
-            
-        //init event
-        $.each('load beforeWait onCancel onPlay onPause onResume onStop onChange beforeDraw'.split(' '), function(index, method){
-                
-            typeof config[method] == 'function' && (
-                self[method]= config[method]
-            );
-        });
+        
+        config.beforeSetup && config.beforeSetup.call(self);
+        
+        self.slides = $(config.$slides, context);
+        self.event_container = config.$event_container ? $(config.$event_container, context) : context;
+        config.$loader && (self.loader() = $(config.$loader, context));
         
         if(!('pause_over' in config) ||  config.pause_over)
-            this.addPauseEventOnHover(this.hover_container);
+            this.pauseOnHover(this.event_container);
         
-        //init navigation
-        if(config.navigation && config.navigation instanceof $.JocodeSlideshowNavigation){
-
-            this.navigation = config.navigation;
-            this._have_navigation = true; 
-            this.navigation.init(this);
-        }
-        
-        //initialize buttons
-        if(config.$buttons){
-            
-            ctx_button = $(config.$buttons, context);
-            
-            $.each('first previous play pause resume stop next last'.split(' '), function(index, button){
-                
-                bt = $(' .' + button, ctx_button);
-                if(bt[0]){
-                    
-                    self['bt_' + button] = bt.click(function(e){
-
-                        self._stopEvent(e); 
-                        self[button]();
-                    });
-                }
+        if(config.keyboard){
+            $(document).keyup(function(e) {
+                if(e.which == 37) self.previous(); 
+                else if(e.which == 39) self.next();
             });
         }
         
-        //init transition object
-        this.fx.init(this);
+        if(config.touch && 'ontouchstart' in document.documentElement){
+            
+            self.event_container.bind({
+                
+                touchstart : function(e){
+                    
+                    self._touch_from_x = e.originalEvent.touches[0].pageX;
+                    self._touch_to_x = 0;
+                },
+                
+                touchmove : function(e) {
+                    
+                    self._touch_to_x = e.originalEvent.touches[0].pageX;
+                },
+                
+                touchend : function(e) {
+                    
+                    if (Math.abs(self._touch.from_x - self._touch.to_x) > self.touch_strength) {
+                        
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        self._touch_from_x > self._touch_to_x ? self.next() : self.previous();
+                    }
+                }
+            });
+        }    
+
+        if(config.navigation && config.navigation instanceof $.JocodeSlideshowNavigation){
+
+            self.navigation = config.navigation;
+            self.navigation.init(self);
+            
+            !self.display_nav_on_mouseout && self.navigation.context != context &&
+                self.displayOnHover(self.event_container, self.navigation.context);
+        }
+            
+        ctx_button = config.$buttons ? $(config.$buttons, context) : context;
         
-        //enable/disable buttons
+        $.each('first previous play pause resume stop next last'.split(' '), function(index, button){
+            
+            bt = $(' .' + button, ctx_button);
+
+            if(bt[0]){
+                
+                bts += (bts ? ',' : '') + ' .' + button;
+                
+                self['bt_' + button] = bt.click(function(e){
+                     self._stopEvent(e); 
+                     self[button]();
+                }); 
+            } 
+        });
+        
+        !self.display_bt_on_mouseout && bts &&
+                self.displayOnHover(self.event_container, $(bts, ctx_button));
+        
+        self.fx.init(self);
+        
         if(config.auto_play){
             
-            this.play();
+            self.play();
         }
         else{ 
             
-            this._toogleBt('pause resume stop', false);
-            //got to start index
-            self.goTo(this.start_index);
+            self._toogleBt('pause resume stop', wrong, wrong);
+            self.goTo(self.start_index);
         }
         
+        config.afterSetup && config.afterSetup.call(self);
     },
     
     {
@@ -182,7 +204,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @property config
          * @type {Object}
          */
-        config : null,
+        config : nil,
         
         /**
          * The initialization context
@@ -190,7 +212,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @property context
          * @type {jQuery}
          */
-        context : null,
+        context : nil,
         
         /**
          * The slides selector
@@ -198,7 +220,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @property $slides
          * @type {String}
          */
-        $slides : null,
+        $slides : nil,
         
         /**
          * The slides
@@ -206,23 +228,31 @@ $.JocodeSlideshow = $.jocodeClass(
          * @property slides
          * @type {jQuery}
          */
-        slides : null,
+        slides : nil,
+        
+        /**
+         * ...
+         * 
+         * @property loader
+         * @type {jQuery}
+         */
+        loader : nil,
         
         /**
          * The container of the event hover
          * 
-         * @property hover_container
+         * @property event_container
          * @type {jQuery}
          */
-        hover_container : null,
+        event_container : nil,
         
         /**
          * The navigation object
          * 
          * @property navigation
-         * @type {$.JocodeSlideshowNavigation.Base}
+         * @type {$.JocodeSlideshowNavigation}
          */
-        navigation : null,
+        navigation : nil,
         
         /**
          * The button first
@@ -230,7 +260,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @property bt_first
          * @type {jQuery}
          */
-        bt_first : null,
+        bt_first : nil,
 
         /**
          * The button previous
@@ -238,7 +268,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @property bt_previous
          * @type {jQuery}
          */
-        bt_previous : null,
+        bt_previous : nil,
 
         /**
          * The button play
@@ -246,7 +276,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @property bt_play
          * @type {jQuery}
          */
-        bt_play : null,
+        bt_play : nil,
 
         /**
          * The button pause
@@ -254,7 +284,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @property bt_pause
          * @type {jQuery}
          */
-        bt_pause : null,
+        bt_pause : nil,
 
         /**
          * The button resume
@@ -262,7 +292,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @property bt_resume
          * @type {jQuery}
          */
-        bt_resume : null,
+        bt_resume : nil,
 
         /**
          * The button stop
@@ -270,7 +300,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @property bt_stop
          * @type {jQuery}
          */
-        bt_stop : null,
+        bt_stop : nil,
 
         /**
          * The button next 
@@ -281,7 +311,7 @@ $.JocodeSlideshow = $.jocodeClass(
         /**
          * @property {jQuery} The button next 
          */
-        bt_next : null,
+        bt_next : nil,
 
         /**
          * The button last 
@@ -289,16 +319,32 @@ $.JocodeSlideshow = $.jocodeClass(
          * @property bt_last
          * @type {jQuery}
          */
-        bt_last : null,
+        bt_last : nil,
 
         /**
          * The css class of disabled buttons
          * 
-         * @property disabled_bt_class
+         * @property css_disable_bt
          * @type {String}
          */
-        disabled_bt_class : null,
-
+        css_disable_bt : nil,
+        
+        /**
+         * Class of buttons that wait the end of a transition or a loading
+         * 
+         * @property css_await_bt
+         * @type {String}
+         */
+        css_await_bt : nil,
+        
+        /**
+         * ...
+         * 
+         * @property display_bt_on_mouseout
+         * @type {Boolean}
+         */
+        display_bt_on_mouseout : right,
+        
         /**
          * Time in milliseconds between each transition
          * 
@@ -314,7 +360,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @property fx
          * @type {$.JocodeSlideshowFx.Base}
          */
-        fx : null,
+        fx : nil,
         
         /**
          * The current slide
@@ -322,7 +368,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @property current
          * @type {jQuery}
          */
-        current : null,
+        current : nil,
 
         /**
          * The start index
@@ -353,6 +399,42 @@ $.JocodeSlideshow = $.jocodeClass(
         loading_index : -1,
         
         /**
+         * Waiting for the end of a transition to change navigation item
+         * 
+         * @property await_nav_fx
+         * @type {Boolean}
+         * @default false
+         */
+        await_nav_fx : wrong,
+        
+        /**
+         * Waiting for the end of a loading to change a slide
+         * 
+         * @property await_load
+         * @type {Boolean}
+         * @default false
+         */
+        await_load : wrong,
+        
+        /**
+         * Waiting for the end of a transition to change a slide
+         * 
+         * @property await_fx
+         * @type {Boolean}
+         * @default false
+         */
+        await_fx : wrong,
+        
+        /**
+         * ...
+         * 
+         * @property touch_strength
+         * @type {Number}
+         * @default 30
+         */
+        touch_strength : 30,
+        
+        /**
          * If the player is stopped
          * 
          * @property _stopped
@@ -360,7 +442,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @default true
          * @private
          */
-        _stopped : true,
+        _stopped : right,
 
         /**
          * If the player is on pause
@@ -370,7 +452,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @default false
          * @private
          */
-        _paused : false,
+        _paused : wrong,
         
         /**
          * If the slide is on load
@@ -380,28 +462,18 @@ $.JocodeSlideshow = $.jocodeClass(
          * @default false
          * @private
          */
-        _on_load : false,
+        _on_load : wrong,
         
         /**
          * If the slide is on transition
          * 
-         * @property _on_draw
+         * @property _on_fx
          * @type {Boolean}
          * @default false
          * @private
          */
-        _on_draw : false,
+        _on_fx : wrong,
 
-        /**
-         * If have navigation
-         * 
-         * @property _have_navigation
-         * @type {Boolean}
-         * @default false
-         * @private
-         */
-        _have_navigation : false,
-        
         /**
          * The timestamp of the beginning of the time interval between transitions
          * 
@@ -429,7 +501,26 @@ $.JocodeSlideshow = $.jocodeClass(
          * @type {Number}
          * @private
          */
-        _timeout : null,
+        _timeout : nil,
+        
+        /**
+         * ...
+         * 
+         * @property _touch_from_x
+         * @type {Number}
+         * @private
+         */
+        _touch_from_x : nil,
+        
+        /**
+         * ...
+         * 
+         * @property _touch_to_x
+         * @type {Number}
+         * @private
+         */
+        _touch_to_x : nil,
+        
         
         /**
          * Change the css classe of a set of buttons
@@ -437,17 +528,21 @@ $.JocodeSlideshow = $.jocodeClass(
          * @method _toogleBt
          * @param {String} buttons The set of buttons
          * @param {Boolean} enable Add or remove a css class
+         * @param {Boolean} await  
          * @private
          */
-        _toogleBt : function(buttons, enable){
+        _toogleBt : function(buttons, enable, await){
             
-            var self = this;
-                
+            self = this;
+            
+            var cls = await ? self.css_await_bt : self.css_disable_bt;
+            
+            if(!cls)return;
+            
             $.each(buttons.split(' '), function(index, bt){
                 
                 var button = self['bt_' + bt];
-                button && (enable ? button.removeClass(self.disabled_bt_class) 
-                        : button.addClass(self.disabled_bt_class));
+                button && (enable ? button.removeClass(cls)  : button.addClass(cls));
             });
         },
         
@@ -471,16 +566,45 @@ $.JocodeSlideshow = $.jocodeClass(
         /**
          * Set pause on hover event
          * 
-         * @method addPauseEventOnHover
-         * @param {jQuery} el The element to listen
+         * @method pauseOnHover
+         * @param {jQuery} container The container to listen
          */
-        addPauseEventOnHover : function(el){
+        pauseOnHover : function(container){
 
             var self = this;
 
-            el.hover(
-                function() {self.pause();}, 
-                function() {self.resume();}
+            container.hover(
+                function() {
+                    
+                    if(!self._stopped && !self._paused){
+                         self._pause_hover = right; 
+                         self._pause();
+                    }
+                }, 
+                function() {
+                    !self._stopped && self._pause_hover && self.resume();
+                }
+            );
+        },
+        
+        /**
+         * Display an element on hover a container
+         * 
+         * @method displayOnHover
+         * @param {jQuery} container The container to listen
+         * @param {jQuery} container The element to display
+         */
+        displayOnHover : function(container, element){
+
+            var self = this;
+
+            container.hover(
+                function() {
+                    element.show();
+                }, 
+                function() {
+                    element.hide();
+                }
             );
         },
         
@@ -510,17 +634,19 @@ $.JocodeSlideshow = $.jocodeClass(
          */
         play : function(){
             
-            if(!this.isPlayed()){
+            self = this;
+            
+            if(!self.isPlayed()){
                 
-                this.index = this.loading_index = -1;
+                self.index = self.loading_index = -1;
                 
-                this._toogleBt('play resume', false);
-                this._toogleBt('pause stop', true);
+                self._toogleBt('play resume', wrong, wrong);
+                self._toogleBt('pause stop', right, wrong);
 
-                this._stopped = false;
-                this.onPlay();
+                self._stopped = wrong;
+                self.onPlay();
                 
-                this.goTo(this.start_index);
+                self.goTo(self.start_index);
             }
         },
         
@@ -530,18 +656,27 @@ $.JocodeSlideshow = $.jocodeClass(
          * @method pause
          */
         pause : function(){
-
-            if(this.isPlayed()){
-
-                this._toogleBt('resume', true);
-                this._toogleBt('pause', false);
                 
-                this._defer += this._on_wait ? (new Date().getTime()) - this._time : 0;
-                this._paused = true;
+            this._pause_hover = wrong;
+            this._pause();
+        },
+        
+        
+        _pause : function(){
+            
+            self = this;
+            
+            if(self.isPlayed()){
                 
-                this.onPause();
-               
-                this._on_wait && clearTimeout(this._timeout);
+                self._toogleBt('resume', right, wrong);
+                self._toogleBt('pause', wrong, wrong);
+
+                self._defer += self._on_wait ? (new Date().getTime()) - self._time : 0;
+                self._paused = right;
+
+                self.onPause();
+
+                self._on_wait && clearTimeout(self._timeout);
             }
         },
         
@@ -552,17 +687,20 @@ $.JocodeSlideshow = $.jocodeClass(
          */
         resume : function(){
 
-            if(this._paused){
-                this._toogleBt('resume', false);
-                this._toogleBt('pause', true);
+            self = this;
+            
+            if(self._paused){
+                
+                self._toogleBt('resume', wrong, wrong);
+                self._toogleBt('pause', right, wrong);
 
-                this._paused = false;
+                self._paused = wrong;
                 
-                this.onResume();
+                self.onResume();
                 
-                !this._on_draw && this.keepOn(this.index);
+                !self._on_fx && self.keepOn(self.index);
             }
-            else this.play();
+            else self.play();
         },
         
         /**
@@ -572,16 +710,18 @@ $.JocodeSlideshow = $.jocodeClass(
          */
         stop : function(){
 
-            if(this.isPlayed()){
+            self = this;
+            
+            if(!self._stopped){
 
-                this._toogleBt('play', true);
-                this._toogleBt('resume pause stop' , false);
+                self._toogleBt('play', right, wrong);
+                self._toogleBt('resume pause stop' , wrong, wrong);
 
-                this._stopped = true;
+                self._stopped = right;
                 
-                this.onStop();
+                self.onStop();
                 
-                this._on_wait && clearTimeout(this._timeout);
+                self._on_wait && clearTimeout(self._timeout);
             }
         },
         
@@ -680,12 +820,12 @@ $.JocodeSlideshow = $.jocodeClass(
         /**
          * If a slide is an transition
          * 
-         * @method isOnDraw
+         * @method isOnFx
          * @return {Boolean}
          */
-        isOnDraw : function(){
+        isOnFx : function(){
 
-            return this._on_draw;
+            return this._on_fx;
         },
         
         /**
@@ -751,10 +891,14 @@ $.JocodeSlideshow = $.jocodeClass(
          */
         initPile : function(){
             
-            this.slides = $(this.$slides, this.context);
-            this.fx.initPile();
+            self = this;
             
-            this._have_navigation && this.navigation.initPile();
+            self.beforeInitPile();
+            
+            self.slides = $(self.$slides, self.context);
+            self.fx.initPile();
+            
+            self.navigation && self.navigation.initPile();
         },
         
         /**
@@ -766,33 +910,44 @@ $.JocodeSlideshow = $.jocodeClass(
          */
         keepOn : function(index){
             
-            if(index !== this.loading_index)
+            var self = this;
+            
+            if(index !== self.loading_index)
                 return;
             
-            this._on_draw = false;
+            self.afterDraw();
+            
+            self._on_fx = wrong;
                 
-            if(this.isPlayed()){
+            self.navigation && self.await_nav_fx && self.navigation.draw(index);
+            
+            if(self.await_fx){
                 
-                var self = this,
-                    delay = this.delay  - this._defer;
+                self._toogleBt('first previous next last', right, right);
+                self.navigation &&  self.navigation.setAwaitClass(wrong);
+            }
+            
+            if(self.isPlayed()){
                 
-                this._time = new Date().getTime();
+                var delay = self.delay  - self._defer;
                 
-                this._on_wait = true;
+                self._time = new Date().getTime();
                 
-                this._timeout = setTimeout(function(){
+                self._on_wait = right;
+                
+                self._timeout = setTimeout(function(){
                     
                     self._defer  = 0;
-                    self._on_wait = false;
+                    self._on_wait = wrong;
 
                     self.goTo(self.index + 1);
 
                 }, delay);
                 
-                this.beforeWait(delay, this._defer, this._time);
+                self.beforeWait(delay, self._defer, self._time);
             }
-            else if(this._paused) {
-                this._defer = 0;
+            else if(self._paused) {
+                self._defer = 0;
             }
         },
 
@@ -804,23 +959,34 @@ $.JocodeSlideshow = $.jocodeClass(
          */
         draw : function(index){
         
-            if(index != this.loading_index)
+            self = this;
+            
+            if(index != self.loading_index)
                 return; 
             
-            var old_sible = this.current,
-                old_index = this.index;
+            self.loader && self.loader.hdie();
                 
-            this._on_load = false; 
-            this._on_draw = true;
+            var old_sible = self.current,
+                old_index = self.index,
+                await = self.await_load || self.await_fx;
+                
+            self._on_load = wrong; 
+            self._on_fx = right;
             
-            this.current = $(this.slides[index]);
-            this.index = index;
+            self.current = $(self.slides[index]);
+            self.index = index;
             
-            this.beforeDraw();
+            self.beforeDraw();
             
-            this.fx.draw(old_sible, this.current, old_index, this.index);
-
-            this._have_navigation && this.navigation.draw(old_index, this.index);
+            self.fx.draw(old_sible, self.current, old_index, self.index);
+            
+            self.navigation && !self.await_nav_fx && self.navigation.draw(self.index);
+            
+            if(await){
+                
+                self._toogleBt('first previous next last', !self.await_fx, right);
+                self.navigation &&  self.navigation.setAwaitClass(self.await_fx);
+            }
         },
         
         /**
@@ -831,42 +997,61 @@ $.JocodeSlideshow = $.jocodeClass(
          */
         goTo : function(index){
             
-            index = this.computeIndex(index);
+            self = this;
             
-            if(index === this.index){
+            if((self.await_load && self._on_load) 
+                    || (self.await_fx && self._on_fx))
+                return;
+            
+            index = self.computeIndex(index);
+            
+            if(index === self.index){
                 
-                if(this._on_wait){
+                if(self._on_wait){
                     
-                    clearTimeout(this._timeout);
-                    this._defer = 0;
-                    this.keepOn(index);
+                    clearTimeout(self._timeout);
+                    self._defer = 0;
+                    self.keepOn(index);
                 }
                 
                 return;
             }
             
-            if(index === this.loading_index)
+            if(index === self.loading_index)
                 return;
             
-            if(this.index !== -1){
+            self._on_load = right;
+            
+            if(self.await_load){
                 
-                if(this._on_wait){
-                    
-                    this._defer = 0;
-                    clearTimeout(this._timeout); 
-                }
-                
-                this.onCancel(this.loading_index);
-                this._have_navigation && this.navigation.onCancel(this.index);
+                self._toogleBt('first previous next last', wrong, right);
+                self.navigation &&  self.navigation.setAwaitClass(right);
             }
             
-            this.loading_index = index;
-            this._on_load = true;
+            if(self.index !== -1){
+                
+                if(self._on_wait){
+                    
+                    self._defer = 0;
+                    clearTimeout(self._timeout); 
+                }
+                
+                self.onCancel(self.loading_index);
+                self.navigation && self.navigation.onCancel(self.index);
+            }
+            
+            self.loading_index = index;
            
-            this.onChange(index);
-            this._have_navigation && this.navigation.onChange(index);
+            self.onChange(index);
+            self.navigation && self.navigation.onChange(index);
             
-            this.load(index);
+            if(self.isLoaded(index)){
+                self.draw(index)
+            }
+            else {
+                self.loader && self.loader.show();
+                self.load(index);
+            }
         },
         
         //to override with the config object
@@ -883,6 +1068,17 @@ $.JocodeSlideshow = $.jocodeClass(
         },
         
         /**
+         * Check that a slide is loaded
+         * 
+         * @method isLoaded
+         * @param {Number} index The index
+         */
+        isLoaded : function(index){
+            
+            return true;
+        },
+        
+        /**
          * Custom method called  while awaiting a transition
          * 
          * @method beforeWait
@@ -890,7 +1086,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @param {Number} elapsed
          * @param {Number} start_time
          */
-        beforeWait : function(delay, elapsed, start_time){},
+        beforeWait : empty_func,
         
         /**
          * Custom method called when a slide is cancelled
@@ -898,35 +1094,35 @@ $.JocodeSlideshow = $.jocodeClass(
          * @method onCancel
          * @param {Number} canceled_index The canceled index
          */
-        onCancel : function(canceled_index){},
+        onCancel : empty_func,
         
         /**
          * Custom method called when the playback start
          * 
          * @method onPlay
          */
-        onPlay : function(){},
+        onPlay : empty_func,
         
        /**
          * Custom method called when on pause
          * 
          * @method onPause
          */
-        onPause : function(){},
+        onPause : empty_func,
         
         /**
          * Custom method called when the playback is resumed
          * 
          * @method onResume
          */
-        onResume : function(){},
+        onResume : empty_func,
         
         /**
          * Custom method called when the player stops
          * 
          * @method onStop
          */
-        onStop : function(){},
+        onStop : empty_func,
         
         /**
          * Custom method called when a slide is changed
@@ -934,14 +1130,24 @@ $.JocodeSlideshow = $.jocodeClass(
          * @method onChange
          * @param {Number} new_index The index of a new slide
          */
-        onChange : function(new_index){},
+        onChange : empty_func,
         
         /**
          * Custom method called before a transition
          * 
          * @method beforeDraw
          */
-        beforeDraw : function(){}
+        beforeDraw : empty_func,
+        
+        /**
+         * Custom method called after a transition
+         * 
+         * @method afterDraw
+         */
+        afterDraw : empty_func,
+        
+        
+        beforeInitPile : empty_func
     }
 );
 
@@ -966,7 +1172,7 @@ $.JocodeSlideshowFx = {
              * @property slideshow
              * @type {$.JocodeSlideshow}
              */
-            slideshow : null,
+            slideshow : nil,
             
             /**
              * Launch the transition
@@ -977,7 +1183,7 @@ $.JocodeSlideshowFx = {
              * @param {Number} from_index The from index
              * @param {Number} to_index The to index
              */
-            draw : function(from, to, from_index, to_index){},
+            draw : empty_func,
             
             /**
              * Initialize the transition object
@@ -995,9 +1201,7 @@ $.JocodeSlideshowFx = {
              * 
              * @method initPile
              */
-            initPile : function(){
-                
-            }
+            initPile : empty_func
         }
     )
 };

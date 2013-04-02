@@ -25,6 +25,9 @@
 
 (function($){
 
+var empty_func = function(){},
+    nil = nil,
+    self;
 
 $.JocodeSlideshowNavigation = $.jocodeClass(
         
@@ -34,14 +37,17 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
      * @class $.JocodeSlideshowNavigation
      * @constructor 
      * @param {Object} config  The configuration object
-     *      @param {String}   config.$items                                     The navigation items selector, relative to the slideshow context or to the config context, if defined.
-     *      @param {String}   [config.$context]                                 The selector context, defaut,  use the slideshow context
-     *      @param {$.JocodeSlideshowNavigationFx.Base}[config.fx_navigation]   Transition navigation items object
-     *      @param {String}   [config.hover_container]                          The selector of the container of event hover(by default,
-     *      @param {String}   [config.selected_class]                           Class of the selected item
-     *      @param {String}   [config.scrolled_class]                           Class of the scrolled item
+     *      @param {String}   [config.$items]                                   The navigation items selector, relative to the slideshow context or to the config context, if defined.
+     *      @param {Function} [config.itemFactory]                              ...   
+     *      @param {String}   [config.$container]                               The selector of the container of the navigation relative to the slideshow context, defaut, use the slideshow context
+     *      @param {String}   [config.$items_container]                         ...      
+     *      @param {$.JocodeSlideshowNavigationFx.Base} config.fx_navigation    Transition navigation items object
+     *      @param {String}   [config.$event_container]                         The selector of the container of events (by default, the slideshow context).
+     *      @param {String}   [config.css_selected]                             Class of the selected item
+     *      @param {String}   [config.css_scrolled]                             Class of the scrolled item
+     *      @param {String}   [config.css_await]                                Class of items that wait the end of a transition or a loading
      *      @param {Boolean}  [config.pause_over=true]                          Stop on mouseover
-     *      @param {Boolean}  [config.stop_event=true]                          Stop event propagation and default actions
+     *      @param {Boolean}  [config.stop_event=true]                          Stop event propagation and default actions 
      *      @param {Function} [config.indexOf]                                  Function that returns the index of a slide
      *          @param {jQuery}     config.indexOf.item                       
      *      @param {Function} [config.onChange]                                 Custom method called when a slide is changed
@@ -49,19 +55,13 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
      *      @param {Function} [config.onCancel]                                 Custom method called when a slide is cancelled
      *          @param {Number}     config.onCancel.canceled_index 
      *      @param {Function} [config.beforeDraw]                               Custom method called before a transition
+     *      @param {Function} [config.afterDraw]                                Custom method called after a transition
      *      @param {Function} [config.beforeScroll]                             Custom method called before the scroll
+     *      @param {Function} [config.beforeSetup]                              ....
+     *      @param {Function} [config.afterSetup]                               ....
+     *      @param {Function} [config.beforeInitPile]                           ....
      **/
     function(config){
-
-        if(!config)
-            throw new Error('JocodeSlideshowNavigation Error: Missing parameter "config"');
-
-        if(!config.$items)
-            throw new Error('JocodeSlideshowNavigation Error: Missing parameter "config.$items"');
-
-        if(!config.fx || !(config.fx instanceof $.JocodeSlideshowNavigationFx.Base))
-            throw new Error('JocodeSlideshowNavigation Error: Parameter "config.fx" is missing or is not of the type "$.JocodeSlideshowNavigationFx.Base"');
-
         this.config = config;
     },
     {
@@ -72,7 +72,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          * @property slideshow
          * @type {$.JocodeSlideshow}
          */
-        slideshow : null,
+        slideshow : nil,
 
         /**
          * The configuration object
@@ -80,7 +80,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          * @property config
          * @type {Object}
          */
-        config : null,
+        config : nil,
         
         /**
          * The initialization context
@@ -88,7 +88,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          * @property context
          * @type {jQuery}
          */
-        context : null,
+        context : nil,
         
         /**
          * The navigation items selector
@@ -96,7 +96,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          * @property $items
          * @type {String}
          */
-        $items : null,
+        $items : nil,
         
         /**
          * The navigation items
@@ -104,39 +104,73 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          * @property items
          * @type {jQuery}
          */
-        items : null,
-
+        items : nil,
+        
+        
+        /**
+         * .......................
+         * 
+         * @property itemFactory
+         * @type {Function}
+         */
+        itemFactory : nil,
+        
+        /**
+         * .......................
+         * 
+         * @property items_container
+         * @type {jQuery}
+         */
+        items_container : nil,
+        
+        /**
+         * The current index
+         * 
+         * @property index
+         * @type {Number}
+         * @default -1
+         */
+        index : -1,
+        
         /**
          * The container of the event hover
          * 
-         * @property hover_container
+         * @property event_container
          * @type {jQuery}
          */
-        hover_container : null,
+        event_container : nil,
 
         /**
          * The css class of selected item
          * 
-         * @property selected_class
+         * @property css_selected
          * @type {String}
          */
-        selected_class : null,
+        css_selected : nil,
         
         /**
          * The css class of scrolled item
          * 
-         * @property scrolled_class
+         * @property css_scrolled
          * @type {String}
          */
-        scrolled_class : null,
+        css_scrolled : nil,
         
         /**
+         * Class of items that wait the end of a transition or a loading
+         * 
+         * @property css_await
+         * @type {String}
+         */
+        css_await : nil,
+        
+        /*
          * The current item
          * 
          * @property current
          * @type {jQuery}
          */
-        current : null,
+        current : nil,
         
         /**
          * he current scrolled item
@@ -144,7 +178,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          * @property current_scrolled
          * @type {jQuery}
          */
-        current_scrolled : null,
+        current_scrolled : nil,
         
         /**
          * The button first
@@ -152,7 +186,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          * @property bt_first
          * @type {jQuery}
          */
-        bt_first : null,
+        bt_first : nil,
 
         /**
          * The button previous
@@ -160,7 +194,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          * @property bt_previous
          * @type {jQuery}
          */
-        bt_previous : null,
+        bt_previous : nil,
         
         /**
          * The button next
@@ -168,7 +202,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          * @property bt_next
          * @type {jQuery}
          */
-        bt_next : null,
+        bt_next : nil,
 
         /**
          * The button last
@@ -176,7 +210,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          * @property bt_last
          * @type {jQuery}
          */
-        bt_last : null,
+        bt_last : nil,
 
         /**
          * The scrolled index
@@ -192,7 +226,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          * @property fx
          * @type {$.JocodeSlideshowNavigationFx}
          */
-        fx : null,
+        fx : nil,
 
         /**
          * Initialize the navigation
@@ -202,58 +236,48 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
         init : function(slideshow){
 
             var self = this,
-                config = this.config,
+                config = self.config,
                 ctx_button,
                 bt;
                 
-            //set requiered 
-            this.slideshow = slideshow;
-            this.context = config.$context ? $(config.$context) : slideshow.context;
-            this.$items = config.$items;
-            this._initItems();
-            this.fx = config.fx;
+            self.slideshow = slideshow;
             
-            //set options
-            this.hover_container = config.hover_container ? $(config.hover_container, this.context) : this.items.parent();
-
-            config.selected_class && (
-                this.selected_class = config.selected_class
+            config.beforeSetup && config.beforeSetup.call(self);
+            
+            self.context = config.$context ? $(config.$context, slideshow.context) : slideshow.context;
+            alert(config.$context)
+            $.each(
+                (
+                    'fx $items itemFactory css_selected css_scrolled css_await ' + 
+                    'indexOf onCancel onChange beforeScroll beforeDraw afterDraw beforeInitPile'    
+                ).split(' '), function(index, property){
+                    property in config && (self[property] = config[property]);
+                }
             );
-            config.scrolled_class && (
-                this.scrolled_class = config.scrolled_class
-            );
-          
-            //init custom method and event
-            $.each('indexOf onCancel onChange beforeScroll beforeDraw'.split(' '), function(index, method){
-
-                typeof config[method] == 'function' && (
-                    self[method]= config[method]
-                );
-            });
+            
+            self.items_container  = config.$items_container ? $(config.$items_container, self.context) : self.context;
+            self._initItems();
+            
+            self.event_container = config.event_container ? $(config.event_container, self.context) : self.context;
 
             if(!('pause_over' in config) ||  config.pause_over)
-                this.slideshow.addPauseEventOnHover(this.hover_container);
+                self.slideshow.pauseOnHover(self.event_container);
             
-            //initialize buttons
-            if(config.$buttons){
+            ctx_button = config.$buttons ? $(config.$buttons, self.context) : self.context;
 
-                ctx_button = $(config.$buttons, this.context);
-                
-                $.each('first previous next last'.split(' '), function(index, button){
+            $.each('first previous next last'.split(' '), function(index, button){
 
-                    bt = $(' .' + button, ctx_button);
-                    if(bt[0]){
+                bt = $(' .' + button, ctx_button);
 
-                        self['bt_' + button] = bt.click(function(e){
+                bt[0] &&( self['bt_' + button] = bt.click(function(e){
+                    self.slideshow._stopEvent(e); 
+                    self[button]();
+                }));
+            });
 
-                            self.slideshow._stopEvent(e); 
-                            self[button]();
-                        });
-                    }
-                });
-            }
-
-            this.fx.init(this);
+            self.fx.init(self);
+            
+            config.afterSetup && config.afterSetup.call(self);
         },
         
         /**
@@ -271,8 +295,8 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          */
         previous : function(){
             
-            var i = this.scrolled_index > -1 ? this.scrolled_index : this.slideshow.index;
-            this.scrollTo(i - 1);
+            self = this;
+            self.scrollTo((self.scrolled_index > -1 ? self.scrolled_index : self.slideshow.index)- 1);
         },
         
         /**
@@ -281,8 +305,8 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          */
         next : function(){
 
-            var i = this.scrolled_index > -1 ? this.scrolled_index : this.slideshow.index;
-            this.scrollTo(i + 1);
+            self = this;
+            self.scrollTo((self.scrolled_index > -1 ? self.scrolled_index : self.slideshow.index) + 1);
         },
 
         /**
@@ -295,39 +319,75 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
         },
         
         /**
+         * Add or remove the "await" css class
+         * @method setAwaitClass
+         * @protected
+         */
+        setAwaitClass : function(add){
+            
+            self = this;
+            
+            if(!self.css_await)
+                return;
+            
+            if(add){
+                self.items.addClass(self.css_await);
+                self.current && self.current.removeClass(self.css_await);
+                self.current_scrolled &&  self.current_scrolled.removeClass(self.css_await);
+            }
+            else self.items.removeClass(self.css_await);
+        },
+        
+        /**
          * Scroll at the passed index
          * @method scrollTo
          * @param {Number} index The index 
          */
         scrollTo : function(index){
             
-            if((index = this.slideshow.computeIndex(index)) === this.scrolled_index)
+            self = this;
+            
+            if((index = self.slideshow.computeIndex(index)) === self.scrolled_index)
                 return;
             
-            this.setScrolled(index);
-            this.fx.scrollTo(this.current, this.current_scrolled, this.slideshow.index, this.scrolled_index);
+            self.fx.scrollTo(self.current, self.current_scrolled, self.slideshow.index, self.scrolled_index);
+            self.setScrolled(index);
         },
         
         /**
          * Set the scrolled index and element
-         * Change its css class if scrolled_class is defined
+         * Change its css class 
          * @method setScrolled
          * @param {Number} index The index 
          */
         setScrolled : function(index){
             
+            self = this;
             
-            this.scrolled_index = index;
+            if(self.scrolled_index === index)
+                return;
             
-            var sible =  $(this.items[this.scrolled_index]);
+            self.scrolled_index = index;
             
-            if(this.scrolled_class){
+            var sible =  $(self.items[index]),
+                wait = self.css_await && 
+                    ((self.slideshow.await_load &&  self.slideshow.isOnLoad()) 
+                    || (self.slideshow.await_fx &&  self.slideshow.isOnFx()));
+            
+            if(self.index != index){
                 
-                this.current[0] != sible[0] && sible.addClass(this.scrolled_class);
-                this.current_scrolled && this.current_scrolled.removeClass(this.scrolled_class);
+                self.css_scrolled && sible.addClass(self.css_scrolled);
+                wait && sible.removeClass(self.css_await);
             }
             
-            this.current_scrolled = sible;
+            if(self.current_scrolled){
+                
+                self.css_scrolled && self.current_scrolled.removeClass(self.css_scrolled);
+                wait && self.scrolled_index != self.slideshow.index 
+                    && self.current_scrolled.addClass(self.css_await);
+            }
+            
+            self.current_scrolled = sible;
         },
         
         /**
@@ -337,11 +397,24 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          */
         _initItems : function(){
             
-            var self = this;
+            self = this;
             
-            this.items = $(this.$items, this.context);
+            self.beforeInitPile();
             
-            this.items.click(function(e){
+            if(self.$items){
+                
+                self.items = $(self.$items, self.context);
+            }
+            else {
+                
+                self.slideshow.slides.each(function(index){
+                    self.items_container.append(self.itemFactory($(this), index));
+                });
+                
+                self.items = self.items_container.children();
+            }
+            
+            self.items.click(function(e){
                 
                 self.slideshow._stopEvent(e);
                 self.slideshow.goTo(self.indexOf($(this)));
@@ -361,28 +434,33 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
         /**
          * Launch the transition
          * @method draw
-         * @param {Number} from_index The from index
          * @param {Number} to_index The to index
          */
-        draw : function(from_index, to_index){
+        draw : function(to_index){
             
-            var sible = $(this.items[to_index]);
-
-            if(this.selected_class){
+            self = this;
+            
+            if(to_index == self.index)
+                return;
+            
+            var sible = $(self.items[to_index]),
+                old_index = self.index,
+                old_sible = self.current;
+            
+            self.index = to_index;
+            self.current = sible;
+            
+            if(self.css_selected){
                 
-                this.current && this.current.removeClass(this.selected_class);
-                sible.addClass(this.selected_class);
+                old_sible && old_sible.removeClass(self.css_selected);
+                sible.addClass(self.css_selected);
                 
-                this.scrolled_class && this.current_scrolled 
-                    && this.current_scrolled[0] == sible[0] 
-                    && this.current_scrolled.removeClass(this.scrolled_class);
+                self.css_scrolled && self.current_scrolled_index ==  to_index
+                    && self.current_scrolled.removeClass(self.css_scrolled);
             }
+            self.beforeDraw();
             
-            this.current = sible;
-            
-            this.beforeDraw();
-            
-            this.fx.draw(this.current, sible, from_index, to_index);
+            self.fx.draw(old_sible, sible, old_index, to_index);
         },
         
         //to override with the config object
@@ -402,27 +480,36 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
          * @method onCancel
          * @param {Number} canceled_index The canceled index
          */
-        onCancel : function(canceled_index){},
+        onCancel : empty_func,
         
         /**
          * Custom method called when a slide is changed
          * @method onChange
          * @param {Number} new_index The index of a new slide
          */
-        onChange : function(new_index){},
+        onChange : empty_func,
         
         /**
          * Custom method called before the scroll
          * @method beforeScroll
          * @param {Number} scrolled_index The index of the scrolled index
          */
-        beforeScroll : function(scrolled_index){},
+        beforeScroll : empty_func,
         
         /**
          * Custom method called before a transition
          * @method beforeDraw
          */
-        beforeDraw : function(){}
+        beforeDraw : empty_func,
+        
+        /**
+         * Custom method called after a transition
+         * 
+         * @method afterDraw
+         */
+        afterDraw : empty_func,
+        
+        beforeInitPile : empty_func
     }
 );
 
@@ -448,7 +535,7 @@ $.JocodeSlideshowNavigationFx = {
              * @property navigation
              * @type {$.JocodeSlideshowNavigation}
              */
-            navigation : null,
+            navigation : nil,
 
             /**
              * Launch the transition
@@ -458,7 +545,7 @@ $.JocodeSlideshowNavigationFx = {
              * @param {Number} from_index The from index
              * @param {Number} to_index The to index
              */
-            draw : function(from, to, from_index, to_index){},
+            draw : empty_func,
             
             /**
              * Scroll the navigation
@@ -468,7 +555,7 @@ $.JocodeSlideshowNavigationFx = {
              * @param {Number} from_index The from index
              * @param {Number} to_index The to index
              */
-            scrollTo : function(from, to, from_index, to_index){},
+            scrollTo : empty_func,
             
             /**
              * Initialize the transition object
@@ -484,9 +571,7 @@ $.JocodeSlideshowNavigationFx = {
              * Method invoked when the pile of slides change
              * @method initPile
              */
-            initPile : function(){
-                
-            }
+            initPile : empty_func
         }
     )
 };

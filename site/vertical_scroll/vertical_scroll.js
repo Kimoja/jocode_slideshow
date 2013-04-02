@@ -7,7 +7,7 @@ JocodeSlideshowExemple.vertical_scroll = function(){
         
             $slides : '> .pad > .scroller > .slides > img',
             disabled_bt_class : 'disabled',
-
+            
             fx : new $.JocodeSlideshowFx.Scroll({
                 $scroller : '> .pad > .scroller',
                 duration : 1000,

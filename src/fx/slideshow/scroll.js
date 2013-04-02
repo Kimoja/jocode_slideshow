@@ -2,32 +2,22 @@
 (function($){
     
     
+var nil = nil,
+    self;
+
 $.JocodeSlideshowFx.Scroll = $.jocodeClass(
 
     function(config){
         
-        if(!config)
-            throw new Error('$.JocodeSlideshowFx.Scroll Error: Missing parameter "config"');
-
-        if(!config.$scroller)
-            throw new Error('$.JocodeSlideshowFx.Scroll Error: Missing parameter "config.$scroller"');
+        self = this;
         
-        this.$scroller = config.$scroller;
-        
-        config.duration  && (
-            this.duration = config.duration
-        );
-        config.easing  && (
-            this.easing = config.easing
-        );
-        'vertical' in config && (
-            this.vertical = !!config.vertical
-        );
+        self.config = config = config || {};
+        $.extend(self, config);
     }, {
 
-        config : null,
+        config : nil,
         
-        $scroller : null,
+        $scroller : nil,
         
         duration : 3000,
         
@@ -35,27 +25,30 @@ $.JocodeSlideshowFx.Scroll = $.jocodeClass(
         
         vertical : false,
         
-        _offsets : null,
+        _offsets : nil,
 
-        _scroller : null,
+        _scroller : nil,
 
         init : function(slideshow){
 
-            $.JocodeSlideshowFx.Base.prototype.init.call(this, slideshow);
+            self = this;
+            
+            $.JocodeSlideshowFx.Base.prototype.init.call(self, slideshow);
 
-            this._scroller = $(this.$scroller, slideshow.context);
-            this.initPile();
+            self._scroller = $(self.$scroller, slideshow.context);
+            self.initPile();
         },
         
         
         initPile : function(){
             
-            this._offsets = [];
+            self = this;
+            
+            self._offsets = [];
 
-            var step = 0,
-                self = this;
+            var step = 0;
 
-            this.slideshow.slides.each(function(index, el){
+            self.slideshow.slides.each(function(index, el){
 
                 self._offsets[index] = step;
                 step += self.vertical ? $(el).height() : $(el).width();
@@ -64,12 +57,14 @@ $.JocodeSlideshowFx.Scroll = $.jocodeClass(
         
         draw : function(from, to, from_index, to_index){
 
-            var slideshow = this.slideshow, css;
+            self = this;
+            
+            var slideshow = self.slideshow, css;
 
             if(from_index == -1){
                 
-                this.vertical ? this._scroller.scrollTop(this._offsets[to_index])
-                    : this._scroller.scrollLeft(this._offsets[to_index]);
+                self.vertical ? self._scroller.scrollTop(self._offsets[to_index])
+                    : self._scroller.scrollLeft(self._offsets[to_index]);
                 slideshow.keepOn(to_index);
 
                 return;
@@ -77,12 +72,12 @@ $.JocodeSlideshowFx.Scroll = $.jocodeClass(
             
             css = [];
             
-            css[this.vertical ? 'scrollTop' : 'scrollLeft'] = this._offsets[to_index];
+            css[self.vertical ? 'scrollTop' : 'scrollLeft'] = self._offsets[to_index];
             //alert(this._offsets[to_index])
-            this._scroller.stop().animate(css, 
+            self._scroller.stop().animate(css, 
                 {
-                    duration: this.duration, 
-                    easing: this.easing,
+                    duration: self.duration, 
+                    easing: self.easing,
                     complete : function(){
                         slideshow.keepOn(to_index);
                     }

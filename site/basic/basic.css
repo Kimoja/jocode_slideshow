@@ -50,6 +50,9 @@
     .slideshow.basic > .player > .disabled{
         display : none;
     }
+    .slideshow.basic > .player > .await{
+        opacity : 0.5;
+    }
     .slideshow.basic > .player > .first{
         background-position: 0 0;
     }
@@ -116,6 +119,10 @@
         .slideshow.basic > .navigation > .scroller > div > .scrolled{
             background-color: graytext;
         }
+        .slideshow.basic > .navigation > .scroller > div > .await{
+            opacity : 0.5;
+        }
+        
         /* end navigation scroller & items
         ******************************************/
 

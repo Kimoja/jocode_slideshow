@@ -1,16 +1,17 @@
 
 (function($){
     
+var self;
     
 $.JocodeSlideshowFx.Fade = $.jocodeClass(
 
     function(config){
         
-        this.config = config = config || {};
+        self = this;
         
-        config.duration  && (
-            this.duration = config.duration
-        );
+        self.config = config = config || {};
+        $.extend(self, config);
+        
     }, {
 
         config : null,
@@ -19,16 +20,20 @@ $.JocodeSlideshowFx.Fade = $.jocodeClass(
 
         init : function(slideshow){
 
-            $.JocodeSlideshowFx.Base.prototype.init.call(this, slideshow);
-
-            this._scroller = $(this.selector, slideshow.context);
+            self = this;
             
-            this.slideshow.slides.fadeOut(0);
+            $.JocodeSlideshowFx.Base.prototype.init.call(self, slideshow);
+
+            self._scroller = $(self.selector, slideshow.context);
+            
+            self.slideshow.slides.fadeOut(0);
         },
         
         draw : function(from, to, from_index, to_index){
             
-            var slideshow = this.slideshow;
+            self = this;
+            
+            var slideshow = self.slideshow;
 
             if(from_index == -1){
 
@@ -38,11 +43,11 @@ $.JocodeSlideshowFx.Fade = $.jocodeClass(
                 return;
             }
             
-            to.fadeIn(this.duration, function(){
+            to.fadeIn(self.duration, function(){
                 
                 slideshow.keepOn(to_index);
             });
-            from.fadeOut(this.duration, 0);
+            from.fadeOut(self.duration, 0);
         }
 
     }, 
