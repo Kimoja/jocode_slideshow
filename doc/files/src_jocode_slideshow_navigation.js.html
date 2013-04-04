@@ -1,34 +1,38 @@
-/*
+<h1 class="file-heading">File: src\jocode_slideshow_navigation.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*
  * Copyright 2013 Joakim Carrilo de Almeida
- * http://jocode.org/
+ * http:&#x2F;&#x2F;jocode.org&#x2F;
  * 
  * Permission is hereby granted, free of charge, to any person obtaining
  *  copy of this software and associated documentation files (the
- * "Software"), to deal in the Software without restriction, including
+ * &quot;Software&quot;), to deal in the Software without restriction, including
  * without limitation the rights to use, copy, modify, merge, publish,
- * distribute, sublicense, and/or sell copies of the Software, and to
+ * distribute, sublicense, and&#x2F;or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
  * 
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
  * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
  * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
+ *&#x2F;
 
         
-        /*!self.css_bt_on_mouseout && bts &&
-                self.displayOnHover(self.event_container, $(bts, ctx_button));*/
+        &#x2F;*!self.css_bt_on_mouseout &amp;&amp; bts &amp;&amp;
+                self.displayOnHover(self.event_container, $(bts, ctx_button));*&#x2F;
         
             
-           /* !self.display_nav_on_mouseout && self.navigation.container != container &&
-                self.displayOnHover(self.event_container, self.navigation.container);*/
+           &#x2F;* !self.display_nav_on_mouseout &amp;&amp; self.navigation.container != container &amp;&amp;
+                self.displayOnHover(self.event_container, self.navigation.container);*&#x2F;
 
 (function($){
 
@@ -38,7 +42,7 @@ var empty_func = function(){},
 
 $.JocodeSlideshowNavigation = $.jocodeClass(
         
-    /**
+    &#x2F;**
      *  The navigation class for a slideshow
      *  
      * @class $.JocodeSlideshowNavigation
@@ -66,170 +70,170 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
      *      @param {Function} [config.beforeSetup]                              ....
      *      @param {Function} [config.afterSetup]                               ....
      *      @param {Function} [config.beforeInitPile]                           ....
-     **/
+     **&#x2F;
     function(config){
         this.config = config;
     },
     {
         
-        /**
+        &#x2F;**
          * The slideshow
          * 
          * @property slideshow
          * @type {$.JocodeSlideshow}
-         */
+         *&#x2F;
         slideshow : nil,
 
-        /**
+        &#x2F;**
          * The configuration object
          * 
          * @property config
          * @type {Object}
-         */
+         *&#x2F;
         config : nil,
         
-        /**
+        &#x2F;**
          * The initialization container
          * 
          * @property container
          * @type {jQuery}
-         */
+         *&#x2F;
         container : nil,
         
-        /**
+        &#x2F;**
          * The button first
          * 
          * @property bt_first
          * @type {jQuery}
-         */
+         *&#x2F;
         bt_first : nil,
 
-        /**
+        &#x2F;**
          * The button previous
          * 
          * @property bt_previous
          * @type {jQuery}
-         */
+         *&#x2F;
         bt_previous : nil,
         
-        /**
+        &#x2F;**
          * The button next
          * 
          * @property bt_next
          * @type {jQuery}
-         */
+         *&#x2F;
         bt_next : nil,
 
-        /**
+        &#x2F;**
          * The button last
          * 
          * @property bt_last
          * @type {jQuery}
-         */
+         *&#x2F;
         bt_last : nil,
 
-        /**
+        &#x2F;**
          * The navigation items selector
          * 
          * @property $items
          * @type {String}
-         */
+         *&#x2F;
         $items : nil,
         
-        /**
+        &#x2F;**
          * The navigation items
          * 
          * @property items
          * @type {jQuery}
-         */
+         *&#x2F;
         items : nil,
         
-        /**
+        &#x2F;**
          * .......................
          * 
          * @property itemFactory
          * @type {Function}
-         */
+         *&#x2F;
         itemFactory : nil,
         
-        /**
+        &#x2F;**
          * .......................
          * 
          * @property items_container
          * @type {jQuery}
-         */
+         *&#x2F;
         items_container : nil,
         
-        /**
+        &#x2F;**
          * The current index
          * 
          * @property index
          * @type {Number}
          * @default -1
-         */
+         *&#x2F;
         index : -1,
         
-        /**
+        &#x2F;**
          * The css class of selected item
          * 
          * @property css_selected
          * @type {String}
-         */
+         *&#x2F;
         css_selected : nil,
         
-        /**
+        &#x2F;**
          * The css class of scrolled item
          * 
          * @property css_scrolled
          * @type {String}
-         */
+         *&#x2F;
         css_scrolled : nil,
         
-        /**
+        &#x2F;**
          * Class of items that wait the end of a transition or a loading
          * 
          * @property css_await
          * @type {String}
-         */
+         *&#x2F;
         css_await : nil,
         
-        /*
+        &#x2F;*
          * The current item
          * 
          * @property current
          * @type {jQuery}
-         */
+         *&#x2F;
         current : nil,
         
-        /**
+        &#x2F;**
          * he current scrolled item
          * 
          * @property current_scrolled
          * @type {jQuery}
-         */
+         *&#x2F;
         current_scrolled : nil,
         
-        /**
+        &#x2F;**
          * The scrolled index
          * 
          * @property scrolled_index
          * @type {Number}
-         */
+         *&#x2F;
         scrolled_index : -1,
 
-        /**
+        &#x2F;**
          * Transition navigation items object
          * 
          * @property fx
          * @type {$.JocodeSlideshowNavigationFx}
-         */
+         *&#x2F;
         fx : nil,
 
-        /**
+        &#x2F;**
          * Initialize the navigation
          * @method init
          * @param {$.JocodeSlideshow.Base} The slideshow
-         */
+         *&#x2F;
         init : function(slideshow){
 
             var self = this,
@@ -239,17 +243,17 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
                 
             self.slideshow = slideshow;
             
-            config.beforeSetup && config.beforeSetup.call(self);
+            config.beforeSetup &amp;&amp; config.beforeSetup.call(self);
             
             self.container = config.$container ? slideshow.$(config.$container) : slideshow.container;
             
-            //revoir, for in plus in prototype
+            &#x2F;&#x2F;revoir, for in plus in prototype
             $.each(
                 (
-                    'fx $items itemFactory css_selected css_scrolled css_await ' + 
-                    'indexOf onCancel onChange beforeScroll beforeDraw afterDraw beforeInitPile'    
-                ).split(' '), function(index, property){
-                    property in config && (self[property] = config[property]);
+                    &#x27;fx $items itemFactory css_selected css_scrolled css_await &#x27; + 
+                    &#x27;indexOf onCancel onChange beforeScroll beforeDraw afterDraw beforeInitPile&#x27;    
+                ).split(&#x27; &#x27;), function(index, property){
+                    property in config &amp;&amp; (self[property] = config[property]);
                 }
             );
             
@@ -257,11 +261,11 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
             
             ctx_button = self.$(config.$buttons);
 
-            $.each('first previous next last'.split(' '), function(index, button){
+            $.each(&#x27;first previous next last&#x27;.split(&#x27; &#x27;), function(index, button){
 
-                bt = $(' .' + button, ctx_button);
+                bt = $(&#x27; .&#x27; + button, ctx_button);
                 
-                bt[0] && (self['bt_' + button] = bt.click(function(e){
+                bt[0] &amp;&amp; (self[&#x27;bt_&#x27; + button] = bt.click(function(e){
                     self.slideshow._stopEvent(e); 
                     self[button]();
                 }))
@@ -269,63 +273,63 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
 
             self.fx.init(self);
             
-            config.afterSetup && config.afterSetup.call(self);
+            config.afterSetup &amp;&amp; config.afterSetup.call(self);
         },
         
-        /**
+        &#x2F;**
          * ....
          * 
          * @method $
          * @param {String} selector ...
-         */
+         *&#x2F;
         $ : function(selector){
             
-            return !selector || selector === '<' ? this.container : $(selector, this.container);
+            return !selector || selector === &#x27;&lt;&#x27; ? this.container : $(selector, this.container);
         },
         
-        /**
+        &#x2F;**
          * Scroll to the first item
          * @method first
-         */
+         *&#x2F;
         first : function(){
             
             this.scrollTo(0);
         },
 
-        /**
+        &#x2F;**
          * Scroll to the previous item
          * @method previous
-         */
+         *&#x2F;
         previous : function(){
             
             self = this;
-            self.scrollTo((self.scrolled_index > -1 ? self.scrolled_index : self.slideshow.index)- 1);
+            self.scrollTo((self.scrolled_index &gt; -1 ? self.scrolled_index : self.slideshow.index)- 1);
         },
         
-        /**
+        &#x2F;**
          * Scroll to the next item
          * @method next
-         */
+         *&#x2F;
         next : function(){
 
             self = this;
-            self.scrollTo((self.scrolled_index > -1 ? self.scrolled_index : self.slideshow.index) + 1);
+            self.scrollTo((self.scrolled_index &gt; -1 ? self.scrolled_index : self.slideshow.index) + 1);
         },
 
-        /**
+        &#x2F;**
          * Scroll to the last item
          * @method last
-         */
+         *&#x2F;
         last : function(){
             
             this.scrollTo(this.slideshow.slides.length - 1);
         },
         
-        /**
-         * Add or remove the "await" css class
+        &#x2F;**
+         * Add or remove the &quot;await&quot; css class
          * @method setAwaitCss
          * @protected
-         */
+         *&#x2F;
         setAwaitCss : function(add){
             
             self = this;
@@ -334,18 +338,18 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
                 return;
             
             if(add){
-                self.items.addClass(self.css_await);//alert(self.css_await);alert(self.items.length)
-                self.current && self.current.removeClass(self.css_await);
-                self.current_scrolled &&  self.current_scrolled.removeClass(self.css_await);
+                self.items.addClass(self.css_await);&#x2F;&#x2F;alert(self.css_await);alert(self.items.length)
+                self.current &amp;&amp; self.current.removeClass(self.css_await);
+                self.current_scrolled &amp;&amp;  self.current_scrolled.removeClass(self.css_await);
             }
             else self.items.removeClass(self.css_await);
         },
         
-        /**
+        &#x2F;**
          * Scroll at the passed index
          * @method scrollTo
          * @param {Number} index The index 
-         */
+         *&#x2F;
         scrollTo : function(index){
             
             self = this;
@@ -357,12 +361,12 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
             self.fx.scrollTo(self.current, self.current_scrolled, self.slideshow.index, self.scrolled_index);
         },
         
-        /**
+        &#x2F;**
          * Set the scrolled index and element
          * Change its css class 
          * @method setScrolled
          * @param {Number} index The index 
-         */
+         *&#x2F;
         setScrolled : function(index){
             
             self = this;
@@ -373,32 +377,32 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
             self.scrolled_index = index;
             
             var sible =  $(self.items[index]),
-                wait = self.css_await && 
-                    ((self.slideshow.await_load &&  self.slideshow.isOnLoad()) 
-                    || (self.slideshow.await_fx &&  self.slideshow.isOnFx()));
+                wait = self.css_await &amp;&amp; 
+                    ((self.slideshow.await_load &amp;&amp;  self.slideshow.isOnLoad()) 
+                    || (self.slideshow.await_fx &amp;&amp;  self.slideshow.isOnFx()));
             
             if(self.index != index){
                 
-                self.css_scrolled && sible.addClass(self.css_scrolled);
-                wait && sible.removeClass(self.css_await);
+                self.css_scrolled &amp;&amp; sible.addClass(self.css_scrolled);
+                wait &amp;&amp; sible.removeClass(self.css_await);
             }
             
             if(self.current_scrolled){
                 
-                self.css_scrolled && self.current_scrolled.removeClass(self.css_scrolled);
-                wait && self.scrolled_index != self.slideshow.index 
-                    && self.current_scrolled.addClass(self.css_await);
+                self.css_scrolled &amp;&amp; self.current_scrolled.removeClass(self.css_scrolled);
+                wait &amp;&amp; self.scrolled_index != self.slideshow.index 
+                    &amp;&amp; self.current_scrolled.addClass(self.css_await);
             }
             
             self.current_scrolled = sible;
         },
         
-        /**
+        &#x2F;**
          * Set items and its listener
          * @method _initItems
          * @param {jQuery} last_pile The last pile of slides 
          * @private
-         */
+         *&#x2F;
         _initItems : function(last_pile){
             
             self = this;
@@ -414,7 +418,7 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
                 self.slideshow.slides.each(function(index){
                     
                     var item = self.itemFactory($(this), index, last_pile);
-                    item && self.items_container.append(item);
+                    item &amp;&amp; self.items_container.append(item);
                 });
                 
                 self.items = self.items_container.children();
@@ -427,22 +431,22 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
             });
         },
         
-        /**
+        &#x2F;**
          * Method invoked when the pile of slides change
          * @method initPile
          * @param {jQuery} last_pile The last pile of slides 
-         */
+         *&#x2F;
         initPile : function(last_pile){
             
             this._initItems(last_pile);
             this.fx.initPile(last_pile);
         },
         
-        /**
+        &#x2F;**
          * Launch the transition
          * @method draw
          * @param {Number} to_index The to index
-         */
+         *&#x2F;
         draw : function(to_index){
             
             self = this;
@@ -459,61 +463,61 @@ $.JocodeSlideshowNavigation = $.jocodeClass(
             
             if(self.css_selected){
                 
-                old_sible && old_sible.removeClass(self.css_selected);
+                old_sible &amp;&amp; old_sible.removeClass(self.css_selected);
                 sible.addClass(self.css_selected);
                 
-                self.css_scrolled && self.scrolled_index ==  to_index
-                    && self.current_scrolled.removeClass(self.css_scrolled);
+                self.css_scrolled &amp;&amp; self.scrolled_index ==  to_index
+                    &amp;&amp; self.current_scrolled.removeClass(self.css_scrolled);
             }
             self.beforeDraw();
             
             self.fx.draw(old_sible, sible, old_index, to_index);
         },
         
-        //to override with the config object
+        &#x2F;&#x2F;to override with the config object
         
-        /**
+        &#x2F;**
          * Return the index of an item
          * @method indexOf
          * @param {jQuery} item The item
-         */
+         *&#x2F;
         indexOf : function (item){
 
             return  item.parent().children().index(item);
         },
         
-        /**
+        &#x2F;**
          * Custom method called when a slide is cancelled
          * @method onCancel
          * @param {Number} canceled_index The canceled index
-         */
+         *&#x2F;
         onCancel : empty_func,
         
-        /**
+        &#x2F;**
          * Custom method called when a slide is changed
          * @method onChange
          * @param {Number} new_index The index of a new slide
-         */
+         *&#x2F;
         onChange : empty_func,
         
-        /**
+        &#x2F;**
          * Custom method called before the scroll
          * @method beforeScroll
          * @param {Number} scrolled_index The index of the scrolled index
-         */
+         *&#x2F;
         beforeScroll : empty_func,
         
-        /**
+        &#x2F;**
          * Custom method called before a transition
          * @method beforeDraw
-         */
+         *&#x2F;
         beforeDraw : empty_func,
         
-        /**
+        &#x2F;**
          * Custom method called after a transition
          * 
          * @method afterDraw
-         */
+         *&#x2F;
         afterDraw : empty_func,
         
         beforeInitPile : empty_func
@@ -526,62 +530,64 @@ $.JocodeSlideshowNavigationFx = {
         
     Base : $.jocodeClass(
     
-         /**
+         &#x2F;**
           * The base class of a transition between items of navigation
           * 
           * @class $.JocodeSlideshowNavigationFx.Base
           * @constructor 
-          **/ 
+          **&#x2F; 
         function(){
             
         }, 
         {
-            /**
+            &#x2F;**
              * The navigation object
              * 
              * @property navigation
              * @type {$.JocodeSlideshowNavigation}
-             */
+             *&#x2F;
             navigation : nil,
 
-            /**
+            &#x2F;**
              * Launch the transition
              * @method draw
              * @param {jQuery} from Navigation item source
              * @param {jQuery} to   Navigation item destination
              * @param {Number} from_index The from index
              * @param {Number} to_index The to index
-             */
+             *&#x2F;
             draw : empty_func,
             
-            /**
+            &#x2F;**
              * Scroll the navigation
              * @method scrollTo
              * @param {jQuery} from Navigation item  source
              * @param {jQuery} to   Navigation item  destination
              * @param {Number} from_index The from index
              * @param {Number} to_index The to index
-             */
+             *&#x2F;
             scrollTo : empty_func,
             
-            /**
+            &#x2F;**
              * Initialize the transition object
              * @method init
              * @param {$.JocodeSlideshow} navigation The slideshow
-             */
+             *&#x2F;
             init : function(navigation){
 
                 this.navigation = navigation;
             },
             
-            /**
+            &#x2F;**
              * Method invoked when the pile of slides change
              * @method initPile
              * @param {jQuery} last_pile The last pile of slides 
-             */
+             *&#x2F;
             initPile : empty_func
         }
     )
 };
 
 })(jQuery);
+    </pre>
+</div>

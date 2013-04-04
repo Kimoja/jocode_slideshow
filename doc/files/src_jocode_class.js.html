@@ -1,8 +1,12 @@
+<h1 class="file-heading">File: src\jocode_class.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
 
 
 (function($){
     
- /**
+ &#x2F;**
   * Create classes, that support  inheritance
   * @method jocodeClass
   * @param {Function} construct The constructor
@@ -11,12 +15,12 @@
   * @for $ 
   * @static
   * @return {Function}
-  */
+  *&#x2F;
 $.jocodeClass = function(construct, proto, parent) {
     
     var key;
     
-    if(parent && typeof parent === 'function'){
+    if(parent &amp;&amp; typeof parent === &#x27;function&#x27;){
 
         function S(){};
         S.prototype = parent.prototype;
@@ -30,16 +34,19 @@ $.jocodeClass = function(construct, proto, parent) {
 
     construct.prototype.constructor = construct;
     
-    //to put somewhere else
+    &#x2F;&#x2F;to put somewhere else
     construct.prototype.setConfig = function(config){
         
         var i, member;
         
         for(i in config)
-            i in this && (this[i] = config[i]);
+            i in this &amp;&amp; (this[i] = config[i]);
     };
     
     return construct;
 };
     
 })(jQuery);
+
+    </pre>
+</div>

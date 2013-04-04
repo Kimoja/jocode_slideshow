@@ -58,8 +58,7 @@ $.JocodeSlideshowNavigationFx.Scroll = $.jocodeClass(
         
             $.JocodeSlideshowNavigationFx.Base.prototype.init.call(self, navigation);
             
-            self._scroller = $(self.$scroller, navigation.context);
-            self.initPile();
+            self._scroller = $(self.$scroller, navigation.container);
         },
           
         initPile : function(){
@@ -147,7 +146,8 @@ $.JocodeSlideshowNavigationFx.Scroll = $.jocodeClass(
         
         _animate : function(){
             
-            var self = this;
+            var self = this,
+                temp;
             
             if(self._on_scroll)
                 return;
@@ -163,12 +163,15 @@ $.JocodeSlideshowNavigationFx.Scroll = $.jocodeClass(
                     self._on_scroll = wrong;
                     return;
                 } 
-
-                var shift = ((self._to - self._from) / self._size) * self.velocity;
-                self._from += self._to < self._from ? Math.floor(shift) : Math.ceil(shift);
                 
+                var shift = ((self._to - self._from) / self._size) * self.velocity;
+                
+                temp = self._from + shift;
+                
+                self._from = self._to < self._from ? temp < self._from ? temp : self._to 
+                            : temp > self._from ? temp : self._to;
+                            
                 self.vertical ? self._scroller.scrollTop(self._from):  self._scroller.scrollLeft(self._from);
-
             }, 30);
         }
         

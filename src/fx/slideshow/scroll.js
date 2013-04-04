@@ -1,7 +1,6 @@
 
 (function($){
     
-    
 var nil = nil,
     self;
 
@@ -34,9 +33,7 @@ $.JocodeSlideshowFx.Scroll = $.jocodeClass(
             self = this;
             
             $.JocodeSlideshowFx.Base.prototype.init.call(self, slideshow);
-
-            self._scroller = $(self.$scroller, slideshow.context);
-            self.initPile();
+            self._scroller = $(self.$scroller, slideshow.container);
         },
         
         
@@ -66,14 +63,14 @@ $.JocodeSlideshowFx.Scroll = $.jocodeClass(
                 self.vertical ? self._scroller.scrollTop(self._offsets[to_index])
                     : self._scroller.scrollLeft(self._offsets[to_index]);
                 slideshow.keepOn(to_index);
-
+                
                 return;
             }
             
             css = [];
             
             css[self.vertical ? 'scrollTop' : 'scrollLeft'] = self._offsets[to_index];
-            //alert(this._offsets[to_index])
+           
             self._scroller.stop().animate(css, 
                 {
                     duration: self.duration, 

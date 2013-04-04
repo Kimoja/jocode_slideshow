@@ -112,9 +112,11 @@ if ($dir = opendir('./site/')) {
                 <nav id="exemple">
                     <ul>
                         <li><a href="#exemple_basic">Basic</a></li>
-                        <li><a href="#exemple_horizontal_fade">Horizontal fade</a></li>
-                        <li><a href="#exemple_vertical_scroll">Vertical scroll</a></li>
-                        <li><a href="#exemple_horizontal_scroll_async">Horizontal scroll asynchronous</a></li>
+                        <li><a href="#exemple_nav">Navigation</a></li>
+                        <li><a href="#exemple_vertical">Vertical</a></li>
+                        <li><a href="#exemple_fade">Fade</a></li>
+                        <li><a href="#exemple_async">Asynchronous</a></li>
+                        <li><a href="#exemple_infinite">Infinite</a></li>
                     </ul>
                 </nav>
                 
@@ -131,9 +133,9 @@ if ($dir = opendir('./site/')) {
                 </nav>
                 
             </div>    
-
+            
             <div class="section" id="main">
-
+                
             </div>
 
             <?php
@@ -144,17 +146,17 @@ if ($dir = opendir('./site/')) {
                     echo '<div class="section exemple" id="'.$value['id'].'">';
 
                     echo $value['data'],
-                            '<ul class="tab">',
-                                '<li><a href="#javascript">Javascript</a></li>',
-                                '<li><a href="#html">HTML</a></li>',
-                                '<li><a href="#css">CSS</a></li>',
-                            '</ul>',
-                            '<div class="tab_content javascript"><pre class="sh_javascript">',
-                                 $exemples_data['js'][$i]['data'].'</pre></div>',
-                            '<div class="tab_content html"><pre class="sh_html">',
-                                 htmlentities($value['data']).'</pre></div>',
-                            '<div class="tab_content css"><pre class="sh_css">',
-                                 $exemples_data['css'][$i]['data'].'</pre></div></div>';
+                            '<div class="tabs"><div class="tab">',
+                                '<div><a href="#javascript">Javascript</a></div>',
+                                '<div><a href="#html">HTML</a></div>',
+                                '<div><a href="#css">CSS</a></div>',
+                            '</div>',
+                            '<div class="tab_content javascript"><div class="pad"><pre class="sh_javascript">',
+                                 $exemples_data['js'][$i]['data'].'</pre></div></div>',
+                            '<div class="tab_content html"><div class="pad"><pre class="sh_html">',
+                                 htmlentities($value['data']).'</pre></div></div>',
+                            '<div class="tab_content css"><div class="pad"><pre class="sh_css">',
+                                 $exemples_data['css'][$i]['data'].'</pre></div></div></div></div>';
                     $i++;
                 }
                 

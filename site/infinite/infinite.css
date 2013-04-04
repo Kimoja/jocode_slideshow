@@ -1,0 +1,161 @@
+/* slideshow (see template horizontal)
+******************************************/
+.slideshow.infinite{
+    width : 518px;
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    box-shadow: 10px 10px 30px #aaa;
+}
+.slideshow.infinite a:active, .slideshow.infinite a:focus { 
+    border:none;
+    outline:none;
+}
+.slideshow.infinite > .loader{
+    display: none;
+    width : 518px;
+    height : 333px;
+    z-index : 10;
+    background: #fff url('../image/loading.gif') center no-repeat;
+    position: absolute;
+    opacity : 0.5;
+}
+     /* slides 
+    ******************************************/
+     .slideshow.infinite > .slides{
+        overflow:  hidden;
+        position : relative;
+        width : 518px;
+        height : 333px;
+     }
+     .slideshow.infinite > .slides > img{
+        position : absolute;
+        left : 9px;
+        top : 9px;
+     }
+    /* end slides
+    ******************************************/
+    
+    /* player 
+    ******************************************/
+    .slideshow.infinite > .player{
+        background: #f8f8f8;
+        height : 35px;
+        border-radius: 3px;
+        box-shadow: inset 0px -2px 5px #ddd;
+    }
+    .slideshow.infinite > .player > *{
+        display : inline-block;
+        height : 25px;
+        width : 25px;
+        margin : 5px;
+        background-image: url(../image/player_horizontal.png);
+        background-repeat: no-repeat;
+    }
+    .slideshow.infinite > .player > .disabled{
+        display : none;
+    }
+    .slideshow.infinite > .player > .await{
+        opacity : 0.5;
+    }
+    .slideshow.infinite > .player > .first{
+        background-position: 0 0;
+    }
+    .slideshow.infinite > .player > .previous{
+        background-position: -25px 0px;
+    }
+    .slideshow.infinite > .player > .play{
+        background-position: -50px 0px;
+    }
+    .slideshow.infinite > .player > .pause{
+        background-position: -75px 0px;
+    }
+    .slideshow.infinite > .player > .resume{
+        background-position: -50px 0px;
+    }
+    .slideshow.infinite > .player > .stop{
+        background-position: -100px 0px;
+    }
+    .slideshow.infinite > .player > .next{
+        background-position: -125px 0px;
+    }
+    .slideshow.infinite > .player > .last{
+        background-position: -150px 0px;
+    }
+    /* end player
+    ******************************************/
+    
+    /* navigation 
+    ******************************************/
+    .slideshow.infinite > .navigation{
+        background: #f8f8f8;
+        width : 518px;
+        height : 40px;
+        border-radius: 3px;
+        box-shadow: inset 0px 2px 5px #ddd;
+    }
+    .slideshow.infinite > .navigation > *{
+        float : left;
+    }
+        /* navigation scroller & items
+        ******************************************/
+        .slideshow.infinite > .navigation > .scroller{
+            width : 378px;
+            overflow: hidden;
+        }
+        .slideshow.infinite > .navigation > .scroller > div{
+            display: table;
+            table-layout: fixed;
+            width : 0;/*important disable auto width*/
+        }
+        .slideshow.infinite > .navigation > .scroller > div > div{
+            display: table-cell;
+            overflow:  hidden;
+            text-align: center;
+            width : 63px;
+            height : 40px;
+            opacity : 0.5;
+        }
+        .slideshow.infinite > .navigation > .scroller > div > div > img{
+            width : 50px;
+            height : 31px;
+            display : block;
+            margin-top : 5px;
+            cursor: pointer;  
+        }
+        .slideshow.infinite > .navigation > .scroller > div > .selected, 
+        .slideshow.infinite > .navigation > .scroller > div > .scrolled{
+            opacity : 1;
+        }
+        /* end navigation scroller & items
+        ******************************************/
+
+        /* navigation button
+        ******************************************/
+        .slideshow.infinite > .navigation > a{
+            width : 25px;
+            height : 30px;
+            margin : 5px;
+            background-image: url('../image/player_horizontal.png');
+            background-repeat: no-repeat;
+        }
+        .slideshow.infinite > .navigation > .first{
+            background-position: 0 2px;
+        }
+        .slideshow.infinite > .navigation > .previous{
+            background-position: -25px 2px;
+        }
+        .slideshow.infinite > .navigation > .next{
+            background-position: -125px 2px;
+        }
+        .slideshow.infinite > .navigation > .last{
+            background-position: -150px 2px;
+        }
+        /* end navigation button
+        ******************************************/
+    /* end navigation
+    ******************************************/
+
+/* end slideshow 
+******************************************/
+

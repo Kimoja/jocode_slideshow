@@ -25,8 +25,11 @@ $.JocodeSlideshowFx.Fade = $.jocodeClass(
             $.JocodeSlideshowFx.Base.prototype.init.call(self, slideshow);
 
             self._scroller = $(self.selector, slideshow.context);
+        },
+        
+        initPile : function(){
             
-            self.slideshow.slides.fadeOut(0);
+            this.slideshow.slides.hide();
         },
         
         draw : function(from, to, from_index, to_index){
@@ -35,19 +38,10 @@ $.JocodeSlideshowFx.Fade = $.jocodeClass(
             
             var slideshow = self.slideshow;
 
-            if(from_index == -1){
-
-                to.fadeIn(0);
-                slideshow.keepOn(to_index);
-
-                return;
-            }
-            
             to.fadeIn(self.duration, function(){
-                
-                slideshow.keepOn(to_index);
+                self.slideshow.keepOn(to_index);
             });
-            from.fadeOut(self.duration, 0);
+            from_index !== -1 && from.fadeOut(self.duration);
         }
 
     }, 

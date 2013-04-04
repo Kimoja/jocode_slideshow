@@ -56,11 +56,11 @@ h6 {font-size: 1em;margin : 1em 0;}
     padding :20px 0;
 }
 #header{
-    width : 220px;
+    width : 240px;
     float : left;
 }
 .section{
-    width : 530px;
+    width : 520px;
     padding :20px 0;
     float : right;
 }
@@ -79,45 +79,55 @@ h6 {font-size: 1em;margin : 1em 0;}
 **************************/
 
 
-/* exemple tab
+/* tab
 **************************/
+.tabs{
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    box-shadow: 10px 10px 30px #aaa;
+    margin-top : 40px;
+    text-align : left !important;
+}
 .tab{
-    text-align: left !important;
-    list-style: none;
-    margin-top : 20px;
-}
-.tab li{
-    float : left; 
-}
-.tab li a{
-    display : block;
-    padding : 0 10px;
-    line-height : 30px;
-    position : relative;
-    top : 3px;
-}
-.tab li a.active{
-    color : #5c5c5c;
-    font-weight: bold;
     background: #f8f8f8;
     border-radius: 3px;
-    border-top: 1px solid #ddd;
-    border-left: 1px solid #ddd;
+    height : 35px;
+    box-shadow: inset 0px -2px 5px #ddd;
+}
+.tab  > div{
+    display: inline-table;
+}
+.tab  > div > a{
+    display: table-cell;
+    vertical-align: middle;
+    overflow:  hidden;
+    text-align: center;
+    line-height : 35px;
+    padding : 0 10px;
+}
+.tab > div > a.active{
+    background-color: #fff;
     border-right: 1px solid #ddd;
+    box-shadow: 2px 0px 5px #ddd;
+    color : #5c5c5c;
+    font-weight: bold;
 }
 .tab_content{
     display : none;
     text-align : left;
     clear:both;
+    overflow: auto;
+    padding : 9px;
+    overflow: hidden;
+    position: relative;
+    z-index : 1000;
+    background: #fff;
 }
-.tab_content{
-    background: #f8f8f8;
-    border-radius: 3px;
-    border: 1px solid #ddd;
-    padding : 10px;
+.tab_content > .pad{
+    width : 500px;
     overflow: auto;
 }
-/* end exemple tab
+/* end tab
 **************************/
 
 

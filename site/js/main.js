@@ -68,13 +68,13 @@ $(function(){
             
         var self = $(this),
             type = self.attr("href").replace('#', ''),
-            ul = self.parent().parent(),
-            parent = ul.parent();
+            tab = self.parent().parent(),
+            tabs = tab.parent();
         
-        $('li > a', ul).removeClass('active');
+        $('> div > a', tab).removeClass('active');
         
-        $('> .tab_content' , parent).hide();
-        $('> .tab_content.' + type , parent).show();
+        $('> .tab_content' , tabs).hide();
+        $('> .tab_content.' + type , tabs).show();
         
         self.addClass('active');
     });
@@ -104,7 +104,7 @@ $(function(){
         });
     });
     
-    $('.tab li:first-child a').addClass('active');
+    $('.tab > div:first-child a ').addClass('active');
     $('.tab + .tab_content').show();
     
     sh_highlightDocument();
