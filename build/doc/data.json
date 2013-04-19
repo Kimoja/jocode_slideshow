@@ -1,0 +1,2013 @@
+{
+    "project": {
+        "name": "JocodeSlideshow",
+        "description": "",
+        "version": "0.9.1"
+    },
+    "files": {
+        "src\\class.js": {
+            "name": "src\\class.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "$": 1
+            },
+            "namespaces": {}
+        },
+        "src\\config.js": {
+            "name": "src\\config.js",
+            "modules": {},
+            "classes": {
+                "$.JocodeConfig": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\fx_nav_scroll.js": {
+            "name": "src\\fx_nav_scroll.js",
+            "modules": {},
+            "classes": {
+                "$.JocodeSlideshowNavigationFx.Scroll": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\slideshow.js": {
+            "name": "src\\slideshow.js",
+            "modules": {},
+            "classes": {
+                "$": 1,
+                "$.JocodeSlideshowConfig": 1,
+                "$.JocodeSlideshow": 1,
+                "$.JocodeSlideshowFx.Base": 1
+            },
+            "fors": {
+                "$": 1
+            },
+            "namespaces": {}
+        },
+        "src\\slideshow_navigation.js": {
+            "name": "src\\slideshow_navigation.js",
+            "modules": {},
+            "classes": {
+                "$.JocodeSlideshowNavigation": 1,
+                "$.JocodeSlideshowNavigationFx.Base": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "$": {
+            "name": "$",
+            "shortname": "$",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\slideshow.js",
+            "line": 41
+        },
+        "$.JocodeConfig": {
+            "name": "$.JocodeConfig",
+            "shortname": "$.JocodeConfig",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "$.JocodeSlideshowNavigationFx.Scroll",
+                "$.JocodeSlideshow",
+                "$.JocodeSlideshowFx.Base",
+                "$.JocodeSlideshowNavigation",
+                "$.JocodeSlideshowNavigationFx.Base"
+            ],
+            "file": "src\\config.js",
+            "line": 7,
+            "description": "...",
+            "is_constructor": 1
+        },
+        "$.JocodeSlideshowNavigationFx.Scroll": {
+            "name": "$.JocodeSlideshowNavigationFx.Scroll",
+            "shortname": "$.JocodeSlideshowNavigationFx.Scroll",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\fx_nav_scroll.js",
+            "line": 13,
+            "description": "The base class of a transition between items of navigation",
+            "is_constructor": 1,
+            "extends": "$.JocodeSlideshowNavigationFx.Base",
+            "uses": [
+                "$.JocodeConfig"
+            ],
+            "params": [
+                {
+                    "name": "config",
+                    "description": "The configuration object",
+                    "type": "Object"
+                }
+            ]
+        },
+        "$.JocodeSlideshowConfig": {
+            "name": "$.JocodeSlideshowConfig",
+            "shortname": "$.JocodeSlideshowConfig",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\slideshow.js",
+            "line": 56,
+            "is_constructor": 1
+        },
+        "$.JocodeSlideshow": {
+            "name": "$.JocodeSlideshow",
+            "shortname": "$.JocodeSlideshow",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\slideshow.js",
+            "line": 73,
+            "description": "The JodecodeSlideshow constructor",
+            "is_constructor": 1,
+            "uses": [
+                "$.JocodeConfig"
+            ],
+            "params": [
+                {
+                    "name": "container",
+                    "description": "The initialization container",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "config",
+                    "description": "The configuration object",
+                    "type": "Object"
+                }
+            ]
+        },
+        "$.JocodeSlideshowFx.Base": {
+            "name": "$.JocodeSlideshowFx.Base",
+            "shortname": "$.JocodeSlideshowFx.Base",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\slideshow.js",
+            "line": 1183,
+            "description": "The base class of transitions between slide",
+            "is_constructor": 1,
+            "uses": [
+                "$.JocodeConfig"
+            ],
+            "params": [
+                {
+                    "name": "config",
+                    "description": "The configuration object",
+                    "type": "Object"
+                }
+            ]
+        },
+        "$.JocodeSlideshowNavigation": {
+            "name": "$.JocodeSlideshowNavigation",
+            "shortname": "$.JocodeSlideshowNavigation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\slideshow_navigation.js",
+            "line": 41,
+            "description": "The navigation class for a slideshow",
+            "is_constructor": 1,
+            "uses": [
+                "$.JocodeConfig"
+            ],
+            "params": [
+                {
+                    "name": "config",
+                    "description": "The configuration object",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "$items",
+                            "description": "The navigation items selector, relative to the slideshow container or to the config container, if defined.",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "$container",
+                            "description": "The selector of the container of the navigation, relative to the slideshow container, defaut, use the slideshow container",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "$items_container",
+                            "description": "...",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "fx_navigation",
+                            "description": "Transition navigation items object",
+                            "type": "$.JocodeSlideshowNavigationFx.Base"
+                        },
+                        {
+                            "name": "css_selected",
+                            "description": "Class of the selected item",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "css_scrolled",
+                            "description": "Class of the scrolled item",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "css_await",
+                            "description": "Class of items that wait the end of a transition or a loading",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "stop_event",
+                            "description": "Stop event propagation and default actions",
+                            "type": "Boolean",
+                            "optional": true,
+                            "optdefault": "true"
+                        },
+                        {
+                            "name": "indexOf",
+                            "description": "Function that returns the index of a slide",
+                            "type": "Function",
+                            "optional": true,
+                            "props": [
+                                {
+                                    "name": "item",
+                                    "description": "",
+                                    "type": "JQuery"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "onChange",
+                            "description": "Custom method called when a slide is changed",
+                            "type": "Function",
+                            "optional": true,
+                            "props": [
+                                {
+                                    "name": "new_index",
+                                    "description": "",
+                                    "type": "Number"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "onCancel",
+                            "description": "Custom method called when a slide is cancelled",
+                            "type": "Function",
+                            "optional": true,
+                            "props": [
+                                {
+                                    "name": "canceled_index",
+                                    "description": "",
+                                    "type": "Number"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "itemFactory",
+                            "description": "...",
+                            "type": "Function",
+                            "optional": true,
+                            "props": [
+                                {
+                                    "name": "last_pile",
+                                    "description": "",
+                                    "type": "Number"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "beforeDraw",
+                            "description": "Custom method called before a transition",
+                            "type": "Function",
+                            "optional": true
+                        },
+                        {
+                            "name": "afterDraw",
+                            "description": "Custom method called after a transition",
+                            "type": "Function",
+                            "optional": true
+                        },
+                        {
+                            "name": "beforeScroll",
+                            "description": "Custom method called before the scroll",
+                            "type": "Function",
+                            "optional": true
+                        },
+                        {
+                            "name": "beforeSetup",
+                            "description": "....",
+                            "type": "Function",
+                            "optional": true
+                        },
+                        {
+                            "name": "afterSetup",
+                            "description": "....",
+                            "type": "Function",
+                            "optional": true
+                        },
+                        {
+                            "name": "beforeInitPile",
+                            "description": "....",
+                            "type": "Function",
+                            "optional": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "$.JocodeSlideshowNavigationFx.Base": {
+            "name": "$.JocodeSlideshowNavigationFx.Base",
+            "shortname": "$.JocodeSlideshowNavigationFx.Base",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\slideshow_navigation.js",
+            "line": 533,
+            "description": "The base class of a transition between items of navigation",
+            "is_constructor": 1,
+            "uses": [
+                "$.JocodeConfig"
+            ],
+            "params": [
+                {
+                    "name": "config",
+                    "description": "The configuration object",
+                    "type": "Object"
+                }
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "src\\class.js",
+            "line": 6,
+            "description": "Create classes, that support inheritance and mixins",
+            "itemtype": "method",
+            "name": "jocodeClass",
+            "params": [
+                {
+                    "name": "construct",
+                    "description": "The constructor",
+                    "type": "Function"
+                },
+                {
+                    "name": "proto",
+                    "description": "The prototype",
+                    "type": "Object"
+                },
+                {
+                    "name": "parent",
+                    "description": "The super class",
+                    "type": "Function"
+                }
+            ],
+            "static": 1,
+            "return": {
+                "description": "",
+                "type": "Function"
+            },
+            "class": "$"
+        },
+        {
+            "file": "src\\config.js",
+            "line": 14,
+            "description": "Initialize the transition object",
+            "itemtype": "method",
+            "name": "setConfig",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "The configuration object",
+                    "type": "Object"
+                }
+            ],
+            "class": "$.JocodeConfig"
+        },
+        {
+            "file": "src\\fx_nav_scroll.js",
+            "line": 55,
+            "description": "Initialize the transition object",
+            "itemtype": "method",
+            "name": "init",
+            "params": [
+                {
+                    "name": "navigation",
+                    "description": "The slideshow",
+                    "type": "$.JocodeSlideshow"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigationFx.Scroll"
+        },
+        {
+            "file": "src\\fx_nav_scroll.js",
+            "line": 69,
+            "description": "Method invoked when the pile of slides change",
+            "itemtype": "method",
+            "name": "initPile",
+            "params": [
+                {
+                    "name": "last_pile",
+                    "description": "The last pile of slides",
+                    "type": "JQuery"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigationFx.Scroll"
+        },
+        {
+            "file": "src\\fx_nav_scroll.js",
+            "line": 112,
+            "description": "Launch the transition",
+            "itemtype": "method",
+            "name": "draw",
+            "params": [
+                {
+                    "name": "from",
+                    "description": "Navigation item source",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "to",
+                    "description": "Navigation item destination",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "from_index",
+                    "description": "The from index",
+                    "type": "Number"
+                },
+                {
+                    "name": "to_index",
+                    "description": "The to index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigationFx.Scroll"
+        },
+        {
+            "file": "src\\fx_nav_scroll.js",
+            "line": 138,
+            "description": "Scroll the navigation",
+            "itemtype": "method",
+            "name": "scrollTo",
+            "params": [
+                {
+                    "name": "from",
+                    "description": "Navigation item  source",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "to",
+                    "description": "Navigation item  destination",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "from_index",
+                    "description": "The from index",
+                    "type": "Number"
+                },
+                {
+                    "name": "to_index",
+                    "description": "The to index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigationFx.Scroll"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 60,
+            "description": "The navigation object",
+            "itemtype": "property",
+            "name": "navigation",
+            "type": "{$.JocodeSlideshowNavigation}",
+            "class": "$.JocodeSlideshowConfig"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 66,
+            "description": "The slides selector",
+            "itemtype": "property",
+            "name": "$slides",
+            "type": "{String}",
+            "class": "$.JocodeSlideshowConfig"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 211,
+            "description": "The configuration object",
+            "itemtype": "property",
+            "name": "config",
+            "type": "{Object}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 219,
+            "description": "The initialization container",
+            "itemtype": "property",
+            "name": "container",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 227,
+            "description": "The slides selector",
+            "itemtype": "property",
+            "name": "$slides",
+            "type": "{String}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 235,
+            "description": "The slides",
+            "itemtype": "property",
+            "name": "slides",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 243,
+            "description": "...",
+            "itemtype": "property",
+            "name": "loader",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 251,
+            "description": "The navigation object",
+            "itemtype": "property",
+            "name": "navigation",
+            "type": "{$.JocodeSlideshowNavigation}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 259,
+            "description": "The container of buttons",
+            "itemtype": "property",
+            "name": "buttons",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 267,
+            "description": "The button first",
+            "itemtype": "property",
+            "name": "bt_first",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 275,
+            "description": "The button previous",
+            "itemtype": "property",
+            "name": "bt_previous",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 283,
+            "description": "The button play",
+            "itemtype": "property",
+            "name": "bt_play",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 291,
+            "description": "The button pause",
+            "itemtype": "property",
+            "name": "bt_pause",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 299,
+            "description": "The button resume",
+            "itemtype": "property",
+            "name": "bt_resume",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 307,
+            "description": "The button stop",
+            "itemtype": "property",
+            "name": "bt_stop",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 315,
+            "description": "The button next",
+            "itemtype": "property",
+            "name": "bt_next",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 321,
+            "itemtype": "property",
+            "name": "The button next",
+            "type": "JQuery",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 326,
+            "description": "The button last",
+            "itemtype": "property",
+            "name": "bt_last",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 334,
+            "description": "The css class of disabled buttons",
+            "itemtype": "property",
+            "name": "css_disable_bt",
+            "type": "{String}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 342,
+            "description": "Class of buttons that wait the end of a transition or a loading",
+            "itemtype": "property",
+            "name": "css_await_bt",
+            "type": "{String}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 350,
+            "description": "Time in milliseconds between each transition",
+            "itemtype": "property",
+            "name": "delay",
+            "type": "{Number}",
+            "default": "3000",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 359,
+            "description": "Transition slide object",
+            "itemtype": "property",
+            "name": "fx",
+            "type": "{$.JocodeSlideshowFx.Base}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 367,
+            "description": "The current slide",
+            "itemtype": "property",
+            "name": "current",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 375,
+            "description": "The start index",
+            "itemtype": "property",
+            "name": "start_index",
+            "type": "{Number}",
+            "default": "0",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 384,
+            "description": "The current index",
+            "itemtype": "property",
+            "name": "index",
+            "type": "{Number}",
+            "default": "-1",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 394,
+            "description": "The loading index",
+            "itemtype": "property",
+            "name": "loading_index",
+            "type": "{Number}",
+            "default": "-1",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 403,
+            "description": "Waiting for the end of a transition for draw the change of the navigation item",
+            "itemtype": "property",
+            "name": "await_nav_fx",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 412,
+            "description": "Waiting for the end of a loading to be able to change slide",
+            "itemtype": "property",
+            "name": "await_load",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 421,
+            "description": "Waiting for the end of a transition to be able to change slide",
+            "itemtype": "property",
+            "name": "await_fx",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 431,
+            "description": "Hide buttons during loading of a slide. \nThe container of buttons must be different of the container of the slideshow.",
+            "itemtype": "property",
+            "name": "mask_buttons_load",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 441,
+            "description": "Hide buttons during transition of a slide.\nThe container of buttons must be different of the container of the slideshow.",
+            "itemtype": "property",
+            "name": "mask_buttons_fx",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 451,
+            "description": "Hide navigation container during transition of a slide.\nThe parameter container of the navigation must be defined and must be different of the container of the slideshow.",
+            "itemtype": "property",
+            "name": "mask_nav_load",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 461,
+            "description": "Hide navigation container during transition of a slide.\nThe parameter container of the navigation must be defined and must be different of the container of the slideshow.",
+            "itemtype": "property",
+            "name": "mask_nav_fx",
+            "type": "{Boolean}",
+            "default": "false",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 472,
+            "description": "If the player is stopped",
+            "itemtype": "property",
+            "name": "_stopped",
+            "type": "{Boolean}",
+            "default": "true",
+            "access": "private",
+            "tagname": "",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 482,
+            "description": "If the player is on pause",
+            "itemtype": "property",
+            "name": "_paused",
+            "type": "{Boolean}",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 492,
+            "description": "If the slide is on load",
+            "itemtype": "property",
+            "name": "_on_load",
+            "type": "{Boolean}",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 502,
+            "description": "If the slide is on transition",
+            "itemtype": "property",
+            "name": "_on_fx",
+            "type": "{Boolean}",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 512,
+            "description": "The timestamp of the beginning of the time interval between transitions",
+            "itemtype": "property",
+            "name": "_time",
+            "type": "{Number}",
+            "default": "0",
+            "access": "private",
+            "tagname": "",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 522,
+            "description": "The time delay during a break",
+            "itemtype": "property",
+            "name": "_defer",
+            "type": "{Number}",
+            "default": "0",
+            "access": "private",
+            "tagname": "",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 532,
+            "description": "The waiting timer between slides",
+            "itemtype": "property",
+            "name": "_timeout",
+            "type": "{Number}",
+            "access": "private",
+            "tagname": "",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 542,
+            "description": "....",
+            "itemtype": "method",
+            "name": "$",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "...",
+                    "type": "String"
+                }
+            ],
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 553,
+            "description": "Change the css classe of a set of buttons",
+            "itemtype": "method",
+            "name": "_toogleBt",
+            "params": [
+                {
+                    "name": "buttons",
+                    "description": "The set of buttons",
+                    "type": "String"
+                },
+                {
+                    "name": "enable",
+                    "description": "Add or remove a css class",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "await",
+                    "description": "",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 577,
+            "description": "Stop an click event",
+            "itemtype": "method",
+            "name": "_stopEvent",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "The event object",
+                    "type": "Event"
+                },
+                {
+                    "name": "enable",
+                    "description": "Add or remove a css class",
+                    "type": "Boolean"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 594,
+            "description": "Display an element on hover a container",
+            "itemtype": "method",
+            "name": "_displayOnHover",
+            "params": [
+                {
+                    "name": "container",
+                    "description": "The container to listen",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "element",
+                    "description": "The element to display",
+                    "type": "JQuery"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 616,
+            "description": "Go to the first slide",
+            "itemtype": "method",
+            "name": "first",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 626,
+            "description": "Go to the previous slide",
+            "itemtype": "method",
+            "name": "previous",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 635,
+            "description": "Start the player",
+            "itemtype": "method",
+            "name": "play",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 658,
+            "description": "Pause the player",
+            "itemtype": "method",
+            "name": "pause",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 688,
+            "description": "Resume the player",
+            "itemtype": "method",
+            "name": "resume",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 711,
+            "description": "Stop the player",
+            "itemtype": "method",
+            "name": "stop",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 733,
+            "description": "Go to the next slide",
+            "itemtype": "method",
+            "name": "next",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 743,
+            "description": "Go to the last slide",
+            "itemtype": "method",
+            "name": "last",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 753,
+            "description": "Are there any slides after to current or loading slide (ignores loop)",
+            "itemtype": "method",
+            "name": "hasNext",
+            "params": [
+                {
+                    "name": "from_index",
+                    "description": "True to test on the index, otherwise on the loading index",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 765,
+            "description": "Are there any slides previous to current or loading slide (ignores loop)",
+            "itemtype": "method",
+            "name": "hasPrevious",
+            "params": [
+                {
+                    "name": "from_index",
+                    "description": "True to test on the index, otherwise on the loading index",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 777,
+            "description": "If the current or loading slide is the first",
+            "itemtype": "method",
+            "name": "isFirst",
+            "params": [
+                {
+                    "name": "from_index",
+                    "description": "True to test on the index, otherwise on the loading index",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 789,
+            "description": "If the current or loading slide is the last",
+            "itemtype": "method",
+            "name": "isLast",
+            "params": [
+                {
+                    "name": "from_index",
+                    "description": "True to test on the index, otherwise on the loading index",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 801,
+            "description": "If the current or loading slide index is that passed as argument",
+            "itemtype": "method",
+            "name": "is",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "The index",
+                    "type": "Number"
+                },
+                {
+                    "name": "from_index",
+                    "description": "True to test on the index, otherwise on the loading index",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 814,
+            "description": "If a slide is an load",
+            "itemtype": "method",
+            "name": "isOnLoad",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 825,
+            "description": "If a slide is an transition",
+            "itemtype": "method",
+            "name": "isOnFx",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 836,
+            "description": "If playback is waiting for a transition",
+            "itemtype": "method",
+            "name": "isOnWait",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 847,
+            "description": "If the player is playing",
+            "itemtype": "method",
+            "name": "isPlayed",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 858,
+            "description": "If the player is stopped",
+            "itemtype": "method",
+            "name": "isStopped",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 869,
+            "description": "If the player is on pause",
+            "itemtype": "method",
+            "name": "isPaused",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 880,
+            "description": "Calculate an index",
+            "itemtype": "method",
+            "name": "computeIndex",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "The index",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 892,
+            "description": "Method invoked when the pile of slides change",
+            "itemtype": "method",
+            "name": "initPile",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 911,
+            "description": "Continue playback after a transition\nStart the timer delay between each transition, whether it is playing",
+            "itemtype": "method",
+            "name": "keepOn",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "The index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 964,
+            "description": "Launch the transition, after loading a slide",
+            "itemtype": "method",
+            "name": "draw",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "The index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1008,
+            "description": "Go to slide",
+            "itemtype": "method",
+            "name": "goTo",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "The index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1078,
+            "description": "Load a slide",
+            "itemtype": "method",
+            "name": "load",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "The index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1089,
+            "description": "Check that a slide is loaded",
+            "itemtype": "method",
+            "name": "isLoaded",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "The index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1100,
+            "description": "Custom method called  while awaiting a transition",
+            "itemtype": "method",
+            "name": "beforeWait",
+            "params": [
+                {
+                    "name": "delay",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "elapsed",
+                    "description": "",
+                    "type": "Number"
+                },
+                {
+                    "name": "start_time",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1110,
+            "description": "Custom method called when a slide is cancelled",
+            "itemtype": "method",
+            "name": "onCancel",
+            "params": [
+                {
+                    "name": "canceled_index",
+                    "description": "The canceled index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1118,
+            "description": "Custom method called when the playback start",
+            "itemtype": "method",
+            "name": "onPlay",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1125,
+            "description": "Custom method called when on pause",
+            "itemtype": "method",
+            "name": "onPause",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1132,
+            "description": "Custom method called when the playback is resumed",
+            "itemtype": "method",
+            "name": "onResume",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1139,
+            "description": "Custom method called when the player stops",
+            "itemtype": "method",
+            "name": "onStop",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1146,
+            "description": "Custom method called when a slide is changed",
+            "itemtype": "method",
+            "name": "onChange",
+            "params": [
+                {
+                    "name": "new_index",
+                    "description": "The index of a new slide",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1154,
+            "description": "Custom method called before a transition",
+            "itemtype": "method",
+            "name": "beforeDraw",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1161,
+            "description": "Custom method called after a transition",
+            "itemtype": "method",
+            "name": "afterDraw",
+            "class": "$.JocodeSlideshow"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1196,
+            "description": "The configuration object",
+            "itemtype": "property",
+            "name": "config",
+            "type": "{Object}",
+            "class": "$.JocodeSlideshowFx.Base"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1204,
+            "description": "The slideshow",
+            "itemtype": "property",
+            "name": "slideshow",
+            "type": "{$.JocodeSlideshow}",
+            "class": "$.JocodeSlideshowFx.Base"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1212,
+            "description": "Launch the transition",
+            "itemtype": "method",
+            "name": "draw",
+            "params": [
+                {
+                    "name": "from",
+                    "description": "Slide source",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "to",
+                    "description": "Slide destination",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "from_index",
+                    "description": "The from index",
+                    "type": "Number"
+                },
+                {
+                    "name": "to_index",
+                    "description": "The to index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshowFx.Base"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1223,
+            "description": "Initialize the transition object",
+            "itemtype": "method",
+            "name": "init",
+            "params": [
+                {
+                    "name": "jocode_slideshow",
+                    "description": "The slideshow",
+                    "type": "$.JocodeSlideshow"
+                }
+            ],
+            "class": "$.JocodeSlideshowFx.Base"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1234,
+            "description": "Method invoked when the pile of slides change",
+            "itemtype": "method",
+            "name": "initPile",
+            "params": [
+                {
+                    "name": "last_pile",
+                    "description": "The last pile of slides",
+                    "type": "JQuery"
+                }
+            ],
+            "class": "$.JocodeSlideshowFx.Base"
+        },
+        {
+            "file": "src\\slideshow.js",
+            "line": 1249,
+            "description": "Add JocodeSlideshow as a jQuery plug-in",
+            "itemtype": "method",
+            "name": "jocodeSlideshow",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "The configuration object",
+                    "type": "Object"
+                }
+            ],
+            "static": 1,
+            "return": {
+                "description": "",
+                "type": "JQuery"
+            },
+            "class": "$"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 76,
+            "description": "The slideshow",
+            "itemtype": "property",
+            "name": "slideshow",
+            "type": "{$.JocodeSlideshow}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 84,
+            "description": "The configuration object",
+            "itemtype": "property",
+            "name": "config",
+            "type": "{Object}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 92,
+            "description": "The initialization container",
+            "itemtype": "property",
+            "name": "container",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 100,
+            "description": "The button first",
+            "itemtype": "property",
+            "name": "bt_first",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 108,
+            "description": "The button previous",
+            "itemtype": "property",
+            "name": "bt_previous",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 116,
+            "description": "The button next",
+            "itemtype": "property",
+            "name": "bt_next",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 124,
+            "description": "The button last",
+            "itemtype": "property",
+            "name": "bt_last",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 132,
+            "description": "The navigation items selector",
+            "itemtype": "property",
+            "name": "$items",
+            "type": "{String}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 140,
+            "description": "The navigation items",
+            "itemtype": "property",
+            "name": "items",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 148,
+            "description": ".......................",
+            "itemtype": "property",
+            "name": "itemFactory",
+            "type": "{Function}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 156,
+            "description": ".......................",
+            "itemtype": "property",
+            "name": "items_container",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 164,
+            "description": "The current index",
+            "itemtype": "property",
+            "name": "index",
+            "type": "{Number}",
+            "default": "-1",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 173,
+            "description": "The css class of selected item",
+            "itemtype": "property",
+            "name": "css_selected",
+            "type": "{String}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 181,
+            "description": "The css class of scrolled item",
+            "itemtype": "property",
+            "name": "css_scrolled",
+            "type": "{String}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 189,
+            "description": "Class of items that wait the end of a transition or a loading",
+            "itemtype": "property",
+            "name": "css_await",
+            "type": "{String}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 205,
+            "description": "he current scrolled item",
+            "itemtype": "property",
+            "name": "current_scrolled",
+            "type": "{jQuery}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 213,
+            "description": "The scrolled index",
+            "itemtype": "property",
+            "name": "scrolled_index",
+            "type": "{Number}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 221,
+            "description": "Transition navigation items object",
+            "itemtype": "property",
+            "name": "fx",
+            "type": "{$.JocodeSlideshowNavigationFx}",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 229,
+            "description": "Initialize the navigation",
+            "itemtype": "method",
+            "name": "init",
+            "params": [
+                {
+                    "name": "The",
+                    "description": "slideshow",
+                    "type": "$.JocodeSlideshow.Base"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 276,
+            "description": "....",
+            "itemtype": "method",
+            "name": "$",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "...",
+                    "type": "String"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 287,
+            "description": "Scroll to the first item",
+            "itemtype": "method",
+            "name": "first",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 296,
+            "description": "Scroll to the previous item",
+            "itemtype": "method",
+            "name": "previous",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 306,
+            "description": "Scroll to the next item",
+            "itemtype": "method",
+            "name": "next",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 316,
+            "description": "Scroll to the last item",
+            "itemtype": "method",
+            "name": "last",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 325,
+            "description": "Add or remove the \"await\" css class",
+            "itemtype": "method",
+            "name": "setAwaitCss",
+            "access": "protected",
+            "tagname": "",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 345,
+            "description": "Scroll at the passed index",
+            "itemtype": "method",
+            "name": "scrollTo",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "The index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 361,
+            "description": "Set the scrolled index and element\nChange its css class",
+            "itemtype": "method",
+            "name": "setScrolled",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "The index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 397,
+            "description": "Set items and its listener",
+            "itemtype": "method",
+            "name": "_initItems",
+            "params": [
+                {
+                    "name": "last_pile",
+                    "description": "The last pile of slides",
+                    "type": "JQuery"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 431,
+            "description": "Method invoked when the pile of slides change",
+            "itemtype": "method",
+            "name": "initPile",
+            "params": [
+                {
+                    "name": "last_pile",
+                    "description": "The last pile of slides",
+                    "type": "JQuery"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 442,
+            "description": "Launch the transition",
+            "itemtype": "method",
+            "name": "draw",
+            "params": [
+                {
+                    "name": "to_index",
+                    "description": "The to index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 476,
+            "description": "Return the index of an item",
+            "itemtype": "method",
+            "name": "indexOf",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "The item",
+                    "type": "JQuery"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 486,
+            "description": "Custom method called when a slide is cancelled",
+            "itemtype": "method",
+            "name": "onCancel",
+            "params": [
+                {
+                    "name": "canceled_index",
+                    "description": "The canceled index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 493,
+            "description": "Custom method called when a slide is changed",
+            "itemtype": "method",
+            "name": "onChange",
+            "params": [
+                {
+                    "name": "new_index",
+                    "description": "The index of a new slide",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 500,
+            "description": "Custom method called before the scroll",
+            "itemtype": "method",
+            "name": "beforeScroll",
+            "params": [
+                {
+                    "name": "scrolled_index",
+                    "description": "The index of the scrolled index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 507,
+            "description": "Custom method called before a transition",
+            "itemtype": "method",
+            "name": "beforeDraw",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 513,
+            "description": "Custom method called after a transition",
+            "itemtype": "method",
+            "name": "afterDraw",
+            "class": "$.JocodeSlideshowNavigation"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 545,
+            "description": "The configuration object",
+            "itemtype": "property",
+            "name": "config",
+            "type": "{Object}",
+            "class": "$.JocodeSlideshowNavigationFx.Base"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 553,
+            "description": "The navigation object",
+            "itemtype": "property",
+            "name": "navigation",
+            "type": "{$.JocodeSlideshowNavigation}",
+            "class": "$.JocodeSlideshowNavigationFx.Base"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 561,
+            "description": "Launch the transition",
+            "itemtype": "method",
+            "name": "draw",
+            "params": [
+                {
+                    "name": "from",
+                    "description": "Navigation item source",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "to",
+                    "description": "Navigation item destination",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "from_index",
+                    "description": "The from index",
+                    "type": "Number"
+                },
+                {
+                    "name": "to_index",
+                    "description": "The to index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigationFx.Base"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 571,
+            "description": "Scroll the navigation",
+            "itemtype": "method",
+            "name": "scrollTo",
+            "params": [
+                {
+                    "name": "from",
+                    "description": "Navigation item  source",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "to",
+                    "description": "Navigation item  destination",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "from_index",
+                    "description": "The from index",
+                    "type": "Number"
+                },
+                {
+                    "name": "to_index",
+                    "description": "The to index",
+                    "type": "Number"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigationFx.Base"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 581,
+            "description": "Initialize the transition object",
+            "itemtype": "method",
+            "name": "init",
+            "params": [
+                {
+                    "name": "navigation",
+                    "description": "The slideshow",
+                    "type": "$.JocodeSlideshow"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigationFx.Base"
+        },
+        {
+            "file": "src\\slideshow_navigation.js",
+            "line": 591,
+            "description": "Method invoked when the pile of slides change",
+            "itemtype": "method",
+            "name": "initPile",
+            "params": [
+                {
+                    "name": "last_pile",
+                    "description": "The last pile of slides",
+                    "type": "JQuery"
+                }
+            ],
+            "class": "$.JocodeSlideshowNavigationFx.Base"
+        }
+    ],
+    "warnings": []
+}

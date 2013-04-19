@@ -1,0 +1,146 @@
+<% 
+function link(cls) {
+    cls = cls.replace(/\{|\}/g, '');
+    var blank = /^(String|Object|Array|Boolean)$/.test(cls),
+        jq = /^jQuery$/i.test(cls),
+        href = jq ? 
+            'http://api.jquery.com/' : blank ? 
+            'https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/' + cls
+            : '#doc_' + cls;
+%>
+    <a href="<%- href %>" <% if(blank){ %> target="_blank" <% } %> > <%- cls %></a>
+<% } %>
+
+
+<% function property(property) { %>
+    
+    <div class="property item <% if(property.access) %><%- property.access %>">
+        <span class="bold"><%- property.name %></span> 
+        : <%  link(property.type) %>
+        <div class='desc'>
+            <%- property.description %>
+            <% if(property['default']){ %>
+                <div class="margin"><span class='bold'>Default </span><%-  property['default'] %></div>
+            <% } %>
+        </div>
+    </div>
+<% } %>
+
+<% function method(method) { %>
+    <div class="method item <% if(method.access)%><%- method.access %>">
+       <span class="bold"><%- method.name %></span> 
+       (<% if(method.params) { method.params.forEach(function(param, i){ %>
+            <% if(param.optional){ %>
+                [
+            <% } link(param.type); %>     
+            <%- param.name %> 
+            <% if('optdefault' in param){ %>
+                 =<%- param.optdefault %> 
+            <% } if(param.optional) {%>     
+                ]
+            <% } if(i != method.params.length - 1){ %> 
+                ,
+            <% } %>
+       <% })} %>)
+       <% if(method['return']) { %> 
+            :
+        <%  link(method['return'].type)  } %>
+        <div class='desc'>
+            <%- method.description %>
+
+            <% if(method.params) { %>
+                <div class='margin bold'>Parameters</div>
+                <ul class="params">
+                <% method.params.forEach(function(param){ %>
+                    <li>
+                        <span>
+                        <% if(param.optional){ %>
+                            [
+                        <% } link(param.type); %>     
+                        <%- param.name %> 
+                        <% if('optdefault' in param){ %>
+                             =<%- param.optdefault %> 
+                        <% } if(param.optional) {%>     
+                            ]
+                        <% } %>
+                        </span>
+                        <div class='desc'><%- param.description %></div>
+                    </li>
+                <% });%>
+                </ul>
+            <% } %>
+
+            <% if(method['return']) { %>
+                <div class="margin"><span class='bold'>Returns </span><%  link(method['return'].type); %> </div>  
+            <% } %>
+         </div>   
+    </div>
+<% } %>
+
+
+<div class="section doc" id="doc_<%- o.name %>">
+
+    <h4>Class <%- o.name %></h4>
+    
+    <% if(o.uses) {%>
+        <div class="uses">
+            Uses
+            <ul>
+                <% o.uses.forEach(function(use){ %>
+                <li><% link(use) %></li>
+                <% }) %>
+            </ul>
+        </div>
+    <%}%>
+    
+    <% if(o['extends']) {%>
+        <div class="extends">
+            Extends <a href="#doc_"><%- o['extends'] %></a>
+        </div>
+    <%}%>
+    
+    <div class="class_description">
+        <%- o.description %>
+    </div>
+    
+    <span>Show private : </span><input type="checkbox" class="show_private">
+    <span>Show inherited : </span><input type="checkbox" class="show_inherit" checked>
+    
+    <div class="tabs">
+        <div class="tab">
+            
+            <% if(o.config) {%>
+            <div><a href="#config">Configuration</a></div>
+            <%}%>
+            <% if(o.methods.length) {%>
+            <div><a href="#methods">Methods</a></div>
+            <%}%>
+            <% if(o.properties.length) {%>
+            <div><a href="#props">Properties</a></div>
+            <%}%>
+
+        </div>
+        
+        <% if(o.config) {%>
+            <div class="tab_content config">
+                <% if(o.config.methods) {%>
+                    <% o.config.methods.forEach(method) %>
+                <%}%>
+                <% if(o.config.properties) {%>
+                    <% o.config.properties.forEach(property) %>
+                <%}%>
+            </div>
+        <%}%>
+        <% if(o.methods.length) {%>
+            <div class="tab_content methods">
+                <% o.methods.forEach(method) %>
+            </div>
+        <%}%>
+        <% if(o.properties.length) {%>
+            <div class="tab_content props">
+                <% o.properties.forEach(property) %>
+            </div>
+        <%}%>
+    </div>
+
+</div>

@@ -38,18 +38,30 @@ a:hover {
 h1, h2, h3, h4, h5, h6{
     font-family: "DSDIGI", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-h1 {font-size: 1.5em;margin : 1.5em 0;}
-h2 {font-size: 1.4em;margin : 1.4em 0;}
-h3 {font-size: 1.3em;margin : 1.3em 0;}
-h4 {font-size: 1.2em;margin : 1.2em 0;}
-h5 {font-size: 1.1em;margin : 1.1em 0;}
-h6 {font-size: 1em;margin : 1em 0;}
+h1 {font-size: 1.5em;margin : 0.5em 0;}
+h2 {font-size: 1.4em;margin : 0.4em 0;}
+h3 {font-size: 1.3em;margin : 0.3em 0;}
+h4 {font-size: 1.2em;margin : 0.2em 0;}
+h5 {font-size: 1.1em;margin : 0.1em 0;}
+h6 {font-size: 1em;margin : 0 0;}
 /* end font
 **************************/
 
 
 /* global layout
 **************************/
+html, body{
+    height : 100%;
+}
+#loader{
+    position : absolute;
+    z-index : 5000;
+    height : 100%;
+    width : 100%;
+    background: #fff url('../image/loading.gif') no-repeat center;
+    opacity : .5;
+    display : none;
+}
 #wrapper{
     width : 800px;
     margin : 0 auto;
@@ -61,16 +73,16 @@ h6 {font-size: 1em;margin : 1em 0;}
 }
 .section{
     width : 520px;
-    padding :20px 0;
+    padding :10px 0;
     float : right;
-}
-.exemple{
     display : none;
     text-align: center;
 }
 .doc{
-    display : none;
     text-align: left;
+}
+#main{
+    display : block;
 }
 #logo{
     margin-bottom: 20px;
@@ -79,40 +91,37 @@ h6 {font-size: 1em;margin : 1em 0;}
 **************************/
 
 
-/* tab
+/* tabs
 **************************/
 .tabs{
-    border-radius: 3px;
     border: 1px solid #ddd;
     box-shadow: 10px 10px 30px #aaa;
     margin-top : 40px;
     text-align : left !important;
 }
-.tab{
-    background: #f8f8f8;
-    border-radius: 3px;
+.tabs > .tab{
     height : 35px;
     box-shadow: inset 0px -2px 5px #ddd;
 }
-.tab  > div{
-    display: inline-table;
+.tabs > .tab  > div{
+    display: inline-block;
 }
-.tab  > div > a{
-    display: table-cell;
+.tabs > .tab  > div > a{
+    display: block;
     vertical-align: middle;
     overflow:  hidden;
     text-align: center;
     line-height : 35px;
-    padding : 0 10px;
+    padding : 0 20px;
 }
-.tab > div > a.active{
+.tabs > .tab > div > a.active{
     background-color: #fff;
     border-right: 1px solid #ddd;
     box-shadow: 2px 0px 5px #ddd;
     color : #5c5c5c;
     font-weight: bold;
 }
-.tab_content{
+.tabs > .tab_content{
     display : none;
     text-align : left;
     clear:both;
@@ -123,21 +132,18 @@ h6 {font-size: 1em;margin : 1em 0;}
     z-index : 1000;
     background: #fff;
 }
-.tab_content > .pad{
+.tabs > .tab_content > .pad{
     width : 500px;
     overflow: auto;
 }
-/* end tab
+/* end tabs
 **************************/
 
 
 
 /* doc
 **************************/
-.doc .tab_content ul > li ul > li{
-}
-.doc .tab_content .item, 
-.doc .tab_content.constructor > .item > .desc > ul > li > ul > li{
+.doc .tab_content .item{
     margin-bottom : 10px;
     padding-bottom:  10px;
     padding-left:  15px;
@@ -145,46 +151,32 @@ h6 {font-size: 1em;margin : 1em 0;}
     cursor: pointer;
     background: url('../image/item.gif') no-repeat 0  5px;
 }
-
-.doc .tab_content.constructor > .item > .desc > ul > li > ul > li{
-    margin-left:  0;
+.doc .tab_content .item.private{
+    display : none;
 }
-.doc .tab_content .item:hover, 
-.doc .tab_content.constructor > .item > .desc > ul > li > ul > li:hover{
+.doc .tab_content .item:hover{
     background: url('../image/item_hover.gif') no-repeat 0px  5px;
 }
-.doc .tab_content.constructor > .item{
-    padding-left:  0px;
-    border-width: 0px;
-    cursor: default;
-    background: none;
-}
-.doc .tab_content.constructor > .item > .desc > ul > li{
-    background: url('../image/item_open.gif') no-repeat 0px  5px;
-    padding-left:  15px;
-}
-.doc .tab_content .item.open, 
-.doc .tab_content.constructor > .item > .desc > ul > li > ul > li.open{
+.doc .tab_content .item.open{
     background: url('../image/item_open.gif') no-repeat 0px  5px;
 }
-.doc .tab_content .desc,
-.doc .tab_content.constructor > .item > .desc > ul > li > ul > li > p, 
-.doc .tab_content.constructor > .item > .desc > ul > li > ul > li > ul {
+.doc > .tabs > .tab_content > .item > .desc{
     display : none;
     margin-top : 10px;
 }
-.doc .tab_content.constructor .desc{
-    display : block;
+.doc .bold{
+    font-weight: bold;
+    margin: 10px 0;
 }
-.doc .tab_content.constructor .param_title{
-    display : none;
+.doc li{
+    margin-left :  10px;
+    margin-bottom :  10px;
 }
-.doc ul.params li{
-    margin : 10px;
+.doc .class_description{
+    margin-bottom: 10px;
 }
-
-.doc ul.params li{
-    margin : 10px;
+.doc .tabs{
+    margin-top: 10px;
 }
 /* end doc
 **************************/

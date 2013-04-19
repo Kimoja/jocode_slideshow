@@ -1,0 +1,164 @@
+/* slideshow (see template horizontal)
+******************************************/
+.slideshow.nav{
+    width : 518px;
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    box-shadow: 10px 10px 30px #aaa;
+}
+.slideshow.nav a:active, .slideshow.nav a:focus { 
+    border:none;
+    outline:none;
+}
+    /* slides 
+    ******************************************/
+    .slideshow.nav > .pad{
+        width : 500px;
+        padding : 9px;
+    }
+    .slideshow.nav > .pad > .scroller{
+        overflow: hidden;
+    }
+    .slideshow.nav > .pad > .scroller > .slides{
+        display: table;
+        table-layout: fixed;
+        position: relative;
+        width : 0;
+    }
+    .slideshow.nav > .pad > .scroller > .slides > div{
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        width : 500px;
+        height : 130px;
+    }
+    /* end slides
+    ******************************************/
+
+    /* player 
+    ******************************************/
+    .slideshow.nav > .player{
+        background: #f8f8f8;
+        height : 35px;
+        border-radius: 3px;
+        box-shadow: inset 0px -2px 5px #ddd;
+    }
+    .slideshow.nav > .player > *{
+        display : inline-block;
+        height : 25px;
+        width : 25px;
+        margin : 5px;
+        background-image: url(./site/image/player_horizontal.png);
+        background-repeat: no-repeat;
+    }
+    .slideshow.nav > .player > .disabled{
+        display : none;
+    }
+    .slideshow.nav > .player > .await{
+        opacity : 0.5;
+    }
+    .slideshow.nav > .player > .first{
+        background-position: 0 0;
+    }
+    .slideshow.nav > .player > .previous{
+        background-position: -25px 0px;
+    }
+    .slideshow.nav > .player > .play{
+        background-position: -50px 0px;
+    }
+    .slideshow.nav > .player > .pause{
+        background-position: -75px 0px;
+    }
+    .slideshow.nav > .player > .resume{
+        background-position: -50px 0px;
+    }
+    .slideshow.nav > .player > .stop{
+        background-position: -100px 0px;
+    }
+    .slideshow.nav > .player > .next{
+        background-position: -125px 0px;
+    }
+    .slideshow.nav > .player > .last{
+        background-position: -150px 0px;
+    }
+    /* end player
+    ******************************************/
+    
+    /* navigation 
+    ******************************************/
+    .slideshow.nav > .navigation{
+        background: #f8f8f8;
+        width : 518px;
+        height : 35px;
+        border-radius: 3px;
+        box-shadow: inset 0px 2px 5px #ddd;
+    }
+    .slideshow.nav > .navigation > *{
+        float : left;
+    }
+        /* navigation scroller & items
+        ******************************************/
+        .slideshow.nav > .navigation > .scroller{
+            width : 378px;
+            overflow: hidden;
+        }
+        .slideshow.nav > .navigation > .scroller > div{
+            display: table;
+            table-layout: fixed;
+            width : 0;/*important disable auto width*/
+        }
+        .slideshow.nav > .navigation > .scroller > div > a{
+            display: table-cell;
+            vertical-align: middle;
+            overflow:  hidden;
+            text-align: center;
+            width : 54px;
+            height : 35px;
+        }
+        .slideshow.nav > .navigation > .scroller > div > .await{
+            opacity : 0.5;
+        }
+        .slideshow.nav > .navigation > .scroller > div > .selected, 
+        .slideshow.nav > .navigation > .scroller > div > .scrolled{
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+            box-shadow: 2px 0px 5px #ddd;
+        }
+        .slideshow.nav > .navigation > .scroller > div > .selected{
+            color : #5c5c5c;
+            font-weight: bold;
+        }
+        /* end navigation scroller & items
+        ******************************************/
+
+        /* navigation button
+        ******************************************/
+        .slideshow.nav > .navigation > a{
+            width : 25px;
+            height : 25px;
+            margin : 5px;
+            background-image: url('./site/image/player_horizontal.png');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .slideshow.nav > .navigation > .first{
+            background-position: 0 0;
+        }
+        .slideshow.nav > .navigation > .previous{
+            background-position: -25px 0px;
+        }
+        .slideshow.nav > .navigation > .next{
+            background-position: -125px 0px;
+        }
+        .slideshow.nav > .navigation > .last{
+            background-position: -150px 0px;
+        }
+        /* end navigation button
+        ******************************************/
+    /* end navigation
+    ******************************************/
+
+/* end slideshow 
+******************************************/
+

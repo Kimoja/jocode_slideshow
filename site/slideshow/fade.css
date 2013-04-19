@@ -1,0 +1,152 @@
+/* slideshow (see template horizontal)
+******************************************/
+.slideshow.fade{
+    width : 518px;
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    box-shadow: 10px 10px 30px #aaa;
+}
+.slideshow.fade a:active, .slideshow.fade a:focus { 
+    border:none;
+    outline:none;
+}
+     /* slides 
+    ******************************************/
+     .slideshow.fade > .slides{
+        overflow:  hidden;
+        position : relative;
+        width : 518px;
+        height : 333px;
+     }
+     .slideshow.fade > .slides > img{
+        position : absolute;
+        left : 9px;
+        top : 9px;
+     }
+    /* end slides
+    ******************************************/
+    
+    /* player 
+    ******************************************/
+    .slideshow.fade > .player{
+        background: #f8f8f8;
+        height : 35px;
+        border-radius: 3px;
+        box-shadow: inset 0px -2px 5px #ddd;
+    }
+    .slideshow.fade > .player > *{
+        display : inline-block;
+        height : 25px;
+        width : 25px;
+        margin : 5px;
+        background-image: url(./site/image/player_horizontal.png);
+        background-repeat: no-repeat;
+    }
+    .slideshow.fade > .player > .disabled{
+        display : none;
+    }
+    .slideshow.fade > .player > .await{
+        opacity : 0.5;
+    }
+    .slideshow.fade > .player > .first{
+        background-position: 0 0;
+    }
+    .slideshow.fade > .player > .previous{
+        background-position: -25px 0px;
+    }
+    .slideshow.fade > .player > .play{
+        background-position: -50px 0px;
+    }
+    .slideshow.fade > .player > .pause{
+        background-position: -75px 0px;
+    }
+    .slideshow.fade > .player > .resume{
+        background-position: -50px 0px;
+    }
+    .slideshow.fade > .player > .stop{
+        background-position: -100px 0px;
+    }
+    .slideshow.fade > .player > .next{
+        background-position: -125px 0px;
+    }
+    .slideshow.fade > .player > .last{
+        background-position: -150px 0px;
+    }
+    /* end player
+    ******************************************/
+    
+    /* navigation 
+    ******************************************/
+    .slideshow.fade > .navigation{
+        background: #f8f8f8;
+        width : 518px;
+        height : 40px;
+        border-radius: 3px;
+        box-shadow: inset 0px 2px 5px #ddd;
+    }
+    .slideshow.fade > .navigation > *{
+        float : left;
+    }
+        /* navigation scroller & items
+        ******************************************/
+        .slideshow.fade > .navigation > .scroller{
+            width : 378px;
+            overflow: hidden;
+        }
+        .slideshow.fade > .navigation > .scroller > div{
+            display: table;
+            table-layout: fixed;
+            width : 0;/*important disable auto width*/
+        }
+        .slideshow.fade > .navigation > .scroller > div > div{
+            display: table-cell;
+            overflow:  hidden;
+            text-align: center;
+            width : 63px;
+            height : 40px;
+            opacity : 0.5;
+        }
+        .slideshow.fade > .navigation > .scroller > div > div > img{
+            width : 50px;
+            height : 31px;
+            display : block;
+            margin-top : 5px;
+            cursor: pointer;  
+        }
+        .slideshow.fade > .navigation > .scroller > div > .selected, 
+        .slideshow.fade > .navigation > .scroller > div > .scrolled{
+            opacity : 1;
+        }
+        /* end navigation scroller & items
+        ******************************************/
+
+        /* navigation button
+        ******************************************/
+        .slideshow.fade > .navigation > a{
+            width : 25px;
+            height : 30px;
+            margin : 5px;
+            background-image: url('./site/image/player_horizontal.png');
+            background-repeat: no-repeat;
+        }
+        .slideshow.fade > .navigation > .first{
+            background-position: 0 2px;
+        }
+        .slideshow.fade > .navigation > .previous{
+            background-position: -25px 2px;
+        }
+        .slideshow.fade > .navigation > .next{
+            background-position: -125px 2px;
+        }
+        .slideshow.fade > .navigation > .last{
+            background-position: -150px 2px;
+        }
+        /* end navigation button
+        ******************************************/
+    /* end navigation
+    ******************************************/
+
+/* end slideshow 
+******************************************/
+

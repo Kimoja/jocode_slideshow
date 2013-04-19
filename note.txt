@@ -1,5 +1,12 @@
 //cmd yuidoc 
-yuidoc -c yuidoc.json --theme jocode
+yuidoc -c yuidoc.json -p
 
 //chemin yui doc 
 C:/Users/Jo/AppData/Roaming/npm/node_modules/yuidocjs
+
+//build site
+node site.js
+
+
+//build 
+node dist.js

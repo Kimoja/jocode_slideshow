@@ -4,7 +4,7 @@
     "version": "0.9.1",
     "options": {
         "linkNatives": true, 
-        "outdir": "./doc",
+        "outdir": "./build/doc",
         "paths": ["./src"]
     }
 }

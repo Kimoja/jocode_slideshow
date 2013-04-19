@@ -1,0 +1,1 @@
+(function(o){o.jocodeConfig=o.jocodeClass({setConfig:function(o){o=o||{};for(var t in o)t in this&&(this[t]=o[t]);this.config=o}})})(jQuery);

@@ -1,0 +1,39 @@
+
+<div class="section exemple" id="<%- project %>_<%- id %>">
+    <%- txt %>
+    
+    <div class="tabs">
+        <div class="tab">
+            <% if(js) {%>
+                <div><a href="#javascript">Javascript</a></div>
+            <%}%>
+            <% if(html) {%>
+                <div><a href="#html">HTML</a></div>
+            <%}%>
+            <% if(css) {%>
+                <div><a href="#css">CSS</a></div>
+            <%}%>
+        </div>
+        <% if(js) {%>
+           <div class="tab_content javascript">
+               <div class="pad">
+<pre class="sh_javascript"><%- js %></pre>
+               </div>
+           </div>
+        <%}%>
+        <% if(html) {%>
+           <div class="tab_content html">
+               <div class="pad">
+<pre class="sh_html"><%- html %></pre>
+               </div>
+           </div>
+        <%}%>
+        <% if(css) {%>
+           <div class="tab_content css">
+               <div class="pad">
+<pre class="sh_css"><%- css %></pre>
+               </div>
+           </div>
+        <%}%>
+    </div>
+</div>

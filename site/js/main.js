@@ -1,111 +1,179 @@
 
-var JocodeSlideshowExemple = {},
-    JocodeSlideshow = {};
-
-function getSlideshow(name){
-    
-    if(!JocodeSlideshow[name])
-        JocodeSlideshow[name] = JocodeSlideshowExemple[name]();
-    
-    return JocodeSlideshow[name];
-}
 $(function(){
     
-    //gestion du menu des exemples
-    var current_displayed = $('#main'),
-        current_id = 'main',
-        is_exemple = false,
-        is_doc = false;
-    
-    $('#header ul > li > a').click(function(e){
-        toogle($(this).attr("href").replace('#', ''));
-    });
-    
-    function toogle(id){
+    var processor = {
         
-        var old_is_exemple = is_exemple,
-            old_is_doc = is_doc,
-            old_id = current_id;
-        
-        if(old_id == id)return;
-        
-        if(/^exemple_/.test(id)){
-            
-            is_exemple = true;
-            id = id.replace(/^exemple_/, '');
-        }
-        else{ 
-            
-            is_exemple = false;
-            
-            if(/^doc_/.test(id)){
-                
-                is_doc = true;
-                id = id.replace(/^doc_/, '');
+        slideshow : {
+            afterLoad : function(){
+            },
+            beforeHide : function(){
+                $.data($('.' + old_project + '.' + old_id)[0], 'jocodeSlideshow').pause();
+            },
+            afterShow : function(){
+                $.data($('.' + project + '.' + id)[0], 'jocodeSlideshow').resume();
             }
-            else is_doc = false;
+        },
+        
+        doc : {
+            afterLoad : function(){
+                
+                var ctx = $(hash.replace(/\$|\./g, function(a){return '\\' + a;}));
+                
+                $('> .tabs > .tab_content > .item', ctx).each(function(){
+        
+                    var open = false,
+                        self = $(this);
+
+                    self.click(function(e){
+
+                        if(open){
+
+                            $('> .desc', self).hide();
+                            self.removeClass('open');
+                            open = false;
+                        }
+                        else {
+
+                            $('> .desc', self).show();
+                            self.addClass('open');
+                            open = true;
+                        }
+                    });
+                });
+                
+                $('.show_private', ctx).change(function() {
+                    this.checked ? $('.private', ctx).show() : $('.private', ctx).hide();
+                });
+                
+                $('.show_inherit', ctx).change(function() {
+                    this.checked ? $('.inherit', ctx).show() : $('.inherit', ctx).hide();
+                });
+                
+                initLink('a[href^="#doc_"]', ctx);
+            }
         }
+    };    
+    
+    var hash = '#main',
+        displayed = $(hash),
+        loaded = {'#main' : true, '#todo' : true},
+        loader = $('#loader'),
+        body = $(document.body),
+        project,
+        old_project,
+        id,
+        old_id;
+    
+    function initLink(selector, context){
         
-        current_displayed.hide();
-        if(old_is_exemple)
-            getSlideshow(old_id).pause();
+        $(selector, context).click(function(e){
         
-        current_id = id;
-        current_displayed = $('#' + id);
+            var old_hash = hash,
+                i;
+
+            hash = $(this).attr("href");
+
+            if(old_hash == hash)return;
+
+            i = hash.indexOf('_');
+
+            old_project = project;
+            project = ~i && hash.slice(1, i);
+
+            old_id = id;
+            id = hash.slice(i + 1)
+
+            loaded[hash] ? display() : getPage();
+        });
+    }
         
-        current_displayed.show();
+    function display(js){
         
-        if(is_exemple)
-            getSlideshow(id).resume();
+        var old_displayed = displayed;
+        
+        displayed = $(hash.replace(/\$|\./g, function(a){return '\\' + a;}));
+        
+        old_project && processor[old_project].beforeHide 
+            && processor[old_project].beforeHide();
+        old_displayed.hide();
+        
+        displayed.show();
+        js && $("<script></script>").appendTo("head").html(js);
+        
+        project && processor[project].afterShow 
+            && processor[project].afterShow();
     }
     
-    
-    //gestion des onglets des exemples
-    $('.tab a').click(function(e){
+    function getPage(){
         
-        e.preventDefault();
-        e.stopPropagation();
+        var exs = Page[project][id],
+            i = 0,
+            l = exs.length,
+            pending = l,
+            js;
+        
+        body.css('overflow', 'hidden');
+        loader.css('top', body.scrollTop());
+        loader.show();
+        
             
-        var self = $(this),
-            type = self.attr("href").replace('#', ''),
-            tab = self.parent().parent(),
-            tabs = tab.parent();
-        
-        $('> div > a', tab).removeClass('active');
-        
-        $('> .tab_content' , tabs).hide();
-        $('> .tab_content.' + type , tabs).show();
-        
-        self.addClass('active');
-    });
-    
-    $('.doc .tab_content:not(.constructor) .item, .doc .tab_content.constructor > .item > .desc > ul > li > ul > li').each(function(){
-        
-        var open = false,
-            self = $(this);
-        
-        self.click(function(e){
+        for(; i < l; i++){
             
+            (function(ex){
+                
+                $.ajax({
+                    url: 'site/' + project + '/' + id  + '.' + ex,
+                    dataType : 'text',
+                    cache : false
+                }).done(function(data) {
+                    
+                    if(ex === 'html')
+                        $('#wrapper').append(data);
+                    else if(ex === 'css')
+                        $("<style></style>").appendTo("head").html(data);
+                    else js = data;
+                    
+                    if(!--pending){
+                        
+                        loaded[hash] = true;
+                        
+                        if(processor[project].afterLoad)
+                            processor[project].afterLoad();
+                        
+                        display(js);
+                        initTabs();
+                        
+                        body.css('overflow', 'auto');
+                        loader.hide();
+                    }
+                });
+            })(exs[i]);
+        }
+    }
+    
+    function initTabs(){
+        
+        $('.tab + .tab_content', displayed).show();
+        $('.tab > div:first-child a', displayed).addClass('active');
+    
+        $('.tab a', displayed).click(function(e){
+        
             e.preventDefault();
             e.stopPropagation();
-        
-            if(open){
-                
-                $('> .desc, > p, > ul', self).hide();
-                self.removeClass('open');
-                open = false;
-            }
-            else {
-                
-                $('> .desc, > p, > ul', self).show();
-                self.addClass('open');
-                open = true;
-            }
+
+            var self = $(this),
+                type = self.attr("href").replace('#', ''),
+                tab = self.parent().parent(),
+                tabs = tab.parent();
+
+            $('> div > a', tab).removeClass('active');
+
+            $('> .tab_content' , tabs).hide();
+            $('> .tab_content.' + type , tabs).show();
+
+            self.addClass('active');
         });
-    });
+    }
     
-    $('.tab > div:first-child a ').addClass('active');
-    $('.tab + .tab_content').show();
-    
-    sh_highlightDocument();
+    initLink('#header ul > li > a', null);
 });

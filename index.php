@@ -72,6 +72,7 @@ if ($dir = opendir('./site/')) {
         <script src="./lib/jquery-1.9.1.min.js"></script>
         
         <script src="./src/jocode_class.js"></script>
+        <script src="./src/jocode_config.js"></script>
         <script src="./src/jocode_slideshow.js"></script>
         <script src="./src/fx/slideshow/scroll.js"></script>
         <script src="./src/fx/slideshow/fade.js"></script>

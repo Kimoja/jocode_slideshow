@@ -1,0 +1,337 @@
+ 
+<div class="section exemple" id="slideshow_nav"> 
+    <div class="slideshow nav">
+
+    <div class="player">
+        <a href="#" class="first">&nbsp;</a>
+        <a href="#" class="previous">&nbsp;</a>
+        <a href="#" class="play">&nbsp;</a>
+        <a href="#" class="pause">&nbsp;</a>
+        <a href="#" class="resume">&nbsp;</a>
+        <a href="#" class="stop">&nbsp;</a>
+        <a href="#" class="next">&nbsp;</a>
+        <a href="#" class="last">&nbsp;</a>
+    </div>
+
+    <div class='pad'>
+        <div class='scroller'>
+            <div class='slides'>
+                <div><p>HTML Content1</p><p>Center vertically</p></div>
+                <div><p>HTML Content2</p><p>Center vertically</p></div>
+                <div><p>HTML Content3</p><p>Center vertically</p></div>
+                <div><p>HTML Content4</p><p>Center vertically</p></div>
+                <div><p>HTML Content5</p><p>Center vertically</p></div>
+                <div><p>HTML Content6</p><p>Center vertically</p></div>
+                <div><p>HTML Content7</p><p>Center vertically</p></div>
+                <div><p>HTML Content8</p><p>Center vertically</p></div>
+                <div><p>HTML Content9</p><p>Center vertically</p></div>
+                <div><p>HTML Content10</p><p>Center vertically</p></div>
+                <div><p>HTML Content11</p><p>Center vertically</p></div>
+                <div><p>HTML Content12</p><p>Center vertically</p></div>
+                <div><p>HTML Content13</p><p>Center vertically</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class='navigation'>
+        <a href="#" class="first">&nbsp;</a>
+        <a href="#" class="previous">&nbsp;</a>
+        <div class='scroller'>
+            <div>
+            </div>
+        </div>
+        <a href="#" class="next">&nbsp;</a>
+        <a href="#" class="last">&nbsp;</a>
+    </div>
+</div> 
+     
+    <div class="tabs"> 
+        <div class="tab"> 
+             
+                <div><a href="#javascript">Javascript</a></div> 
+             
+             
+                <div><a href="#html">HTML</a></div> 
+             
+             
+                <div><a href="#css">CSS</a></div> 
+             
+        </div> 
+         
+           <div class="tab_content javascript"> 
+               <div class="pad"> 
+<pre class="sh_javascript">$(<span class="string">'.slideshow.nav'</span>).jocodeSlideshow({
+
+    $slides : <span class="string">'&gt; .pad &gt; .scroller &gt; .slides &gt; div'</span>,
+    $controls : <span class="string">'&gt; .player'</span>,
+    $pause_hover : <span class="string">'&lt;'</span>,
+
+    delay : <span class="number">1000</span>,
+
+    await_nav_fx : <span class="literal">true</span>,
+    await_fx : <span class="literal">true</span>,
+    css_disable_bt : <span class="string">'disabled'</span>,
+    css_await_bt : <span class="string">'await'</span>,
+
+    transition : {
+        type : <span class="string">'scroll'</span>,
+        duration : <span class="number">1000</span>,
+        $scroller  : <span class="string">'&gt; .pad &gt; .scroller'</span>
+    },
+
+    navigation : {
+
+        $container : <span class="string">'&gt; .navigation'</span>,
+        $items : <span class="string">'&gt; .scroller &gt; div &gt; a'</span>,
+        $controls : <span class="string">'&lt;'</span>,
+
+        css_scrolled : <span class="string">'scrolled'</span>,
+        css_selected : <span class="string">'selected'</span>,
+        css_await : <span class="string">'await'</span>,
+
+        itemsFactory : <span class="keyword">function</span>(slide, index){
+            
+            <span class="keyword">var</span> ct_items = <span class="keyword">this</span>.$(<span class="string">'&gt; .scroller &gt; div'</span>);
+            
+            $.each(<span class="keyword">this</span>.slideshow.$slides, <span class="keyword">function</span>(i, slide){
+                
+                <span class="keyword">var</span> a = document.createElement(<span class="string">'a'</span>);
+
+                a.href = <span class="string">'#'</span>;
+                a.appendChild(document.createTextNode(<span class="string">"Nav "</span> + (i + <span class="number">1</span>)));
+                
+                ct_items.append(a);
+            });
+        },
+
+        transition : {
+            type : <span class="string">'scroll'</span>,
+            $scroller : <span class="string">'&gt; .scroller'</span>,
+            scroll_over : <span class="literal">true</span>
+        }
+    }
+})</pre> 
+               </div> 
+           </div> 
+         
+         
+           <div class="tab_content html"> 
+               <div class="pad"> 
+<pre class="sh_html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"slideshow nav"</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"player"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"first"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"previous"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"play"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"pause"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"resume"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"stop"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"next"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"last"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">'pad'</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">'scroller'</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">'slides'</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>HTML Content1<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Center vertically<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>HTML Content2<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Center vertically<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>HTML Content3<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Center vertically<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>HTML Content4<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Center vertically<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>HTML Content5<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Center vertically<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>HTML Content6<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Center vertically<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>HTML Content7<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Center vertically<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>HTML Content8<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Center vertically<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>HTML Content9<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Center vertically<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>HTML Content10<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Center vertically<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>HTML Content11<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Center vertically<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>HTML Content12<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Center vertically<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>HTML Content13<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Center vertically<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+            <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">'navigation'</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"first"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"previous"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">'scroller'</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">div</span>&gt;</span>
+            <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"next"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"last"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></pre> 
+               </div> 
+           </div> 
+         
+         
+           <div class="tab_content css"> 
+               <div class="pad"> 
+<pre class="sh_css"><span class="comment">/* slideshow (see template horizontal)
+******************************************/</span>
+<span class="class">.slideshow</span><span class="class">.nav</span><span class="rules">{
+    <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">518</span>px;</span></span>
+    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#fff</span>;</span></span>
+    <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">3</span>px;</span></span>
+    <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">1</span>px solid <span class="hexcolor">#ddd</span>;</span></span>
+    <span class="rule"><span class="attribute">box-shadow</span>:<span class="value"> <span class="number">10</span>px <span class="number">10</span>px <span class="number">30</span>px <span class="hexcolor">#aaa</span>;</span></span>
+<span class="rule">}</span></span>
+<span class="class">.slideshow</span><span class="class">.nav</span> <span class="tag">a</span><span class="pseudo">:active</span>, <span class="class">.slideshow</span><span class="class">.nav</span> <span class="tag">a</span><span class="pseudo">:focus</span> <span class="rules">{ 
+    <span class="rule"><span class="attribute">border</span>:<span class="value">none;</span></span>
+    <span class="rule"><span class="attribute">outline</span>:<span class="value">none;</span></span>
+<span class="rule">}</span></span>
+    <span class="comment">/* slides 
+    ******************************************/</span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.pad</span><span class="rules">{
+        <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">500</span>px;</span></span>
+        <span class="rule"><span class="attribute">padding </span>:<span class="value"> <span class="number">9</span>px;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.pad</span> &gt; <span class="class">.scroller</span><span class="rules">{
+        <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.pad</span> &gt; <span class="class">.scroller</span> &gt; <span class="class">.slides</span><span class="rules">{
+        <span class="rule"><span class="attribute">display</span>:<span class="value"> table;</span></span>
+        <span class="rule"><span class="attribute">table-layout</span>:<span class="value"> fixed;</span></span>
+        <span class="rule"><span class="attribute">position</span>:<span class="value"> relative;</span></span>
+        <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">0</span>;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.pad</span> &gt; <span class="class">.scroller</span> &gt; <span class="class">.slides</span> &gt; <span class="tag">div</span><span class="rules">{
+        <span class="rule"><span class="attribute">display</span>:<span class="value"> table-cell;</span></span>
+        <span class="rule"><span class="attribute">vertical-align</span>:<span class="value"> middle;</span></span>
+        <span class="rule"><span class="attribute">text-align</span>:<span class="value"> center;</span></span>
+        <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">500</span>px;</span></span>
+        <span class="rule"><span class="attribute">height </span>:<span class="value"> <span class="number">130</span>px;</span></span>
+    <span class="rule">}</span></span>
+    <span class="comment">/* end slides
+    ******************************************/</span>
+
+    <span class="comment">/* player 
+    ******************************************/</span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.player</span><span class="rules">{
+        <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#f8f8f8</span>;</span></span>
+        <span class="rule"><span class="attribute">height </span>:<span class="value"> <span class="number">35</span>px;</span></span>
+        <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">3</span>px;</span></span>
+        <span class="rule"><span class="attribute">box-shadow</span>:<span class="value"> inset <span class="number">0</span>px -<span class="number">2</span>px <span class="number">5</span>px <span class="hexcolor">#ddd</span>;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.player</span> &gt; *<span class="rules">{
+        <span class="rule"><span class="attribute">display </span>:<span class="value"> inline-block;</span></span>
+        <span class="rule"><span class="attribute">height </span>:<span class="value"> <span class="number">25</span>px;</span></span>
+        <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">25</span>px;</span></span>
+        <span class="rule"><span class="attribute">margin </span>:<span class="value"> <span class="number">5</span>px;</span></span>
+        <span class="rule"><span class="attribute">background-image</span>:<span class="value"> <span class="function">url(./site/image/player_horizontal.png)</span>;</span></span>
+        <span class="rule"><span class="attribute">background-repeat</span>:<span class="value"> no-repeat;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.player</span> &gt; <span class="class">.disabled</span><span class="rules">{
+        <span class="rule"><span class="attribute">display </span>:<span class="value"> none;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.player</span> &gt; <span class="class">.await</span><span class="rules">{
+        <span class="rule"><span class="attribute">opacity </span>:<span class="value"> <span class="number">0.5</span>;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.player</span> &gt; <span class="class">.first</span><span class="rules">{
+        <span class="rule"><span class="attribute">background-position</span>:<span class="value"> <span class="number">0</span> <span class="number">0</span>;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.player</span> &gt; <span class="class">.previous</span><span class="rules">{
+        <span class="rule"><span class="attribute">background-position</span>:<span class="value"> -<span class="number">25</span>px <span class="number">0</span>px;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.player</span> &gt; <span class="class">.play</span><span class="rules">{
+        <span class="rule"><span class="attribute">background-position</span>:<span class="value"> -<span class="number">50</span>px <span class="number">0</span>px;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.player</span> &gt; <span class="class">.pause</span><span class="rules">{
+        <span class="rule"><span class="attribute">background-position</span>:<span class="value"> -<span class="number">75</span>px <span class="number">0</span>px;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.player</span> &gt; <span class="class">.resume</span><span class="rules">{
+        <span class="rule"><span class="attribute">background-position</span>:<span class="value"> -<span class="number">50</span>px <span class="number">0</span>px;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.player</span> &gt; <span class="class">.stop</span><span class="rules">{
+        <span class="rule"><span class="attribute">background-position</span>:<span class="value"> -<span class="number">100</span>px <span class="number">0</span>px;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.player</span> &gt; <span class="class">.next</span><span class="rules">{
+        <span class="rule"><span class="attribute">background-position</span>:<span class="value"> -<span class="number">125</span>px <span class="number">0</span>px;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.player</span> &gt; <span class="class">.last</span><span class="rules">{
+        <span class="rule"><span class="attribute">background-position</span>:<span class="value"> -<span class="number">150</span>px <span class="number">0</span>px;</span></span>
+    <span class="rule">}</span></span>
+    <span class="comment">/* end player
+    ******************************************/</span>
+    
+    <span class="comment">/* navigation 
+    ******************************************/</span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.navigation</span><span class="rules">{
+        <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#f8f8f8</span>;</span></span>
+        <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">518</span>px;</span></span>
+        <span class="rule"><span class="attribute">height </span>:<span class="value"> <span class="number">35</span>px;</span></span>
+        <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">3</span>px;</span></span>
+        <span class="rule"><span class="attribute">box-shadow</span>:<span class="value"> inset <span class="number">0</span>px <span class="number">2</span>px <span class="number">5</span>px <span class="hexcolor">#ddd</span>;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.navigation</span> &gt; *<span class="rules">{
+        <span class="rule"><span class="attribute">float </span>:<span class="value"> left;</span></span>
+    <span class="rule">}</span></span>
+        <span class="comment">/* navigation scroller &amp; items
+        ******************************************/</span>
+        <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.scroller</span><span class="rules">{
+            <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">378</span>px;</span></span>
+            <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden;</span></span>
+        <span class="rule">}</span></span>
+        <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.scroller</span> &gt; <span class="tag">div</span><span class="rules">{
+            <span class="rule"><span class="attribute">display</span>:<span class="value"> table;</span></span>
+            <span class="rule"><span class="attribute">table-layout</span>:<span class="value"> fixed;</span></span>
+            <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">0</span>;</span></span><span class="comment">/*important disable auto width*/</span>
+        <span class="rule">}</span></span>
+        <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.scroller</span> &gt; <span class="tag">div</span> &gt; <span class="tag">a</span><span class="rules">{
+            <span class="rule"><span class="attribute">display</span>:<span class="value"> table-cell;</span></span>
+            <span class="rule"><span class="attribute">vertical-align</span>:<span class="value"> middle;</span></span>
+            <span class="rule"><span class="attribute">overflow</span>:<span class="value">  hidden;</span></span>
+            <span class="rule"><span class="attribute">text-align</span>:<span class="value"> center;</span></span>
+            <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">54</span>px;</span></span>
+            <span class="rule"><span class="attribute">height </span>:<span class="value"> <span class="number">35</span>px;</span></span>
+        <span class="rule">}</span></span>
+        <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.scroller</span> &gt; <span class="tag">div</span> &gt; <span class="class">.await</span><span class="rules">{
+            <span class="rule"><span class="attribute">opacity </span>:<span class="value"> <span class="number">0.5</span>;</span></span>
+        <span class="rule">}</span></span>
+        <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.scroller</span> &gt; <span class="tag">div</span> &gt; <span class="class">.selected</span>, 
+        <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.scroller</span> &gt; <span class="tag">div</span> &gt; <span class="class">.scrolled</span><span class="rules">{
+            <span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#fff</span>;</span></span>
+            <span class="rule"><span class="attribute">border-right</span>:<span class="value"> <span class="number">1</span>px solid <span class="hexcolor">#ddd</span>;</span></span>
+            <span class="rule"><span class="attribute">box-shadow</span>:<span class="value"> <span class="number">2</span>px <span class="number">0</span>px <span class="number">5</span>px <span class="hexcolor">#ddd</span>;</span></span>
+        <span class="rule">}</span></span>
+        <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.scroller</span> &gt; <span class="tag">div</span> &gt; <span class="class">.selected</span><span class="rules">{
+            <span class="rule"><span class="attribute">color </span>:<span class="value"> <span class="hexcolor">#5c5c5c</span>;</span></span>
+            <span class="rule"><span class="attribute">font-weight</span>:<span class="value"> bold;</span></span>
+        <span class="rule">}</span></span>
+        <span class="comment">/* end navigation scroller &amp; items
+        ******************************************/</span>
+
+        <span class="comment">/* navigation button
+        ******************************************/</span>
+        <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.navigation</span> &gt; <span class="tag">a</span><span class="rules">{
+            <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">25</span>px;</span></span>
+            <span class="rule"><span class="attribute">height </span>:<span class="value"> <span class="number">25</span>px;</span></span>
+            <span class="rule"><span class="attribute">margin </span>:<span class="value"> <span class="number">5</span>px;</span></span>
+            <span class="rule"><span class="attribute">background-image</span>:<span class="value"> <span class="function">url(<span class="string">'./site/image/player_horizontal.png'</span>)</span>;</span></span>
+            <span class="rule"><span class="attribute">background-repeat</span>:<span class="value"> no-repeat;</span></span>
+            <span class="rule"><span class="attribute">background-position</span>:<span class="value"> center;</span></span>
+        <span class="rule">}</span></span>
+        <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.first</span><span class="rules">{
+            <span class="rule"><span class="attribute">background-position</span>:<span class="value"> <span class="number">0</span> <span class="number">0</span>;</span></span>
+        <span class="rule">}</span></span>
+        <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.previous</span><span class="rules">{
+            <span class="rule"><span class="attribute">background-position</span>:<span class="value"> -<span class="number">25</span>px <span class="number">0</span>px;</span></span>
+        <span class="rule">}</span></span>
+        <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.next</span><span class="rules">{
+            <span class="rule"><span class="attribute">background-position</span>:<span class="value"> -<span class="number">125</span>px <span class="number">0</span>px;</span></span>
+        <span class="rule">}</span></span>
+        <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.last</span><span class="rules">{
+            <span class="rule"><span class="attribute">background-position</span>:<span class="value"> -<span class="number">150</span>px <span class="number">0</span>px;</span></span>
+        <span class="rule">}</span></span>
+        <span class="comment">/* end navigation button
+        ******************************************/</span>
+    <span class="comment">/* end navigation
+    ******************************************/</span>
+
+<span class="comment">/* end slideshow 
+******************************************/</span></pre> 
+               </div> 
+           </div> 
+         
+    </div> 
+</div>
