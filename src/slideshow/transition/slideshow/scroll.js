@@ -1,93 +1,43 @@
 
 (function($){
     
-var nil = nil,
-    self;
-
-//pseudo type for documentation and typescript (TODO later)
-/**
- * ...
- * 
- * @constructor 
- * @class $.JocodeSlideshowTransition.ScrollConfig
- **/
-
-/**
- * The scroller selector
- * 
- * @property $scroller
- * @type {String}
- */
-
-/**
- * The scroller selector
- * 
- * @property duration
- * @type {Number}
- * @default 3000
- */
-
-/**
- * ...
- * 
- * @property duration
- * @type {Number}
- * @default 3000
- */
-
-/**
- * ...
- * 
- * @property easing
- * @type {String}
- * @default 'swing'
- */
-
-/**
- * ...
- * 
- * @property vertical
- * @type {Boolean}
- * @default false
- */
-//end pseudo type
-
-$.JocodeSlideshowTransition.Scroll = $.jocodeClass(
-    {
+    var nil = nil,
+        self;
+    
+    /**
+     * ...
+     * 
+     * @class $.JocodeSlideshowTransition.ScrollConfig
+     **/    
+    $.JocodeSlideshowTransition.ScrollConfig = {
         
         /**
-         * ...
-         * 
-         * @class $.JocodeSlideshowTransition.Scroll
-         * @extends $.JocodeSlideshowTransition.Base 
-         **/
-        
-       /**
-        * The scroller element
+        * The scroller selector
         * 
         * @property $scroller
-        * @type {jQuery}
+        * @type {String}
         */
-        $scroller : nil,
-        
+       
+       $scroller : '',
+
        /**
         * ...
         * 
         * @property duration
         * @type {Number}
-        * @default 3000
+        * @default 500
         */
-        duration : 3000,
-        
-        /**
+       duration : 500,
+       
+       /**
         * ...
         * 
         * @property easing
         * @type {String}
         * @default 'swing'
         */
-        easing : 'swing',
-        
+       easing : 'swing',
+       
         /**
         * ...
         * 
@@ -95,37 +45,57 @@ $.JocodeSlideshowTransition.Scroll = $.jocodeClass(
         * @type {Boolean}
         * @default false
         */
-        vertical : false,
+       vertical : false
         
-       /**
-        * ...
-        * 
-        * @private
-        * @property _offsets
-        * @type {Array}
-        */
-        _offsets : nil,
+    };
+
+
+    /**
+    * ...
+    * 
+    * @class $.JocodeSlideshowTransition.Scroll
+    * @extends $.JocodeSlideshowTransition.Base 
+    * @uses $.JocodeSlideshowTransition.ScrollConfig 
+    * @param {$.JocodeSlideshowTransition.ScrollConfig} config The configuration object
+    * @param {$.JocodeSlideshowTransition.Scroll} override  The override object
+    **/
+    $.JocodeSlideshowTransition.Scroll = $.jocodeClass(
+    {
+        
         
         /**
-         * Initialize the navigation
+         * The scroller element
          * 
-         * @method init
-         * @param {$.JocodeSlideshowTransition.ScrollConfig} config The configuration object
+         * @property $scroller
+         * @type {jQuery}
          */
-        init : function(config){
-
-            self = this;
-            
-            $.JocodeSlideshowTransition.Base.prototype.init.call(self, config);
-            self.$scroller = self.slideshow.$(config.$scroller);
-        },
-        
+        $scroller : nil,
         
         /**
          * ...
          * 
-         * @method initPile
+         * @private
+         * @property _offsets
+         * @type {Array}
          */
+        _offsets : nil,
+        
+        /**
+         * @overriden
+         */ 
+        init : function(slideshow){
+
+            self = this;
+            
+            $.JocodeSlideshowTransition.Base.prototype.init.call(self, slideshow);
+            self.$scroller = self.slideshow.$(self.config.$scroller);
+        },
+        
+        defaultConfig : $.JocodeSlideshowTransition.ScrollConfig,
+            
+        /**
+         * @overriden
+         */ 
         initPile : function(){
             
             self = this;
@@ -142,14 +112,8 @@ $.JocodeSlideshowTransition.Scroll = $.jocodeClass(
         },
         
         /**
-         * ...
-         * 
-         * @method draw
-         * @param {jQuery} from
-         * @param {jQuery} to
-         * @param {Number} from_index
-         * @param {Number} to_index
-         */
+         * @overriden
+         */ 
         draw : function(from, to, from_index, to_index){
 
             self = this;
@@ -161,18 +125,18 @@ $.JocodeSlideshowTransition.Scroll = $.jocodeClass(
             css[self.vertical ? 'scrollTop' : 'scrollLeft'] = self._offsets[to_index];
            
             self.$scroller.stop().animate(css, 
-                {
-                    duration: from_index == -1 ? 1 : self.duration, 
-                    easing: self.easing,
-                    complete : function(){
-                        slideshow.keepOn(to_index);
-                    }
+            {
+                duration: from_index == -1 ? 1 : self.duration, 
+                easing: self.easing,
+                complete : function(){
+                    slideshow.keepOn(to_index);
                 }
+            }
             );
         }
     }, 
     $.JocodeSlideshowTransition.Base,
-    null
-); 
+    [$.JocodeSlideshowTransition.ScrollConfig]
+    );
 
 })(jQuery);

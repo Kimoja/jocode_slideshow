@@ -6,6 +6,7 @@
     border-radius: 3px;
     border: 1px solid #ddd;
     box-shadow: 10px 10px 30px #aaa;
+    position : relative;
 }
 .slideshow.nav a:active, .slideshow.nav a:focus { 
     border:none;
@@ -84,6 +85,22 @@
     }
     /* end player
     ******************************************/
+    
+    /* progress 
+    ******************************************/
+    .slideshow.nav > .progress{
+        position:absolute;
+        width : 518px;
+        height : 10px;
+    }
+    .slideshow.nav > .progress > .bar{
+        height : 10px;
+        background : gray;
+        opacity : 0.5;
+    }
+    /* end progress
+    ******************************************/
+    
     
     /* navigation 
     ******************************************/

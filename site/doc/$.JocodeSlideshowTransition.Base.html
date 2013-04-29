@@ -1,0 +1,408 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<div class="section doc" id="doc_$.JocodeSlideshowTransition.Base"> 
+ 
+    <h4>Class $.JocodeSlideshowTransition.Base</h4> 
+     
+     
+        <div class="uses"> 
+            Uses  
+             
+    <a href="#doc_$.JocodeConfigurable"  > $.JocodeConfigurable</a> 
+ 
+             
+            ,  
+             
+             
+    <a href="#doc_$.JocodeOverridable"  > $.JocodeOverridable</a> 
+ 
+             
+        </div> 
+     
+     
+     
+    <br> 
+     
+    <div class="class_description"> 
+        The base class of transitions between slide 
+    </div> 
+     
+    <span>Show private : </span><input type="checkbox" class="show_private"> 
+    <span>Show inherited : </span><input type="checkbox" class="show_inherit" checked> 
+     
+    <div class="tabs"> 
+        <div class="tab"> 
+             
+             
+             
+            <div><a href="#methods">Methods</a></div> 
+             
+             
+            <div><a href="#props">Properties</a></div> 
+             
+ 
+        </div> 
+         
+         
+         
+            <div class="tab_content methods"> 
+                 
+    <div class="method item   "> 
+       <span class="bold">draw</span>  
+       ( 
+             
+    <a href="http://api.jquery.com/"  > JQuery</a> 
+      
+            from  
+              
+                , 
+             
+        
+             
+    <a href="http://api.jquery.com/"  > JQuery</a> 
+      
+            to  
+              
+                , 
+             
+        
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
+      
+            from_index  
+              
+                , 
+             
+        
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
+      
+            to_index  
+             
+       ) 
+        
+        <div class='desc'> 
+            Launch the transition 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="http://api.jquery.com/"  > JQuery</a> 
+      
+                        from  
+                         
+                        </span> 
+                        <div class='desc'>Slide source</div> 
+                    </li> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="http://api.jquery.com/"  > JQuery</a> 
+      
+                        to  
+                         
+                        </span> 
+                        <div class='desc'>Slide destination</div> 
+                    </li> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
+      
+                        from_index  
+                         
+                        </span> 
+                        <div class='desc'>The from index</div> 
+                    </li> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
+      
+                        to_index  
+                         
+                        </span> 
+                        <div class='desc'>The to index</div> 
+                    </li> 
+                 
+                </ul> 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item protected  "> 
+       <span class="bold">init</span>  
+       ( 
+             
+    <a href="#doc_$.JocodeSlideshow"  > $.JocodeSlideshow</a> 
+      
+            slideshow  
+             
+       ) 
+        
+        <div class='desc'> 
+            Initialize the transition object 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="#doc_$.JocodeSlideshow"  > $.JocodeSlideshow</a> 
+      
+                        slideshow  
+                         
+                        </span> 
+                        <div class='desc'>The slideshow</div> 
+                    </li> 
+                 
+                </ul> 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item protected  inherit"> 
+       <span class="bold">initConfig</span>  
+       ( 
+             
+                [ 
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+            config  
+                  
+                ] 
+             
+       ) 
+        
+        <div class='desc'> 
+            ... 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+                            [ 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+                        config  
+                              
+                            ] 
+                         
+                        </span> 
+                        <div class='desc'>The configuration object</div> 
+                    </li> 
+                 
+                </ul> 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item   "> 
+       <span class="bold">initPile</span>  
+       ( 
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+            obj_arguments....  
+             
+       ) 
+        
+        <div class='desc'> 
+            Method invoked when the pile of slides change 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+                        obj_arguments....  
+                         
+                        </span> 
+                        <div class='desc'></div> 
+                    </li> 
+                 
+                </ul> 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item protected  inherit"> 
+       <span class="bold">override</span>  
+       ( 
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+            members  
+             
+       ) 
+        
+        <div class='desc'> 
+            ... 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+                        members  
+                         
+                        </span> 
+                        <div class='desc'>...</div> 
+                    </li> 
+                 
+                </ul> 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item protected  inherit"> 
+       <span class="bold">setAsMember</span>  
+       ( 
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
+      
+            key  
+              
+                , 
+             
+        
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+            value  
+             
+       ) 
+        
+        <div class='desc'> 
+            ... 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
+      
+                        key  
+                         
+                        </span> 
+                        <div class='desc'>...</div> 
+                    </li> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+                        value  
+                         
+                        </span> 
+                        <div class='desc'>...</div> 
+                    </li> 
+                 
+                </ul> 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+            </div> 
+         
+         
+            <div class="tab_content props"> 
+                 
+     
+    <div class="property item   "> 
+        <span class="bold">config</span>  
+        :  
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+ 
+        <div class='desc'> 
+            The configuration object 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   inherit"> 
+        <span class="bold">defaultConfig</span>  
+        :  
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+ 
+        <div class='desc'> 
+            The default configuration object 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item protected  inherit"> 
+        <span class="bold">setter_cache</span>  
+        :  
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+ 
+        <div class='desc'> 
+            ... 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">slideshow</span>  
+        :  
+    <a href="#doc_$.JocodeSlideshow"  > $.JocodeSlideshow</a> 
+ 
+        <div class='desc'> 
+            The slideshow 
+             
+        </div> 
+    </div> 
+ 
+            </div> 
+         
+    </div> 
+ 
+</div>

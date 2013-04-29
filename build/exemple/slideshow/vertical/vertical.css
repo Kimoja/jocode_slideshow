@@ -86,6 +86,25 @@
     /* end player
     ******************************************/
     
+    /* progress 
+    ******************************************/
+    .slideshow.vertical > .progress{
+        position:absolute;
+        width : 5px;
+        height : 313px;
+        left : 9px;
+        top : 44px;
+        z-index : 1000;
+    }
+    .slideshow.vertical > .progress > .bar{
+        height : 10px;
+        background : gray;
+        opacity : 0.5;
+    }
+    /* end progress
+    ******************************************/
+    
+    
     /* navigation
     ******************************************/
     .slideshow.vertical > .navigation{

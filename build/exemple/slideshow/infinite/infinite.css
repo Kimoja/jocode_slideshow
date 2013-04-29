@@ -6,19 +6,11 @@
     border-radius: 3px;
     border: 1px solid #ddd;
     box-shadow: 10px 10px 30px #aaa;
+    position : relative;
 }
 .slideshow.infinite a:active, .slideshow.infinite a:focus { 
     border:none;
     outline:none;
-}
-.slideshow.infinite > .loader{
-    display: none;
-    width : 518px;
-    height : 333px;
-    z-index : 10;
-    background: #fff url('./site/image/loading.gif') center no-repeat;
-    position: absolute;
-    opacity : 0.5;
 }
      /* slides 
     ******************************************/
@@ -85,6 +77,39 @@
     /* end player
     ******************************************/
     
+    
+    /* progress 
+    ******************************************/
+    .slideshow.infinite > .progress{
+        position:absolute;
+        width : 500px;
+        height : 10px;
+        left : 9px;
+        top : 44px;
+        z-index : 1000;
+    }
+    .slideshow.infinite > .progress > .bar{
+        height : 10px;
+        background : gray;
+        opacity : 0.5;
+    }
+    /* end progress
+    ******************************************/
+    
+     /* loader 
+    ******************************************/
+    .slideshow.infinite > .loader{
+        display: none;
+        width : 518px;
+        height : 333px;
+        z-index : 2000;
+        background: #fff url('./site/image/loading.gif') center no-repeat;
+        position: absolute;
+        opacity : 0.5;
+    }
+     /* loader 
+    ******************************************/
+     
     /* navigation 
     ******************************************/
     .slideshow.infinite > .navigation{

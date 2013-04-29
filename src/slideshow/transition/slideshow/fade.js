@@ -1,47 +1,60 @@
 
 (function($){
     
-var self;
+    var self;
 
-//pseudo type for documentation and typescript (TODO later)
-/**
- * ...
- * 
- * @constructor 
- * @class $.JocodeSlideshowTransition.FadeConfig
- **/
-
-/**
- * ...
- * 
- * @property duration
- * @type {Number}
- * @default 3000
- */
-//end pseudo type
-
-$.JocodeSlideshowTransition.Fade = $.jocodeClass(
-    {
-
+    /**
+     * ...
+     * 
+     * @constructor 
+     * @class $.JocodeSlideshowTransition.FadeConfig
+     **/  
+    $.JocodeSlideshowTransition.FadeConfig = {
+        
         /**
-        * ...
-        * 
-        * @property duration
-        * @type {Number}
-        * @default 3000
-        */
-        duration : 3000,
+         * ...
+         * 
+         * @property duration
+         * @type {Number}
+         * @default 500
+         */
+        duration : 500
+    };
+    
+    
+    /**
+     * ...
+     * 
+     * @class $.JocodeSlideshowTransition.Fade
+     * @extends $.JocodeSlideshowTransition.Base 
+     * @uses $.JocodeSlideshowTransition.FadeConfig 
+     * @param {$.JocodeSlideshowTransition.FadeConfig} config The configuration object
+     * @param {$.JocodeSlideshowTransition.Fade} override  The override object
+     **/
+    $.JocodeSlideshowTransition.Fade = $.jocodeClass(
+    {
+        
+        /**
+         * @overriden
+         */
+        init : function(slideshow){
 
-        init : function(config){
-
-            $.JocodeSlideshowTransition.Base.prototype.init.call(self, config);
+            $.JocodeSlideshowTransition.Base.prototype.init.call(this, slideshow);
         },
         
+        defaultConfig : $.JocodeSlideshowTransition.FadeConfig,
+        
+        /**
+         * @overriden
+         */
         initPile : function(){
             
-            this.slideshow.slides.hide();
+            this.slideshow.$slides.hide();
         },
         
+        /**
+         * @overriden
+         */
         draw : function(from, to, from_index, to_index){
             
             self = this;
@@ -54,10 +67,9 @@ $.JocodeSlideshowTransition.Fade = $.jocodeClass(
             
             from_index !== -1 && from.fadeOut(self.duration);
         }
-
     }, 
     $.JocodeSlideshowTransition.Base,
-    null
-); 
+    [$.JocodeSlideshowTransition.FadeConfig]
+    ); 
 
 })(jQuery);

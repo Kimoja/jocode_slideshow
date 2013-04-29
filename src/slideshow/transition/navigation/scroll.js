@@ -2,83 +2,187 @@
 
 (function($){
     
-var nil = nil,
-    wrong = false,
-    right = true,
-    self;
-
-$.JocodeSlideshowNavigationTransition.Scroll = $.jocodeClass(
-    {
-       /**
-        * The base class of a transition between $items of navigation
-        * 
-        * @constructor 
-        * @class $.JocodeSlideshowNavigationTransition.Scroll
-        * @extends $.JocodeSlideshowNavigationTransition.Base
-        * @uses $.JocodeConfig
-        * @param {Object} config  The configuration object
-        **/ 
-           
-        config : nil,
+    var nil = nil,
+        wrong = false,
+        right = true,
+        self;
         
-        $scroller : nil,
-        
-        scroll_over : wrong,
-        
-        velocity : 30,
-        
-        vertical : wrong,
-        
-        _size : 0,
-
-        _scroll_size : 0,
-
-        _max_scroll : 0,
-
-        _interval : 0,
-
-        _to : 0,
-
-        _from : 0,
-
-        _on_scroll : wrong,
-
-        _by_click : wrong,
-        
-        _to_animate : wrong,
-
-        _offsets : nil,
+    /**
+     * ...
+     * 
+     * @class $.JocodeSlideshowNavigationTransition.ScrollConfig
+     **/    
+    $.JocodeSlideshowNavigationTransition.ScrollConfig = {
+      
+        /**
+         * ...
+         * 
+         * @property $scroller
+         * @type {String}
+         */
+        $scroller : '',
         
         /**
-        * Initialize the transition object
-        * @method init
-        * @param {$.JocodeSlideshow} navigation The slideshow
-        */
+         * ...
+         * 
+         * @property scroll_over
+         * @type {Boolean}
+         */
+        scroll_over : wrong,
+        
+        /**
+         * ...
+         * 
+         * @property velocity
+         * @type {Number}
+         */
+        velocity : 30,
+        
+        /**
+         * ...
+         * 
+         * @property vertical
+         * @type {Boolean}
+         */
+        vertical : wrong
+    };  
+    
+    /**
+     * The base class of a transition between $items of navigation
+     *  
+     * @class $.JocodeSlideshowNavigationTransition.Scroll
+     * @extends $.JocodeSlideshowNavigationTransition.Base
+     * @uses $.JocodeSlideshowNavigationTransition.ScrollConfig 
+     * @param {Object} config  The configuration object
+     * @param {$.JocodeSlideshowNavigationTransition.Scroll} override  The override object
+     **/ 
+    $.JocodeSlideshowNavigationTransition.Scroll = $.jocodeClass(
+    {
+        /**
+         * ...
+         * 
+         * @property $scroller
+         * @type {jQuery}
+         */
+        $scroller : nil,
+        
+        /**
+         * ...
+         * 
+         * @private
+         * @property _size
+         * @type {Number}
+         */
+        _size : 0,
+        
+        /**
+         * ...
+         * 
+         * @private
+         * @property _scroll_size
+         * @type {Number}
+         */
+        _scroll_size : 0,
+        
+        /**
+         * ...
+         * 
+         * @private
+         * @property _max_scroll
+         * @type {Number}
+         */
+        _max_scroll : 0,
+        
+        /**
+         * ...
+         * 
+         * @private
+         * @property _interval
+         * @type {Number}
+         */
+        _interval : 0,
+
+        /**
+         * ...
+         * 
+         * @private
+         * @property _to
+         * @type {Number}
+         */
+        _to : 0,
+
+        /**
+         * ...
+         * 
+         * @private
+         * @property _from
+         * @type {Number}
+         */
+        _from : 0,
+
+        /**
+         * ...
+         * 
+         * @private
+         * @property _on_scroll
+         * @type {Boolean}
+         */
+        _on_scroll : wrong,
+
+        /**
+         * ...
+         * 
+         * @private
+         * @property _by_click
+         * @type {Boolean}
+         */
+        _by_click : wrong,
+        
+        /**
+         * ...
+         * 
+         * @private
+         * @property _to_animate
+         * @type {Boolean}
+         */
+        _to_animate : wrong,
+
+        /**
+         * ...
+         * 
+         * @private
+         * @property _offsets
+         * @type {Array}
+         */
+        _offsets : nil,
+        
+        
+        /**
+         * @overriden
+         */ 
         init : function(navigation){
 
             self = this;
-        
             $.JocodeSlideshowNavigationTransition.Base.prototype.init.call(self, navigation);
-            
-            self.$scroller = $(self.$scroller, navigation.$container);
+            self.$scroller = navigation.$(self.$scroller);
         },
           
+        defaultConfig : $.JocodeSlideshowNavigationTransition.ScrollConfig,
+            
         /**
-        * Method invoked when the pile of slides change
-        * @method initPile
-        * @param {jQuery} last_pile The last pile of slides 
-        */  
+         * @overriden
+         */  
         initPile : function(last_pile){
             
             var self = this;
             
             self._size = self.vertical 
-                    ? self.$scroller.height() 
-                    : self.$scroller.width();
+                ? self.$scroller.height() 
+                : self.$scroller.width();
                     
             self._scroll_size =  self.vertical 
-                    ? self.$scroller[0].scrollHeight
-                    : self.$scroller[0].scrollWidth;
+                ? self.$scroller[0].scrollHeight
+                : self.$scroller[0].scrollWidth;
 
             if(self._scroll_size > self._size){
 
@@ -96,24 +200,19 @@ $.JocodeSlideshowNavigationTransition.Scroll = $.jocodeClass(
                 
                 self.scroll_over && self.$scroller.mousemove(function(e){
                     
-                   var page =  self.vertical ? e.pageY : e.pageX,
-                       off =  self.vertical ? self.$scroller.offset().top : self.$scroller.offset().left;
+                    var page =  self.vertical ? e.pageY : e.pageX,
+                    off =  self.vertical ? self.$scroller.offset().top : self.$scroller.offset().left;
                         
-                   self._to =  Math.ceil(((page - off) / self._size) * self._max_scroll);
-                   self._animate();
+                    self._to =  Math.ceil(((page - off) / self._size) * self._max_scroll);
+                    self._animate();
                 });
             }
             else self._to_animate = wrong; 
         },
         
         /**
-        * Launch the transition
-        * @method draw
-        * @param {jQuery} from Navigation item source
-        * @param {jQuery} to   Navigation item destination
-        * @param {Number} from_index The from index
-        * @param {Number} to_index The to index
-        */
+         * @overriden
+         */ 
         draw : function(from, to, from_index, to_index){
             
             self = this;
@@ -133,13 +232,8 @@ $.JocodeSlideshowNavigationTransition.Scroll = $.jocodeClass(
         },
         
         /**
-        * Scroll the navigation
-        * @method scrollTo
-        * @param {jQuery} from Navigation item  source
-        * @param {jQuery} to   Navigation item  destination
-        * @param {Number} from_index The from index
-        * @param {Number} to_index The to index
-        */
+         * @overriden
+         */ 
         scrollTo : function(from, to, from_index, to_index){
             
             self = this;
@@ -151,13 +245,21 @@ $.JocodeSlideshowNavigationTransition.Scroll = $.jocodeClass(
             
             self._goTo(to, to_index);
         },
-    
+        
+        /**
+         * Scroll the navigation
+         * 
+         * @private
+         * @method _goTo
+         * @param {jQuery} to   Navigation item  destination
+         * @param {Number} to_index The to index
+         */
         _goTo : function(to, to_index){
             
             self = this;
             
             var to_ = self.vertical ? to.height() : to.width(),
-                off;
+            off;
                
             off = self._offsets[to_index];
             off -= self._size / 2 - to_ / 2;
@@ -167,10 +269,16 @@ $.JocodeSlideshowNavigationTransition.Scroll = $.jocodeClass(
             self._animate();
         },
         
+        /**
+         * ...
+         * 
+         * @private
+         * @method _animate
+         */
         _animate : function(){
             
             var self = this,
-                temp;
+            temp;
             
             if(self._on_scroll)
                 return;
@@ -192,15 +300,15 @@ $.JocodeSlideshowNavigationTransition.Scroll = $.jocodeClass(
                 temp = self._from + shift;
                 
                 self._from = self._to < self._from ? temp < self._from ? temp : self._to 
-                            : temp > self._from ? temp : self._to;
+                : temp > self._from ? temp : self._to;
                             
                 self.vertical ? self.$scroller.scrollTop(self._from):  self.$scroller.scrollLeft(self._from);
             }, 30);
         }
         
     }, 
-    //parent
-    $.JocodeSlideshowNavigationTransition.Base
-); 
+    $.JocodeSlideshowNavigationTransition.Base,
+    [$.JocodeSlideshowNavigationTransition.ScrollConfig]
+    ); 
 
 })(jQuery);

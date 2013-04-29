@@ -12,6 +12,8 @@
         <a href="#" class="next">&nbsp;</a>
         <a href="#" class="last">&nbsp;</a>
     </div>
+    
+    <div class="progress"></div>
 
     <div class='pad'>
         <div class='scroller'>
@@ -65,21 +67,32 @@
     $slides : <span class="string">'&gt; .pad &gt; .scroller &gt; .slides &gt; div'</span>,
     $controls : <span class="string">'&gt; .player'</span>,
     $pause_hover : <span class="string">'&lt;'</span>,
+    $mask_progress_hover : <span class="string">'&lt;'</span>,
+    
+    mask_progress_load : <span class="literal">false</span>,
+    mask_progress_transition : <span class="literal">false</span>,
 
-    delay : <span class="number">1000</span>,
+    delay : <span class="number">3000</span>,
 
     await_nav_fx : <span class="literal">true</span>,
     await_fx : <span class="literal">true</span>,
-    css_disable_bt : <span class="string">'disabled'</span>,
-    css_await_bt : <span class="string">'await'</span>,
-
-    transition : {
-        type : <span class="string">'scroll'</span>,
-        duration : <span class="number">1000</span>,
+    css_disable_control : <span class="string">'disabled'</span>,
+    css_await_control : <span class="string">'await'</span>,
+    
+    transition : <span class="keyword">new</span> $.JocodeSlideshowTransition.Scroll({
+        duration : <span class="number">500</span>,
         $scroller  : <span class="string">'&gt; .pad &gt; .scroller'</span>
-    },
+    }),
+    
+    progress : <span class="keyword">new</span> $.JocodeSlideshowProgress({
+        $container : <span class="string">'&gt; .progress'</span>,
+        transition : <span class="keyword">new</span> $.JocodeSlideshowProgressTransition.Bar({
+            css : <span class="string">'bar'</span>,
+            inverse : <span class="literal">true</span>
+        })
+    }),
 
-    navigation : {
+    navigation : <span class="keyword">new</span> $.JocodeSlideshowNavigation({
 
         $container : <span class="string">'&gt; .navigation'</span>,
         $items : <span class="string">'&gt; .scroller &gt; div &gt; a'</span>,
@@ -89,7 +102,7 @@
         css_selected : <span class="string">'selected'</span>,
         css_await : <span class="string">'await'</span>,
 
-        itemsFactory : <span class="keyword">function</span>(slide, index){
+        itemsFactory : <span class="keyword">function</span>(obj_arguments){
             
             <span class="keyword">var</span> ct_items = <span class="keyword">this</span>.$(<span class="string">'&gt; .scroller &gt; div'</span>);
             
@@ -104,12 +117,11 @@
             });
         },
 
-        transition : {
-            type : <span class="string">'scroll'</span>,
+        transition : <span class="keyword">new</span> $.JocodeSlideshowNavigationTransition.Scroll({
             $scroller : <span class="string">'&gt; .scroller'</span>,
             scroll_over : <span class="literal">true</span>
-        }
-    }
+        })
+    })
 })</pre> 
                </div> 
            </div> 
@@ -129,6 +141,8 @@
         <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"next"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
         <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"last"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
     <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"progress"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 
     <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">'pad'</span>&gt;</span>
         <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">'scroller'</span>&gt;</span>
@@ -175,6 +189,7 @@
     <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">3</span>px;</span></span>
     <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">1</span>px solid <span class="hexcolor">#ddd</span>;</span></span>
     <span class="rule"><span class="attribute">box-shadow</span>:<span class="value"> <span class="number">10</span>px <span class="number">10</span>px <span class="number">30</span>px <span class="hexcolor">#aaa</span>;</span></span>
+    <span class="rule"><span class="attribute">position </span>:<span class="value"> relative;</span></span>
 <span class="rule">}</span></span>
 <span class="class">.slideshow</span><span class="class">.nav</span> <span class="tag">a</span><span class="pseudo">:active</span>, <span class="class">.slideshow</span><span class="class">.nav</span> <span class="tag">a</span><span class="pseudo">:focus</span> <span class="rules">{ 
     <span class="rule"><span class="attribute">border</span>:<span class="value">none;</span></span>
@@ -253,6 +268,22 @@
     <span class="rule">}</span></span>
     <span class="comment">/* end player
     ******************************************/</span>
+    
+    <span class="comment">/* progress 
+    ******************************************/</span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.progress</span><span class="rules">{
+        <span class="rule"><span class="attribute">position</span>:<span class="value">absolute;</span></span>
+        <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">518</span>px;</span></span>
+        <span class="rule"><span class="attribute">height </span>:<span class="value"> <span class="number">10</span>px;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.nav</span> &gt; <span class="class">.progress</span> &gt; <span class="class">.bar</span><span class="rules">{
+        <span class="rule"><span class="attribute">height </span>:<span class="value"> <span class="number">10</span>px;</span></span>
+        <span class="rule"><span class="attribute">background </span>:<span class="value"> gray;</span></span>
+        <span class="rule"><span class="attribute">opacity </span>:<span class="value"> <span class="number">0.5</span>;</span></span>
+    <span class="rule">}</span></span>
+    <span class="comment">/* end progress
+    ******************************************/</span>
+    
     
     <span class="comment">/* navigation 
     ******************************************/</span>

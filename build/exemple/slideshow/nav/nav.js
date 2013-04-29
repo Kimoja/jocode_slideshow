@@ -3,21 +3,32 @@ $('.slideshow.nav').jocodeSlideshow({
     $slides : '> .pad > .scroller > .slides > div',
     $controls : '> .player',
     $pause_hover : '<',
+    $mask_progress_hover : '<',
+    
+    mask_progress_load : false,
+    mask_progress_transition : false,
 
-    delay : 1000,
+    delay : 3000,
 
     await_nav_fx : true,
     await_fx : true,
-    css_disable_bt : 'disabled',
-    css_await_bt : 'await',
-
-    transition : {
-        type : 'scroll',
-        duration : 1000,
+    css_disable_control : 'disabled',
+    css_await_control : 'await',
+    
+    transition : new $.JocodeSlideshowTransition.Scroll({
+        duration : 500,
         $scroller  : '> .pad > .scroller'
-    },
+    }),
+    
+    progress : new $.JocodeSlideshowProgress({
+        $container : '> .progress',
+        transition : new $.JocodeSlideshowProgressTransition.Bar({
+            css : 'bar',
+            inverse : true
+        })
+    }),
 
-    navigation : {
+    navigation : new $.JocodeSlideshowNavigation({
 
         $container : '> .navigation',
         $items : '> .scroller > div > a',
@@ -27,7 +38,7 @@ $('.slideshow.nav').jocodeSlideshow({
         css_selected : 'selected',
         css_await : 'await',
 
-        itemsFactory : function(slide, index){
+        itemsFactory : function(obj_arguments){
             
             var ct_items = this.$('> .scroller > div');
             
@@ -42,10 +53,9 @@ $('.slideshow.nav').jocodeSlideshow({
             });
         },
 
-        transition : {
-            type : 'scroll',
+        transition : new $.JocodeSlideshowNavigationTransition.Scroll({
             $scroller : '> .scroller',
             scroll_over : true
-        }
-    }
+        })
+    })
 })

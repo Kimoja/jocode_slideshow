@@ -1,0 +1,190 @@
+/* 
+html5doctor.com Reset Stylesheet
+v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com 
+Twitter: @rich_clark
+*/
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}input,select{vertical-align:middle}
+
+
+
+/* font
+**************************/
+@font-face {
+  font-family: 'DSDIGI';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./font/DSDIGI.woff) format('woff');
+}
+body {
+    font: 13px/21px "DSDIGI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: 13px/21px Helvetica, Arial, sans-serif;
+    color: #5c5c5c;
+}
+a { 
+    color: #7b8fc4;
+    text-decoration: none;
+    -webkit-transition: color .1s linear;
+    -moz-transition: color .1s linear;
+    -ms-transition: color .1s linear;
+    -o-transition: color .1s linear;
+    transition: color .1s linear;
+}
+a:hover { 
+    color: #5c5c5c; 
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: "DSDIGI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+h1 {font-size: 1.5em;margin : 1.5em 0;}
+h2 {font-size: 1.4em;margin : 1.4em 0;}
+h3 {font-size: 1.3em;margin : 1.3em 0;}
+h4 {font-size: 1.2em;margin : 1.2em 0;}
+h5 {font-size: 1.1em;margin : 1.1em 0;}
+h6 {font-size: 1em;margin : 1em 0;}
+/* end font
+**************************/
+
+
+/* global layout
+**************************/
+#wrapper{
+    width : 800px;
+    margin : 0 auto;
+    padding :20px 0;
+}
+#header{
+    width : 240px;
+    float : left;
+}
+.section{
+    width : 520px;
+    padding :20px 0;
+    float : right;
+}
+.exemple{
+    display : none;
+    text-align: center;
+}
+.doc{
+    display : none;
+    text-align: left;
+}
+#logo{
+    margin-bottom: 20px;
+}
+/* end global layout
+**************************/
+
+
+/* tab
+**************************/
+.tabs{
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    box-shadow: 10px 10px 30px #aaa;
+    margin-top : 40px;
+    text-align : left !important;
+}
+.tab{
+    background: #f8f8f8;
+    border-radius: 3px;
+    height : 35px;
+    box-shadow: inset 0px -2px 5px #ddd;
+}
+.tab  > div{
+    display: inline-table;
+}
+.tab  > div > a{
+    display: table-cell;
+    vertical-align: middle;
+    overflow:  hidden;
+    text-align: center;
+    line-height : 35px;
+    padding : 0 10px;
+}
+.tab > div > a.active{
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    box-shadow: 2px 0px 5px #ddd;
+    color : #5c5c5c;
+    font-weight: bold;
+}
+.tab_content{
+    display : none;
+    text-align : left;
+    clear:both;
+    overflow: auto;
+    padding : 9px;
+    overflow: hidden;
+    position: relative;
+    z-index : 1000;
+    background: #fff;
+}
+.tab_content > .pad{
+    width : 500px;
+    overflow: auto;
+}
+/* end tab
+**************************/
+
+
+
+/* doc
+**************************/
+.doc .tab_content ul > li ul > li{
+}
+.doc .tab_content .item, 
+.doc .tab_content.constructor > .item > .desc > ul > li > ul > li{
+    margin-bottom : 10px;
+    padding-bottom:  10px;
+    padding-left:  15px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    background: url('../image/item.gif') no-repeat 0  5px;
+}
+
+.doc .tab_content.constructor > .item > .desc > ul > li > ul > li{
+    margin-left:  0;
+}
+.doc .tab_content .item:hover, 
+.doc .tab_content.constructor > .item > .desc > ul > li > ul > li:hover{
+    background: url('../image/item_hover.gif') no-repeat 0px  5px;
+}
+.doc .tab_content.constructor > .item{
+    padding-left:  0px;
+    border-width: 0px;
+    cursor: default;
+    background: none;
+}
+.doc .tab_content.constructor > .item > .desc > ul > li{
+    background: url('../image/item_open.gif') no-repeat 0px  5px;
+    padding-left:  15px;
+}
+.doc .tab_content .item.open, 
+.doc .tab_content.constructor > .item > .desc > ul > li > ul > li.open{
+    background: url('../image/item_open.gif') no-repeat 0px  5px;
+}
+.doc .tab_content .desc,
+.doc .tab_content.constructor > .item > .desc > ul > li > ul > li > p, 
+.doc .tab_content.constructor > .item > .desc > ul > li > ul > li > ul {
+    display : none;
+    margin-top : 10px;
+}
+.doc .tab_content.constructor .desc{
+    display : block;
+}
+.doc .tab_content.constructor .param_title{
+    display : none;
+}
+.doc ul.params li{
+    margin : 10px;
+}
+
+.doc ul.params li{
+    margin : 10px;
+}
+/* end doc
+**************************/

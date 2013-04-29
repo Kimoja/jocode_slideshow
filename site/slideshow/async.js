@@ -1,14 +1,33 @@
 $('.slideshow.async').jocodeSlideshow({
 
     $slides : '> .slides > img',
-    $buttons : '> .player',
+    $controls : '> .player',
     $pause_hover : '.slides, .navigation',
     $loader : '> .loader',
+    $mask_progress_hover : '<',
+    
+    mask_progress_load : false,
+    mask_progress_transition : false,
 
-    delay : 1000,
-    css_disable_bt : 'disabled',
-    css_await_bt : 'await',
+    delay : 3000,
+    await_nav_transition : true,
+    await_transition : true,
+    css_disable_control : 'disabled',
+    css_await_control  : 'await',
 
+    transition : new $.JocodeSlideshowTransition.Fade({
+        duration : 500
+    }),
+    
+    progress : new $.JocodeSlideshowProgress({
+        $container : '> .progress',
+        transition : new $.JocodeSlideshowProgressTransition.Bar({
+            css : 'bar',
+            inverse : true
+        })
+    }),
+
+    
     //simulate an loader
     //enter here the code of asynchronous requests
     load : function(index){
@@ -24,10 +43,6 @@ $('.slideshow.async').jocodeSlideshow({
 
         return false;
     },
-
-    fx : new $.JocodeSlideshowFx.Fade({
-        duration : 1000
-    }),
     
     navigation : new $.JocodeSlideshowNavigation({
 
@@ -42,7 +57,7 @@ $('.slideshow.async').jocodeSlideshow({
             
             var ct_items = this.$('> .scroller > div');
             
-            $.each(this.slideshow.slides, function(i, slide){
+            $.each(this.slideshow.$slides, function(i, slide){
                 
                 var div = document.createElement('div'),
                     img = document.createElement('img');
@@ -54,8 +69,7 @@ $('.slideshow.async').jocodeSlideshow({
             });
         },
 
-        fx : new $.JocodeSlideshowNavigationFx.Scroll({
-
+        transition : new $.JocodeSlideshowNavigationTransition.Scroll({
             $scroller : '> .scroller',
             scroll_over : true
         })

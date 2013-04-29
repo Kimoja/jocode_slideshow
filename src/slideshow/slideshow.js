@@ -24,11 +24,9 @@
 
 
 /*
- * TODO, v1
+ * proble doc progress bar
  * test  event ontouch
- * event mousewheel
- * progress class
- * change the size of the container from the contained, optional autowidth, autoHeight by default in the base class transition??? 
+ * event mousewheel on navigation and on slides
  * enable browsing history to change slide .... create hash for each slide, and listen onhashchange ... plugin??
  * full screen option .... HTML and CSS integration must allow it, in any case via a plugin ...
  * full of transition
@@ -39,627 +37,99 @@
  **/
 
 (function($){
-    
-var empty_func = function(){},
-    nil = nil,
-    wrong = false,
-    right = true,
-    self;
 
-//pseudo type for documentation and typescript (TODO later)
-/**
- * @class $.JocodeSlideshowConfig
- * @constructor 
- **/
+    var empty_func = function(){},
+        nil = null,
+        wrong = false,
+        right = true,
+        self;
 
-/**
- * The slides selector
- * 
- * @property $slides
- * @type {String}
- */
+    /**
+     * @class $.JocodeSlideshowConfig
+     **/
+    $.JocodeSlideshowConfig = {
 
-/**
- * The navigation configuration object
- * 
- * @property navigation
- * @type {$.JocodeSlideshowNavigationConfig}
- */
-
-/**
- * The progress configuration object (TODO)
- * 
- * @property progress
- * @type {$.JocodeSlideshowProgressConfig}
- */
-
-/**
- * The transition configuration object
- * 
- * @property transition
- * @type {Object}
- */
-
-/**
- * The controls button selector container relative to the initialization container. 
- * The buttons should be present in the container, and have either one of the following class: first, previous, play, pause, resume, stop, next last. 
- * If "<" is specified, then the initialization container will be used.
- * 
- * @property $controls
- * @type {String}
- * @default "<"
- */  
-
-/**
- * ...
- * 
- * @property $loader
- * @type {String}
- */  
-
-/**
- * The selector, relative to the initialization container, that defines the elements that triggers whether to display buttons, on the "hover" event. 
- * The controls container must be different of the container of the slideshow.
- * If "<" is specified, then the initialization container will be used.
- * 
- * @property $mask_controls_hover
- * @type {String}
- */ 
-
-/**
- * The selector, relative to the initialization container, that defines the elements that triggers whether to display the navigation container, on the "hover" event. 
- * The parameter container of the navigation must be defined and must be different of the container of the slideshow.
- * If "<" is specified, then the initialization container will be used.
- * 
- * @property $mask_nav_hover
- * @type {String}
- */  
-
-/**
- * Hide buttons during loading of a slide.
- * The controls container must be different of the container of the slideshow.
- * 
- * @property mask_controls_load
- * @type {Boolean}
- * @default false
- */    
-/**
- * Hide buttons during transition of a slide.
- * The container of buttons must be different of the container of the slideshow.
- * 
- * @property mask_controls_transition
- * @type {Boolean}
- * @default false
- */ 
-
-/**
- * Hide navigation container during transition of a slide.
- * The parameter container of the navigation must be defined and must be different of the container of the slideshow.
- * 
- * @property mask_nav_load
- * @type {String}
- * @default false
- */ 
-
-/**
- * Hide navigation container during transition of a slide.
- * The parameter container of the navigation must be defined and must be different of the container of the slideshow.
- * 
- * @property mask_nav_transition
- * @type {Boolean}
- * @default false
- */  
-
-/**
- * Waiting for the end of a transition for draw the change of the navigation item.
- * 
- * @property await_nav_transition
- * @type {Boolean}
- * @default false
- */      
-
-/**
- * Waiting for the end of a loading to be able to change slide.
- * 
- * @property await_load
- * @type {Boolean}
- * @default false
- */ 
-
-/**
- * Waiting for the end of a transition to be able to change slide.
- * 
- * @property await_transition
- * @type {Boolean}
- * @default false
- */  
-
-/**
- * Class of controls buttons that wait the end of a transition or a loading.
- * 
- * @property css_await_control
- * @type {Boolean}
- * @default false
- */  
-
-/**
- * Allow touch swipe events to control previous/next.
- * 
- * @property $touch
- * @type {String}
- */ 
-
-/**
- * ...
- * 
- * @property touch_strength
- * @type {Number}
- */ 
-
-/**
- * Allow keyboard events to control previous/next.
- * 
- * @property keyboard
- * @type {Boolean}
- * @default false
- */ 
-
-/**
- * Class of disabled buttons
- * 
- * @property css_disable_control
- * @type {Boolean}
- */  
-
-/**
- * Enable Autoplay
- * 
- * @property auto_play
- * @type {Boolean}
- * @default false
- */ 
-
-/**
- * Time in milliseconds between each transition
- * 
- * @property delay
- * @type {Number}
- * @default 3000
- */ 
-
-/**
- *Stop event propagation and default actions
- * 
- * @property stop_event
- * @type {Boolean}
- * @default true
- */ 
-
-/**
- * The start index
- * 
- * @property start_index
- * @type {Number}
- * @default 0
- */ 
-
-/**
- * Transition slide configuration object
- * 
- * @property start
- * @type {Object}
- */ 
-
-/**
- * Loading slide function
- * 
- * @method load
- * @param {Number} index ...
- */
-
-/**
- * Custom method called  while awaiting a transition
- * 
- * @method beforeWait
- * @param {Number} delay ...
- * @param {Number} elapsed ...
- * @param {Number} start_time ...
- */
-
-/**
- * Custom method called when a slide is cancelled
- * 
- * @method onCancel
- * @param {Number} canceled_index ...
- */
-
-/**
- * Custom method called when the playback start
- * 
- * @method onPlay
- */
-
-/**
- * Custom method called when on pause
- * 
- * @method onPause
- */
-
-/**
- * Custom method called when the playback is resumed
- * 
- * @method onResume
- */
-
-/**
- * Custom method called when the player stops
- * 
- * @method onStop
- */
-
-/**
- * Custom method called when a slide is changed
- * 
- * @method onChange
- * @param {Number} new_index ...
- */
-
-/**
- * Custom method called before a transition
- * 
- * @method beforeTransition
- */
-
-/**
- * Custom method called before a transition
- * 
- * @method afterTransition
- */
-
-/**
- * ...
- * 
- * @method beforeSetup
- */
-
-/**
- * ...
- * 
- * @method afterSetup
- */
-
-
-/**
- * ...
- * 
- * @method beforeInitPile
- */
-
-/**
- * Check that a slide is loaded
- * 
- * @method isLoaded
- * @param {Number} index ...
- */
-
-/**
- * ...
- * 
- * @method onClick
- * @param {Event} index ...
- * @param {jQuery} slide ...
- */
-//end pseudo type
-
-
-$.JocodeSlideshow = $.jocodeClass(
-    {
-        
-        /**
-        * The JodecodeSlideshow constructor 
-        * 
-        * @class $.JocodeSlideshow
-        * @constructor 
-        * @extends $.JocodeWidget
-        * @param {jQuery} $container The initialization container
-        * @param {$.JocodeSlideshowConfig} config   The configuration object
-        **/
-        constructor : function($container, config){
-            
-            self = this;
-            self.$container = $container;
-
-            config.beforeSetup && config.beforeSetup.call(self);
-
-            self.setConfig(config);
-
-            self.navigation && self.initNavigation();
-            self.transition.init(config.transition);
-            self.initPile(null);
-
-            config.auto_play 
-                ? self.play() 
-                : self._toogleBt('pause resume stop', wrong, wrong), self.goTo(self.start_index);
-
-            config.afterSetup && config.afterSetup.call(self);
-        },
-        
-        defaultConfig : {
-            
-            $controls : '<',
-            keyboard : false,
-            auto_play : false,
-            start_index : 0
-        },
-        
-        /**
-         * ...
-         * 
-         * @protected 
-         * @method setNavigation
-         * @param {Object} config 
-         * @return {$.JocodeSlideshowNavigation}
-         */
-        setNavigation : function(config){
-            
-            return new $.JocodeSlideshowNavigation(self);
-        },
-        
-        /**
-         * ...
-         * 
-         * @protected 
-         * @method setTransition
-         * @param {Object} config 
-         * @return {$.JocodeSlideshowTransition.Base}
-         */
-        setTransition : function(config){
-            
-            var type = config.type;
-            return new $.JocodeSlideshowTransition[type.charAt(0).toUpperCase() + type.slice(1)](self);
-        },
-        
-        /**
-         * ...
-         * 
-         * @protected 
-         * @method initNavigation
-         */
-        initNavigation : function(){
-            
-            self.navigation.init(self.config.navigation);
-
-            if(self.config.$mask_nav_hover && self.navigation.$container !== self.$container){
-
-                self.navigation.$container.hide();
-                self._displayOnHover(self.$(self.config.$mask_nav_hover), self.navigation.$container);
-            }
-        },
-        
-        /**
-         * ...
-         * 
-         * @protected 
-         * @method initOnClick
-         * @param {Function} onClick 
-         */
-        initOnClick : function(onClick){
-            
-            var self = this;
-            
-            self.$container.on('click', self.config.$slides, function(e){
-                onClick.call(self, e, $(this));
-            });
-        },
-        
-        /**
-         * ...
-         * 
-         * @protected 
-         * @method initPauseHover
-         * @param {String} $pause_hover 
-         */
-        initPauseHover : function($pause_hover){
-            
-            var self = this;
-            
-            self.$($pause_hover).hover(
-                function() {
-                    if(!self._stopped && !self._paused){
-                         self._pause_hover = right; 
-                         self._pause();
-                    }
-                }, 
-                function() {
-                    !self._stopped && self._pause_hover && self.resume();
-                }
-            );
-        },
-        
-        /**
-         * ...
-         * 
-         * @protected 
-         * @method initKeyboard
-         * @param {Boolean} keyboard 
-         */
-        initKeyboard : function(keyboard){
-            
-            var self = this;
-            
-            $(document).keyup(function(e) {
-                if(e.which == 37) self.previous(); 
-                else if(e.which == 39) self.next();
-            });
-        },
-        
-        /**
-         * ...
-         * 
-         * @protected 
-         * @method initTouch
-         * @param {String} $touch 
-         */
-        initTouch : function($touch){
-            
-            var self = self,
-                touch_from, 
-                touch_to, 
-                touch_strength;
-
-            if('ontouchstart' in document.documentElement){
-
-                touch_strength = self.config.touch_strength || 30;
-
-                self.$($touch).bind({
-
-                    touchstart : function(e){
-
-                        touch_from = e.originalEvent.touches[0].pageX;
-                        touch_to = 0;
-                    },
-
-                    touchmove : function(e) {
-
-                        touch_to = e.originalEvent.touches[0].pageX;
-                    },
-
-                    touchend : function(e) {
-
-                        if (Math.abs(touch_from - touch_to) > touch_strength) {
-
-                            e.preventDefault();
-                            e.stopPropagation();
-
-                            touch_from > touch_to ? self.next() : self.previous();
-                        }
-                    }
-                });
-            }    
-        },
-        
-        /**
-         * ...
-         * 
-         * @protected 
-         * @method initControls
-         * @param {String} $controls 
-         */
-        initControls : function($controls){
-            
-            var self = this,
-                controls = self.$($controls);
-           
-            $.each('first previous play pause resume stop next last'.split(' '), function(index, button){
-
-                var bt = $('.' + button, controls);
-
-                bt[0] && bt.click(function(e){ 
-                    self._stopEvent(e); 
-                    self[button]();
-                }); 
-            });
-            
-            if(controls != self.$container){
-                
-                if(self.config.$mask_controls_hover){
-
-                    controls.hide();
-                    self._displayOnHover(self.$(self.config.$mask_controls_hover), controls);
-                }
-            }
-        },
-        
         /**
          * The slides selector
          * 
          * @property $slides
          * @type {String}
          */
-        $slides : nil,
-        
+        $slides : '',
+
         /**
          * ...
          * 
-         * @property loader
-         * @type {jQuery}
-         */
-        $loader : nil,
+         * @property $loader
+         * @type {String}
+         */  
+        $loader : '',
 
         /**
-         * The navigation object
+         * The controls button selector container relative to the initialization container. 
+         * The buttons should be present in the container, and have either one of the following class: first, previous, play, pause, resume, stop, next last. 
+         * If "<" is specified, then the initialization container will be used.
          * 
-         * @property navigation
-         * @type {$.JocodeSlideshowNavigation}
-         */
-        navigation : nil,
+         * @property $controls
+         * @type {String}
+         * @default "<"
+         */  
+        $controls : '<',
 
         /**
-         * The button first
+         * The selector, relative to the initialization container, that defines the elements that triggers whether to display buttons, on the "hover" event. 
+         * The controls container must be different of the container of the slideshow.
+         * If "<" is specified, then the initialization container will be used.
          * 
-         * @property bt_first
-         * @type {jQuery}
-         */
-        $first : nil,
+         * @property $mask_controls_hover
+         * @type {String}
+         */ 
+        $mask_controls_hover : '',
 
         /**
-         * The button previous
+         * The selector, relative to the initialization container, that defines the elements that triggers whether to display the navigation container, on the "hover" event. 
+         * The parameter container of the navigation must be defined and must be different of the container of the slideshow.
+         * If "<" is specified, then the initialization container will be used.
          * 
-         * @property bt_previous
-         * @type {jQuery}
-         */
-        $previous : nil,
+         * @property $mask_nav_hover
+         * @type {String}
+         */  
+        $mask_nav_hover  : '',
 
         /**
-         * The button play
+         * The selector, relative to the initialization container, that defines the elements that triggers whether to display the progress container, on the "hover" event. 
+         * The parameter container of the progress object must be defined and must be different of the container of the slideshow.
+         * If "<" is specified, then the initialization container will be used.
          * 
-         * @property bt_play
-         * @type {jQuery}
+         * @property $mask_progress_hover
+         * @type {String}
          */
-        $play : nil,
+        $mask_progress_hover : '',
 
         /**
-         * The button pause
+         * Allow touch swipe events to control previous/next.
          * 
-         * @property bt_pause
-         * @type {jQuery}
-         */
-        $pause : nil,
+         * @property $touch
+         * @type {String}
+         */ 
+        $touch : '',
 
         /**
-         * The button resume
+         * ...
          * 
-         * @property bt_resume
-         * @type {jQuery}
-         */
-        $resume : nil,
+         * @property touch_strength
+         * @type {Number}
+         */ 
+        touch_strength : 30,
 
         /**
-         * The button stop
+         * Stop event propagation and default actions
          * 
-         * @property bt_stop
-         * @type {jQuery}
+         * @property stop_event
+         * @type {Boolean}
+         * @default true
          */
-        $stop : nil,
-
-        /**
-         * The button next 
-         * 
-         * @property bt_next
-         * @type {jQuery}
-         */
-        /**
-         * @property {jQuery} The button next 
-         */
-        $next : nil,
-
-        /**
-         * The button last 
-         * 
-         * @property bt_last
-         * @type {jQuery}
-         */
-        $last : nil,
+        stop_event : true,
 
         /**
          * The css class of disabled controls
@@ -684,7 +154,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @type {Number}
          * @default 3000
          */
-        delay : 3000,
+        delay : 1000,
 
         /**
          * Transition slide object
@@ -695,12 +165,20 @@ $.JocodeSlideshow = $.jocodeClass(
         transition : nil,
 
         /**
-         * The current slide
+         * The navigation object
          * 
-         * @property current
-         * @type {jQuery}
+         * @property navigation
+         * @type {$.JocodeSlideshowNavigation}
          */
-        $current : nil,
+        navigation : nil,
+
+        /**
+         * The progress object
+         * 
+         * @property progress
+         * @type {$.JocodeSlideshowProgress}
+         */
+        progress : nil,
 
         /**
          * The start index
@@ -709,27 +187,8 @@ $.JocodeSlideshow = $.jocodeClass(
          * @type {Number}
          * @default 0
          */
+        
         start_index : 0,
-
-        /**
-         * The current index
-         * 
-         * @property index
-         * @type {Number}
-         * @default -1
-         */
-        index : -1,
-
-
-        /**
-         * The loading index
-         * 
-         * @property loading_index
-         * @type {Number}
-         * @default -1
-         */
-        loading_index : -1,
-
         /**
          * Waiting for the end of a transition for draw the change of the navigation item
          * 
@@ -798,6 +257,526 @@ $.JocodeSlideshow = $.jocodeClass(
          */
         mask_nav_transition : wrong,
 
+       /**
+        * Hide the progress container during loading of a slide.
+        * The parameter container of the progress object must be defined and must be different of the container of the slideshow.
+        * 
+        * @property mask_progress_load
+        * @type {Boolean}
+        * @default true
+        */ 
+        mask_progress_load : right, 
+
+       /**
+        * Hide the progress container during transition of a slide.
+        * The parameter container of the progress object must be defined and must be different of the container of the slideshow.
+        * 
+        * @property mask_progress_transition
+        * @type {Boolean}
+        * @default true
+        */  
+        mask_progress_transition : right,
+
+       /**
+        * Allow keyboard events to control previous/next.
+        * 
+        * @property keyboard
+        * @type {Boolean}
+        * @default false
+        */ 
+        keyboard : wrong,
+
+       /**
+        * Enable Autoplay
+        * 
+        * @property auto_play
+        * @type {Boolean}
+        * @default false
+        */ 
+        auto_play : wrong,
+
+        /**
+         * ...
+         * 
+         * @method beforeSetup
+         */
+        beforeSetup : empty_func,
+
+        /**
+         * ...
+         * 
+         * @method afterSetup
+         */
+        afterSetup : empty_func,
+
+        /**
+         * ...
+         * 
+         * @method beforeInitPile
+         */
+        beforeInitPile : empty_func,
+
+        /**
+         * ...
+         * 
+         * @method onSlideClick
+         * @param {Event} index ...
+         * @param {jQuery} slide ...
+         */
+        onSlideClick : nil,
+
+        /**
+         * Load a slide
+         * 
+         * @method load
+         * @param {Number} index The index
+         */
+        load : function(index){
+            this.draw(index);
+        },
+
+        /**
+         * Check that a slide is loaded
+         * 
+         * @method isLoaded
+         * @param {Number} index The index
+         */
+        isLoaded : function(index){
+            return true;
+        },
+
+        /**
+         * Custom method called  while awaiting a transition
+         * 
+         * @method beforeWait
+         * @param {Number} delay
+         * @param {Number} elapsed
+         * @param {Number} start_time
+         */
+        beforeWait : empty_func,
+
+        /**
+         * Custom method called when a slide is cancelled
+         * 
+         * @method onCancel
+         * @param {Number} canceled_index The canceled index
+         */
+        onCancel : empty_func,
+
+        /**
+         * Custom method called when the playback start
+         * 
+         * @method onPlay
+         */
+        onPlay : empty_func,
+
+        /**
+         * Custom method called when on pause
+         * 
+         * @method onPause
+         */
+        onPause : empty_func,
+
+        /**
+         * Custom method called when the playback is resumed
+         * 
+         * @method onResume
+         */
+        onResume : empty_func,
+
+        /**
+         * Custom method called when the player stops
+         * 
+         * @method onStop
+         */
+        onStop : empty_func,
+
+        /**
+         * Custom method called when a slide is changed
+         * 
+         * @method onChange
+         * @param {Number} new_index The index of a new slide
+         */
+        onChange : empty_func,
+
+        /**
+         * Custom method called before a transition
+         * 
+         * @method beforeTransition
+         */
+        beforeTransition : empty_func,
+
+        /**
+         * Custom method called after a transition
+         * 
+         * @method afterTransition
+         */
+        afterTransition : empty_func
+    };
+
+
+    $.JocodeSlideshow = $.jocodeClass(
+    {
+
+        /**
+         * The JodecodeSlideshow constructor 
+         * 
+         * @constructor 
+         * @class $.JocodeSlideshow
+         * @extends $.JocodeWidget
+         * @uses $.JocodeSlideshowConfig
+         * @param {jQuery} $container The initialization container
+         * @param {$.JocodeSlideshowConfig} config  The configuration object
+         * @param {$.JocodeSlideshow} override  The override object
+         */
+        constructor : function($container, config, override){
+
+            self = this;
+            
+            self.override(override);
+            
+            self.$container = $container;
+
+            config.beforeSetup && config.beforeSetup.call(self);
+
+            self.initConfig(config);
+
+            self.navigation && self.initNavigation();
+            self.progress && self.initProgress();
+            self.initTransition();
+            self.initControls();
+            self.initPile(null);
+
+            config.auto_play 
+                ? self.play() 
+                : self._toogleBt('pause resume stop', wrong, wrong), self.goTo(self.start_index);
+
+            config.afterSetup && config.afterSetup.call(self);
+        },
+
+        defaultConfig : $.JocodeSlideshowConfig,
+
+        /**
+         * ...
+         * 
+         * @protected 
+         * @method initNavigation
+         */
+        initNavigation : function(){
+
+            self.navigation.init(self);
+
+            if(self.config.$mask_nav_hover && self.navigation.$container !== self.$container){
+
+                self._can_mask_navigation = true;
+                self._displayOnHover(self.$(self.config.$mask_nav_hover), self.navigation.$container, false);
+            }
+        },
+
+        /**
+         * ...
+         * 
+         * @protected 
+         * @method initProgress
+         */
+        initProgress : function(){
+            
+            self.progress.init(self);
+
+            if(self.config.$mask_progress_hover && self.progress.$container !== self.$container){
+
+                self._can_mask_progress = true;
+                self._displayOnHover(self.$(self.config.$mask_progress_hover), self.progress.$container, true);
+            }
+        },
+        
+        /**
+         * ...
+         * 
+         * @protected 
+         * @method initTransition
+         */
+        initTransition : function(){
+
+            self.transition.init(self);
+        },
+
+        /**
+         * ...
+         * 
+         * @protected 
+         * @method initControls
+         */
+        initControls : function(){
+
+            var self = this;
+
+            $.each('first previous play pause resume stop next last'.split(' '), function(index, button){
+
+                var bt = self.$(self.config.$controls + ' .' + button);
+
+                bt[0] && (self['$' + button] = bt.click(function(e){ 
+                    self._stopEvent(e); 
+                    self[button]();
+                })); 
+            });
+
+            if(self.$controls != self.$container){
+
+                self._can_mask_controls = true;
+                self.$mask_controls_hover && 
+                    self._displayOnHover(self.$(self.$mask_controls_hover), self.$controls, false);
+            }
+        },
+
+
+        /**
+         * ...
+         * 
+         * @protected 
+         * @method setOnSlideClick
+         * @param {Function} onClick 
+         */
+        setOnSlideClick : function(onSlideClick){
+            
+            if(onSlideClick != empty_func){
+                
+                var self = this;
+                self.$container.on('click', self.config.$slides, function(e){
+                    onSlideClick.call(self, e, $(this));
+                });
+            }
+        },
+
+        /**
+         * ...
+         * 
+         * @protected 
+         * @method setPauseHover
+         * @param {String} $pause_hover 
+         */
+        setPauseHover : function($pause_hover){
+
+            var self = this;
+
+            self.$($pause_hover).hover(
+                function() {
+                    if(!self._stopped && !self._paused){
+                        self._pause_hover = right; 
+                        self._pause();
+                    }
+                }, 
+                function() {
+                    !self._stopped && self._pause_hover && self.resume();
+                }
+                );
+        },
+
+        /**
+         * ...
+         * 
+         * @protected 
+         * @method initKeyboard
+         * @param {Boolean} keyboard 
+         */
+        setKeyboard : function(keyboard){
+
+            var self = this;
+
+            $(document).keyup(function(e) {
+                if(e.which == 37) self.previous(); 
+                else if(e.which == 39) self.next();
+            });
+        },
+
+        /**
+         * ...
+         * 
+         * @protected 
+         * @method initTouch
+         * @param {String} $touch 
+         */
+        setTouch : function($touch){
+
+            var self = self,
+                touch_from, 
+                touch_to, 
+                touch_strength;
+
+            if('ontouchstart' in document.documentElement){
+
+                touch_strength = self.config.touch_strength || 30;
+
+                self.$($touch).bind({
+
+                    touchstart : function(e){
+
+                        touch_from = e.originalEvent.touches[0].pageX;
+                        touch_to = 0;
+                    },
+
+                    touchmove : function(e) {
+
+                        touch_to = e.originalEvent.touches[0].pageX;
+                    },
+
+                    touchend : function(e) {
+
+                        if (Math.abs(touch_from - touch_to) > touch_strength) {
+
+                            e.preventDefault();
+                            e.stopPropagation();
+
+                            touch_from > touch_to ? self.next() : self.previous();
+                        }
+                    }
+                });
+            }    
+        },
+
+        /**
+         * The slides 
+         * 
+         * @property $slides
+         * @type {jQuery}
+         */
+        $slides : nil,
+
+        /**
+         * ...
+         * 
+         * @property $loader
+         * @type {jQuery}
+         */
+        $loader : nil,
+
+        /**
+         * ...
+         * 
+         * @property $controls
+         * @type {jQuery}
+         */
+        $controls : nil,
+        
+        /**
+         * The button first
+         * 
+         * @property $first
+         * @type {jQuery}
+         */
+        $first : nil,
+
+        /**
+         * The button previous
+         * 
+         * @property $previous
+         * @type {jQuery}
+         */
+        $previous : nil,
+
+        /**
+         * The button play
+         * 
+         * @property $play
+         * @type {jQuery}
+         */
+        $play : nil,
+
+        /**
+         * The button pause
+         * 
+         * @property $pause
+         * @type {jQuery}
+         */
+        $pause : nil,
+
+        /**
+         * The button resume
+         * 
+         * @property $resume
+         * @type {jQuery}
+         */
+        $resume : nil,
+
+        /**
+         * The button stop
+         * 
+         * @property $stop
+         * @type {jQuery}
+         */
+        $stop : nil,
+
+        /**
+         * The button next 
+         * 
+         * @property $next
+         * @type {jQuery}
+         */
+        $next : nil,
+
+        /**
+         * The button last 
+         * 
+         * @property $last
+         * @type {jQuery}
+         */
+        $last : nil,
+        
+        /**
+         * The current slide
+         * 
+         * @property $current
+         * @type {jQuery}
+         */
+        $current : nil,
+        
+        /**
+         * The current index
+         * 
+         * @property index
+         * @type {Number}
+         * @default -1
+         */
+        index : -1,
+
+        /**
+         * The loading index
+         * 
+         * @property loading_index
+         * @type {Number}
+         * @default -1
+         */
+        loading_index : -1,
+
+        /**
+         * ...
+         * 
+         * @property _can_mask_navigation
+         * @type {Boolean}
+         * @default false
+         * @private
+         */
+        _can_mask_navigation : wrong,
+
+        /**
+         * ...
+         * 
+         * @property _can_mask_progress
+         * @type {Boolean}
+         * @default false
+         * @private
+         */
+        _can_mask_progress : wrong,
+
+        /**
+         * ...
+         * 
+         * @property _can_mask_navigation
+         * @type {Boolean}
+         * @default false
+         * @private
+         */
+        _can_mask_progress : wrong,
 
         /**
          * If the player is stopped
@@ -888,17 +867,17 @@ $.JocodeSlideshow = $.jocodeClass(
             $.each(controls.split(' '), function(index, bt){
 
                 var button = self['$' + bt];
-                button && (enable ? button.removeClass(cls)  : button.addClass(cls));
+                button && (enable ? button.removeClass(cls) : button.addClass(cls));
             });
         },
 
         /**
          * Stop an click event
          * 
+         * @private
          * @method _stopEvent
          * @param {Event} e The event object
          * @param {Boolean} enable Add or remove a css class
-         * @private
          */
         _stopEvent : function(e){
 
@@ -912,23 +891,29 @@ $.JocodeSlideshow = $.jocodeClass(
         /**
          * Display an element on hover a container
          * 
+         * @private
          * @method _displayOnHover
          * @param {jQuery} container The container to listen
          * @param {jQuery} element The element to display
-         * @private
+         * @param {Boolean} inverse 
          */
-        _displayOnHover : function(container, element){
+        _displayOnHover : function(container, element, inverse){
 
             var self = this;
 
+            function show(){
+                element.show();
+            }
+            function hide(){
+                element.hide();
+            }
+
+            !inverse && element.hide();
+
             container.hover(
-                function() {
-                    element.show();
-                }, 
-                function() {
-                    element.hide();
-                }
-            );
+                inverse ? hide : show, 
+                inverse ? show : hide
+                );
         },
 
         /**
@@ -950,7 +935,7 @@ $.JocodeSlideshow = $.jocodeClass(
 
             this.goTo(this.loading_index - 1);
         },
-        
+
         /**
          * Start the player
          * 
@@ -981,14 +966,23 @@ $.JocodeSlideshow = $.jocodeClass(
 
             this._pause_hover = wrong;
             this._pause();
+
+            this.progress && this.progress.stop();
         },
 
-
+        /**
+         * Pause the player
+         * 
+         * @private
+         * @method _pause
+         */
         _pause : function(){
 
             self = this;
 
             if(self.isPlayed()){
+
+                self.progress && self.progress.stop();
 
                 self._toogleBt('resume', right, wrong);
                 self._toogleBt('pause', wrong, wrong);
@@ -1044,6 +1038,8 @@ $.JocodeSlideshow = $.jocodeClass(
                 self.onStop();
 
                 self._on_wait && clearTimeout(self._timeout);
+
+                self.progress && self.progress.stop();
             }
         },
 
@@ -1053,7 +1049,7 @@ $.JocodeSlideshow = $.jocodeClass(
          * @method next
          */
         next : function(){
-            
+
             this.goTo(this.loading_index + 1);
         },
 
@@ -1067,7 +1063,7 @@ $.JocodeSlideshow = $.jocodeClass(
             this.goTo(this.$slides.length - 1);
         },
 
-         /**
+        /**
          * Are there any slides after to current or loading slide (ignores loop)
          * 
          * @method hasNext
@@ -1248,8 +1244,8 @@ $.JocodeSlideshow = $.jocodeClass(
                 self.navigation && self.navigation.setAwaitCss(wrong);
             }
 
-            self.mask_controls_transition && self.controls.show();
-            self.mask_nav_transition && self.navigation.container.show();
+            self._can_mask_controls && self.mask_controls_transition && self.$controls.show();
+            self._can_mask_navigation && self.mask_nav_transition && self.navigation.container.show();
 
             if(self.isPlayed()){
 
@@ -1259,6 +1255,10 @@ $.JocodeSlideshow = $.jocodeClass(
 
                 self._on_wait = right;
 
+                self._can_mask_prorgess && self.mask_progress_transition && self.progress.show();
+
+                self.beforeWait(self.delay, delay, self._time);
+
                 self._timeout = setTimeout(function(){
 
                     self._defer  = 0;
@@ -1267,8 +1267,9 @@ $.JocodeSlideshow = $.jocodeClass(
                     self.goTo(self.index + 1);
 
                 }, delay);
+                
+                self.progress && self.progress.play(self.delay, self._defer, self._time);
 
-                self.beforeWait(delay, self._defer, self._time);
             }
             else if(self._paused) {
                 self._defer = 0;
@@ -1288,23 +1289,32 @@ $.JocodeSlideshow = $.jocodeClass(
             if(index != self.loading_index)
                 return; 
 
-            self.loader &&  self.loader.hide();
+            self.$loader &&  self.$loader.hide();
 
-            var old_sible = self.current,
-                old_index = self.index;
+            var old_sible = self.$current,
+            old_index = self.index;
 
             self._on_load = wrong; 
             self._on_transition = right;
 
-            self.current = $(self.$slides[index]);
+            self.$current = $(self.$slides[index]);
             self.index = index;
 
-            self.mask_controls_load && !self.mask_controls_transition ? self.controls.show() 
-                : !self.mask_controls_load && self.mask_controls_transition && self.controls.hide();
+            self._can_mask_controls && self.mask_controls_load && !self.mask_controls_transition 
+            ? self.controls.show() 
+            : !self.mask_controls_load && self.mask_controls_transition && self.controls.hide();
 
-            self.mask_nav_load && !self.mask_nav_transition ? self.navigation.container.show()
-                : !self.mask_nav_load && self.mask_nav_transition && self.navigation.container.hide();
+            self._can_mask_navigation && (
+                self.mask_nav_load && !self.mask_nav_transition 
+                ? self.navigation.container.show()
+                : !self.mask_nav_load && self.mask_nav_transition && self.navigation.container.hide()
+                );
 
+            self._can_mask_progress && (
+                !self._stopped 
+                ? !self.mask_progress_load && self.mask_progress_transition && self.progress.hide()
+                : self.mask_progress_load && self.progress.show()
+                );
 
             if((self.await_load && !self.await_transition) || (!self.await_load && self.await_transition)){
 
@@ -1314,7 +1324,7 @@ $.JocodeSlideshow = $.jocodeClass(
 
             self.beforeTransition();
 
-            self.transition.draw(old_sible, self.current, old_index, index);
+            self.transition.draw(old_sible, self.$current, old_index, index);
             self.navigation && !self.await_nav_transition && self.navigation.draw(index);
 
         },
@@ -1330,7 +1340,7 @@ $.JocodeSlideshow = $.jocodeClass(
             self = this;
 
             if((self.await_load && self._on_load) 
-                    || (self.await_transition && self._on_transition))
+                || (self.await_transition && self._on_transition))
                 return;
 
             index = self.computeIndex(index);
@@ -1352,14 +1362,21 @@ $.JocodeSlideshow = $.jocodeClass(
 
             self._on_load = right;
 
+            if(self.progress && !self._stopped){
+
+                self.progress.goTo(1);
+                self.progress.stop();
+                self._can_mask_progress && self.mask_progress_load && self.progress.hide();
+            }
+
             if(self.await_load){
 
                 self._toogleBt('first previous next last', wrong, right);
                 self.navigation &&  self.navigation.setAwaitCss(right);
             }
 
-            self.mask_controls_load && self.controls.hide();  
-            self.mask_nav_load && self.navigation.container.hide();   
+            self._can_mask_controls && self.mask_controls_load && self.controls.hide();  
+            self._can_mask_navigation&& self.mask_nav_load && self.navigation.container.hide();   
 
             if(self.index !== -1){
 
@@ -1370,7 +1387,7 @@ $.JocodeSlideshow = $.jocodeClass(
                 }
 
                 self.onCancel(self.loading_index);
-                //self.navigation && self.navigation.onCancel(self.index);
+            //self.navigation && self.navigation.onCancel(self.index);
             }
 
             self.loading_index = index;
@@ -1382,126 +1399,56 @@ $.JocodeSlideshow = $.jocodeClass(
                 self.draw(index)
             }
             else {
-                self.loader && self.loader.show();
+                self.$loader && self.$loader.show();
                 self.load(index);
             }
-        },
-
-        //to override with the config object
-
-        /**
-         * Load a slide
-         * 
-         * @method load
-         * @param {Number} index The index
-         */
-        load : function(index){
-
-            this.draw(index);
-        },
-
-        /**
-         * Check that a slide is loaded
-         * 
-         * @method isLoaded
-         * @param {Number} index The index
-         */
-        isLoaded : function(index){
-
-            return true;
-        },
-
-        /**
-         * Custom method called  while awaiting a transition
-         * 
-         * @method beforeWait
-         * @param {Number} delay
-         * @param {Number} elapsed
-         * @param {Number} start_time
-         */
-        beforeWait : empty_func,
-
-        /**
-         * Custom method called when a slide is cancelled
-         * 
-         * @method onCancel
-         * @param {Number} canceled_index The canceled index
-         */
-        onCancel : empty_func,
-
-        /**
-         * Custom method called when the playback start
-         * 
-         * @method onPlay
-         */
-        onPlay : empty_func,
-
-       /**
-         * Custom method called when on pause
-         * 
-         * @method onPause
-         */
-        onPause : empty_func,
-
-        /**
-         * Custom method called when the playback is resumed
-         * 
-         * @method onResume
-         */
-        onResume : empty_func,
-
-        /**
-         * Custom method called when the player stops
-         * 
-         * @method onStop
-         */
-        onStop : empty_func,
-
-        /**
-         * Custom method called when a slide is changed
-         * 
-         * @method onChange
-         * @param {Number} new_index The index of a new slide
-         */
-        onChange : empty_func,
-
-        /**
-         * Custom method called before a transition
-         * 
-         * @method beforeTransition
-         */
-        beforeTransition : empty_func,
-
-        /**
-         * Custom method called after a transition
-         * 
-         * @method afterTransition
-         */
-        afterTransition : empty_func
+        }
     },
     $.JocodeWidget, 
-    nil
-);
+    [$.JocodeSlideshowConfig]
+    );
 
 
-$.JocodeSlideshowTransition = {
+    $.JocodeSlideshowTransition = {
 
-    Base : $.jocodeClass(
+        Base : $.jocodeClass(
         {
 
-           /**
+            /**
             * The base class of transitions between slide
             * 
             * @constructor 
-            * @class $.JocodeSlideshowTransition.Base
             * @uses $.JocodeConfigurable
-            * @param {$.JocodeSlideshow} slideshow  The slideshow
+            * @uses $.JocodeOverridable
+            * @class $.JocodeSlideshowTransition.Base
+            * @param {Object} config The configuration object
+            * @param {$.JocodeSlideshow} override  The override object
             **/
-            constructor : function(slideshow){
-
-                this.slideshow = slideshow;
+            constructor : function(config, override){
+                this.override(override);
+                this.config = config;
             },
 
+            /**
+             * Initialize the transition object
+             * 
+             * @protected 
+             * @method init
+             * @param {$.JocodeSlideshow} slideshow The slideshow
+             */
+            init : function(slideshow){
+                this.slideshow = slideshow;
+                this.initConfig();
+            },
+
+            /**
+             * Method invoked when the pile of slides change
+             * 
+             * @method initPile
+             * @param {Object} obj_arguments....
+             */
+            initPile : empty_func,
+            
             /**
              * The configuration object
              * 
@@ -1527,47 +1474,30 @@ $.JocodeSlideshowTransition = {
              * @param {Number} from_index The from index
              * @param {Number} to_index The to index
              */
-            draw : empty_func,
+            draw : empty_func
 
-            /**
-             * Initialize the transition object
-             * 
-             * @method init
-             * @param {Object} config The configuration object
-             */
-            init : function(config){
-                
-                this.setConfig(config)
-            },
-
-            /**
-             * Method invoked when the pile of slides change
-             * 
-             * @method initPile
-             * @param {Object} obj_arguments....
-             */
-            initPile : empty_func
         }, 
         nil,
-        [$.JocodeConfigurable]
-    )
-};
-
-/**
-  * Add JocodeSlideshow as a jQuery plug-in
-  * @method jocodeSlideshow
-  * @param {Object} config The configuration object
-  * @for $ 
-  * @static
-  * @return {jQuery}
-  */
-$.fn.jocodeSlideshow = function(config) {
+        [$.JocodeConfigurable, $.JocodeOverridable]
+        )
+    };
     
-    return this.each(function() {
-       
-        $.data(this, 'jocodeSlideshow', new $.JocodeSlideshow($(this), config));
-    });
-};
+    /**
+     * Add JocodeSlideshow as a jQuery plug-in
+     * @static
+     * @for $ 
+     * @method jocodeSlideshow
+     * @param {$.JocodeSlideshowConfig} config  The configuration object
+     * @param {$.JocodeSlideshow} override  The override object
+     * @return {jQuery}
+     */
+    $.fn.jocodeSlideshow = function(config, override) {
+
+        return this.each(function() {
+
+            $.data(this, 'jocodeSlideshow', new $.JocodeSlideshow($(this), config, override));
+        });
+    };
 
 })(jQuery);
 

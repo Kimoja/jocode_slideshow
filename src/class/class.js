@@ -37,12 +37,13 @@ $.jocodeClass = function(proto, parent, mixins) {
     }
     else  construct.prototype = proto;    
     
+
     construct.prototype.constructor = construct;
     
     if(mixins){
-        
         $.each(mixins, function(i, mixin){
             
+       
             mixin = typeof mixin === 'function' ? mixin.prototype : mixin;
             
             $.each(mixin, function(key, member){

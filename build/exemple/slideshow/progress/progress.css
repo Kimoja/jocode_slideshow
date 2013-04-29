@@ -1,0 +1,83 @@
+/* slideshow
+******************************************/
+.slideshow.progress{ 
+    background: #f8f8f8;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    box-shadow: 10px 10px 30px #aaa;
+}
+.slideshow.progress a:active, .slideshow.progress a:focus { 
+    border:none;
+    outline:none;
+}
+    /* slides 
+    ******************************************/
+    .slideshow.progress > .pad{
+        width : 500px;
+        padding : 9px;
+    }
+    .slideshow.progress > .pad > .scroller{
+        overflow: hidden;
+    }
+    .slideshow.progress > .pad > .scroller > .slides{
+        display: table;
+        table-layout: fixed;
+        position: relative;
+        width : 0;
+    }
+    .slideshow.progress > .pad > .scroller > .slides > div{
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        width : 500px;
+        height : 130px;
+    }
+    /* end slides
+    ******************************************/
+
+    /* player 
+    ******************************************/
+    .slideshow.progress > .player{
+        position:relative;
+        width : 520px;
+    }
+    .slideshow.progress > .player > *{
+        display : inline-block;
+        height : 25px;
+        width : 25px;
+        position : absolute;
+        top : 55px;
+        margin : 5px;
+        z-index : 1000;
+        background-image: url(./site/image/player_horizontal.png);
+        background-repeat: no-repeat;
+    }
+    .slideshow.progress > .player > .previous{
+        left : 0;
+        background-position: -25px 0px;
+    }
+    .slideshow.progress > .player > .next{
+        right : 0;
+        background-position: -125px 0px;
+    }
+    /* end player
+    ******************************************/
+    
+    /* progress 
+    ******************************************/
+    .slideshow.progress > .progress{
+        position:absolute;
+        width : 518px;
+        height : 10px;
+        background : red;
+    }
+    .slideshow.progress > .progress > .bar{
+        height : 10px;
+        background : green;
+    }
+    /* end progress
+    ******************************************/
+    
+/* end slideshow 
+******************************************/
+

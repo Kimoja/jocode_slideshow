@@ -1,0 +1,1485 @@
+<h4>Class $.JocodeSlideshow</h4>
+
+<div class="intro"><p>The JodecodeSlideshow constructor</p></div>
+
+<div class="tabs">
+    <div class="tab">
+        
+        
+        <div><a href="#constructor">Constructor</a></div>
+        
+
+        
+        <div><a href="#methods">Methods</a></div>
+        
+
+        
+        <div><a href="#props">Properties</a></div>
+        
+    </div>
+        
+            <div class="tab_content constructor">
+            
+                <a name="methods_$.JocodeSlideshow"></a>
+<div class="method item">
+     <strong class="name"><code>$.JocodeSlideshow</code></strong>( <code>container, config </code> ) 
+    <div class='desc'>
+    
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>container</code> &lt;JQuery&gt;
+        
+        
+        <p>The initialization container</p>
+            
+        </li>
+    
+        <li>
+        
+            <code>config</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a>&gt;
+        
+        
+        <p>The configuration object</p>
+            
+            <ul>
+            
+                <li><code>$slides</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;</strong> <p>The slides selector, relative to the initialization container.</p>
+                
+                </li>
+            
+                <li><code>navigation</code> <strong>&lt;$.JocodeSlideshowNavigation.Base&gt;</strong> <p>navigation object.</p>
+                
+                </li>
+            
+                <li><code>progress_bar</code> <strong>&lt;$.JocodeProgressBar.Base&gt;</strong> <p>The progress bar object (TODO)</p>
+                
+                </li>
+            
+                <li><code>$buttons</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;</strong> <p>The button selector container relative to the initialization container. 
+                                                                 The buttons should be present in the container, and have either one of the following class: first, previous, play, pause, resume, stop, next last. 
+                                                                 If "&lt;" is specified, then the initialization container will be used.</p>
+                
+                </li>
+            
+                <li><code>$loader</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;</strong> <p>...</p>
+                
+                </li>
+            
+                <li><code>$pause_hover</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;</strong> <p>The selector, relative to the initialization container, which defines the elements to listen to trigger the break, on the "hover" event. 
+                                                                 If "&lt;" is specified, then the initialization container will be used.</p>
+                
+                </li>
+            
+                <li><code>$mask_buttons_hover</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;</strong> <p>The selector, relative to the initialization container, that defines the elements that triggers whether to display buttons, on the "hover" event. 
+                                                                 The container of buttons must be different of the container of the slideshow.
+                                                                 If "&lt;" is specified, then the initialization container will be used.</p>
+                
+                </li>
+            
+                <li><code>$mask_nav_hover</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;</strong> <p>The selector, relative to the initialization container, that defines the elements that triggers whether to display the navigation container, on the "hover" event. 
+                                                                 The parameter container of the navigation must be defined and must be different of the container of the slideshow.
+                                                                 If "&lt;" is specified, then the initialization container will be used.</p>
+                
+                </li>
+            
+                <li><code>mask_buttons_load</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;</strong> <p>Hide buttons during loading of a slide.
+                                                                  The container of buttons must be different of the container of the slideshow.</p>
+                
+                </li>
+            
+                <li><code>mask_buttons_fx</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;</strong> <p>Hide buttons during transition of a slide.
+                                                                  The container of buttons must be different of the container of the slideshow.</p>
+                
+                </li>
+            
+                <li><code>mask_nav_load</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;</strong> <p>Hide navigation container during transition of a slide.
+                                                                  The parameter container of the navigation must be defined and must be different of the container of the slideshow.</p>
+                
+                </li>
+            
+                <li><code>mask_nav_fx</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;</strong> <p>Hide navigation container during transition of a slide.
+                                                                  The parameter container of the navigation must be defined and must be different of the container of the slideshow.</p>
+                
+                </li>
+            
+                <li><code>await_nav_fx</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;</strong> <p>Waiting for the end of a transition for draw the change of the navigation item.</p>
+                
+                </li>
+            
+                <li><code>await_load</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;</strong> <p>Waiting for the end of a loading to be able to change slide.</p>
+                
+                </li>
+            
+                <li><code>await_fx</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;</strong> <p>Waiting for the end of a transition to be able to change slide.</p>
+                
+                </li>
+            
+                <li><code>css_await_bt</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;</strong> <p>Class of buttons that wait the end of a transition or a loading.</p>
+                
+                </li>
+            
+                <li><code>touch</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;</strong> <p>Allow touch swipe events to control previous/next.</p>
+                
+                </li>
+            
+                <li><code>touch_strength</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;</strong> <p>...</p>
+                
+                </li>
+            
+                <li><code>keyboard</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;</strong> <p>Allow keyboard events to control previous/next.</p>
+                
+                </li>
+            
+                <li><code>css_disable_bt</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;</strong> <p>Class of disabled buttons.</p>
+                
+                </li>
+            
+                <li><code>auto_play</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;</strong> <p>Enable Autoplay.</p>
+                
+                </li>
+            
+                <li><code>delay</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;</strong> <p>Time in milliseconds between each transition .</p>
+                
+                </li>
+            
+                <li><code>stop_event</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;</strong> <p>Stop event propagation and default actions.</p>
+                
+                </li>
+            
+                <li><code>start_index</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;</strong> <p>The start index.</p>
+                
+                </li>
+            
+                <li><code>fx</code> <strong>&lt;<a href="..\classes\$.JocodeSlideshowFx.Base.html" class="crosslink">$.JocodeSlideshowFx.Base</a>&gt;</strong> <p>Transition slide object.</p>
+                
+                </li>
+            
+                <li><code>load</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Loading slide function.</p>
+                
+                    <ul>
+                        
+                            <li><code>index</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;</strong>  </li>
+                        
+                    </ul>
+                
+                </li>
+            
+                <li><code>beforeWait</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Custom method called  while awaiting a transition.</p>
+                
+                    <ul>
+                        
+                            <li><code>delay</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;</strong>  </li>
+                        
+                            <li><code>elapsed</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;</strong>  </li>
+                        
+                            <li><code>start_time</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;</strong>  </li>
+                        
+                    </ul>
+                
+                </li>
+            
+                <li><code>onCancel</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Custom method called when a slide is cancelled.</p>
+                
+                    <ul>
+                        
+                            <li><code>canceled_index</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;</strong>  </li>
+                        
+                    </ul>
+                
+                </li>
+            
+                <li><code>onPlay</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Custom method called when the playback start.</p>
+                
+                </li>
+            
+                <li><code>onPause</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Custom method called when on pause.</p>
+                
+                </li>
+            
+                <li><code>onResume</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Custom method called when the playback is resumed.</p>
+                
+                </li>
+            
+                <li><code>onStop</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Custom method called when the player stops.</p>
+                
+                </li>
+            
+                <li><code>onChange</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Custom method called when a slide is changed.</p>
+                
+                    <ul>
+                        
+                            <li><code>new_index</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;</strong>  </li>
+                        
+                    </ul>
+                
+                </li>
+            
+                <li><code>beforeDraw</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Custom method called before a transition.</p>
+                
+                </li>
+            
+                <li><code>afterDraw</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Custom method called adter a transition.</p>
+                
+                </li>
+            
+                <li><code>beforeSetup</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>....</p>
+                
+                </li>
+            
+                <li><code>afterSetup</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>....</p>
+                
+                </li>
+            
+                <li><code>beforeInitPile</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>....</p>
+                
+                </li>
+            
+                <li><code>isLoaded</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>Check that a slide is loaded.</p>
+                
+                    <ul>
+                        
+                            <li><code>index</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;</strong>  </li>
+                        
+                    </ul>
+                
+                </li>
+            
+                <li><code>onClick</code> <strong>&lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a>&gt;</strong> <p>...</p>
+                
+                    <ul>
+                        
+                            <li><code>e</code> <strong>&lt;Event&gt;</strong>  </li>
+                        
+                            <li><code>slide</code> <strong>&lt;JQuery&gt;</strong>  </li>
+                        
+                    </ul>
+                
+                </li>
+            
+            </ul>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+            </div>
+        
+
+        
+            <div class="tab_content methods">
+            
+                <a name="methods_$"></a>
+<div class="method item">
+     <strong class="name"><code>$</code></strong>( <code>selector </code> ) 
+    <div class='desc'>
+    <p>....</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>selector</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;
+        
+        
+        <p>...</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods__displayOnHover"></a>
+<div class="method item private">
+     <strong class="name"><code>_displayOnHover</code></strong>( <code>container, container </code> ) 
+    <div class='desc'>
+    <p>Display an element on hover a container</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>container</code> &lt;JQuery&gt;
+        
+        
+        <p>The container to listen</p>
+            
+        </li>
+    
+        <li>
+        
+            <code>container</code> &lt;JQuery&gt;
+        
+        
+        <p>The element to display</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods__stopEvent"></a>
+<div class="method item private">
+     <strong class="name"><code>_stopEvent</code></strong>( <code>e, enable </code> ) 
+    <div class='desc'>
+    <p>Stop an click event</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>e</code> &lt;Event&gt;
+        
+        
+        <p>The event object</p>
+            
+        </li>
+    
+        <li>
+        
+            <code>enable</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;
+        
+        
+        <p>Add or remove a css class</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods__toogleBt"></a>
+<div class="method item private">
+     <strong class="name"><code>_toogleBt</code></strong>( <code>buttons, enable, await </code> ) 
+    <div class='desc'>
+    <p>Change the css classe of a set of buttons</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>buttons</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a>&gt;
+        
+        
+        <p>The set of buttons</p>
+            
+        </li>
+    
+        <li>
+        
+            <code>enable</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;
+        
+        
+        <p>Add or remove a css class</p>
+            
+        </li>
+    
+        <li>
+        
+            <code>await</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;
+        
+        
+         
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_afterDraw"></a>
+<div class="method item">
+     <strong class="name"><code>afterDraw</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Custom method called after a transition</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_beforeDraw"></a>
+<div class="method item">
+     <strong class="name"><code>beforeDraw</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Custom method called before a transition</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_beforeWait"></a>
+<div class="method item">
+     <strong class="name"><code>beforeWait</code></strong>( <code>delay, elapsed, start_time </code> ) 
+    <div class='desc'>
+    <p>Custom method called  while awaiting a transition</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>delay</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+         
+            
+        </li>
+    
+        <li>
+        
+            <code>elapsed</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+         
+            
+        </li>
+    
+        <li>
+        
+            <code>start_time</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+         
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_computeIndex"></a>
+<div class="method item">
+    <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a> <strong class="name"><code>computeIndex</code></strong>( <code>index </code> ) 
+    <div class='desc'>
+    <p>Calculate an index</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    <div class="returns"><strong>Returns:</strong> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt; </div>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_draw"></a>
+<div class="method item">
+     <strong class="name"><code>draw</code></strong>( <code>index </code> ) 
+    <div class='desc'>
+    <p>Launch the transition, after loading a slide</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_first"></a>
+<div class="method item">
+     <strong class="name"><code>first</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Go to the first slide</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_goTo"></a>
+<div class="method item">
+     <strong class="name"><code>goTo</code></strong>( <code>index </code> ) 
+    <div class='desc'>
+    <p>Go to slide</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_hasNext"></a>
+<div class="method item">
+    <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong class="name"><code>hasNext</code></strong>( <code>from_index </code> ) 
+    <div class='desc'>
+    <p>Are there any slides after to current or loading slide (ignores loop)</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>from_index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;
+        
+        
+        <p>True to test on the index, otherwise on the loading index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    <div class="returns"><strong>Returns:</strong> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt; </div>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_hasPrevious"></a>
+<div class="method item">
+    <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong class="name"><code>hasPrevious</code></strong>( <code>from_index </code> ) 
+    <div class='desc'>
+    <p>Are there any slides previous to current or loading slide (ignores loop)</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>from_index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;
+        
+        
+        <p>True to test on the index, otherwise on the loading index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    <div class="returns"><strong>Returns:</strong> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt; </div>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_initPile"></a>
+<div class="method item">
+     <strong class="name"><code>initPile</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Method invoked when the pile of slides change</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_is"></a>
+<div class="method item">
+    <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong class="name"><code>is</code></strong>( <code>index, from_index </code> ) 
+    <div class='desc'>
+    <p>If the current or loading slide index is that passed as argument</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The index</p>
+            
+        </li>
+    
+        <li>
+        
+            <code>from_index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;
+        
+        
+        <p>True to test on the index, otherwise on the loading index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    <div class="returns"><strong>Returns:</strong> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt; </div>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_isFirst"></a>
+<div class="method item">
+    <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong class="name"><code>isFirst</code></strong>( <code>from_index </code> ) 
+    <div class='desc'>
+    <p>If the current or loading slide is the first</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>from_index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;
+        
+        
+        <p>True to test on the index, otherwise on the loading index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    <div class="returns"><strong>Returns:</strong> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt; </div>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_isLast"></a>
+<div class="method item">
+    <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong class="name"><code>isLast</code></strong>( <code>from_index </code> ) 
+    <div class='desc'>
+    <p>If the current or loading slide is the last</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>from_index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt;
+        
+        
+        <p>True to test on the index, otherwise on the loading index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    <div class="returns"><strong>Returns:</strong> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt; </div>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_isLoaded"></a>
+<div class="method item">
+     <strong class="name"><code>isLoaded</code></strong>( <code>index </code> ) 
+    <div class='desc'>
+    <p>Check that a slide is loaded</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_isOnFx"></a>
+<div class="method item">
+    <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong class="name"><code>isOnFx</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>If a slide is an transition</p>
+    
+    
+    
+    <div class="returns"><strong>Returns:</strong> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt; </div>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_isOnLoad"></a>
+<div class="method item">
+    <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong class="name"><code>isOnLoad</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>If a slide is an load</p>
+    
+    
+    
+    <div class="returns"><strong>Returns:</strong> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt; </div>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_isOnWait"></a>
+<div class="method item">
+    <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong class="name"><code>isOnWait</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>If playback is waiting for a transition</p>
+    
+    
+    
+    <div class="returns"><strong>Returns:</strong> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt; </div>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_isPaused"></a>
+<div class="method item">
+    <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong class="name"><code>isPaused</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>If the player is on pause</p>
+    
+    
+    
+    <div class="returns"><strong>Returns:</strong> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt; </div>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_isPlayed"></a>
+<div class="method item">
+    <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong class="name"><code>isPlayed</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>If the player is playing</p>
+    
+    
+    
+    <div class="returns"><strong>Returns:</strong> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt; </div>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_isStopped"></a>
+<div class="method item">
+    <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a> <strong class="name"><code>isStopped</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>If the player is stopped</p>
+    
+    
+    
+    <div class="returns"><strong>Returns:</strong> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a>&gt; </div>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_keepOn"></a>
+<div class="method item">
+     <strong class="name"><code>keepOn</code></strong>( <code>index </code> ) 
+    <div class='desc'>
+    <p>Continue playback after a transition
+Start the timer delay between each transition, whether it is playing</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_last"></a>
+<div class="method item">
+     <strong class="name"><code>last</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Go to the last slide</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_load"></a>
+<div class="method item">
+     <strong class="name"><code>load</code></strong>( <code>index </code> ) 
+    <div class='desc'>
+    <p>Load a slide</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_next"></a>
+<div class="method item">
+     <strong class="name"><code>next</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Go to the next slide</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_onCancel"></a>
+<div class="method item">
+     <strong class="name"><code>onCancel</code></strong>( <code>canceled_index </code> ) 
+    <div class='desc'>
+    <p>Custom method called when a slide is cancelled</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>canceled_index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The canceled index</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_onChange"></a>
+<div class="method item">
+     <strong class="name"><code>onChange</code></strong>( <code>new_index </code> ) 
+    <div class='desc'>
+    <p>Custom method called when a slide is changed</p>
+    
+    <ul class="params">
+    
+        <li>
+        
+            <code>new_index</code> &lt;<a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a>&gt;
+        
+        
+        <p>The index of a new slide</p>
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_onPause"></a>
+<div class="method item">
+     <strong class="name"><code>onPause</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Custom method called when on pause</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_onPlay"></a>
+<div class="method item">
+     <strong class="name"><code>onPlay</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Custom method called when the playback start</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_onResume"></a>
+<div class="method item">
+     <strong class="name"><code>onResume</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Custom method called when the playback is resumed</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_onStop"></a>
+<div class="method item">
+     <strong class="name"><code>onStop</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Custom method called when the player stops</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_pause"></a>
+<div class="method item">
+     <strong class="name"><code>pause</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Pause the player</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_play"></a>
+<div class="method item">
+     <strong class="name"><code>play</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Start the player</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_previous"></a>
+<div class="method item">
+     <strong class="name"><code>previous</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Go to the previous slide</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_resume"></a>
+<div class="method item">
+     <strong class="name"><code>resume</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Resume the player</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+                <a name="methods_stop"></a>
+<div class="method item">
+     <strong class="name"><code>stop</code></strong>( <code>  </code> ) 
+    <div class='desc'>
+    <p>Stop the player</p>
+    
+    
+    
+    </div>
+</div>
+
+            
+            </div>
+        
+        
+            <div class="tab_content props">
+            
+                <a name="props_$slides"></a>
+<div class="props item">
+    <code>$slides</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong>&gt;
+    <div class='desc'>
+        <p>The slides selector</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props__defer"></a>
+<div class="props item">
+    <code>_defer</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></strong>&gt;
+    <div class='desc'>
+        <p>The time delay during a break</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props__on_fx"></a>
+<div class="props item">
+    <code>_on_fx</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong>&gt;
+    <div class='desc'>
+        <p>If the slide is on transition</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props__on_load"></a>
+<div class="props item">
+    <code>_on_load</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong>&gt;
+    <div class='desc'>
+        <p>If the slide is on load</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props__paused"></a>
+<div class="props item">
+    <code>_paused</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong>&gt;
+    <div class='desc'>
+        <p>If the player is on pause</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props__stopped"></a>
+<div class="props item">
+    <code>_stopped</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong>&gt;
+    <div class='desc'>
+        <p>If the player is stopped</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props__time"></a>
+<div class="props item">
+    <code>_time</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></strong>&gt;
+    <div class='desc'>
+        <p>The timestamp of the beginning of the time interval between transitions</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props__timeout"></a>
+<div class="props item">
+    <code>_timeout</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></strong>&gt;
+    <div class='desc'>
+        <p>The waiting timer between slides</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_await_fx"></a>
+<div class="props item">
+    <code>await_fx</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong>&gt;
+    <div class='desc'>
+        <p>Waiting for the end of a transition to be able to change slide</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_await_load"></a>
+<div class="props item">
+    <code>await_load</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong>&gt;
+    <div class='desc'>
+        <p>Waiting for the end of a loading to be able to change slide</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_await_nav_fx"></a>
+<div class="props item">
+    <code>await_nav_fx</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong>&gt;
+    <div class='desc'>
+        <p>Waiting for the end of a transition for draw the change of the navigation item</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_bt_first"></a>
+<div class="props item">
+    <code>bt_first</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The button first</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_bt_last"></a>
+<div class="props item">
+    <code>bt_last</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The button last</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_bt_next"></a>
+<div class="props item">
+    <code>bt_next</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The button next</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_bt_pause"></a>
+<div class="props item">
+    <code>bt_pause</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The button pause</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_bt_play"></a>
+<div class="props item">
+    <code>bt_play</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The button play</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_bt_previous"></a>
+<div class="props item">
+    <code>bt_previous</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The button previous</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_bt_resume"></a>
+<div class="props item">
+    <code>bt_resume</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The button resume</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_bt_stop"></a>
+<div class="props item">
+    <code>bt_stop</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The button stop</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_buttons"></a>
+<div class="props item">
+    <code>buttons</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The container of buttons</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_config"></a>
+<div class="props item">
+    <code>config</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></strong>&gt;
+    <div class='desc'>
+        <p>The configuration object</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_container"></a>
+<div class="props item">
+    <code>container</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The initialization container</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_css_await_bt"></a>
+<div class="props item">
+    <code>css_await_bt</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong>&gt;
+    <div class='desc'>
+        <p>Class of buttons that wait the end of a transition or a loading</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_css_disable_bt"></a>
+<div class="props item">
+    <code>css_disable_bt</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></strong>&gt;
+    <div class='desc'>
+        <p>The css class of disabled buttons</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_current"></a>
+<div class="props item">
+    <code>current</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The current slide</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_delay"></a>
+<div class="props item">
+    <code>delay</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></strong>&gt;
+    <div class='desc'>
+        <p>Time in milliseconds between each transition</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_fx"></a>
+<div class="props item">
+    <code>fx</code> &lt;<strong><a href="..\classes\$.JocodeSlideshowFx.Base.html" class="crosslink">$.JocodeSlideshowFx.Base</a></strong>&gt;
+    <div class='desc'>
+        <p>Transition slide object</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_index"></a>
+<div class="props item">
+    <code>index</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></strong>&gt;
+    <div class='desc'>
+        <p>The current index</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_loader"></a>
+<div class="props item">
+    <code>loader</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>...</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_loading_index"></a>
+<div class="props item">
+    <code>loading_index</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></strong>&gt;
+    <div class='desc'>
+        <p>The loading index</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_mask_buttons_fx"></a>
+<div class="props item">
+    <code>mask_buttons_fx</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong>&gt;
+    <div class='desc'>
+        <p>Hide buttons during transition of a slide.
+The container of buttons must be different of the container of the slideshow.</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_mask_buttons_load"></a>
+<div class="props item">
+    <code>mask_buttons_load</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong>&gt;
+    <div class='desc'>
+        <p>Hide buttons during loading of a slide. 
+The container of buttons must be different of the container of the slideshow.</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_mask_nav_fx"></a>
+<div class="props item">
+    <code>mask_nav_fx</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong>&gt;
+    <div class='desc'>
+        <p>Hide navigation container during transition of a slide.
+The parameter container of the navigation must be defined and must be different of the container of the slideshow.</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_mask_nav_load"></a>
+<div class="props item">
+    <code>mask_nav_load</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></strong>&gt;
+    <div class='desc'>
+        <p>Hide navigation container during transition of a slide.
+The parameter container of the navigation must be defined and must be different of the container of the slideshow.</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_navigation"></a>
+<div class="props item">
+    <code>navigation</code> &lt;<strong><a href="..\classes\$.JocodeSlideshowNavigation.html" class="crosslink">$.JocodeSlideshowNavigation</a></strong>&gt;
+    <div class='desc'>
+        <p>The navigation object</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_slides"></a>
+<div class="props item">
+    <code>slides</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        <p>The slides</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_start_index"></a>
+<div class="props item">
+    <code>start_index</code> &lt;<strong><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></strong>&gt;
+    <div class='desc'>
+        <p>The start index</p>
+        
+    </div>
+</div>
+
+            
+                <a name="props_The button next"></a>
+<div class="props item">
+    <code>The button next</code> &lt;<strong>JQuery</strong>&gt;
+    <div class='desc'>
+        
+        
+    </div>
+</div>
+
+            
+            </div>
+        
+</div>

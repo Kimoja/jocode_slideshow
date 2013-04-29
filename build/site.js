@@ -71,25 +71,75 @@ doc_json.classitems.forEach(function(item, index){
         console.log('Missing class :' + cls + ' , member : ' + item.name);
         return;
     }
-    item.itemtype == 'property' 
-        ? o_cls.properties.push(item)
-        : o_cls.methods.push(item);
+    
+    item.itemtype == 'property' && (o_cls.properties.push(item),  o_cls.properties[item.name] = true);
+    item.itemtype == 'method' && (o_cls.methods.push(item),  o_cls.methods[item.name] = true);
+});
+
+
+forEach(doc_obj, function(cls, key_cls){
+    
+    function augment(aug){
+        
+        aug.methods.forEach(function(method){
+            
+            if(cls.methods[method.name])return;
+            
+            method = Object.create(method);
+            method.inherit = true;
+            cls.methods.push(method);
+            cls.methods[method.name] = true;
+        });
+        aug.properties.forEach(function(property){
+            
+            if(cls.properties[property.name])return;
+            
+            property = Object.create(property);
+            property.inherit = true;
+            cls.properties.push(property);
+            cls.properties[property.name] = true;
+        });
+        recursive(aug);
+    }
+    
+    function recursive(clazz){
+        clazz['extends'] && augment(doc_obj[clazz['extends']]);
+        clazz.uses && clazz.uses.forEach(function(name){
+            augment(doc_obj[name]);
+       });
+    };
+    
+    recursive(cls);
 });
 
 forEach(doc_obj, function(cls, key_cls){
     
-    if(key_cls != '$.JocodeConfig' && /^.*Config$/.test(key_cls)){
-        delete doc_obj[key_cls]
+    cls.methods.sort(function(a, b){
+        if(a.name < b.name) return -1;
+        if(a.name > b.name) return 1;
+        return 0;
+    })
+    
+    cls.properties.sort(function(a, b){
+        if(a.name < b.name) return -1;
+        if(a.name > b.name) return 1;
+        return 0;
+    })
+});
+
+forEach(doc_obj, function(cls, key_cls){
+    
+    if(/^.*Config$/.test(key_cls)){
+        delete doc_obj[key_cls];
         doc_obj[key_cls.replace('Config', '')].config = cls;
     }
 });
-
 
 files.doc = {};
 forEach(doc_obj, function(cls, key_cls){
     
     files.doc[cls.name] = ['html'];
-    fs.writeFileSync('../site/doc/' + cls.name + '.html', doc_tpl({o : cls}));
+    fs.writeFileSync('../site/doc/' + cls.name + '.html', doc_tpl({doc : doc_obj, o : cls}));
 });
 
 

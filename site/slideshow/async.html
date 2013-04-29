@@ -13,6 +13,8 @@
         <a href="#" class="last">&nbsp;</a>
     </div>
 
+    <div class="progress"></div>
+    
     <div class='loader'></div>
     
     <div class='slides'>
@@ -62,14 +64,33 @@
 <pre class="sh_javascript">$(<span class="string">'.slideshow.async'</span>).jocodeSlideshow({
 
     $slides : <span class="string">'&gt; .slides &gt; img'</span>,
-    $buttons : <span class="string">'&gt; .player'</span>,
+    $controls : <span class="string">'&gt; .player'</span>,
     $pause_hover : <span class="string">'.slides, .navigation'</span>,
     $loader : <span class="string">'&gt; .loader'</span>,
+    $mask_progress_hover : <span class="string">'&lt;'</span>,
+    
+    mask_progress_load : <span class="literal">false</span>,
+    mask_progress_transition : <span class="literal">false</span>,
 
-    delay : <span class="number">1000</span>,
-    css_disable_bt : <span class="string">'disabled'</span>,
-    css_await_bt : <span class="string">'await'</span>,
+    delay : <span class="number">3000</span>,
+    await_nav_transition : <span class="literal">true</span>,
+    await_transition : <span class="literal">true</span>,
+    css_disable_control : <span class="string">'disabled'</span>,
+    css_await_control  : <span class="string">'await'</span>,
 
+    transition : <span class="keyword">new</span> $.JocodeSlideshowTransition.Fade({
+        duration : <span class="number">500</span>
+    }),
+    
+    progress : <span class="keyword">new</span> $.JocodeSlideshowProgress({
+        $container : <span class="string">'&gt; .progress'</span>,
+        transition : <span class="keyword">new</span> $.JocodeSlideshowProgressTransition.Bar({
+            css : <span class="string">'bar'</span>,
+            inverse : <span class="literal">true</span>
+        })
+    }),
+
+    
     <span class="comment">//simulate an loader</span>
     <span class="comment">//enter here the code of asynchronous requests</span>
     load : <span class="keyword">function</span>(index){
@@ -85,10 +106,6 @@
 
         <span class="keyword">return</span> <span class="literal">false</span>;
     },
-
-    fx : <span class="keyword">new</span> $.JocodeSlideshowFx.Fade({
-        duration : <span class="number">1000</span>
-    }),
     
     navigation : <span class="keyword">new</span> $.JocodeSlideshowNavigation({
 
@@ -103,7 +120,7 @@
             
             <span class="keyword">var</span> ct_items = <span class="keyword">this</span>.$(<span class="string">'&gt; .scroller &gt; div'</span>);
             
-            $.each(<span class="keyword">this</span>.slideshow.slides, <span class="keyword">function</span>(i, slide){
+            $.each(<span class="keyword">this</span>.slideshow.$slides, <span class="keyword">function</span>(i, slide){
                 
                 <span class="keyword">var</span> div = document.createElement(<span class="string">'div'</span>),
                     img = document.createElement(<span class="string">'img'</span>);
@@ -115,8 +132,7 @@
             });
         },
 
-        fx : <span class="keyword">new</span> $.JocodeSlideshowNavigationFx.Scroll({
-
+        transition : <span class="keyword">new</span> $.JocodeSlideshowNavigationTransition.Scroll({
             $scroller : <span class="string">'&gt; .scroller'</span>,
             scroll_over : <span class="literal">true</span>
         })
@@ -141,6 +157,8 @@
         <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"last"</span>&gt;</span>&amp;nbsp;<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
     <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"progress"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    
     <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">'loader'</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
     
     <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">'slides'</span>&gt;</span>
@@ -184,19 +202,11 @@
     <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">3</span>px;</span></span>
     <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">1</span>px solid <span class="hexcolor">#ddd</span>;</span></span>
     <span class="rule"><span class="attribute">box-shadow</span>:<span class="value"> <span class="number">10</span>px <span class="number">10</span>px <span class="number">30</span>px <span class="hexcolor">#aaa</span>;</span></span>
+    <span class="rule"><span class="attribute">position </span>:<span class="value"> relative;</span></span>
 <span class="rule">}</span></span>
 <span class="class">.slideshow</span><span class="class">.async</span> <span class="tag">a</span><span class="pseudo">:active</span>, <span class="class">.slideshow</span><span class="class">.async</span> <span class="tag">a</span><span class="pseudo">:focus</span> <span class="rules">{ 
     <span class="rule"><span class="attribute">border</span>:<span class="value">none;</span></span>
     <span class="rule"><span class="attribute">outline</span>:<span class="value">none;</span></span>
-<span class="rule">}</span></span>
-<span class="class">.slideshow</span><span class="class">.async</span> &gt; <span class="class">.loader</span><span class="rules">{
-    <span class="rule"><span class="attribute">display</span>:<span class="value"> none;</span></span>
-    <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">518</span>px;</span></span>
-    <span class="rule"><span class="attribute">height </span>:<span class="value"> <span class="number">333</span>px;</span></span>
-    <span class="rule"><span class="attribute">z-index </span>:<span class="value"> <span class="number">10</span>;</span></span>
-    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#fff</span> <span class="function">url(<span class="string">'./site/image/loading.gif'</span>)</span> center no-repeat;</span></span>
-    <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute;</span></span>
-    <span class="rule"><span class="attribute">opacity </span>:<span class="value"> <span class="number">0.5</span>;</span></span>
 <span class="rule">}</span></span>
      <span class="comment">/* slides 
     ******************************************/</span>
@@ -263,6 +273,38 @@
     <span class="comment">/* end player
     ******************************************/</span>
     
+    <span class="comment">/* progress 
+    ******************************************/</span>
+    <span class="class">.slideshow</span><span class="class">.async</span> &gt; <span class="class">.progress</span><span class="rules">{
+        <span class="rule"><span class="attribute">position</span>:<span class="value">absolute;</span></span>
+        <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">500</span>px;</span></span>
+        <span class="rule"><span class="attribute">height </span>:<span class="value"> <span class="number">10</span>px;</span></span>
+        <span class="rule"><span class="attribute">left </span>:<span class="value"> <span class="number">9</span>px;</span></span>
+        <span class="rule"><span class="attribute">top </span>:<span class="value"> <span class="number">44</span>px;</span></span>
+        <span class="rule"><span class="attribute">z-index </span>:<span class="value"> <span class="number">1000</span>;</span></span>
+    <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.async</span> &gt; <span class="class">.progress</span> &gt; <span class="class">.bar</span><span class="rules">{
+        <span class="rule"><span class="attribute">height </span>:<span class="value"> <span class="number">10</span>px;</span></span>
+        <span class="rule"><span class="attribute">background </span>:<span class="value"> gray;</span></span>
+        <span class="rule"><span class="attribute">opacity </span>:<span class="value"> <span class="number">0.5</span>;</span></span>
+    <span class="rule">}</span></span>
+    <span class="comment">/* end progress
+    ******************************************/</span>
+    
+     <span class="comment">/* loader 
+    ******************************************/</span>
+    <span class="class">.slideshow</span><span class="class">.async</span> &gt; <span class="class">.loader</span><span class="rules">{
+        <span class="rule"><span class="attribute">display</span>:<span class="value"> none;</span></span>
+        <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">518</span>px;</span></span>
+        <span class="rule"><span class="attribute">height </span>:<span class="value"> <span class="number">333</span>px;</span></span>
+        <span class="rule"><span class="attribute">z-index </span>:<span class="value"> <span class="number">2000</span>;</span></span>
+        <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#fff</span> <span class="function">url(<span class="string">'./site/image/loading.gif'</span>)</span> center no-repeat;</span></span>
+        <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute;</span></span>
+        <span class="rule"><span class="attribute">opacity </span>:<span class="value"> <span class="number">0.5</span>;</span></span>
+    <span class="rule">}</span></span>
+     <span class="comment">/* loader 
+    ******************************************/</span>
+     
     <span class="comment">/* navigation 
     ******************************************/</span>
     <span class="class">.slideshow</span><span class="class">.async</span> &gt; <span class="class">.navigation</span><span class="rules">{

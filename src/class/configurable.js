@@ -1,95 +1,77 @@
 
-
 (function($){
     
-
-var camel_cache = {};
-
-function camelCase(key){
-    return key.replace(/(^|_)([a-z])/g, function($1, $2, $3){return $3.toUpperCase();});
-}    
-
-/**
-* Mixin
-* @class $.JocodeConfigurable
-**/ 
-$.JocodeConfigurable = $.jocodeClass({
+    /**
+     * Mixin ...
+     * @class $.JocodeConfigurable
+     **/ 
+    $.JocodeConfigurable = $.jocodeClass({
       
-    /**
-     * ...
-     * @protected
-     * @method setConfig
-     * @param {Object} config The configuration object
-     */
-    setConfig : function(config){
         
-        var i, j;
+        /**
+         * ...
+         * @protected
+         * @method initConfig
+         * @param {Object} [config] The configuration object
+         */
+        initConfig : function(config){
         
-        this.config = config = config || {};
+            var self = this,
+                key;
         
-        for(j in this.defaultConfig)
-            !(j in config) && (config[j] = this.defaultConfig[j]);
+            config = self.config || (self.config = config || {});
+        
+            for(key in config) key in self.defaultConfig 
+                && !self.hasOwnProperty(key) 
+                && self.setAsMember(key, config[key]);
+        },
     
-        for(i in config){
+        /**
+         * ...
+         * 
+         * @protected
+         * @method setAsMember
+         * @param {String} key ...
+         * @param {Object} value ...
+         */
+        setAsMember : function(key, value){
             
-            if(!this.hasOwnProperty(i)){
-                i in this 
-                    ? this._setMember(i, config[i])
-                    : this._initProperty(i, config[i]);
-            }
-        }
+            var self = this,
+                setter;
+            
+            (setter = self.setter_cache[key] || (
+                self.setter_cache[key]  = 'set' + key.replace(/(^|_)([a-z])/g, function($1, $2, $3){
+                    return $3.toUpperCase();
+                })
+            )) in self 
+                ? self[setter](value) 
+                : self[key] = value;
+        },
+        
+        /**
+         * ...
+         * @protected
+         * @property setter_cache
+         * @type {Object}
+         */
+        setter_cache : {},
+     
+        /**
+         * The configuration object
+         * 
+         * @property config
+         * @type {Object}
+         */
+        config : null,
 
-    },
+        /**
+         * The default configuration object
+         * 
+         * @property defaultConfig
+         * @type {Object}
+         */
+        defaultConfig : {}
     
-    /**
-     * ...
-     * 
-     * @private
-     * @method setMember
-     * @param {String} key ...
-     * @param {Object} value ...
-     */
-    _setMember : function(key, value){
-        
-        var setter = 'set' + key.replace(/(^|_)([a-z])/g, function($1, $2, $3){
-                      return $3.toUpperCase();});
-        
-        this[key] = setter in this 
-            ? this[setter](value) 
-            : value;
-    },
-    
-    /**
-     * ...
-     * 
-     * @private
-     * @method _initProperty
-     * @param {String} key ...
-     * @param {Object} value ...
-     */
-    _initProperty : function(key, value){
-        
-        var init = 'init' + key.replace(/(^|_)([a-z])/g, function($1, $2, $3){
-                      return $3.toUpperCase();});
-        
-        init in this && this[init](value);
-    },
-    
-    /**
-     * The configuration object
-     * 
-     * @property config
-     * @type {Object}
-     */
-    config : null,
-
-    /**
-     * The default configuration object
-     * 
-     * @property defaultConfig
-     * @type {Object}
-     */
-    defaultConfig : {}
-});
+    });
 
 })(jQuery);

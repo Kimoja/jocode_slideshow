@@ -1,20 +1,34 @@
 
 $('.slideshow.vertical').jocodeSlideshow({
-
+    
     $slides : '> .pad > .scroller > .slides > img',
-    $buttons : '> .player',
+    $controls : '> .player',
     $pause_hover : '.slides, .navigation',
+    $loader : '> .loader',
+    $mask_progress_hover : '<',
+    
+    mask_progress_load : false,
+    mask_progress_transition : false,
 
-    delay : 1000,
-    await_nav_fx : true,
-    await_fx : true,
-    css_disable_bt : 'disabled',
-    css_await_bt : 'await',
-
-    fx : new $.JocodeSlideshowFx.Scroll({
-        $scroller : '> .pad > .scroller',
+    delay : 3000,
+    await_nav_transition : true,
+    await_transition : true,
+    css_disable_control : 'disabled',
+    css_await_control  : 'await',
+    
+    transition : new $.JocodeSlideshowTransition.Scroll({
         duration : 1000,
+        $scroller  : '> .pad > .scroller',
         vertical : true
+    }),
+    
+    progress : new $.JocodeSlideshowProgress({
+        $container : '> .progress',
+        transition : new $.JocodeSlideshowProgressTransition.Bar({
+            css : 'bar',
+            inverse : true,
+            vertical : true
+        })
     }),
 
     navigation : new $.JocodeSlideshowNavigation({
@@ -30,7 +44,7 @@ $('.slideshow.vertical').jocodeSlideshow({
             
             var ct_items = this.$('> .scroller');
             
-            $.each(this.slideshow.slides, function(i, slide){
+            $.each(this.slideshow.$slides, function(i, slide){
                 
                 var img = document.createElement('img');
                 img.src = slide.src;
@@ -39,8 +53,7 @@ $('.slideshow.vertical').jocodeSlideshow({
             });
         },
         
-        fx : new $.JocodeSlideshowNavigationFx.Scroll({
-
+        transition : new $.JocodeSlideshowNavigationTransition.Scroll({
             $scroller : '> .scroller',
             scroll_over : true,
             vertical : true

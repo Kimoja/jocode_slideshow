@@ -48,16 +48,13 @@
 
     $slides : <span class="string">'&gt; .pad &gt; .scroller &gt; .slides &gt; div'</span>,
     $controls : <span class="string">'&gt; .player'</span>,
-    $pause_hover : <span class="string">'.slides, .navigation'</span>,
+    $pause_hover : <span class="string">'&lt;'</span>,
     $mask_controls_hover : <span class="string">'&lt;'</span>,
 
-    delay : <span class="number">1000</span>,
-
-    transition : {
-        type : <span class="string">'scroll'</span>,
-        duration : <span class="number">1000</span>,
+    transition : <span class="keyword">new</span> $.JocodeSlideshowTransition.Scroll({
+        duration : <span class="number">500</span>,
         $scroller  : <span class="string">'&gt; .pad &gt; .scroller'</span>
-    }
+    })
 });</pre> 
                </div> 
            </div> 
@@ -162,7 +159,7 @@
     <span class="rule">}</span></span>
     <span class="comment">/* end player
     ******************************************/</span>
-
+    
 <span class="comment">/* end slideshow 
 ******************************************/</span></pre> 
                </div> 

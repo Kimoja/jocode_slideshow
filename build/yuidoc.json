@@ -1,0 +1,10 @@
+{
+    "name": "JocodeSlideshow",
+    "description": "",
+    "version": "0.9.1",
+    "options": {
+        "linkNatives": true, 
+        "outdir": "./doc",
+        "paths": ["../src"]
+    }
+}

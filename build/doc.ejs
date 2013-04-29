@@ -1,7 +1,8 @@
 <% 
 function link(cls) {
+    if(!cls)return/* console.log('oublie type')*/
     cls = cls.replace(/\{|\}/g, '');
-    var blank = /^(String|Object|Array|Boolean)$/.test(cls),
+    var blank = /^(String|Object|Array|Boolean|Number)$/.test(cls),
         jq = /^jQuery$/i.test(cls),
         href = jq ? 
             'http://api.jquery.com/' : blank ? 
@@ -14,7 +15,7 @@ function link(cls) {
 
 <% function property(property) { %>
     
-    <div class="property item <% if(property.access) %><%- property.access %>">
+    <div class="property item <% if(property.access) %><%- property.access %>  <% if(property.inherit){ %>inherit<%}%>">
         <span class="bold"><%- property.name %></span> 
         : <%  link(property.type) %>
         <div class='desc'>
@@ -26,8 +27,9 @@ function link(cls) {
     </div>
 <% } %>
 
+
 <% function method(method) { %>
-    <div class="method item <% if(method.access)%><%- method.access %>">
+    <div class="method item <% if(method.access)%><%- method.access %>  <% if(method.inherit){ %>inherit<%}%>">
        <span class="bold"><%- method.name %></span> 
        (<% if(method.params) { method.params.forEach(function(param, i){ %>
             <% if(param.optional){ %>
@@ -84,12 +86,11 @@ function link(cls) {
     
     <% if(o.uses) {%>
         <div class="uses">
-            Uses
-            <ul>
-                <% o.uses.forEach(function(use){ %>
-                <li><% link(use) %></li>
-                <% }) %>
-            </ul>
+            Uses <% o.uses.forEach(function(use, index){ %>
+            <% link(use) %>
+            <% if(index !=  o.uses.length - 1){ %>
+            , 
+            <% }}) %>
         </div>
     <%}%>
     
@@ -98,6 +99,7 @@ function link(cls) {
             Extends <a href="#doc_"><%- o['extends'] %></a>
         </div>
     <%}%>
+    <br>
     
     <div class="class_description">
         <%- o.description %>
@@ -123,12 +125,8 @@ function link(cls) {
         
         <% if(o.config) {%>
             <div class="tab_content config">
-                <% if(o.config.methods) {%>
-                    <% o.config.methods.forEach(method) %>
-                <%}%>
-                <% if(o.config.properties) {%>
-                    <% o.config.properties.forEach(property) %>
-                <%}%>
+                <% o.config.methods.forEach(method) %>
+                <% o.config.properties.forEach(property) %>
             </div>
         <%}%>
         <% if(o.methods.length) {%>

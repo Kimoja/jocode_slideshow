@@ -6,27 +6,30 @@
  
  
  
+ 
 <div class="section doc" id="doc_$.JocodeSlideshowNavigation"> 
  
     <h4>Class $.JocodeSlideshowNavigation</h4> 
      
      
         <div class="uses"> 
-            Uses 
-            <ul> 
-                 
-                <li> 
-    <a href="#doc_$.JocodeConfig"  > $.JocodeConfig</a> 
-</li> 
-                 
-            </ul> 
+            Uses  
+             
+    <a href="#doc_$.JocodeSlideshowNavigationConfig"  > $.JocodeSlideshowNavigationConfig</a> 
+ 
+             
         </div> 
      
      
      
+        <div class="extends"> 
+            Extends <a href="#doc_">$.JocodeWidget</a> 
+        </div> 
+     
+    <br> 
      
     <div class="class_description"> 
-        The navigation class for a slideshow 
+        ... 
     </div> 
      
     <span>Show private : </span><input type="checkbox" class="show_private"> 
@@ -35,6 +38,8 @@
     <div class="tabs"> 
         <div class="tab"> 
              
+             
+            <div><a href="#config">Configuration</a></div> 
              
              
             <div><a href="#methods">Methods</a></div> 
@@ -46,85 +51,14 @@
         </div> 
          
          
-         
-            <div class="tab_content methods"> 
+            <div class="tab_content config"> 
                  
-    <div class="method item "> 
-       <span class="bold">init</span>  
-       ( 
-             
-    <a href="#doc_$.JocodeSlideshow.Base"  > $.JocodeSlideshow.Base</a> 
-      
-            The  
-             
-       ) 
-        
-        <div class='desc'> 
-            Initialize the navigation 
- 
-             
-                <div class='margin bold'>Parameters</div> 
-                <ul class="params"> 
-                 
-                    <li> 
-                        <span> 
-                         
-    <a href="#doc_$.JocodeSlideshow.Base"  > $.JocodeSlideshow.Base</a> 
-      
-                        The  
-                         
-                        </span> 
-                        <div class='desc'>slideshow</div> 
-                    </li> 
-                 
-                </ul> 
-             
- 
-             
-         </div>    
-    </div> 
- 
-    <div class="method item "> 
-       <span class="bold">$</span>  
-       ( 
-             
-    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
-      
-            selector  
-             
-       ) 
-        
-        <div class='desc'> 
-            .... 
- 
-             
-                <div class='margin bold'>Parameters</div> 
-                <ul class="params"> 
-                 
-                    <li> 
-                        <span> 
-                         
-    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
-      
-                        selector  
-                         
-                        </span> 
-                        <div class='desc'>...</div> 
-                    </li> 
-                 
-                </ul> 
-             
- 
-             
-         </div>    
-    </div> 
- 
-    <div class="method item "> 
-       <span class="bold">first</span>  
+    <div class="method item   "> 
+       <span class="bold">afterTransition</span>  
        () 
         
         <div class='desc'> 
-            Scroll to the first item 
+            Custom method called after a transition 
  
              
  
@@ -132,12 +66,47 @@
          </div>    
     </div> 
  
-    <div class="method item "> 
-       <span class="bold">previous</span>  
+    <div class="method item   "> 
+       <span class="bold">beforeScroll</span>  
+       ( 
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
+      
+            scrolled_index  
+             
+       ) 
+        
+        <div class='desc'> 
+            Custom method called before the scroll 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
+      
+                        scrolled_index  
+                         
+                        </span> 
+                        <div class='desc'>The index of the scrolled index</div> 
+                    </li> 
+                 
+                </ul> 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item   "> 
+       <span class="bold">beforeTransition</span>  
        () 
         
         <div class='desc'> 
-            Scroll to the previous item 
+            Custom method called before a transition 
  
              
  
@@ -145,222 +114,7 @@
          </div>    
     </div> 
  
-    <div class="method item "> 
-       <span class="bold">next</span>  
-       () 
-        
-        <div class='desc'> 
-            Scroll to the next item 
- 
-             
- 
-             
-         </div>    
-    </div> 
- 
-    <div class="method item "> 
-       <span class="bold">last</span>  
-       () 
-        
-        <div class='desc'> 
-            Scroll to the last item 
- 
-             
- 
-             
-         </div>    
-    </div> 
- 
-    <div class="method item protected"> 
-       <span class="bold">setAwaitCss</span>  
-       () 
-        
-        <div class='desc'> 
-            Add or remove the "await" css class 
- 
-             
- 
-             
-         </div>    
-    </div> 
- 
-    <div class="method item "> 
-       <span class="bold">scrollTo</span>  
-       ( 
-             
-    <a href="#doc_Number"  > Number</a> 
-      
-            index  
-             
-       ) 
-        
-        <div class='desc'> 
-            Scroll at the passed index 
- 
-             
-                <div class='margin bold'>Parameters</div> 
-                <ul class="params"> 
-                 
-                    <li> 
-                        <span> 
-                         
-    <a href="#doc_Number"  > Number</a> 
-      
-                        index  
-                         
-                        </span> 
-                        <div class='desc'>The index</div> 
-                    </li> 
-                 
-                </ul> 
-             
- 
-             
-         </div>    
-    </div> 
- 
-    <div class="method item "> 
-       <span class="bold">setScrolled</span>  
-       ( 
-             
-    <a href="#doc_Number"  > Number</a> 
-      
-            index  
-             
-       ) 
-        
-        <div class='desc'> 
-            Set the scrolled index and element
-Change its css class 
- 
-             
-                <div class='margin bold'>Parameters</div> 
-                <ul class="params"> 
-                 
-                    <li> 
-                        <span> 
-                         
-    <a href="#doc_Number"  > Number</a> 
-      
-                        index  
-                         
-                        </span> 
-                        <div class='desc'>The index</div> 
-                    </li> 
-                 
-                </ul> 
-             
- 
-             
-         </div>    
-    </div> 
- 
-    <div class="method item private"> 
-       <span class="bold">_initItems</span>  
-       ( 
-             
-    <a href="http://api.jquery.com/"  > JQuery</a> 
-      
-            last_pile  
-             
-       ) 
-        
-        <div class='desc'> 
-            Set items and its listener 
- 
-             
-                <div class='margin bold'>Parameters</div> 
-                <ul class="params"> 
-                 
-                    <li> 
-                        <span> 
-                         
-    <a href="http://api.jquery.com/"  > JQuery</a> 
-      
-                        last_pile  
-                         
-                        </span> 
-                        <div class='desc'>The last pile of slides</div> 
-                    </li> 
-                 
-                </ul> 
-             
- 
-             
-         </div>    
-    </div> 
- 
-    <div class="method item "> 
-       <span class="bold">initPile</span>  
-       ( 
-             
-    <a href="http://api.jquery.com/"  > JQuery</a> 
-      
-            last_pile  
-             
-       ) 
-        
-        <div class='desc'> 
-            Method invoked when the pile of slides change 
- 
-             
-                <div class='margin bold'>Parameters</div> 
-                <ul class="params"> 
-                 
-                    <li> 
-                        <span> 
-                         
-    <a href="http://api.jquery.com/"  > JQuery</a> 
-      
-                        last_pile  
-                         
-                        </span> 
-                        <div class='desc'>The last pile of slides</div> 
-                    </li> 
-                 
-                </ul> 
-             
- 
-             
-         </div>    
-    </div> 
- 
-    <div class="method item "> 
-       <span class="bold">draw</span>  
-       ( 
-             
-    <a href="#doc_Number"  > Number</a> 
-      
-            to_index  
-             
-       ) 
-        
-        <div class='desc'> 
-            Launch the transition 
- 
-             
-                <div class='margin bold'>Parameters</div> 
-                <ul class="params"> 
-                 
-                    <li> 
-                        <span> 
-                         
-    <a href="#doc_Number"  > Number</a> 
-      
-                        to_index  
-                         
-                        </span> 
-                        <div class='desc'>The to index</div> 
-                    </li> 
-                 
-                </ul> 
-             
- 
-             
-         </div>    
-    </div> 
- 
-    <div class="method item "> 
+    <div class="method item   "> 
        <span class="bold">indexOf</span>  
        ( 
              
@@ -395,18 +149,108 @@ Change its css class
          </div>    
     </div> 
  
-    <div class="method item "> 
-       <span class="bold">onCancel</span>  
+                 
+     
+    <div class="property item   "> 
+        <span class="bold">$container</span>  
+        :  
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
+ 
+        <div class='desc'> 
+            The selector of the container of the navigation, relative to the slideshow container, defaut, use the slideshow container 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">$items</span>  
+        :  
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
+ 
+        <div class='desc'> 
+            The navigation items selector, relative to the slideshow container or to the config container, if defined 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">css_await</span>  
+        :  
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
+ 
+        <div class='desc'> 
+            Class of items that wait the end of a transition or a loading 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">css_scrolled</span>  
+        :  
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
+ 
+        <div class='desc'> 
+            Class of the scrolled item 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">css_selected</span>  
+        :  
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
+ 
+        <div class='desc'> 
+            Class of the selected item 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">itemsFactory</span>  
+        :  
+    <a href="#doc_Function"  > Function</a> 
+ 
+        <div class='desc'> 
+            ... 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">transition</span>  
+        :  
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+ 
+        <div class='desc'> 
+            The transition object 
+             
+        </div> 
+    </div> 
+ 
+            </div> 
+         
+         
+            <div class="tab_content methods"> 
+                 
+    <div class="method item   inherit"> 
+       <span class="bold">$</span>  
        ( 
              
-    <a href="#doc_Number"  > Number</a> 
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
       
-            canceled_index  
+            selector  
              
        ) 
         
         <div class='desc'> 
-            Custom method called when a slide is cancelled 
+            .... 
  
              
                 <div class='margin bold'>Parameters</div> 
@@ -415,12 +259,12 @@ Change its css class
                     <li> 
                         <span> 
                          
-    <a href="#doc_Number"  > Number</a> 
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
       
-                        canceled_index  
+                        selector  
                          
                         </span> 
-                        <div class='desc'>The canceled index</div> 
+                        <div class='desc'>...</div> 
                     </li> 
                  
                 </ul> 
@@ -430,46 +274,24 @@ Change its css class
          </div>    
     </div> 
  
-    <div class="method item "> 
-       <span class="bold">onChange</span>  
-       ( 
-             
-    <a href="#doc_Number"  > Number</a> 
-      
-            new_index  
-             
-       ) 
+    <div class="method item   inherit"> 
+       <span class="bold">afterTransition</span>  
+       () 
         
         <div class='desc'> 
-            Custom method called when a slide is changed 
+            Custom method called after a transition 
  
-             
-                <div class='margin bold'>Parameters</div> 
-                <ul class="params"> 
-                 
-                    <li> 
-                        <span> 
-                         
-    <a href="#doc_Number"  > Number</a> 
-      
-                        new_index  
-                         
-                        </span> 
-                        <div class='desc'>The index of a new slide</div> 
-                    </li> 
-                 
-                </ul> 
              
  
              
          </div>    
     </div> 
  
-    <div class="method item "> 
+    <div class="method item   inherit"> 
        <span class="bold">beforeScroll</span>  
        ( 
              
-    <a href="#doc_Number"  > Number</a> 
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
       
             scrolled_index  
              
@@ -485,7 +307,7 @@ Change its css class
                     <li> 
                         <span> 
                          
-    <a href="#doc_Number"  > Number</a> 
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
       
                         scrolled_index  
                          
@@ -500,8 +322,8 @@ Change its css class
          </div>    
     </div> 
  
-    <div class="method item "> 
-       <span class="bold">beforeDraw</span>  
+    <div class="method item   inherit"> 
+       <span class="bold">beforeTransition</span>  
        () 
         
         <div class='desc'> 
@@ -513,13 +335,399 @@ Change its css class
          </div>    
     </div> 
  
-    <div class="method item "> 
-       <span class="bold">afterDraw</span>  
+    <div class="method item   "> 
+       <span class="bold">draw</span>  
+       ( 
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
+      
+            to_index  
+             
+       ) 
+        
+        <div class='desc'> 
+            Launch the transition 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
+      
+                        to_index  
+                         
+                        </span> 
+                        <div class='desc'>The to index</div> 
+                    </li> 
+                 
+                </ul> 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item   "> 
+       <span class="bold">first</span>  
        () 
         
         <div class='desc'> 
-            Custom method called after a transition 
+            Scroll to the first item 
  
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item protected  "> 
+       <span class="bold">init</span>  
+       ( 
+             
+    <a href="#doc_$.JocodeSlideshow"  > $.JocodeSlideshow</a> 
+      
+            slideshow  
+             
+       ) 
+        
+        <div class='desc'> 
+            Initialize the navigation 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="#doc_$.JocodeSlideshow"  > $.JocodeSlideshow</a> 
+      
+                        slideshow  
+                         
+                        </span> 
+                        <div class='desc'>The slideshow</div> 
+                    </li> 
+                 
+                </ul> 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item protected  inherit"> 
+       <span class="bold">initConfig</span>  
+       ( 
+             
+                [ 
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+            config  
+                  
+                ] 
+             
+       ) 
+        
+        <div class='desc'> 
+            ... 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+                            [ 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+                        config  
+                              
+                            ] 
+                         
+                        </span> 
+                        <div class='desc'>The configuration object</div> 
+                    </li> 
+                 
+                </ul> 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item protected  "> 
+       <span class="bold">initControls</span>  
+       () 
+        
+        <div class='desc'> 
+            ... 
+ 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item   "> 
+       <span class="bold">initPile</span>  
+       ( 
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+            obj_arguments  
+             
+       ) 
+        
+        <div class='desc'> 
+            Method invoked when the pile of $slides change 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+                        obj_arguments  
+                         
+                        </span> 
+                        <div class='desc'>...</div> 
+                    </li> 
+                 
+                </ul> 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item protected  "> 
+       <span class="bold">initTransition</span>  
+       () 
+        
+        <div class='desc'> 
+            ... 
+ 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item   "> 
+       <span class="bold">last</span>  
+       () 
+        
+        <div class='desc'> 
+            Scroll to the last item 
+ 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item   "> 
+       <span class="bold">next</span>  
+       () 
+        
+        <div class='desc'> 
+            Scroll to the next item 
+ 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item protected  inherit"> 
+       <span class="bold">override</span>  
+       ( 
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+            members  
+             
+       ) 
+        
+        <div class='desc'> 
+            ... 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+                        members  
+                         
+                        </span> 
+                        <div class='desc'>...</div> 
+                    </li> 
+                 
+                </ul> 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item   "> 
+       <span class="bold">previous</span>  
+       () 
+        
+        <div class='desc'> 
+            Scroll to the previous item 
+ 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item   "> 
+       <span class="bold">scrollTo</span>  
+       ( 
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
+      
+            index  
+             
+       ) 
+        
+        <div class='desc'> 
+            Scroll at the passed index 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
+      
+                        index  
+                         
+                        </span> 
+                        <div class='desc'>The index</div> 
+                    </li> 
+                 
+                </ul> 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item protected  inherit"> 
+       <span class="bold">setAsMember</span>  
+       ( 
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
+      
+            key  
+              
+                , 
+             
+        
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+            value  
+             
+       ) 
+        
+        <div class='desc'> 
+            .... 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
+      
+                        key  
+                         
+                        </span> 
+                        <div class='desc'>...</div> 
+                    </li> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+      
+                        value  
+                         
+                        </span> 
+                        <div class='desc'>...</div> 
+                    </li> 
+                 
+                </ul> 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item protected  "> 
+       <span class="bold">setAwaitCss</span>  
+       () 
+        
+        <div class='desc'> 
+            Add or remove the "await" css class 
+ 
+             
+ 
+             
+         </div>    
+    </div> 
+ 
+    <div class="method item   "> 
+       <span class="bold">setScrolled</span>  
+       ( 
+             
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
+      
+            index  
+             
+       ) 
+        
+        <div class='desc'> 
+            Set the scrolled index and element
+Change its css class 
+ 
+             
+                <div class='margin bold'>Parameters</div> 
+                <ul class="params"> 
+                 
+                    <li> 
+                        <span> 
+                         
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
+      
+                        index  
+                         
+                        </span> 
+                        <div class='desc'>The index</div> 
+                    </li> 
+                 
+                </ul> 
              
  
              
@@ -532,19 +740,91 @@ Change its css class
             <div class="tab_content props"> 
                  
      
-    <div class="property item "> 
-        <span class="bold">slideshow</span>  
+    <div class="property item   inherit"> 
+        <span class="bold">$container</span>  
         :  
-    <a href="#doc_$.JocodeSlideshow"  > $.JocodeSlideshow</a> 
+    <a href="http://api.jquery.com/"  > jQuery</a> 
  
         <div class='desc'> 
-            The slideshow 
+            The container of the widget 
              
         </div> 
     </div> 
  
      
-    <div class="property item "> 
+    <div class="property item   "> 
+        <span class="bold">$controls</span>  
+        :  
+    <a href="http://api.jquery.com/"  > jQuery</a> 
+ 
+        <div class='desc'> 
+            ... 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">$first</span>  
+        :  
+    <a href="http://api.jquery.com/"  > jQuery</a> 
+ 
+        <div class='desc'> 
+            The button first 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">$items</span>  
+        :  
+    <a href="http://api.jquery.com/"  > jQuery</a> 
+ 
+        <div class='desc'> 
+            The navigation items 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">$last</span>  
+        :  
+    <a href="http://api.jquery.com/"  > jQuery</a> 
+ 
+        <div class='desc'> 
+            The button last 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">$next</span>  
+        :  
+    <a href="http://api.jquery.com/"  > jQuery</a> 
+ 
+        <div class='desc'> 
+            The button next 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">$previous</span>  
+        :  
+    <a href="http://api.jquery.com/"  > jQuery</a> 
+ 
+        <div class='desc'> 
+            The button previous 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   inherit"> 
         <span class="bold">config</span>  
         :  
     <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
@@ -556,153 +836,7 @@ Change its css class
     </div> 
  
      
-    <div class="property item "> 
-        <span class="bold">container</span>  
-        :  
-    <a href="http://api.jquery.com/"  > jQuery</a> 
- 
-        <div class='desc'> 
-            The initialization container 
-             
-        </div> 
-    </div> 
- 
-     
-    <div class="property item "> 
-        <span class="bold">bt_first</span>  
-        :  
-    <a href="http://api.jquery.com/"  > jQuery</a> 
- 
-        <div class='desc'> 
-            The button first 
-             
-        </div> 
-    </div> 
- 
-     
-    <div class="property item "> 
-        <span class="bold">bt_previous</span>  
-        :  
-    <a href="http://api.jquery.com/"  > jQuery</a> 
- 
-        <div class='desc'> 
-            The button previous 
-             
-        </div> 
-    </div> 
- 
-     
-    <div class="property item "> 
-        <span class="bold">bt_next</span>  
-        :  
-    <a href="http://api.jquery.com/"  > jQuery</a> 
- 
-        <div class='desc'> 
-            The button next 
-             
-        </div> 
-    </div> 
- 
-     
-    <div class="property item "> 
-        <span class="bold">bt_last</span>  
-        :  
-    <a href="http://api.jquery.com/"  > jQuery</a> 
- 
-        <div class='desc'> 
-            The button last 
-             
-        </div> 
-    </div> 
- 
-     
-    <div class="property item "> 
-        <span class="bold">$items</span>  
-        :  
-    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
- 
-        <div class='desc'> 
-            The navigation items selector 
-             
-        </div> 
-    </div> 
- 
-     
-    <div class="property item "> 
-        <span class="bold">items</span>  
-        :  
-    <a href="http://api.jquery.com/"  > jQuery</a> 
- 
-        <div class='desc'> 
-            The navigation items 
-             
-        </div> 
-    </div> 
- 
-     
-    <div class="property item "> 
-        <span class="bold">itemFactory</span>  
-        :  
-    <a href="#doc_Function"  > Function</a> 
- 
-        <div class='desc'> 
-            ....................... 
-             
-        </div> 
-    </div> 
- 
-     
-    <div class="property item "> 
-        <span class="bold">items_container</span>  
-        :  
-    <a href="http://api.jquery.com/"  > jQuery</a> 
- 
-        <div class='desc'> 
-            ....................... 
-             
-        </div> 
-    </div> 
- 
-     
-    <div class="property item "> 
-        <span class="bold">index</span>  
-        :  
-    <a href="#doc_Number"  > Number</a> 
- 
-        <div class='desc'> 
-            The current index 
-             
-                <div class="margin"><span class='bold'>Default </span>-1</div> 
-             
-        </div> 
-    </div> 
- 
-     
-    <div class="property item "> 
-        <span class="bold">css_selected</span>  
-        :  
-    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
- 
-        <div class='desc'> 
-            The css class of selected item 
-             
-        </div> 
-    </div> 
- 
-     
-    <div class="property item "> 
-        <span class="bold">css_scrolled</span>  
-        :  
-    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
- 
-        <div class='desc'> 
-            The css class of scrolled item 
-             
-        </div> 
-    </div> 
- 
-     
-    <div class="property item "> 
+    <div class="property item   inherit"> 
         <span class="bold">css_await</span>  
         :  
     <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
@@ -714,22 +848,84 @@ Change its css class
     </div> 
  
      
-    <div class="property item "> 
-        <span class="bold">current_scrolled</span>  
+    <div class="property item   inherit"> 
+        <span class="bold">css_scrolled</span>  
         :  
-    <a href="http://api.jquery.com/"  > jQuery</a> 
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
  
         <div class='desc'> 
-            he current scrolled item 
+            Class of the scrolled item 
              
         </div> 
     </div> 
  
      
-    <div class="property item "> 
+    <div class="property item   inherit"> 
+        <span class="bold">css_selected</span>  
+        :  
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String"  target="_blank"  > String</a> 
+ 
+        <div class='desc'> 
+            Class of the selected item 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">current_scrolled</span>  
+        :  
+    <a href="http://api.jquery.com/"  > jQuery</a> 
+ 
+        <div class='desc'> 
+            The current scrolled item 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   inherit"> 
+        <span class="bold">defaultConfig</span>  
+        :  
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+ 
+        <div class='desc'> 
+            The default configuration object 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">index</span>  
+        :  
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
+ 
+        <div class='desc'> 
+            The current index 
+             
+                <div class="margin"><span class='bold'>Default </span>-1</div> 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   inherit"> 
+        <span class="bold">itemsFactory</span>  
+        :  
+    <a href="#doc_Function"  > Function</a> 
+ 
+        <div class='desc'> 
+            ... 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
         <span class="bold">scrolled_index</span>  
         :  
-    <a href="#doc_Number"  > Number</a> 
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number"  target="_blank"  > Number</a> 
  
         <div class='desc'> 
             The scrolled index 
@@ -738,13 +934,37 @@ Change its css class
     </div> 
  
      
-    <div class="property item "> 
-        <span class="bold">fx</span>  
+    <div class="property item protected  inherit"> 
+        <span class="bold">setter_cache</span>  
         :  
-    <a href="#doc_$.JocodeSlideshowNavigationFx"  > $.JocodeSlideshowNavigationFx</a> 
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
  
         <div class='desc'> 
-            Transition navigation items object 
+            ... 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   "> 
+        <span class="bold">slideshow</span>  
+        :  
+    <a href="#doc_$.JocodeSlideshow"  > $.JocodeSlideshow</a> 
+ 
+        <div class='desc'> 
+            The slideshow 
+             
+        </div> 
+    </div> 
+ 
+     
+    <div class="property item   inherit"> 
+        <span class="bold">transition</span>  
+        :  
+    <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object"  target="_blank"  > Object</a> 
+ 
+        <div class='desc'> 
+            The transition object 
              
         </div> 
     </div> 

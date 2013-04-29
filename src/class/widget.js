@@ -1,16 +1,19 @@
 
 
 (function($){
-/**
-* Mixin
-* @class $.JocodeWidget
-**/ 
-$.JocodeWidget = $.jocodeClass(
+    /**
+     * ...
+     * @class $.JocodeWidget
+     * @uses $.JocodeConfigurable
+     * @uses $.JocodeOverridable
+     **/ 
+    $.JocodeWidget = $.jocodeClass(
     {
     
         /**
-         * The container of the user interface widget
+         * The container of the widget
          * 
+         * @uses $.JocodeConfigurable
          * @property $container
          * @type {jQuery}
          */
@@ -30,37 +33,31 @@ $.JocodeWidget = $.jocodeClass(
         /**
          * ....
          * 
-         * @private
-         * @method setMember
+         * @protected
+         * @method setAsMember
          * @param {String} key ...
          * @param {Object} value ...
          */
-        _setMember : function(key, value){
+        setAsMember : function(key, value){
             
-            key.charAt(0) == '$' 
-                ? this[key] = this.$(value) 
-                : $.JocodeConfigurable.prototype._setMember.call(this, key, value);
-        },
-        
-        /**
-         * ...
-         * 
-         * @private
-         * @method _initProperty
-         * @param {String} key ...
-         * @param {Object} value ...
-         */
-        _initProperty : function(key, value){
+            var self = this,
+                setter;
             
-            $.JocodeConfigurable.prototype._initProperty.call(
-                this, key.charAt(0) == '$' ? key.slice(1) : key, value
-            );
+            (setter = self.setter_cache[key] || (
+                self.setter_cache[key]  = 'set' + key.replace(/\$/g, '').replace(/(^|_)([a-z])/g, function($1, $2, $3){
+                    return $3.toUpperCase();
+                })
+            )) in self 
+                ? self[setter](value) 
+                : key.charAt(0) == '$' 
+                    ? self[key] = self.$(value)
+                    : self[key] = value;
         }
     },
     
     null,
     
-    [$.JocodeConfigurable]
-);
+    [$.JocodeConfigurable, $.JocodeOverridable]
+    );
 
 })(jQuery);
