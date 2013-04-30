@@ -2,8 +2,8 @@ $('.slideshow.nav').jocodeSlideshow({
 
     $slides : '> .pad > .scroller > .slides > div',
     $controls : '> .player',
-    $pause_hover : '<',
-    $mask_progress_hover : '<',
+    $pause_hover : '.pad, .navigation',
+    $mask_progress_hover : '.pad, .navigation',
     
     mask_progress_load : false,
     mask_progress_transition : false,

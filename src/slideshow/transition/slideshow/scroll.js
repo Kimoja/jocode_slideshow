@@ -1,8 +1,7 @@
 
 (function($){
     
-    var nil = nil,
-        self;
+    var nil = nil;
     
     /**
      * ...
@@ -85,44 +84,38 @@
          */ 
         init : function(slideshow){
 
-            self = this;
+            var self = this;
             
             $.JocodeSlideshowTransition.Base.prototype.init.call(self, slideshow);
             self.$scroller = self.slideshow.$(self.config.$scroller);
         },
         
         defaultConfig : $.JocodeSlideshowTransition.ScrollConfig,
-            
+         
         /**
-         * @overriden
-         */ 
-        initPile : function(){
+         * ...
+         * 
+         * @method getOffset
+         * @param {jQuery} to   Navigation item  destination
+         * @param {Number} to_index The to index
+         */
+        getOffset : function(to, to_index){
             
-            self = this;
-            
-            self._offsets = [];
-
-            var step = 0;
-
-            self.slideshow.$slides.each(function(index, el){
-
-                self._offsets[index] = step;
-                step += self.vertical ? $(el).height() : $(el).width();
-            }); 
+            return to[0][this.vertical ? 'offsetTop' : 'offsetLeft']; 
         },
         
         /**
          * @overriden
          */ 
         draw : function(from, to, from_index, to_index){
-
-            self = this;
             
-            var slideshow = self.slideshow, css;
+            var self = this;
+            
+            var slideshow = self.slideshow, 
+                css;
 
             css = [];
-            
-            css[self.vertical ? 'scrollTop' : 'scrollLeft'] = self._offsets[to_index];
+            css[self.vertical ? 'scrollTop' : 'scrollLeft'] = self.getOffset(to, to_index);
            
             self.$scroller.stop().animate(css, 
             {

@@ -15,6 +15,8 @@
   */
 $.jocodeClass = function(proto, parent, mixins) {
     
+    function S(){};
+    
     proto = proto || {};
     
     var parent_constructor = parent ? typeof parent === 'function' ? parent : parent.constructor : null,
@@ -26,7 +28,7 @@ $.jocodeClass = function(proto, parent, mixins) {
     
     if(parent_constructor){
 
-        function S(){};
+        
         S.prototype = parent_proto;
 
         construct.prototype = new S();

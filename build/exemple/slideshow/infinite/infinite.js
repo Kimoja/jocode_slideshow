@@ -2,9 +2,9 @@ $('.slideshow.infinite').jocodeSlideshow({
 
     $slides : '> .slides > img',
     $controls : '> .player',
-    $pause_hover : '.slides, .navigation',
     $loader : '> .loader',
-    $mask_progress_hover : '<',
+    $pause_hover : '.slides, .navigation',
+    $mask_progress_hover : '.slides, .navigation',
     
     mask_progress_load : false,
     mask_progress_transition : false,
@@ -72,7 +72,7 @@ $('.slideshow.infinite').jocodeSlideshow({
 
         $container : '> .navigation',
         $items : '> .scroller > div > div',
-        $buttons : '<',
+        $controls : '<',
 
         css_scrolled : 'scrolled',
         css_selected : 'selected',

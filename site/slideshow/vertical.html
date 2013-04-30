@@ -71,9 +71,8 @@
     
     $slides : <span class="string">'&gt; .pad &gt; .scroller &gt; .slides &gt; img'</span>,
     $controls : <span class="string">'&gt; .player'</span>,
-    $pause_hover : <span class="string">'.slides, .navigation'</span>,
-    $loader : <span class="string">'&gt; .loader'</span>,
-    $mask_progress_hover : <span class="string">'&lt;'</span>,
+    $pause_hover : <span class="string">'.pad, .navigation'</span>,
+    $mask_progress_hover : <span class="string">'.pad, .navigation'</span>,
     
     mask_progress_load : <span class="literal">false</span>,
     mask_progress_transition : <span class="literal">false</span>,
@@ -217,6 +216,10 @@
         <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden;</span></span>
         <span class="rule"><span class="attribute">height </span>:<span class="value"> <span class="number">313</span>px;</span></span>
     <span class="rule">}</span></span>
+    <span class="class">.slideshow</span><span class="class">.vertical</span> &gt; <span class="class">.pad</span> &gt; <span class="class">.scroller</span>  &gt; <span class="class">.slides</span><span class="rules">{
+       <span class="rule"><span class="attribute">position </span>:<span class="value"> relative;</span></span>
+       <span class="rule"><span class="attribute">top </span>:<span class="value"> <span class="number">0</span>;</span></span>
+    <span class="rule">}</span></span>
     <span class="class">.slideshow</span><span class="class">.vertical</span> &gt; <span class="class">.pad</span> &gt; <span class="class">.scroller</span> &gt; <span class="class">.slides</span> <span class="tag">img</span><span class="rules">{
         <span class="rule"><span class="attribute">vertical-align</span>:<span class="value"> middle;</span></span>
     <span class="rule">}</span></span>
@@ -313,6 +316,7 @@
         <span class="class">.slideshow</span><span class="class">.vertical</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.scroller</span><span class="rules">{
             <span class="rule"><span class="attribute">height </span>:<span class="value"> <span class="number">235</span>px;</span></span>
             <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden;</span></span>
+            <span class="rule"><span class="attribute">position </span>:<span class="value"> relative;</span></span>
         <span class="rule">}</span></span>
         <span class="class">.slideshow</span><span class="class">.vertical</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.scroller</span> &gt; <span class="tag">img</span><span class="rules">{
             <span class="rule"><span class="attribute">display </span>:<span class="value"> block;</span></span>

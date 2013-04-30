@@ -2,8 +2,7 @@
 (function($){
     
     var nil = null,
-        wrong = false,
-        self;
+        wrong = false;
     
     /**
      * ...
@@ -89,7 +88,7 @@
          */        
         init : function(progress){
 
-            self = this;
+            var self = this;
             
             $.JocodeSlideshowProgressTransition.Base.prototype.init.call(self, progress);
             
@@ -111,8 +110,10 @@
          * @overriden
          */          
         goTo : function(ratio){
-                    
-            this.$bar.css(self._style, 
+            
+            var self = this;
+            
+            self.$bar.css(self._style, 
                 self.inverse 
                     ? ~~((1 - ratio) * self._size) + 'px'
                     : ~~(ratio * self._size) + 'px'

@@ -113,6 +113,7 @@
         .slideshow.fade > .navigation > .scroller{
             width : 378px;
             overflow: hidden;
+            position : relative;
         }
         .slideshow.fade > .navigation > .scroller > div{
             display: table;

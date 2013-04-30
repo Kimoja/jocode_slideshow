@@ -127,6 +127,7 @@
         .slideshow.infinite > .navigation > .scroller{
             width : 378px;
             overflow: hidden;
+            position : relative;
         }
         .slideshow.infinite > .navigation > .scroller > div{
             display: table;

@@ -28,6 +28,10 @@
         overflow: hidden;
         height : 313px;
     }
+    .slideshow.vertical > .pad > .scroller  > .slides{
+       position : relative;
+       top : 0;
+    }
     .slideshow.vertical > .pad > .scroller > .slides img{
         vertical-align: middle;
     }
@@ -124,6 +128,7 @@
         .slideshow.vertical > .navigation > .scroller{
             height : 235px;
             overflow: hidden;
+            position : relative;
         }
         .slideshow.vertical > .navigation > .scroller > img{
             display : block;

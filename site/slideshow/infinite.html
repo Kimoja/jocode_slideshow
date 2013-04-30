@@ -52,9 +52,9 @@
 
     $slides : <span class="string">'&gt; .slides &gt; img'</span>,
     $controls : <span class="string">'&gt; .player'</span>,
-    $pause_hover : <span class="string">'.slides, .navigation'</span>,
     $loader : <span class="string">'&gt; .loader'</span>,
-    $mask_progress_hover : <span class="string">'&lt;'</span>,
+    $pause_hover : <span class="string">'.slides, .navigation'</span>,
+    $mask_progress_hover : <span class="string">'.slides, .navigation'</span>,
     
     mask_progress_load : <span class="literal">false</span>,
     mask_progress_transition : <span class="literal">false</span>,
@@ -122,7 +122,7 @@
 
         $container : <span class="string">'&gt; .navigation'</span>,
         $items : <span class="string">'&gt; .scroller &gt; div &gt; div'</span>,
-        $buttons : <span class="string">'&lt;'</span>,
+        $controls : <span class="string">'&lt;'</span>,
 
         css_scrolled : <span class="string">'scrolled'</span>,
         css_selected : <span class="string">'selected'</span>,
@@ -324,6 +324,7 @@
         <span class="class">.slideshow</span><span class="class">.infinite</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.scroller</span><span class="rules">{
             <span class="rule"><span class="attribute">width </span>:<span class="value"> <span class="number">378</span>px;</span></span>
             <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden;</span></span>
+            <span class="rule"><span class="attribute">position </span>:<span class="value"> relative;</span></span>
         <span class="rule">}</span></span>
         <span class="class">.slideshow</span><span class="class">.infinite</span> &gt; <span class="class">.navigation</span> &gt; <span class="class">.scroller</span> &gt; <span class="tag">div</span><span class="rules">{
             <span class="rule"><span class="attribute">display</span>:<span class="value"> table;</span></span>

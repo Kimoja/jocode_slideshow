@@ -25,8 +25,7 @@
 (function($){
 
     var empty_func = function(){},
-        nil = null,
-        self;
+        nil = null;
 
     /**
      * @class $.JocodeSlideshowNavigationConfig
@@ -146,11 +145,11 @@
              */
             init : function(slideshow){
 
-                self = this;
+                var self = this;
 
                 self.slideshow = slideshow;
                 self.$container = slideshow.$(self.config.$container);
-
+                
                 self.initConfig();
                 self.initTransition();
                 self.initControls();
@@ -166,7 +165,7 @@
              */
             initTransition : function(){
 
-                self.transition.init(self);
+                this.transition.init(this);
             },
 
             /**
@@ -177,11 +176,12 @@
              */
             initControls : function(){
 
-                var self = this;
+                var self = this,
+                    select = self.config.$controls == '<' ? '' : self.config.$controls;
 
                 $.each('first previous next last'.split(' '), function(index, button){
-
-                    var bt = $(' .' + button, self.$controls);
+                    
+                    var bt = self.$(' .' + button, self.$controls);
 
                     bt[0] && (self['$' + button] = bt.click(function(e){
                         self.slideshow._stopEvent(e); 
@@ -293,7 +293,7 @@
              */
             previous : function(){
 
-                self = this;
+                var self = this;
                 self.scrollTo((self.scrolled_index > -1 ? self.scrolled_index : self.slideshow.index)- 1);
             },
 
@@ -303,7 +303,7 @@
              */
             next : function(){
 
-                self = this;
+                var self = this;
                 self.scrollTo((self.scrolled_index > -1 ? self.scrolled_index : self.slideshow.index) + 1);
             },
 
@@ -323,7 +323,7 @@
              */
             setAwaitCss : function(add){
 
-                self = this;
+                var self = this;
 
                 if(!self.css_await)
                     return;
@@ -343,7 +343,7 @@
              */
             scrollTo : function(index){
 
-                self = this;
+                var self = this;
 
                 if((index = self.slideshow.computeIndex(index)) === self.scrolled_index)
                     return;
@@ -360,7 +360,7 @@
              */
             setScrolled : function(index){
 
-                self = this;
+                var self = this;
 
                 if(self.scrolled_index === index)
                     return;
@@ -395,7 +395,7 @@
              */
             initPile : function(obj_arguments){
 
-                self = this;
+                var self = this;
 
                 self.itemsFactory(obj_arguments);
 
@@ -415,7 +415,7 @@
              */
             draw : function(to_index){
 
-                self = this;
+                var self = this;
 
                 if(to_index == self.index)
                     return;

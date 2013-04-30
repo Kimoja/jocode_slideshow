@@ -4,8 +4,7 @@
     
     var nil = nil,
         wrong = false,
-        right = true,
-        self;
+        right = true;
         
     /**
      * ...
@@ -147,22 +146,13 @@
          */
         _to_animate : wrong,
 
-        /**
-         * ...
-         * 
-         * @private
-         * @property _offsets
-         * @type {Array}
-         */
-        _offsets : nil,
-        
         
         /**
          * @overriden
          */ 
         init : function(navigation){
 
-            self = this;
+            var self = this;
             $.JocodeSlideshowNavigationTransition.Base.prototype.init.call(self, navigation);
             self.$scroller = navigation.$(self.$scroller);
         },
@@ -190,13 +180,6 @@
 
                 self._to_animate = right;
                 self._max_scroll = self._scroll_size - self._size;
-                self._offsets = [];
-
-                self.navigation.$items.each(function(index, el){
-
-                    self._offsets[index] = step;
-                    step +=  self.vertical ? $(el).height() : $(el).width();
-                }); 
                 
                 self.scroll_over && self.$scroller.mousemove(function(e){
                     
@@ -215,7 +198,7 @@
          */ 
         draw : function(from, to, from_index, to_index){
             
-            self = this;
+            var self = this;
             
             if(!self._to_animate)
                 return;
@@ -236,7 +219,7 @@
          */ 
         scrollTo : function(from, to, from_index, to_index){
             
-            self = this;
+            var self = this;
             
             if(!self._to_animate)
                 return;
@@ -244,6 +227,20 @@
             self._by_click = right;
             
             self._goTo(to, to_index);
+        },
+        
+        /**
+         * ...
+         * 
+         * @method getOffset
+         * @param {jQuery} to   Navigation item  destination
+         * @param {Number} to_index The to index
+         */
+        getOffset : function(to, to_index){
+            
+            var self = this;
+            return (to[0][self.vertical ? 'offsetTop' : 'offsetLeft']) - 
+                   (self._size / 2 - (self.vertical ? to.height() : to.width()) / 2); 
         },
         
         /**
@@ -256,13 +253,9 @@
          */
         _goTo : function(to, to_index){
             
-            self = this;
+            var self = this;
             
-            var to_ = self.vertical ? to.height() : to.width(),
-            off;
-               
-            off = self._offsets[to_index];
-            off -= self._size / 2 - to_ / 2;
+            var off = self.getOffset(to, to_index);
 
             self._to = off < 0 ? 0 : off > self._max_scroll ? self._max_scroll : off;
 

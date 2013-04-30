@@ -3,9 +3,8 @@ $('.slideshow.vertical').jocodeSlideshow({
     
     $slides : '> .pad > .scroller > .slides > img',
     $controls : '> .player',
-    $pause_hover : '.slides, .navigation',
-    $loader : '> .loader',
-    $mask_progress_hover : '<',
+    $pause_hover : '.pad, .navigation',
+    $mask_progress_hover : '.pad, .navigation',
     
     mask_progress_load : false,
     mask_progress_transition : false,

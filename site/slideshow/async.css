@@ -126,6 +126,7 @@
         .slideshow.async > .navigation > .scroller{
             width : 378px;
             overflow: hidden;
+            position : relative;
         }
         .slideshow.async > .navigation > .scroller > div{
             display: table;

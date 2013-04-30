@@ -41,8 +41,7 @@
     var empty_func = function(){},
         nil = null,
         wrong = false,
-        right = true,
-        self;
+        right = true;
 
     /**
      * @class $.JocodeSlideshowConfig
@@ -75,6 +74,15 @@
          * @default "<"
          */  
         $controls : '<',
+
+        /**
+         * The selector, relative to the initialization container, which defines the elements to listen to trigger the break, on the "hover" event. 
+         * If "<" is specified, then the initialization container will be used.
+         * 
+         * @property $pause_hover
+         * @type {String}
+         */ 
+        $pause_hover : '',
 
         /**
          * The selector, relative to the initialization container, that defines the elements that triggers whether to display buttons, on the "hover" event. 
@@ -431,7 +439,7 @@
          */
         constructor : function($container, config, override){
 
-            self = this;
+            var self = this;
             
             self.override(override);
             
@@ -464,6 +472,8 @@
          */
         initNavigation : function(){
 
+            var self = this;
+            
             self.navigation.init(self);
 
             if(self.config.$mask_nav_hover && self.navigation.$container !== self.$container){
@@ -480,6 +490,8 @@
          * @method initProgress
          */
         initProgress : function(){
+            
+            var self = this;
             
             self.progress.init(self);
 
@@ -498,7 +510,7 @@
          */
         initTransition : function(){
 
-            self.transition.init(self);
+            this.transition.init(this);
         },
 
         /**
@@ -509,11 +521,12 @@
          */
         initControls : function(){
 
-            var self = this;
+            var self = this,
+                select = self.config.$controls == '<' ? '' : self.config.$controls;
 
             $.each('first previous play pause resume stop next last'.split(' '), function(index, button){
-
-                var bt = self.$(self.config.$controls + ' .' + button);
+                
+                var bt = self.$(select + ' .' + button);
 
                 bt[0] && (self['$' + button] = bt.click(function(e){ 
                     self._stopEvent(e); 
@@ -540,8 +553,9 @@
         setOnSlideClick : function(onSlideClick){
             
             if(onSlideClick != empty_func){
-                
+
                 var self = this;
+            
                 self.$container.on('click', self.config.$slides, function(e){
                     onSlideClick.call(self, e, $(this));
                 });
@@ -556,9 +570,9 @@
          * @param {String} $pause_hover 
          */
         setPauseHover : function($pause_hover){
-
+            
             var self = this;
-
+            
             self.$($pause_hover).hover(
                 function() {
                     if(!self._stopped && !self._paused){
@@ -769,16 +783,6 @@
         _can_mask_progress : wrong,
 
         /**
-         * ...
-         * 
-         * @property _can_mask_navigation
-         * @type {Boolean}
-         * @default false
-         * @private
-         */
-        _can_mask_progress : wrong,
-
-        /**
          * If the player is stopped
          * 
          * @property _stopped
@@ -858,9 +862,8 @@
          */
         _toogleBt : function(controls, enable, await){
 
-            self = this;
-
-            var cls = await ? self.css_await_control : self.css_disable_control;
+            var self = this,
+                cls = await ? self.css_await_control : self.css_disable_control;
 
             if(!cls)return;
 
@@ -898,8 +901,6 @@
          * @param {Boolean} inverse 
          */
         _displayOnHover : function(container, element, inverse){
-
-            var self = this;
 
             function show(){
                 element.show();
@@ -943,7 +944,7 @@
          */
         play : function(){
 
-            self = this;
+            var self = this;
 
             if(!self.isPlayed()){
 
@@ -952,7 +953,9 @@
 
                 self._stopped = wrong;
                 self.onPlay();
-
+                
+                self._can_mask_progress && self.progress.show();
+                
                 self.goTo(self.start_index);
             }
         },
@@ -978,12 +981,13 @@
          */
         _pause : function(){
 
-            self = this;
+            var self = this;
 
             if(self.isPlayed()){
 
                 self.progress && self.progress.stop();
-
+                //self.progress && self._on_wait && alert('oko');
+                
                 self._toogleBt('resume', right, wrong);
                 self._toogleBt('pause', wrong, wrong);
 
@@ -991,7 +995,7 @@
                 self._paused = right;
 
                 self.onPause();
-
+                
                 self._on_wait && clearTimeout(self._timeout);
             }
         },
@@ -1003,7 +1007,7 @@
          */
         resume : function(){
 
-            self = this;
+            var self = this;
 
             if(self._paused){
 
@@ -1026,7 +1030,7 @@
          */
         stop : function(){
 
-            self = this;
+            var self = this;
 
             if(!self._stopped){
 
@@ -1038,7 +1042,9 @@
                 self.onStop();
 
                 self._on_wait && clearTimeout(self._timeout);
-
+                
+                self._can_mask_progress && self.progress.hide();
+                
                 self.progress && self.progress.stop();
             }
         },
@@ -1210,7 +1216,7 @@
          */
         initPile : function(obj_arguments){
 
-            self = this;
+            var self = this;
 
             self.$slides = self.$(self.config.$slides);
             self.transition.initPile(obj_arguments);
@@ -1255,7 +1261,7 @@
 
                 self._on_wait = right;
 
-                self._can_mask_prorgess && self.mask_progress_transition && self.progress.show();
+                self._can_mask_progress && self.mask_progress_transition && self.progress.show();
 
                 self.beforeWait(self.delay, delay, self._time);
 
@@ -1284,7 +1290,7 @@
          */
         draw : function(index){
 
-            self = this;
+            var self = this;
 
             if(index != self.loading_index)
                 return; 
@@ -1337,12 +1343,12 @@
          */
         goTo : function(index){
 
-            self = this;
-
+            var self = this;
+            //
             if((self.await_load && self._on_load) 
                 || (self.await_transition && self._on_transition))
                 return;
-
+            //if(self.await_transition && self._on_transition)alert('ok')
             index = self.computeIndex(index);
 
             if(index === self.index){

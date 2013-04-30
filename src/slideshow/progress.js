@@ -1,9 +1,6 @@
 
 (function(){
     
-    var nil = null,
-        self;
-    
    /**
     * @class $.JocodeSlideshowProgressConfig
     **/
@@ -23,7 +20,7 @@
          * @property transition
          * @type {$.JocodeSlideshowProgressTransition}
          */
-        transition : 'nil'
+        transition : null
     };    
     
     $.JocodeSlideshowProgress= $.jocodeClass(
@@ -53,7 +50,7 @@
              */
             init : function(slideshow){
                 
-                self = this;
+                var self = this;
                 self.slideshow = slideshow;
                 self.$container = slideshow.$(self.config.$container);
                 self.initConfig();
@@ -69,7 +66,7 @@
              * @method initTransition
              */
             initTransition : function(){
-                self.transition.init(self);
+                this.transition.init(this);
             },
             
             /**
@@ -78,7 +75,7 @@
              * @property _interval
              * @type {Number}
              */
-            _interval : nil,        
+            _interval : null,        
                 
         
             /**
@@ -88,7 +85,7 @@
              * @param {Number} ratio
              */
             goTo : function(ratio){
-                self.transition.goTo(ratio);
+                this.transition.goTo(ratio);
             },
         
             /**
@@ -114,7 +111,8 @@
              * @method stop
              */  
             stop : function(){
-                clearInterval(self._interval);
+                
+                clearInterval(this._interval);
             },
              
             /**
@@ -123,7 +121,7 @@
              * @method hide
              */      
             hide : function(){
-                self.$container.hide();
+                this.$container.hide();
             }, 
             
             /**
@@ -132,7 +130,7 @@
              * @method show
              */  
             show : function(){
-                self.$container.show();
+                this.$container.show();
             }  
         },
         $.JocodeWidget, 
@@ -177,7 +175,7 @@
              * @property progress
              * @type {$.JocodeSlideshowProgress}
              */
-            progress : nil,
+            progress : null,
 
             /**
              * ...
@@ -188,7 +186,7 @@
             goTo : function(){}
             
         }, 
-        nil,
+        null,
         [$.JocodeConfigurable, $.JocodeOverridable]
         )
     };

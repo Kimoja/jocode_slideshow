@@ -6,10 +6,10 @@ $('.slideshow.progress').jocodeSlideshow({
     $mask_controls_hover : '<',
     $mask_progress_hover : '<',
     
-    mask_progress_load : false,
-    mask_progress_transition : false,
+    mask_progress_load : true,
+    mask_progress_transition : true,
     
-    delay : 10000,
+    delay : 1000,
 
     transition : new $.JocodeSlideshowTransition.Scroll({
         duration : 500,

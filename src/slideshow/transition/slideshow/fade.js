@@ -1,8 +1,6 @@
 
 (function($){
     
-    var self;
-
     /**
      * ...
      * 
@@ -57,7 +55,7 @@
          */
         draw : function(from, to, from_index, to_index){
             
-            self = this;
+            var self = this;
             
             var slideshow = self.slideshow;
             

@@ -21,7 +21,8 @@
         
             config = self.config || (self.config = config || {});
         
-            for(key in config) key in self.defaultConfig 
+            for(key in config) 
+                key in self.defaultConfig 
                 && !self.hasOwnProperty(key) 
                 && self.setAsMember(key, config[key]);
         },
